@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VALO Technologies LLC | Modern Security. Simple Execution.</title>
+  <style>
+    :root {
+      --bg: #050b12;
+      --card: #0c131d;
+      --accent: #4da3ff;
+      --accent-soft: #2a3a4f;
+      --text-main: #f5f7fb;
+      --text-muted: #b4bccb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #16263b 0, #050b12 45%, #02060a 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 3rem 0 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 2.9rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 36rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(77, 163, 255, 0.12);
+      border: 1px solid rgba(77, 163, 255, 0.5);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #02040a;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      margin-right: 0.75rem;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.95rem;
+      background: rgba(3, 10, 18, 0.6);
+    }
+
+    .hero-card {
+      background: rgba(4, 12, 20, 0.95);
+      border-radius: 1.2rem;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid rgba(133, 170, 215, 0.2);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .hero-card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card li::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+
+    section {
+      padding: 2.5rem 0;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    section > p.section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+      max-width: 36rem;
+      font-size: 0.96rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: rgba(6, 14, 24, 0.96);
+      border-radius: 1rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid rgba(123, 158, 205, 0.2);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .card ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .card li {
+      margin-bottom: 0.35rem;
+    }
+
+    .card li::before {
+      content: "–";
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+
+    .contact-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 0.8rem;
+      padding: 1.2rem 1.3rem;
+      border-radius: 1rem;
+      background: rgba(5, 13, 22, 0.96);
+      border: 1px solid rgba(77, 163, 255, 0.45);
+    }
+
+    .contact-item {
+      min-width: 240px;
+      font-size: 0.95rem;
+    }
+
+    .contact-label {
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    .contact-value a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 1.8rem 0 0.75rem;
+      border-top: 1px solid rgba(58, 83, 118, 0.6);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      nav {
+        margin-top: 0.4rem;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 1rem;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 2.3rem;
+      }
+
+      .hero-card {
+        margin-top: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="logo-wrapper">
+        <img src="valo-logo.png" alt="VALO Technologies LLC logo" class="logo-img" />
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#about">Why Valo</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="hero-badge">Based in Rockwall, TX • Serving clients nationwide</div>
+          <div class="hero-tagline">Modern Security. Simple Execution.</div>
+          <h1>Network & Cybersecurity consulting for small and mid-size businesses.</h1>
+          <p>
+            Valo Technologies LLC helps organizations design, secure, and optimize their
+            networks with practical, vendor-grade expertise in Palo Alto firewalls,
+            Cisco Umbrella, and modern security architectures.
+          </p>
+          <a class="btn-primary" href="mailto:valotechllc@gmail.com?subject=Valo%20Technologies%20Consultation">
+            Schedule a consultation
+          </a>
+          <a class="btn-ghost" href="#services">View services</a>
+        </div>
+
+        <aside class="hero-card">
+          <h2>Core capabilities</h2>
+          <p>Hands-on engineering and architecture support from design through operations.</p>
+          <ul>
+            <li>Network segmentation & VPN design</li>
+            <li>Palo Alto firewall implementation & tuning</li>
+            <li>DNS & web security with Cisco Umbrella</li>
+            <li>Risk assessments and incident response</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="services">
+        <h2>Services</h2>
+        <p class="section-subtitle">
+          Focused cybersecurity and network consulting to protect critical assets
+          without overcomplicating your environment.
+        </p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Network Security Consulting</h3>
+            <p>Secure, resilient network designs aligned with your business requirements.</p>
+            <ul>
+              <li>Design and implementation of LANs, WANs, and VPNs</li>
+              <li>Network segmentation and zero-trust strategies</li>
+              <li>Firewall and intrusion prevention architecture</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Cybersecurity Consulting</h3>
+            <p>Risk-driven security guidance anchored in real-world operations.</p>
+            <ul>
+              <li>Security assessments and risk management</li>
+              <li>Compliance support for HIPAA, SOX, and other regulations</li>
+              <li>Threat detection and incident response planning</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Palo Alto Firewall Consulting</h3>
+            <p>Deep expertise in Palo Alto Networks firewalls and Panorama.</p>
+            <ul>
+              <li>Firewall setup, configuration, and migration</li>
+              <li>Security policy development and tuning</li>
+              <li>Ongoing management and best-practice reviews</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Cisco Umbrella & SSO</h3>
+            <p>Cloud-delivered security to protect users anywhere they work.</p>
+            <ul>
+              <li>Cisco Umbrella deployments and optimization</li>
+              <li>Single Sign-On integrations</li>
+              <li>DNS-layer security and web filtering policies</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2>Why Valo Technologies LLC</h2>
+        <p class="section-subtitle">
+          Led by Founder, CEO, and CTO <strong>Loseini Kamara</strong>, Valo combines
+          hands-on engineering experience with clear, business-focused communication.
+        </p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Practical, hands-on expertise</h3>
+            <p>
+              Over a decade of experience designing, implementing, and operating secure
+              network solutions in complex enterprise environments.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Straightforward execution</h3>
+            <p>
+              No unnecessary complexity—just modern security architectures, clear
+              documentation, and repeatable processes your team can own.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p class="section-subtitle">
+          Ready to discuss a project, security review, or ongoing support? Reach out
+          directly and we’ll follow up with next steps.
+        </p>
+
+        <div class="contact-box">
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:valotechllc@gmail.com">valotechllc@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Cell</div>
+            <div class="contact-value">
+              <a href="tel:+19728549388">972-854-9388</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Location</div>
+            <div class="contact-value">
+              Rockwall, Texas • Serving clients nationwide
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Valo Technologies LLC. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
