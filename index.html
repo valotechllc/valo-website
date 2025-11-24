@@ -12,9 +12,30 @@
       --accent-soft: #2a3a4f;
       --text-main: #f5f7fb;
       --text-muted: #b4bccb;
+    }    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
     }
 
-    * {
+    .badge-row img {
+      height: 36px;
+      width: auto;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .badge-row {
+        gap: 0.5rem;
+      }
+
+      .badge-row img {
+        height: 30px;
+      }
+    }
+
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -409,7 +430,16 @@
           Industry-recognized certifications that demonstrate deep, hands-on expertise
           in cybersecurity, cloud security, networking, and modern delivery practices.
         </p>
-
+        <div class="badge-row">
+          <img src="logo-ccna.png" alt="Cisco CCNA" />
+          <img src="logo-pccse.png" alt="Palo Alto PCCSE" />
+          <img src="logo-cysa.png" alt="CompTIA CySA+" />
+          <img src="logo-pentest.png" alt="CompTIA PenTest+" />
+          <img src="logo-secup.png" alt="CompTIA Security+" />
+          <img src="logo-secux.png" alt="CompTIA SecurityX" />
+          <img src="logo-isaca.png" alt="ISACA CISM" />
+          <img src="logo-scrum.png" alt="Professional Scrum Master I" />
+        </div>
         <div class="grid grid-2">
           <div class="card">
             <h3>Cybersecurity & Cloud</h3>
