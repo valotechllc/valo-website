@@ -464,54 +464,77 @@
             Provide a few details and we will respond within 1 business day.
           </p>
 
-          <!-- Formspree: create a form at formspree.io and replace YOUR_FORMSPREE_ID -->
-          <form action="https://formspree.io/f/xnnevpwq" method="POST">
+          <div id="inquiry" class="form-wrap">
+  <h3 style="margin:0 0 0.35rem 0;">Request a quote / inquiry</h3>
+  <p class="section-subtitle" style="margin-bottom: 1rem;">
+    Provide a few details and we will respond within 1 business day.
+  </p>
 
-            <div class="form-grid">
-              <div class="field">
-                <label for="name">Full name</label>
-                <input id="name" name="name" type="text" required placeholder="Your name" />
-              </div>
+  <form action="https://formspree.io/f/xnnevpwq" method="POST">
+    <!-- Inbox and UX helpers -->
+    <input type="hidden" name="_subject" value="New Valo Technologies Website Inquiry" />
+    <!-- Update this URL to your real thank-you page -->
+    <input type="hidden" name="_next" value="https://YOUR-GITHUB-PAGES-URL/thank-you.html" />
 
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required placeholder="you@company.com" />
-              </div>
+    <div class="form-grid">
+      <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" required placeholder="Your name" autocomplete="name" />
+      </div>
 
-              <div class="field">
-                <label for="phone">Phone (optional)</label>
-                <input id="phone" name="phone" type="tel" placeholder="(###) ###-####" />
-              </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="you@company.com" autocomplete="email" />
+      </div>
 
-              <div class="field">
-                <label for="service">Service area</label>
-                <select id="service" name="service" required>
-                  <option value="" disabled selected>Select a service</option>
-                  <option>Information Security</option>
-                  <option>Cybersecurity</option>
-                  <option>Computer Networking</option>
-                  <option>IT Consulting</option>
-                  <option>Network Support</option>
-                  <option>Other</option>
-                </select>
-              </div>
+      <div class="field">
+        <label for="phone">Phone (optional)</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          placeholder="(###) ###-####"
+          autocomplete="tel"
+          pattern="^[0-9()+.\-\s]{7,}$"
+        />
+      </div>
 
-              <div class="field span-2">
-                <label for="message">Project details</label>
-                <textarea id="message" name="message" required placeholder="What problem are you trying to solve? Any timelines, size of environment, and key constraints?"></textarea>
-              </div>
+      <div class="field">
+        <label for="service">Service area</label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected>Select a service</option>
+          <option>Information Security</option>
+          <option>Cybersecurity</option>
+          <option>Computer Networking</option>
+          <option>IT Consulting</option>
+          <option>Network Support</option>
+          <option>Other</option>
+        </select>
+      </div>
 
-              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-            </div>
+      <div class="field span-2">
+        <label for="message">Project details</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          required
+          placeholder="What problem are you trying to solve? Any timelines, size of environment, and key constraints?"
+        ></textarea>
+      </div>
 
-            <div class="form-actions">
-              <p class="fineprint">
-                By submitting, you consent to be contacted about your request. No marketing spam.
-              </p>
-              <button class="btn-primary" type="submit">Send inquiry</button>
-            </div>
-          </form>
-        </div>
+      <!-- Honeypot (spam trap) -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="form-actions">
+      <p class="fineprint">
+        By submitting, you consent to be contacted about your request. No marketing spam.
+      </p>
+      <button class="btn-primary" type="submit">Send inquiry</button>
+    </div>
+  </form>
+</div>
       </section>
     </main>
 
