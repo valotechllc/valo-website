@@ -1,15 +1,145 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Thank You - Valo Technologies</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You | VALO Technologies LLC</title>
+
+  <style>
+    :root {
+      --bg-0: #02040a;
+      --bg-1: #020617;
+      --bg-2: #0f172a;
+      --card: rgba(6, 14, 24, 0.96);
+      --border: rgba(123, 158, 205, 0.2);
+      --border-strong: rgba(77, 163, 255, 0.45);
+      --accent: #4da3ff;
+      --text-main: #f5f7fb;
+      --text-muted: #b4bccb;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, var(--bg-2) 0, var(--bg-1) 45%, var(--bg-0) 100%) !important;
+      color: var(--text-main);
+      line-height: 1.6;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 1.2rem;
+      padding: 2rem 1.8rem;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(77, 163, 255, 0.12);
+      border: 1px solid rgba(77, 163, 255, 0.5);
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0 0 0.6rem 0;
+      letter-spacing: -0.02em;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+    }
+
+    p {
+      margin: 0 0 1.25rem 0;
+      color: var(--text-muted);
+      max-width: 48rem;
+      font-size: 1rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #02040a;
+      font-weight: 650;
+      text-decoration: none;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { filter: brightness(1.08); }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 158, 205, 0.30);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.95rem;
+      background: rgba(2, 6, 12, 0.55);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(77, 163, 255, 0.75);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 1.25rem;
+    }
+  </style>
 </head>
+
 <body>
-  <main style="max-width:720px;margin:4rem auto;padding:0 1rem;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
-    <h1>Thank you.</h1>
-    <p>Your inquiry has been received. We will respond within 1 business day.</p>
-    <p><a href="/">Back to home</a></p>
+  <main class="wrap">
+    <section class="card" aria-live="polite">
+      <div class="badge">Thanks — message received</div>
+      <h1>Thank you.</h1>
+      <p>
+        Your inquiry has been received. We will respond within 1 business day.
+        If your request is urgent, please call <strong>972-854-9388</strong>.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn-primary" href="https://www.valotechnologiellc.com/">Back to home</a>
+        <a class="btn-ghost" href="mailto:valotechllc@gmail.com">Email us</a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Valo Technologies LLC. All rights reserved.
+    </footer>
   </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
