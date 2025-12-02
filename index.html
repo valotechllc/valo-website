@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VALO Technologies LLC | Modern Security. Simple Execution.</title>
+  <title>Thank You | VALO Technologies LLC</title>
 
   <style>
     :root {
@@ -11,11 +11,9 @@
       --bg-1: #020617;
       --bg-2: #0f172a;
       --card: rgba(6, 14, 24, 0.96);
-      --card-2: rgba(4, 12, 20, 0.95);
       --border: rgba(123, 158, 205, 0.2);
       --border-strong: rgba(77, 163, 255, 0.45);
       --accent: #4da3ff;
-      --accent-soft: #2a3a4f;
       --text-main: #f5f7fb;
       --text-muted: #b4bccb;
       --shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
@@ -30,48 +28,25 @@
       color: var(--text-main);
       line-height: 1.6;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    .wrapper {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 1.5rem;
-      background: transparent;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0 0.5rem;
-      gap: 1rem;
-    }
-
-    .logo-wrapper { display: flex; align-items: center; gap: 0.75rem; min-width: 200px; }
-    .logo-img { height: 48px; width: auto; display: block; }
-
-    nav { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: flex-end; }
-    nav a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; }
-    nav a:hover { color: var(--accent); }
-
-    .hero {
-      padding: 3rem 0 2rem;
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2.5rem;
-      align-items: center;
+      place-items: center;
+      padding: 1.5rem;
     }
 
-    .hero h1 {
-      font-size: clamp(2.1rem, 4vw, 2.9rem);
-      margin: 0 0 0.8rem 0;
-      letter-spacing: -0.02em;
+    .wrap {
+      width: 100%;
+      max-width: 860px;
     }
 
-    .hero-tagline { font-size: 1.65rem; color: var(--accent); font-weight: 650; margin: 0 0 1.2rem 0; }
-    .hero p { color: var(--text-muted); max-width: 38rem; margin: 0 0 1.8rem 0; }
+    .card {
+      background: var(--card);
+      border-radius: 1.2rem;
+      padding: 2rem 1.8rem;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+    }
 
-    .hero-badge {
+    .badge {
       display: inline-block;
       padding: 0.25rem 0.75rem;
       border-radius: 999px;
@@ -82,7 +57,26 @@
       margin-bottom: 1rem;
     }
 
-    .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    h1 {
+      margin: 0 0 0.6rem 0;
+      letter-spacing: -0.02em;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+    }
+
+    p {
+      margin: 0 0 1.25rem 0;
+      color: var(--text-muted);
+      max-width: 48rem;
+      font-size: 1rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
 
     .btn-primary {
       display: inline-block;
@@ -96,450 +90,53 @@
       border: none;
       cursor: pointer;
     }
+
     .btn-primary:hover { filter: brightness(1.08); }
 
     .btn-ghost {
       display: inline-block;
       padding: 0.75rem 1.4rem;
       border-radius: 999px;
-      border: 1px solid var(--accent-soft);
+      border: 1px solid rgba(123, 158, 205, 0.30);
       color: var(--text-main);
       text-decoration: none;
       font-size: 0.95rem;
-      background: rgba(3, 10, 18, 0.6);
+      background: rgba(2, 6, 12, 0.55);
     }
 
-    .hero-card {
-      background: var(--card-2);
-      border-radius: 1.2rem;
-      padding: 1.5rem 1.6rem;
-      border: 1px solid rgba(133, 170, 215, 0.2);
-      box-shadow: var(--shadow);
-    }
-    .hero-card h2 { font-size: 1.1rem; margin: 0 0 0.6rem 0; }
-    .hero-card p { font-size: 0.93rem; margin: 0 0 0.75rem 0; color: var(--text-muted); }
-    .hero-card ul { list-style: none; margin: 0; padding: 0; font-size: 0.92rem; color: var(--text-muted); }
-    .hero-card li { margin-bottom: 0.35rem; }
-    .hero-card li::before { content: "•"; color: var(--accent); margin-right: 0.4rem; }
-
-    section { padding: 2.5rem 0; }
-    section h2 { font-size: 1.6rem; margin: 0 0 0.4rem 0; }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      margin: 0 0 1.8rem 0;
-      max-width: 44rem;
-      font-size: 0.98rem;
-    }
-
-    .grid { display: grid; gap: 1.5rem; }
-    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-
-    .card {
-      background: var(--card);
-      border-radius: 1rem;
-      padding: 1.3rem 1.4rem;
-      border: 1px solid var(--border);
-    }
-
-    .card h3 {
-      font-size: 1.1rem;
-      margin: 0 0 0.5rem 0;
-      color: var(--text-main);
-      font-weight: 650;
-    }
-
-    .pill {
-      display: inline-block;
-      margin: 0.25rem 0 0.75rem 0;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(77, 163, 255, 0.12);
-      border: 1px solid rgba(77, 163, 255, 0.35);
-      color: var(--text-muted);
-      font-size: 0.82rem;
-    }
-
-    .card p { font-size: 0.92rem; color: var(--text-muted); margin: 0 0 0.6rem 0; }
-    .card ul { list-style: none; margin: 0; padding: 0; font-size: 0.92rem; color: var(--text-muted); }
-    .card li { margin-bottom: 0.35rem; }
-    .card li::before { content: "–"; color: var(--accent); margin-right: 0.4rem; }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      justify-content: center;
-      margin: 0.8rem 0 1.2rem;
-    }
-    .badge-row img { height: 30px; width: auto; opacity: 0.92; }
-
-    .contact-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-top: 0.8rem;
-      padding: 1.2rem 1.3rem;
-      border-radius: 1rem;
-      background: rgba(5, 13, 22, 0.96);
-      border: 1px solid var(--border-strong);
-    }
-
-    .contact-item { min-width: 240px; font-size: 0.95rem; }
-    .contact-label { text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 0.25rem; }
-    .contact-value a { color: var(--accent); text-decoration: none; }
-    .contact-value a:hover { text-decoration: underline; }
-
-    .form-wrap {
-      margin-top: 1.25rem;
-      background: rgba(5, 13, 22, 0.96);
-      border: 1px solid rgba(123, 158, 205, 0.25);
-      border-radius: 1rem;
-      padding: 1.2rem 1.3rem;
-    }
-
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-    .field { display: flex; flex-direction: column; gap: 0.35rem; }
-    label { font-size: 0.9rem; color: var(--text-muted); }
-
-    input, select, textarea {
-      appearance: none;
-      border: 1px solid rgba(123, 158, 205, 0.30);
-      background: rgba(2, 6, 12, 0.65);
-      color: var(--text-main);
-      border-radius: 0.85rem;
-      padding: 0.75rem 0.85rem;
-      font-size: 0.95rem;
-      outline: none;
-    }
-
-    input:focus, select:focus, textarea:focus {
+    .btn-ghost:hover {
       border-color: rgba(77, 163, 255, 0.75);
-      box-shadow: 0 0 0 3px rgba(77, 163, 255, 0.18);
     }
-
-    textarea { min-height: 120px; resize: vertical; }
-    .span-2 { grid-column: span 2; }
-
-    .form-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.9rem;
-    }
-
-    .fineprint { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 
     footer {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      padding: 1.8rem 0 0.75rem;
-      border-top: 1px solid rgba(58, 83, 118, 0.6);
       text-align: center;
-    }
-
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
-    @media (max-width: 640px) {
-      .wrapper { padding: 1.1rem; }
-      .form-grid { grid-template-columns: 1fr; }
-      .span-2 { grid-column: auto; }
-      nav { justify-content: flex-start; }
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 1.25rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <div class="logo-wrapper">
-        <img src="valo-logo.png" alt="VALO Technologies LLC logo" class="logo-img" />
-      </div>
-
-      <nav aria-label="Primary">
-        <a href="#services">Services</a>
-        <a href="#about">Why Valo</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div>
-          <div class="hero-badge">Texas-based • Serving clients nationwide</div>
-          <div class="hero-tagline">Modern Security. Simple Execution.</div>
-          <h1>Network & Cybersecurity consulting for small and mid-size businesses.</h1>
-          <p>
-            VALO Technologies LLC helps organizations design, secure, and optimize their networks
-            with vendor-grade expertise in Palo Alto firewalls, Cisco Umbrella, and modern security architectures.
-          </p>
-
-          <div class="btn-row">
-            <a class="btn-primary" href="#inquiry">Request a quote</a>
-            <a class="btn-ghost" href="#services">View services</a>
-          </div>
-        </div>
-
-        <aside class="hero-card">
-          <h2>Core capabilities</h2>
-          <p>Hands-on engineering and architecture support from design through operations.</p>
-          <ul>
-            <li>Network segmentation & VPN design</li>
-            <li>Palo Alto firewall implementation & tuning</li>
-            <li>DNS & web security with Cisco Umbrella</li>
-            <li>Risk assessments and incident readiness</li>
-          </ul>
-        </aside>
-      </section>
-
-      <!-- SERVICES: UPDATED TO MATCH LINKEDIN LABELS -->
-      <section id="services">
-        <h2>Services</h2>
-        <p class="section-subtitle">
-          These service categories match our LinkedIn Services list. Each engagement is delivered with clear scope, documentation, and measurable outcomes.
-        </p>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Information Security</h3>
-            <div class="pill">Best for: leadership-ready risk reduction</div>
-            <p>Reduce your security risk with a practical baseline assessment and a prioritized remediation roadmap.</p>
-            <ul>
-              <li><strong>Security Baseline Assessment (10 business days):</strong> findings, risk register, and 30/60/90-day plan</li>
-              <li>Firewall policy review and rulebase hygiene</li>
-              <li>Security documentation: SOPs, change control, and executive summaries</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Cybersecurity</h3>
-            <div class="pill">Best for: readiness and response planning</div>
-            <p>Improve detection, response, and governance without overcomplicating your environment.</p>
-            <ul>
-              <li>Incident readiness checklist and IR runbook</li>
-              <li>Logging strategy: sources, retention targets, alerting basics</li>
-              <li>Hardening recommendations aligned to business priorities</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Computer Networking</h3>
-            <div class="pill">Best for: stable, scalable network foundations</div>
-            <p>Design and optimize routing, switching, segmentation, and secure connectivity for SMB environments.</p>
-            <ul>
-              <li>Network segmentation reference architecture (VLANs/zones, east-west controls)</li>
-              <li>VPN design and secure remote access patterns</li>
-              <li>Network health checks: reliability, documentation, and modernization recommendations</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>IT Consulting</h3>
-            <div class="pill">Best for: clear plans and confident execution</div>
-            <p>Advisory and implementation guidance that aligns stakeholders, budgets, and technical teams.</p>
-            <ul>
-              <li>Security and network roadmap planning (30/60/90-day execution plan)</li>
-              <li>Vendor/tool selection guidance (right-sized for SMB)</li>
-              <li>Documentation packages to operationalize improvements</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Network Support</h3>
-            <div class="pill">Best for: ongoing support and continuous improvement</div>
-            <p>Get expert support for operations, troubleshooting, and change execution—without hiring full-time.</p>
-            <ul>
-              <li><strong>Firewall & VPN Health Check (5 business days)</strong></li>
-              <li>Cisco Umbrella policy tuning and reporting cadence</li>
-              <li>Ongoing monthly retainer options (scope-defined support windows)</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Specialty: Palo Alto & Cisco Umbrella</h3>
-            <div class="pill">Best for: fast wins on your security stack</div>
-            <p>Hands-on engineering focused on your highest-impact controls.</p>
-            <ul>
-              <li>Palo Alto NGFW/Panorama design, migration, troubleshooting, and best practices</li>
-              <li>GlobalProtect VPN design and access segmentation</li>
-              <li><strong>Umbrella QuickStart (3–5 business days):</strong> policy baseline + reporting setup</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="about">
-        <h2>Why Valo Technologies LLC</h2>
-        <p class="section-subtitle">
-          Led by Founder, CEO, and CTO <strong>Loseini Kamara</strong>, Valo combines hands-on engineering experience
-          with clear, business-focused communication.
-        </p>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Practical, hands-on expertise</h3>
-            <p>
-              Over a decade of experience designing, implementing, and operating secure network solutions in complex environments.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Straightforward execution</h3>
-            <p>
-              No unnecessary complexity—just modern security architectures, clear documentation, and repeatable processes your team can own.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="certifications">
-        <h2>Certifications</h2>
-        <p class="section-subtitle">
-          Industry-recognized certifications across cybersecurity, cloud security, networking, and delivery practices.
-        </p>
-
-        <div class="badge-row" aria-label="Certification badges">
-          <img src="logo-ccna.png" alt="Cisco CCNA" />
-          <img src="logo-pccse.png" alt="Palo Alto PCCSE" />
-          <img src="logo-cysa.png" alt="CompTIA CySA+" />
-          <img src="logo-pentest.png" alt="CompTIA PenTest+" />
-          <img src="logo-secup.png" alt="CompTIA Security+" />
-          <img src="logo-secux.png" alt="CompTIA SecurityX" />
-          <img src="logo-isaca.png" alt="ISACA CISM" />
-          <img src="logo-scrum.png" alt="Professional Scrum Master I" />
-        </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Cybersecurity & Cloud</h3>
-            <ul>
-              <li>ISACA CISM</li>
-              <li>Palo Alto PCCSE</li>
-              <li>CompTIA CySA+</li>
-              <li>CompTIA PenTest+</li>
-              <li>CompTIA Security+</li>
-              <li>CompTIA SecurityX (CAS-004)</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Networking & Delivery</h3>
-            <ul>
-              <li>Cisco CCNA</li>
-              <li>PSM I</li>
-              <li>Continuous learning across security, networking, and cloud platforms</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <p class="section-subtitle">
-          Ready to discuss a project, security review, or ongoing support? Reach out directly or use the inquiry form below.
-        </p>
-
-        <div class="contact-box">
-          <div class="contact-item">
-            <div class="contact-label">Email</div>
-            <div class="contact-value"><a href="mailto:valotechllc@gmail.com">valotechllc@gmail.com</a></div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-label">Cell</div>
-            <div class="contact-value"><a href="tel:+19728549388">972-854-9388</a></div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-label">Location</div>
-            <div class="contact-value">Rockwall, Texas • Registered in Texas</div>
-          </div>
-        </div>
-
-        <div id="inquiry" class="form-wrap">
-          <h3 style="margin:0 0 0.35rem 0;">Request a quote / inquiry</h3>
-          <p class="section-subtitle" style="margin-bottom: 1rem;">
-            Provide a few details and we will respond within 1 business day.
-          </p>
-
-          <div id="inquiry" class="form-wrap">
-  <h3 style="margin:0 0 0.35rem 0;">Request a quote / inquiry</h3>
-  <p class="section-subtitle" style="margin-bottom: 1rem;">
-    Provide a few details and we will respond within 1 business day.
-  </p>
-
-  <form action="https://formspree.io/f/xnnevpwq" method="POST">
-    <!-- Inbox and UX helpers -->
-    <input type="hidden" name="_subject" value="New Valo Technologies Website Inquiry" />
-    <!-- Update this URL to your real thank-you page -->
-    <div class="form-grid">
-      <div class="field">
-        <label for="name">Full name</label>
-        <input id="name" name="name" type="text" required placeholder="Your name" autocomplete="name" />
-      </div>
-
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required placeholder="you@company.com" autocomplete="email" />
-      </div>
-
-      <div class="field">
-        <label for="phone">Phone (optional)</label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          placeholder="(###) ###-####"
-          autocomplete="tel"
-          pattern="^[0-9()+.\-\s]{7,}$"
-        />
-      </div>
-
-      <div class="field">
-        <label for="service">Service area</label>
-        <select id="service" name="service" required>
-          <option value="" disabled selected>Select a service</option>
-          <option>Information Security</option>
-          <option>Cybersecurity</option>
-          <option>Computer Networking</option>
-          <option>IT Consulting</option>
-          <option>Network Support</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="field span-2">
-        <label for="message">Project details</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="6"
-          required
-          placeholder="What problem are you trying to solve? Any timelines, size of environment, and key constraints?"
-        ></textarea>
-      </div>
-
-      <!-- Honeypot (spam trap) -->
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-    </div>
-
-    <div class="form-actions">
-      <p class="fineprint">
-        By submitting, you consent to be contacted about your request. No marketing spam.
+  <main class="wrap">
+    <section class="card" aria-live="polite">
+      <div class="badge">Thanks — message received</div>
+      <h1>Thank you.</h1>
+      <p>
+        Your inquiry has been received. We will respond within 1 business day.
+        If your request is urgent, please call <strong>972-854-9388</strong>.
       </p>
-      <button class="btn-primary" type="submit">Send inquiry</button>
-    </div>
-  </form>
-</div>
-      </section>
-    </main>
+
+      <div class="btn-row">
+        <a class="btn-primary" href="https://www.valotechnologiellc.com/">Back to home</a>
+        <a class="btn-ghost" href="mailto:valotechllc@gmail.com">Email us</a>
+      </div>
+    </section>
 
     <footer>
       © <span id="year"></span> Valo Technologies LLC. All rights reserved.
     </footer>
-  </div>
+  </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
