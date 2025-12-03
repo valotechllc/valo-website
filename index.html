@@ -6,19 +6,19 @@
   <title>VALO Technologies LLC | Modern Security. Simple Execution.</title>
   <style>
     :root{
-  --bg-0:#070b14;
-  --bg-1:#0b1224;
-  --bg-2:#16264a;
-  --text-main:#f5f7fb;
-  --text-muted:#c3ccda;
-  --card: rgba(10,18,32,.92);
-  --card-2: rgba(8,16,28,.90);
-  --border: rgba(123,158,205,.26);
-  --border-strong: rgba(77,163,255,.45);
-  --accent:#4da3ff;
-  --accent-soft:#2a3a4f;
-  --shadow: 0 18px 40px rgba(0,0,0,.55);
-}
+      --bg-0:#070b14;
+      --bg-1:#0b1224;
+      --bg-2:#16264a;
+      --text-main:#f5f7fb;
+      --text-muted:#c3ccda;
+      --card: rgba(10,18,32,.92);
+      --card-2: rgba(8,16,28,.90);
+      --border: rgba(123,158,205,.26);
+      --border-strong: rgba(77,163,255,.45);
+      --accent:#4da3ff;
+      --accent-soft:#2a3a4f;
+      --shadow: 0 18px 40px rgba(0,0,0,.55);
+    }
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; height: 100%; }
 
@@ -29,10 +29,11 @@
       line-height: 1.6;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-h1, h2, h3, h4, h5, h6 { color: var(--text-main); }
-p, li { color: var(--text-muted); }
-nav a { color: var(--text-muted); }
-nav a:hover { color: var(--accent); }
+    h1, h2, h3, h4, h5, h6 { color: var(--text-main); }
+    p, li { color: var(--text-muted); }
+    nav a { color: var(--text-muted); }
+    nav a:hover { color: var(--accent); }
+
     .wrapper {
       max-width: 1080px;
       margin: 0 auto;
@@ -52,9 +53,19 @@ nav a:hover { color: var(--accent); }
     .logo-img { height: 48px; width: auto; display: block; }
 
     nav { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: flex-end; }
-    nav a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; }
-    nav a:hover { color: var(--accent); }
+    nav a { text-decoration: none; font-size: 0.95rem; }
 
+    section { padding: 2.5rem 0; }
+    section h2 { font-size: 1.6rem; margin: 0 0 0.4rem 0; }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      margin: 0 0 1.8rem 0;
+      max-width: 44rem;
+      font-size: 0.98rem;
+    }
+
+    /* HERO */
     .hero {
       padding: 3rem 0 2rem;
       display: grid;
@@ -70,7 +81,7 @@ nav a:hover { color: var(--accent); }
     }
 
     .hero-tagline { font-size: 1.65rem; color: var(--accent); font-weight: 650; margin: 0 0 1.2rem 0; }
-    .hero p { color: var(--text-muted); max-width: 38rem; margin: 0 0 1.8rem 0; }
+    .hero p { color: var(--text-muted); max-width: 40rem; margin: 0 0 1.2rem 0; }
 
     .hero-badge {
       display: inline-block;
@@ -85,17 +96,22 @@ nav a:hover { color: var(--accent); }
 
     .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
 
-    .btn-primary {
+    .btn-primary,
+    .btn-secondary {
       display: inline-block;
       padding: 0.75rem 1.4rem;
       border-radius: 999px;
-      background: var(--accent);
-      color: #02040a;
       font-weight: 650;
       text-decoration: none;
       font-size: 0.95rem;
       border: none;
       cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #02040a;
     }
     .btn-primary:hover { filter: brightness(1.08); }
     .btn-primary[disabled] { opacity: 0.7; cursor: not-allowed; }
@@ -109,6 +125,13 @@ nav a:hover { color: var(--accent); }
       text-decoration: none;
       font-size: 0.95rem;
       background: rgba(3, 10, 18, 0.6);
+      white-space: nowrap;
+    }
+
+    .microcopy {
+      margin-top: 0.9rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
     .hero-card {
@@ -124,18 +147,10 @@ nav a:hover { color: var(--accent); }
     .hero-card li { margin-bottom: 0.35rem; }
     .hero-card li::before { content: "•"; color: var(--accent); margin-right: 0.4rem; }
 
-    section { padding: 2.5rem 0; }
-    section h2 { font-size: 1.6rem; margin: 0 0 0.4rem 0; }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      margin: 0 0 1.8rem 0;
-      max-width: 44rem;
-      font-size: 0.98rem;
-    }
-
+    /* GRID / CARDS */
     .grid { display: grid; gap: 1.5rem; }
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
     .card {
       background: var(--card);
@@ -167,6 +182,31 @@ nav a:hover { color: var(--accent); }
     .card li { margin-bottom: 0.35rem; }
     .card li::before { content: "–"; color: var(--accent); margin-right: 0.4rem; }
 
+    .card .service-cta {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    /* Use a link styled like a button, but keep it subtle */
+    .link-cta {
+      display: inline-block;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(77, 163, 255, 0.35);
+      background: rgba(77, 163, 255, 0.08);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .link-cta:hover {
+      border-color: rgba(77, 163, 255, 0.6);
+      filter: brightness(1.06);
+    }
+
+    /* BADGES / CONTACT / FORM */
     .badge-row {
       display: flex;
       flex-wrap: wrap;
@@ -234,12 +274,7 @@ nav a:hover { color: var(--accent); }
     }
 
     .fineprint { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
-
-    .form-status {
-      margin-top: 0.75rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
+    .form-status { margin-top: 0.75rem; font-size: 0.88rem; color: var(--text-muted); }
 
     footer {
       font-size: 0.85rem;
@@ -267,6 +302,7 @@ nav a:hover { color: var(--accent); }
       </div>
 
       <nav aria-label="Primary">
+        <a href="#top-services">Top Services</a>
         <a href="#services">Services</a>
         <a href="#about">Why Valo</a>
         <a href="#certifications">Certifications</a>
@@ -279,32 +315,102 @@ nav a:hover { color: var(--accent); }
         <div>
           <div class="hero-badge">Texas-based • Serving clients nationwide</div>
           <div class="hero-tagline">Modern Security. Simple Execution.</div>
-          <h1>Network & Cybersecurity consulting for small and mid-size businesses.</h1>
+
+          <h1>Practical cybersecurity that reduces risk without slowing your business.</h1>
           <p>
-            VALO Technologies LLC helps organizations design, secure, and optimize their networks
-            with vendor-grade expertise in Palo Alto firewalls, Cisco Umbrella, and modern security architectures.
+            Valo Technologies LLC delivers hands-on engineering and clear, business-focused guidance—covering
+            firewall operations, network hardening, and security assessments with measurable outcomes.
           </p>
 
           <div class="btn-row">
-            <a class="btn-primary" href="#inquiry">Request a quote</a>
-            <a class="btn-ghost" href="#services">View services</a>
+            <a class="btn-primary" href="#inquiry">Request a consultation</a>
+            <a class="btn-ghost" href="#top-services">See top services</a>
           </div>
+
+          <p class="microcopy">Clear scope. Clean documentation. No unnecessary complexity.</p>
         </div>
 
         <aside class="hero-card">
-          <h2>Core capabilities</h2>
-          <p>Hands-on engineering and architecture support from design through operations.</p>
+          <h2>What you can expect</h2>
+          <p>Engagements delivered with scope, evidence, and operational handoff.</p>
           <ul>
-            <li>Network segmentation & VPN design</li>
-            <li>Palo Alto firewall implementation & tuning</li>
-            <li>DNS & web security with Cisco Umbrella</li>
-            <li>Risk assessments and incident readiness</li>
+            <li>Practical recommendations tied to business impact</li>
+            <li>Implementation support (not just a report)</li>
+            <li>Executive-ready summaries and technical runbooks</li>
+            <li>Change-control friendly approach</li>
           </ul>
         </aside>
       </section>
 
+      <!-- TOP 3 SERVICES (PRIORITIES) -->
+      <section id="top-services">
+        <h2>Top services</h2>
+        <p class="section-subtitle">
+          These are Valo’s highest-impact offerings—optimized for fast, measurable improvements and reliable operations.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Palo Alto Firewall & Panorama Services</h3>
+            <div class="pill">Best for: perimeter stability and policy control</div>
+            <p>
+              Design, deploy, and optimize Palo Alto Networks firewalls and Panorama with clean standards,
+              strong visibility, and predictable change execution.
+            </p>
+            <ul>
+              <li>New implementations, migrations, and environment standardization</li>
+              <li>Rulebase cleanup, NAT/security policy tuning, objects & zones</li>
+              <li>Logging/visibility improvements and operational dashboards</li>
+              <li>High availability validation and controlled upgrades</li>
+            </ul>
+
+            <div class="service-cta">
+              <a class="link-cta" href="#inquiry" onclick="prefillService('Palo Alto / Panorama')">Talk to a firewall expert</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Network Hardening & Remediation</h3>
+            <div class="pill">Best for: reducing exposure and improving resilience</div>
+            <p>
+              Establish a secure, supportable baseline across switching, routing, and security controls—then
+              remediate issues with clear priorities.
+            </p>
+            <ul>
+              <li>Secure configuration baselines for switches/routers</li>
+              <li>Management-plane hardening (AAA, admin access, SNMP, NTP, syslog)</li>
+              <li>Segmentation support and access-control improvements</li>
+              <li>Remediation plan with quick wins and longer-term fixes</li>
+            </ul>
+
+            <div class="service-cta">
+              <a class="link-cta" href="#inquiry" onclick="prefillService('Network Hardening & Remediation')">Request hardening support</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Security Assessments & Compliance Readiness</h3>
+            <div class="pill">Best for: leadership clarity and audit readiness</div>
+            <p>
+              Get a clear, evidence-backed view of risk with actionable recommendations your team can execute.
+              Designed to support leadership decisions and compliance initiatives.
+            </p>
+            <ul>
+              <li>Security posture review and gap analysis</li>
+              <li>Configuration and architecture findings (with evidence)</li>
+              <li>Prioritized remediation roadmap (30/60/90 days)</li>
+              <li>Documentation suitable for change control and audits</li>
+            </ul>
+
+            <div class="service-cta">
+              <a class="link-cta" href="#inquiry" onclick="prefillService('Security Assessment')">Get an assessment</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="services">
-        <h2>Services</span></h2>
+        <h2>Services</h2>
         <p class="section-subtitle">
           These service categories match our LinkedIn Services list. Each engagement is delivered with clear scope, documentation, and measurable outcomes.
         </p>
@@ -501,11 +607,15 @@ nav a:hover { color: var(--accent); }
                 <label for="service">Service area</label>
                 <select id="service" name="service" required>
                   <option value="" disabled selected>Select a service</option>
+                  <option>Security Assessment</option>
+                  <option>Network Hardening & Remediation</option>
+                  <option>Palo Alto / Panorama</option>
                   <option>Information Security</option>
                   <option>Cybersecurity</option>
                   <option>Computer Networking</option>
                   <option>IT Consulting</option>
                   <option>Network Support</option>
+                  <option>Specialty</option>
                   <option>Other</option>
                 </select>
               </div>
@@ -545,6 +655,18 @@ nav a:hover { color: var(--accent); }
   <script>
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Prefill service dropdown for better conversion
+    function prefillService(value) {
+      try {
+        const service = document.getElementById("service");
+        if (!service) return;
+        const normalized = String(value || "").trim();
+        // Only set if an option exists with that label
+        const match = Array.from(service.options).find(opt => (opt.text || "").trim() === normalized);
+        if (match) service.value = match.value;
+      } catch (_) {}
+    }
 
     // Free-plan Formspree redirect (client-side)
     (function () {
