@@ -291,6 +291,103 @@
       .span-2 { grid-column: auto; }
       nav { justify-content: flex-start; }
     }
+
+    /* AI agent widget */
+    .ai-agent-toggle {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 999;
+      background: linear-gradient(135deg, var(--accent), #7ec1ff);
+      color: #02040a;
+      border: none;
+      border-radius: 999px;
+      padding: 0.85rem 1.25rem;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ai-agent-panel {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 5.75rem;
+      width: min(420px, 96vw);
+      background: rgba(5, 13, 22, 0.98);
+      border: 1px solid rgba(123, 158, 205, 0.35);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      display: none;
+      flex-direction: column;
+      max-height: 70vh;
+      overflow: hidden;
+      z-index: 998;
+    }
+
+    .ai-agent-panel.open { display: flex; }
+
+    .ai-agent-header {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(77, 163, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .ai-agent-title { margin: 0; font-size: 1rem; color: var(--text-main); }
+    .ai-agent-sub { margin: 0; color: var(--text-muted); font-size: 0.88rem; }
+    .ai-agent-close { background: none; color: var(--text-muted); border: none; cursor: pointer; font-size: 1.1rem; }
+
+    .ai-agent-body { padding: 0.9rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.75rem; overflow-y: auto; }
+
+    .ai-message {
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.9rem;
+      background: rgba(22, 38, 74, 0.8);
+      border: 1px solid rgba(77, 163, 255, 0.28);
+      color: var(--text-main);
+      font-size: 0.93rem;
+      max-width: 94%;
+    }
+
+    .ai-message.user { background: rgba(4, 9, 18, 0.85); border-color: rgba(123, 158, 205, 0.35); margin-left: auto; }
+    .ai-quick { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .ai-chip {
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      background: rgba(77, 163, 255, 0.12);
+      border: 1px solid rgba(77, 163, 255, 0.35);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+
+    .ai-agent-input { display: flex; gap: 0.55rem; padding: 0.85rem 1rem; border-top: 1px solid rgba(77, 163, 255, 0.2); background: rgba(4, 9, 18, 0.95); }
+    .ai-agent-input input {
+      flex: 1;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(123, 158, 205, 0.3);
+      background: rgba(5, 13, 22, 0.9);
+      color: var(--text-main);
+    }
+    .ai-agent-input button {
+      border-radius: 0.85rem;
+      padding: 0.65rem 1rem;
+      border: none;
+      background: var(--accent);
+      color: #02040a;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .ai-hand-off { font-size: 0.88rem; color: var(--text-muted); }
+    .ai-hand-off a { color: var(--accent); }
+    .badge-live { background: rgba(0, 255, 170, 0.12); color: #7df8c5; border: 1px solid rgba(0,255,170,0.45); padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.78rem; }
   </style>
 </head>
 
@@ -652,6 +749,28 @@
     </footer>
   </div>
 
+  <button class="ai-agent-toggle" id="aiAgentToggle" aria-expanded="false" aria-controls="aiAgentPanel">
+    🤖 Chat with Valo
+  </button>
+
+  <section class="ai-agent-panel" id="aiAgentPanel" aria-label="Valo AI agent and live chat">
+    <div class="ai-agent-header">
+      <div>
+        <p class="ai-agent-title">Valo AI Desk</p>
+        <p class="ai-agent-sub">Instant answers + live follow-up</p>
+      </div>
+      <button class="ai-agent-close" type="button" aria-label="Close chat">✕</button>
+    </div>
+
+    <div class="ai-agent-body" id="aiAgentMessages" role="log" aria-live="polite"></div>
+    <div class="ai-agent-body" id="aiAgentQuick" aria-label="Quick topics"></div>
+
+    <div class="ai-agent-input">
+      <input id="aiAgentInput" type="text" placeholder="Ask about services, timelines, or pricing" aria-label="Message the Valo AI" />
+      <button id="aiAgentSend" type="button">Send</button>
+    </div>
+  </section>
+
   <script>
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -711,6 +830,108 @@
           if (submitBtn) submitBtn.disabled = false;
         }
       });
+    })();
+
+    // AI agent + live handoff (client-side)
+    (function () {
+      const toggle = document.getElementById("aiAgentToggle");
+      const panel = document.getElementById("aiAgentPanel");
+      const closeBtn = panel?.querySelector(".ai-agent-close");
+      const messagesEl = document.getElementById("aiAgentMessages");
+      const quickEl = document.getElementById("aiAgentQuick");
+      const input = document.getElementById("aiAgentInput");
+      const sendBtn = document.getElementById("aiAgentSend");
+
+      const quickTopics = [
+        "Firewall & Panorama help",
+        "Network hardening guidance",
+        "Security assessment scope",
+        "Pricing + timelines",
+        "Talk to a human"
+      ];
+
+      function togglePanel(forceState) {
+        const isOpen = typeof forceState === "boolean" ? forceState : !panel.classList.contains("open");
+        panel.classList.toggle("open", isOpen);
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        if (isOpen) input?.focus();
+      }
+
+      function addMessage(text, role = "agent") {
+        if (!messagesEl) return;
+        const bubble = document.createElement("div");
+        bubble.className = "ai-message" + (role === "user" ? " user" : "");
+        bubble.textContent = text;
+        messagesEl.appendChild(bubble);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function renderQuickTopics() {
+        if (!quickEl) return;
+        quickEl.innerHTML = "";
+        quickEl.className = "ai-quick";
+        quickTopics.forEach(topic => {
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "ai-chip";
+          chip.textContent = topic;
+          chip.addEventListener("click", () => handleUserInput(topic));
+          quickEl.appendChild(chip);
+        });
+
+        const handoff = document.createElement("p");
+        handoff.className = "ai-hand-off";
+        handoff.innerHTML = '<span class="badge-live">Live handoff</span> Want a human now? Call <a href="tel:+12148762525">(214) 876-2525</a> or <a href="#inquiry">use the form</a>.';
+        quickEl.appendChild(handoff);
+      }
+
+      function agentReply(userText) {
+        const lower = userText.toLowerCase();
+        if (lower.includes("firewall") || lower.includes("panorama")) {
+          return "We can help with design, migrations, rulebase cleanup, HA validation, and GlobalProtect. Share your firewall model, current version, and desired outcomes—I'll prep a scope for the team.";
+        }
+        if (lower.includes("hardening") || lower.includes("network")) {
+          return "For network hardening we focus on secure baselines (AAA, admin access, SNMP, NTP, syslog), segmentation, and remediation plans with quick wins. Tell me your vendor mix and any change windows.";
+        }
+        if (lower.includes("assessment") || lower.includes("audit")) {
+          return "Our Security Baseline Assessment is a 10-business-day engagement with findings, risk register, and a 30/60/90-day plan. Let me know your target frameworks or compliance needs.";
+        }
+        if (lower.includes("price") || lower.includes("pricing") || lower.includes("timeline")) {
+          return "Typical quick-starts run 3–10 business days, with fixed-scope pricing after a short discovery call. Share your project size and urgency so I can line up a live engineer.";
+        }
+        if (lower.includes("human") || lower.includes("live") || lower.includes("agent")) {
+          return "No problem—I can notify a live engineer. Share your best contact method and preferred time, or call (214) 876-2525 for immediate assistance.";
+        }
+        return "I'll capture this for the team. Could you add environment size, key tools (Palo Alto, Cisco, etc.), and your target timeline? I can then route you to the right engineer.";
+      }
+
+      function handleUserInput(value) {
+        const text = (value || input?.value || "").trim();
+        if (!text) return;
+        addMessage(text, "user");
+        if (input) input.value = "";
+        const reply = agentReply(text);
+        addMessage(reply, "agent");
+      }
+
+      function bootstrap() {
+        addMessage("Hi, I'm the Valo AI desk. Ask about services, timelines, or pricing and I'll route you to the right engineer. Want a human? Type 'talk to a human'.");
+        renderQuickTopics();
+      }
+
+      if (toggle && panel) {
+        toggle.addEventListener("click", () => togglePanel());
+      }
+      closeBtn?.addEventListener("click", () => togglePanel(false));
+      sendBtn?.addEventListener("click", () => handleUserInput());
+      input?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          handleUserInput();
+        }
+      });
+
+      bootstrap();
     })();
   </script>
 </body>
