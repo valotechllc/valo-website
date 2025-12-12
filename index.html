@@ -206,6 +206,29 @@
       filter: brightness(1.06);
     }
 
+    /* Clinic package enhancements */
+    .card.highlight {
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+    }
+    .meta-row {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .note-box{
+      margin-top: 1.2rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1rem;
+      background: rgba(5, 13, 22, 0.96);
+      border: 1px solid rgba(123, 158, 205, 0.25);
+      color: var(--text-muted);
+    }
+    .note-box strong{ color: var(--text-main); }
+
     /* BADGES / CONTACT / FORM */
     .badge-row {
       display: flex;
@@ -304,6 +327,7 @@
       <nav aria-label="Primary">
         <a href="#top-services">Top Services</a>
         <a href="#services">Services</a>
+        <a href="#clinic-ai">Clinics</a>
         <a href="#about">Why Valo</a>
         <a href="#certifications">Certifications</a>
         <a href="#contact">Contact</a>
@@ -484,6 +508,147 @@
         </div>
       </section>
 
+      <!-- CLINIC + AI PACKAGE -->
+      <section id="clinic-ai">
+        <h2>Clinic Cybersecurity + AI Safety Package</h2>
+        <p class="section-subtitle">
+          Built for clinics that need strong baseline security and safe AI adoption—without slowing patient care workflows.
+          Delivered with clear scope, evidence, and operational handoff.
+        </p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Option A: Clinic Security Baseline Assessment</h3>
+            <div class="pill">Best for: risk reduction + audit/cyber insurance readiness</div>
+            <p>
+              A practical assessment focused on identity, endpoints, email, backups, remote access, and core operational controls—
+              delivered as a clear remediation plan your team can execute.
+            </p>
+            <ul>
+              <li>Identity and admin access review (MFA + least privilege focus)</li>
+              <li>Endpoint and email security posture checks</li>
+              <li>Backup and recovery readiness (practical review)</li>
+              <li>Findings summary + Top 10 fixes</li>
+              <li>30/60/90-day remediation roadmap</li>
+            </ul>
+            <div class="meta-row">
+              <span class="pill">Typical: $750–$2,500</span>
+              <span class="pill">Timeline: 5–10 business days</span>
+            </div>
+            <div class="service-cta">
+              <a class="link-cta" href="#inquiry" onclick="prefillService('Clinic Security Baseline Assessment')">Request this assessment</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Option B: AI Safe-Use Package for Clinics</h3>
+            <div class="pill">Best for: AI guardrails + staff training</div>
+            <p>
+              Put simple AI rules in place so staff can benefit from AI tools while minimizing risk to PHI and confidential information.
+              No hype—just safe adoption.
+            </p>
+            <ul>
+              <li>AI acceptable use + PHI data-handling policy</li>
+              <li>Approved tools list + “Do Not Enter” data rules</li>
+              <li>Safe prompting patterns for admin tasks (no patient data)</li>
+              <li>30-minute staff micro-training (remote)</li>
+            </ul>
+            <div class="meta-row">
+              <span class="pill">Typical: $500–$1,500</span>
+              <span class="pill">Timeline: 3–7 business days</span>
+            </div>
+            <div class="service-cta">
+              <a class="link-cta" href="#inquiry" onclick="prefillService('AI Safe-Use (Clinics)')">Set up AI guardrails</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Option C: Website Tracking + Scheduling Workflow Check</h3>
+            <div class="pill">Best for: reducing exposure from web tools</div>
+            <p>
+              Identify risk from website analytics, pixels, chat widgets, forms, and scheduling workflows—then receive a remediation checklist
+              to remove/replace/configure and document as needed.
+            </p>
+            <ul>
+              <li>Review trackers/pixels/analytics on key pages</li>
+              <li>Review embedded forms/chat/scheduling tools</li>
+              <li>Remediation checklist (remove/replace/configure)</li>
+              <li>Basic documentation recommendations (scope-dependent)</li>
+            </ul>
+            <div class="meta-row">
+              <span class="pill">Typical: $500–$1,500</span>
+              <span class="pill">Timeline: 3–7 business days</span>
+            </div>
+            <div class="service-cta">
+              <a class="link-cta" href="#inquiry" onclick="prefillService('Website Tracking & Scheduling Check')">Check our website workflow</a>
+            </div>
+          </div>
+
+          <div class="card highlight">
+            <h3>Best Value Bundle: Clinic Secure + AI Safe Start</h3>
+            <div class="pill">Includes Options A + B + C</div>
+            <p>
+              A complete starter package combining security baseline improvements, AI safe-use guardrails, and a website/scheduling workflow check—
+              delivered as one unified action plan and executive summary.
+            </p>
+            <ul>
+              <li>Unified action plan across security + AI + web workflow risk</li>
+              <li>Single executive summary for leadership decisions</li>
+              <li>Implementation guidance (not just a report)</li>
+            </ul>
+            <div class="meta-row">
+              <span class="pill">Typical: $1,500–$4,500</span>
+              <span class="pill">Timeline: 10–15 business days</span>
+            </div>
+            <div class="service-cta">
+              <a class="btn-primary" href="#inquiry" onclick="prefillService('Clinic Secure + AI Safe Start (Bundle)')">Schedule a discovery call</a>
+              <a class="btn-ghost" href="#clinic-intake">View intake checklist</a>
+            </div>
+          </div>
+        </div>
+
+        <div id="clinic-intake" class="note-box">
+          <h3 style="margin:0 0 0.4rem 0;">Quick Intake Checklist</h3>
+          <p style="margin:0 0 0.9rem 0; color: var(--text-muted);">
+            To scope quickly, send the items below in your first message. This helps us deliver a fixed-fee quote and a fast start.
+          </p>
+
+          <div class="grid grid-3">
+            <div class="card" style="background: rgba(0,0,0,.18);">
+              <h3 style="margin-bottom:0.35rem;">Clinic profile</h3>
+              <ul>
+                <li>Number of staff</li>
+                <li>Number of devices</li>
+                <li>Number of locations</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(0,0,0,.18);">
+              <h3 style="margin-bottom:0.35rem;">Core systems</h3>
+              <ul>
+                <li>Microsoft 365 or Google Workspace</li>
+                <li>EHR vendor (name only)</li>
+                <li>Email security / EDR (if any)</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(0,0,0,.18);">
+              <h3 style="margin-bottom:0.35rem;">Workflow + risk areas</h3>
+              <ul>
+                <li>Remote access methods (VPN/RDP/BYOD)</li>
+                <li>Backup approach</li>
+                <li>Website + scheduling tools</li>
+              </ul>
+            </div>
+          </div>
+
+          <p style="margin:1rem 0 0 0;">
+            <strong>Included:</strong> assessment, documentation, prioritized plan, and implementation guidance.
+            <strong>Not included by default:</strong> penetration testing, digital forensics, or legal advice (available via add-ons/partners).
+          </p>
+        </div>
+      </section>
+
       <section id="about">
         <h2>Why Valo Technologies LLC</h2>
         <p class="section-subtitle">
@@ -607,6 +772,8 @@
                 <label for="service">Service area</label>
                 <select id="service" name="service" required>
                   <option value="" disabled selected>Select a service</option>
+
+                  <!-- Core -->
                   <option>Security Assessment</option>
                   <option>Network Hardening & Remediation</option>
                   <option>Palo Alto / Panorama</option>
@@ -616,6 +783,13 @@
                   <option>IT Consulting</option>
                   <option>Network Support</option>
                   <option>Specialty</option>
+
+                  <!-- Clinics + AI -->
+                  <option>Clinic Security Baseline Assessment</option>
+                  <option>AI Safe-Use (Clinics)</option>
+                  <option>Website Tracking & Scheduling Check</option>
+                  <option>Clinic Secure + AI Safe Start (Bundle)</option>
+
                   <option>Other</option>
                 </select>
               </div>
@@ -662,7 +836,6 @@
         const service = document.getElementById("service");
         if (!service) return;
         const normalized = String(value || "").trim();
-        // Only set if an option exists with that label
         const match = Array.from(service.options).find(opt => (opt.text || "").trim() === normalized);
         if (match) service.value = match.value;
       } catch (_) {}
