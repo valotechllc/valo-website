@@ -23,7 +23,7 @@
     /* Base / safety */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; height: 100%; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     img, svg, video { max-width: 100%; height: auto; }
     body { overflow-x: hidden; }
     a, p, li, h1, h2, h3, h4, h5, h6 { overflow-wrap: anywhere; }
@@ -40,28 +40,8 @@
     nav a { color: var(--text-muted); }
     nav a:hover { color: var(--accent); }
 
-    /* =========================================================
-       CLICKABILITY SAFEGUARD (prevents invisible overlays)
-       ========================================================= */
-    /* Ensure main content layers sit above anything accidental */
-    .wrapper, .site-header, main, footer, section, nav {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Make sure interactive elements can receive clicks */
-    a, button, input, select, textarea {
-      pointer-events: auto;
-    }
-
-    /* If any pseudo-element overlay exists, it will NOT block clicks */
-    body::before, body::after,
-    .wrapper::before, .wrapper::after,
-    header::before, header::after,
-    main::before, main::after {
-      pointer-events: none !important;
-    }
-    /* ========================================================= */
+    /* Ensure anchor jumps do not hide section titles behind header */
+    [id] { scroll-margin-top: 90px; }
 
     .wrapper {
       max-width: 1080px;
@@ -77,6 +57,8 @@
       align-items: center;
       padding: 1rem 0 0.5rem;
       gap: 1rem;
+      position: relative;
+      z-index: 10;
     }
 
     .logo-wrapper { display: flex; align-items: center; gap: 0.75rem; min-width: 200px; }
@@ -91,8 +73,6 @@
       border-radius: 999px;
       font-weight: 650;
       cursor: pointer;
-      position: relative;
-      z-index: 3; /* keep toggle above dropdown */
     }
 
     .nav-links {
@@ -100,8 +80,6 @@
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: flex-end;
-      position: relative;
-      z-index: 3; /* keep nav above other content */
     }
 
     .nav-links a { text-decoration: none; font-size: 0.95rem; }
@@ -111,7 +89,7 @@
 
     .section-subtitle {
       color: var(--text-muted);
-      margin: 0 0 1.8rem 0;
+      margin: 0 0 1.2rem 0;
       max-width: 44rem;
       font-size: 0.98rem;
     }
@@ -147,8 +125,7 @@
 
     .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
 
-    .btn-primary,
-    .btn-secondary {
+    .btn-primary {
       display: inline-block;
       padding: 0.75rem 1.4rem;
       border-radius: 999px;
@@ -158,16 +135,10 @@
       border: none;
       cursor: pointer;
       white-space: nowrap;
-      position: relative;
-      z-index: 2;
-    }
-
-    .btn-primary {
       background: var(--accent);
       color: #02040a;
     }
     .btn-primary:hover { filter: brightness(1.08); }
-    .btn-primary[disabled] { opacity: 0.7; cursor: not-allowed; }
 
     .btn-ghost {
       display: inline-block;
@@ -179,8 +150,6 @@
       font-size: 0.95rem;
       background: rgba(3, 10, 18, 0.6);
       white-space: nowrap;
-      position: relative;
-      z-index: 2;
     }
 
     .microcopy {
@@ -189,18 +158,43 @@
       color: var(--text-muted);
     }
 
-    /* Keep the remainder of your styles exactly as-is (cards/forms/etc.) */
-    /* --- FORM / FOOTER styles you already had --- */
-    input, select, textarea {
+    /* Basic cards for the sections (minimal) */
+    .grid { display: grid; gap: 1.2rem; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    .card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid var(--border);
+    }
+    .card h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; font-weight: 650; }
+    .card p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+
+    /* Simple inquiry form block */
+    .form-wrap {
+      margin-top: 1rem;
+      background: rgba(5, 13, 22, 0.96);
+      border: 1px solid rgba(123, 158, 205, 0.25);
+      border-radius: 1rem;
+      padding: 1.2rem 1.3rem;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 0.9rem; color: var(--text-muted); }
+
+    input, textarea {
       appearance: none;
       border: 1px solid rgba(123, 158, 205, 0.30);
       background: rgba(2, 6, 12, 0.65);
       color: var(--text-main);
       border-radius: 0.85rem;
       padding: 0.75rem 0.85rem;
-      font-size: 16px; /* prevents iOS zoom */
+      font-size: 16px;
       outline: none;
     }
+    textarea { min-height: 120px; resize: vertical; }
+    .span-2 { grid-column: span 2; }
 
     footer {
       font-size: 0.85rem;
@@ -210,15 +204,11 @@
       text-align: center;
     }
 
-    /* Existing responsive rules (kept) */
+    /* Responsive */
     @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
 
-    /* New responsive rules (nav + mobile CTA behavior) */
     @media (max-width: 860px){
-      .site-header{
-        flex-wrap: wrap;
-        align-items: center;
-      }
+      .site-header{ flex-wrap: wrap; }
       .logo-wrapper{ min-width: unset; }
       .nav-toggle{ display: inline-flex; align-items: center; justify-content: center; }
       .nav-links{
@@ -234,16 +224,15 @@
       .nav-links a{ padding: 0.25rem 0; font-size: 1rem; }
     }
 
-    @media (max-width: 600px){
+    @media (max-width: 640px){
       .wrapper { padding: 1.1rem; }
-      .btn-row{
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-primary, .btn-ghost{
-        width: 100%;
-        text-align: center;
-      }
+      .form-grid { grid-template-columns: 1fr; }
+      .span-2 { grid-column: auto; }
+    }
+
+    @media (max-width: 600px){
+      .btn-row{ flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-ghost{ width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -271,7 +260,7 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="top">
         <div>
           <div class="hero-badge">Texas-based • Serving clients nationwide</div>
           <div class="hero-tagline">Modern Technology. Robust Security. Simple Execution.</div>
@@ -290,7 +279,83 @@
           <p class="microcopy">Clear scope. Clean documentation. No unnecessary complexity.</p>
         </div>
 
-        <!-- The rest of your HTML remains unchanged -->
+        <div class="card" style="background: var(--card-2); border: 1px solid rgba(133, 170, 215, 0.2); box-shadow: var(--shadow); border-radius: 1.2rem;">
+          <h3>What we deliver</h3>
+          <p>Firewall operations, network hardening, security assessments, and clean documentation.</p>
+        </div>
+      </section>
+
+      <!-- These sections make your NAV + CTA actually work -->
+      <section id="top-services">
+        <h2>Top Services</h2>
+        <p class="section-subtitle">Your key offerings, prioritized.</p>
+        <div class="grid grid-3">
+          <div class="card"><h3>Firewall Operations</h3><p>Rule updates, NAT/VPN changes, troubleshooting, and monitoring.</p></div>
+          <div class="card"><h3>Network Hardening</h3><p>Secure baselines, segmentation, and vulnerability remediation.</p></div>
+          <div class="card"><h3>Security Assessments</h3><p>Practical findings with prioritized remediation steps.</p></div>
+        </div>
+      </section>
+
+      <section id="services">
+        <h2>Services</h2>
+        <p class="section-subtitle">Full service catalog (replace with your real content).</p>
+        <div class="grid grid-3">
+          <div class="card"><h3>Palo Alto / Panorama</h3><p>Design, implementation, and day-2 operations.</p></div>
+          <div class="card"><h3>Secure Remote Access</h3><p>VPN/ZTNA strategy and deployment.</p></div>
+          <div class="card"><h3>Compliance & Reporting</h3><p>Evidence, controls, and executive-ready reporting.</p></div>
+        </div>
+      </section>
+
+      <section id="windows11">
+        <h2>Windows 11</h2>
+        <p class="section-subtitle">Add your Windows 11 migration/support content here.</p>
+      </section>
+
+      <section id="clinic-ai">
+        <h2>Clinics</h2>
+        <p class="section-subtitle">Add your clinic-focused solutions here.</p>
+      </section>
+
+      <section id="about">
+        <h2>Why Valo</h2>
+        <p class="section-subtitle">Add your differentiators, approach, and outcomes.</p>
+      </section>
+
+      <section id="certifications">
+        <h2>Certifications</h2>
+        <p class="section-subtitle">Add your certification badges/credentials here.</p>
+      </section>
+
+      <section id="inquiry">
+        <h2>Request a Consultation</h2>
+        <p class="section-subtitle">Send a quick message and we’ll respond with next steps.</p>
+
+        <div class="form-wrap">
+          <form onsubmit="event.preventDefault(); alert('Form placeholder: connect this to Formspree or your backend.');">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+              <div class="field span-2">
+                <label for="msg">What do you need help with?</label>
+                <textarea id="msg" name="message" required></textarea>
+              </div>
+            </div>
+            <div style="margin-top: 0.9rem;">
+              <button class="btn-primary" type="submit">Send request</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p class="section-subtitle">Add your email/phone details here.</p>
       </section>
     </main>
 
