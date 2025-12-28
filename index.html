@@ -19,8 +19,14 @@
       --accent-soft:#2a3a4f;
       --shadow: 0 18px 40px rgba(0,0,0,.55);
     }
+
+    /* Base / safety */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; height: 100%; }
+    html { -webkit-text-size-adjust: 100%; }
+    img, svg, video { max-width: 100%; height: auto; }
+    body { overflow-x: hidden; }
+    a, p, li, h1, h2, h3, h4, h5, h6 { overflow-wrap: anywhere; }
 
     body {
       min-height: 100vh;
@@ -41,7 +47,8 @@
       background: transparent;
     }
 
-    header {
+    /* Header + Nav (mobile friendly) */
+    .site-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -51,8 +58,26 @@
 
     .logo-wrapper { display: flex; align-items: center; gap: 0.75rem; min-width: 200px; }
     .logo-img { height: 58px; width: auto; display: block; }
-    nav { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: flex-end; }
-    nav a { text-decoration: none; font-size: 0.95rem; }
+
+    .nav-toggle{
+      display: none;
+      border: 1px solid rgba(123, 158, 205, 0.30);
+      background: rgba(3, 10, 18, 0.55);
+      color: var(--text-main);
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+
+    .nav-links a { text-decoration: none; font-size: 0.95rem; }
 
     section { padding: 2.5rem 0; }
     section h2 { font-size: 1.6rem; margin: 0 0 0.4rem 0; }
@@ -271,7 +296,7 @@
       color: var(--text-main);
       border-radius: 0.85rem;
       padding: 0.75rem 0.85rem;
-      font-size: 0.95rem;
+      font-size: 16px; /* prevents iOS zoom */
       outline: none;
     }
 
@@ -303,6 +328,7 @@
       text-align: center;
     }
 
+    /* Existing responsive rules (kept) */
     @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
     @media (max-width: 640px) {
       .wrapper { padding: 1.1rem; }
@@ -310,17 +336,53 @@
       .span-2 { grid-column: auto; }
       nav { justify-content: flex-start; }
     }
+
+    /* New responsive rules (nav + mobile CTA behavior) */
+    @media (max-width: 860px){
+      .site-header{
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .logo-wrapper{ min-width: unset; }
+      .nav-toggle{ display: inline-flex; align-items: center; justify-content: center; }
+      .nav-links{
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-top: 1px solid rgba(58, 83, 118, 0.45);
+        margin-top: 0.5rem;
+      }
+      .nav-links.open{ display: flex; }
+      .nav-links a{ padding: 0.25rem 0; font-size: 1rem; }
+    }
+
+    @media (max-width: 600px){
+      .btn-row{
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-primary, .btn-ghost{
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="wrapper">
-    <header>
+    <header class="site-header">
       <div class="logo-wrapper">
         <img src="valo-logo.png" alt="VALO Technologies LLC logo" class="logo-img" />
       </div>
 
-      <nav aria-label="Primary">
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primaryNav">
+        Menu
+      </button>
+
+      <nav id="primaryNav" class="nav-links" aria-label="Primary">
         <a href="#top-services">Top Services</a>
         <a href="#services">Services</a>
         <a href="#windows11">Windows 11</a>
@@ -355,8 +417,6 @@
       </section>
 
       <!-- Keep the remainder of your page exactly as you pasted it -->
-      <!-- (No functional changes required beyond updating title + hero tagline) -->
-
     </main>
 
     <footer>
@@ -365,7 +425,29 @@
   </div>
 
   <script>
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const toggleBtn = document.querySelector(".nav-toggle");
+    const nav = document.getElementById("primaryNav");
+
+    if (toggleBtn && nav) {
+      toggleBtn.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        toggleBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      // Close menu after clicking a link (mobile)
+      nav.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 860px)").matches) {
+            nav.classList.remove("open");
+            toggleBtn.setAttribute("aria-expanded", "false");
+          }
+        });
+      });
+    }
   </script>
 </body>
 </html>
