@@ -158,9 +158,14 @@
       color: var(--text-muted);
     }
 
-    /* Basic cards for the sections (minimal) */
+    /* Cards / grids */
     .grid { display: grid; gap: 1.2rem; }
     .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    @media (max-width: 860px){
+      .grid-2 { grid-template-columns: 1fr; }
+    }
 
     .card {
       background: var(--card);
@@ -171,15 +176,27 @@
     .card h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; font-weight: 650; }
     .card p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
 
-    /* Simple inquiry form block */
-    .form-wrap {
-      margin-top: 1rem;
-      background: rgba(5, 13, 22, 0.96);
-      border: 1px solid rgba(123, 158, 205, 0.25);
-      border-radius: 1rem;
-      padding: 1.2rem 1.3rem;
+    /* Section shell (fixes your “empty background” sections) */
+    .section-shell{
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid rgba(123,158,205,.22);
+      border-radius: 1.25rem;
+      padding: 1.25rem 1.25rem;
+      box-shadow: var(--shadow);
     }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+
+    /* Inquiry form improvements */
+    .form-wrap {
+      max-width: 960px;
+      margin: 0.5rem auto 0;
+      background: rgba(5, 13, 22, 0.96);
+      border: 1px solid rgba(123, 158, 205, 0.28);
+      border-radius: 1.25rem;
+      padding: 1.2rem 1.3rem;
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .field { display: flex; flex-direction: column; gap: 0.35rem; }
     label { font-size: 0.9rem; color: var(--text-muted); }
 
@@ -188,13 +205,51 @@
       border: 1px solid rgba(123, 158, 205, 0.30);
       background: rgba(2, 6, 12, 0.65);
       color: var(--text-main);
-      border-radius: 0.85rem;
+      border-radius: 1rem;
       padding: 0.75rem 0.85rem;
       font-size: 16px;
       outline: none;
+      width: 100%;
     }
-    textarea { min-height: 120px; resize: vertical; }
+    textarea { min-height: 140px; resize: vertical; }
     .span-2 { grid-column: span 2; }
+
+    .form-actions{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .fineprint{
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact grid */
+    .contact-grid{
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 900px){
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+    .contact-card small{
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .75rem;
+      color: var(--text-muted);
+      margin-bottom: .35rem;
+    }
+    .contact-card a{
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contact-card a:hover{ text-decoration: underline; }
 
     footer {
       font-size: 0.85rem;
@@ -285,7 +340,6 @@
         </div>
       </section>
 
-      <!-- These sections make your NAV + CTA actually work -->
       <section id="top-services">
         <h2>Top Services</h2>
         <p class="section-subtitle">Your key offerings, prioritized.</p>
@@ -307,55 +361,102 @@
       </section>
 
       <section id="windows11">
-        <h2>Windows 11</h2>
-        <p class="section-subtitle">Add your Windows 11 migration/support content here.</p>
+        <div class="section-shell">
+          <h2>Windows 11</h2>
+          <p class="section-subtitle">Migration planning, readiness checks, and rollout support—without downtime surprises.</p>
+          <div class="grid grid-2">
+            <div class="card"><h3>Readiness & Compatibility</h3><p>Hardware checks, app validation, driver readiness, and risk flags before you commit.</p></div>
+            <div class="card"><h3>Rollout & Support</h3><p>Pilot group, staged deployment plan, and post-upgrade support to keep users productive.</p></div>
+          </div>
+        </div>
       </section>
 
       <section id="clinic-ai">
-        <h2>Clinics</h2>
-        <p class="section-subtitle">Add your clinic-focused solutions here.</p>
+        <div class="section-shell">
+          <h2>Clinics</h2>
+          <p class="section-subtitle">Security and reliability for small healthcare environments—networks, endpoints, and access.</p>
+          <div class="grid grid-2">
+            <div class="card"><h3>Network & Wi-Fi Hardening</h3><p>Segmentation, secure guest access, and clean Wi-Fi design for staff and patient traffic.</p></div>
+            <div class="card"><h3>Access & Data Protection</h3><p>Account controls, MFA guidance, device security baselines, and practical risk reduction.</p></div>
+          </div>
+        </div>
       </section>
 
       <section id="about">
-        <h2>Why Valo</h2>
-        <p class="section-subtitle">Add your differentiators, approach, and outcomes.</p>
+        <div class="section-shell">
+          <h2>Why Valo</h2>
+          <p class="section-subtitle">Hands-on engineering, clean documentation, and outcomes you can measure.</p>
+          <div class="grid grid-2">
+            <div class="card"><h3>Operational & Practical</h3><p>No buzzwords—just clear scope, effective controls, and repeatable processes.</p></div>
+            <div class="card"><h3>Security + Network Expertise</h3><p>Firewall operations, network hardening, and troubleshooting from a real engineering background.</p></div>
+          </div>
+        </div>
       </section>
 
       <section id="certifications">
-        <h2>Certifications</h2>
-        <p class="section-subtitle">Add your certification badges/credentials here.</p>
+        <div class="section-shell">
+          <h2>Certifications</h2>
+          <p class="section-subtitle">Credentials and platforms supported (add your real badges/logos here).</p>
+          <div class="grid grid-2">
+            <div class="card"><h3>Core Platforms</h3><p>Palo Alto Networks, Cisco, Microsoft, and common enterprise network/security stacks.</p></div>
+            <div class="card"><h3>Badges / Proof</h3><p>Add your certification images in a row or list them here.</p></div>
+          </div>
+        </div>
       </section>
 
       <section id="inquiry">
-        <h2>Request a Consultation</h2>
-        <p class="section-subtitle">Send a quick message and we’ll respond with next steps.</p>
+        <div class="section-shell">
+          <h2>Request a Consultation</h2>
+          <p class="section-subtitle">Send a quick message and we’ll respond with next steps.</p>
 
-        <div class="form-wrap">
-          <form onsubmit="event.preventDefault(); alert('Form placeholder: connect this to Formspree or your backend.');">
-            <div class="form-grid">
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="name" required />
+          <div class="form-wrap">
+            <form onsubmit="event.preventDefault(); alert('Form placeholder: connect this to Formspree or your backend.');">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" required placeholder="Your name" />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" required placeholder="you@company.com" />
+                </div>
+                <div class="field span-2">
+                  <label for="msg">What do you need help with?</label>
+                  <textarea id="msg" name="message" required placeholder="Briefly describe your environment and the issue."></textarea>
+                </div>
               </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required />
+
+              <div class="form-actions">
+                <p class="fineprint">Clear scope. Clean documentation. No unnecessary complexity.</p>
+                <button class="btn-primary" type="submit">Send request</button>
               </div>
-              <div class="field span-2">
-                <label for="msg">What do you need help with?</label>
-                <textarea id="msg" name="message" required></textarea>
-              </div>
-            </div>
-            <div style="margin-top: 0.9rem;">
-              <button class="btn-primary" type="submit">Send request</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
 
       <section id="contact">
-        <h2>Contact</h2>
-        <p class="section-subtitle">Add your email/phone details here.</p>
+        <div class="section-shell">
+          <h2>Contact</h2>
+          <p class="section-subtitle">Use the form above, or reach us directly.</p>
+
+          <div class="contact-grid">
+            <div class="card contact-card">
+              <small>Email</small><br />
+              <a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a>
+            </div>
+
+            <div class="card contact-card">
+              <small>Service Area</small><br />
+              <span>Texas-based • Serving clients nationwide</span>
+            </div>
+
+            <div class="card contact-card">
+              <small>Website</small><br />
+              <a href="https://www.valotechnologiellc.com">valotechnologiellc.com</a>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
