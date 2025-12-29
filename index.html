@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VALO Technologies LLC | Modern Tech. Robust Security. Simple Execution.</title>
+
   <style>
     :root{
       --bg-0:#070b14;
@@ -176,7 +177,7 @@
     .card h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; font-weight: 650; }
     .card p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
 
-    /* Section shell (fixes “empty background” sections) */
+    /* Section shell */
     .section-shell{
       background: linear-gradient(180deg, var(--card), var(--card-2));
       border: 1px solid rgba(123,158,205,.22);
@@ -185,7 +186,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* =============== BADGES (CERTIFICATIONS) =============== */
+    /* BADGES */
     .badge-row{
       display: flex;
       flex-wrap: wrap;
@@ -219,9 +220,8 @@
     @media (max-width: 600px){
       .badge img{ height: 30px; }
     }
-    /* ======================================================= */
 
-    /* Inquiry form improvements */
+    /* Inquiry form */
     .form-wrap {
       max-width: 960px;
       margin: 0.5rem auto 0;
@@ -236,7 +236,8 @@
     .field { display: flex; flex-direction: column; gap: 0.35rem; }
     label { font-size: 0.9rem; color: var(--text-muted); }
 
-    input, textarea {
+    /* IMPORTANT: include select so dropdown matches, and stays readable */
+    input, textarea, select {
       appearance: none;
       border: 1px solid rgba(123, 158, 205, 0.30);
       background: rgba(2, 6, 12, 0.65);
@@ -247,7 +248,13 @@
       outline: none;
       width: 100%;
     }
+    select { cursor: pointer; }
     textarea { min-height: 140px; resize: vertical; }
+
+    /* Keep the placeholder option readable even when selected */
+    select:invalid { color: rgba(195, 204, 218, 0.8); }
+    option { color: #0b1224; } /* options list itself (browser UI) */
+
     .span-2 { grid-column: span 2; }
 
     .form-actions{
@@ -436,7 +443,6 @@
         </div>
       </section>
 
-      <!-- Certifications with your badge images -->
       <section id="certifications">
         <div class="section-shell">
           <h2>Certifications</h2>
@@ -444,21 +450,21 @@
 
           <div class="grid grid-2">
             <div class="card">
-  <h3>Badges</h3>
+              <h3>Badges</h3>
+              <div class="badge-row" aria-label="Certification badges">
+                <div class="badge"><img src="logo-ccna.png" alt="CCNA badge" loading="lazy" /><span>CCNA</span></div>
+                <div class="badge"><img src="logo-cysa.png" alt="CySA+ badge" loading="lazy" /><span>CySA+</span></div>
+                <div class="badge"><img src="logo-isaca.png" alt="ISACA badge" loading="lazy" /><span>ISACA</span></div>
+                <div class="badge"><img src="logo-pccse.png" alt="PCCSE badge" loading="lazy" /><span>PCCSE</span></div>
+                <div class="badge"><img src="logo-pentest.png" alt="PenTest badge" loading="lazy" /><span>PenTest</span></div>
+                <div class="badge"><img src="logo-proj.png" alt="Project badge" loading="lazy" /><span>Project</span></div>
+                <div class="badge"><img src="logo-scrum.png" alt="Scrum badge" loading="lazy" /><span>Scrum</span></div>
+                <div class="badge"><img src="logo-exper.png" alt="Experience badge" loading="lazy" /><span>Experience</span></div>
+                <div class="badge"><img src="logo-secup.png" alt="Security+ badge" loading="lazy" /><span>Security+</span></div>
+                <div class="badge"><img src="logo-secux.png" alt="Security UX badge" loading="lazy" /><span>Security UX</span></div>
+              </div>
+            </div>
 
-  <div class="badge-row" aria-label="Certification badges">
-    <div class="badge"><img src="logo-ccna.png" alt="CCNA badge" loading="lazy" /><span>CCNA</span></div>
-    <div class="badge"><img src="logo-cysa.png" alt="CySA+ badge" loading="lazy" /><span>CySA+</span></div>
-    <div class="badge"><img src="logo-isaca.png" alt="ISACA badge" loading="lazy" /><span>ISACA</span></div>
-    <div class="badge"><img src="logo-pccse.png" alt="PCCSE badge" loading="lazy" /><span>PCCSE</span></div>
-    <div class="badge"><img src="logo-pentest.png" alt="PenTest badge" loading="lazy" /><span>PenTest</span></div>
-    <div class="badge"><img src="logo-proj.png" alt="Project badge" loading="lazy" /><span>Project</span></div>
-    <div class="badge"><img src="logo-scrum.png" alt="Scrum badge" loading="lazy" /><span>Scrum</span></div>
-    <div class="badge"><img src="logo-exper.png" alt="Experience badge" loading="lazy" /><span>Experience</span></div>
-    <div class="badge"><img src="logo-secup.png" alt="Security+ badge" loading="lazy" /><span>Security+</span></div>
-    <div class="badge"><img src="logo-secux.png" alt="Security UX badge" loading="lazy" /><span>Security UX</span></div>
-  </div>
-</div>
             <div class="card">
               <h3>Focus Areas</h3>
               <p>Network security architecture, firewall operations, hardening, risk reduction, and practical implementation support.</p>
@@ -467,7 +473,7 @@
         </div>
       </section>
 
-      <!-- UPDATED: Inquiry form now submits to Formspree -->
+      <!-- FIXED: form now has dropdown styling + missing closing tags + send button + hidden fields -->
       <section id="inquiry">
         <div class="section-shell">
           <h2>Request a Consultation</h2>
@@ -485,26 +491,44 @@
                   <label for="email">Email</label>
                   <input id="email" name="email" type="email" required placeholder="you@company.com" />
                 </div>
-<div class="field span-2">
-  <label for="service">Service needed</label>
-  <select id="service" name="service" required>
-    <option value="" disabled selected>Select a service</option>
-    <option value="Firewall Operations">Firewall Operations</option>
-    <option value="Network Hardening">Network Hardening</option>
-    <option value="Security Assessment">Security Assessment</option>
-    <option value="Palo Alto / Panorama">Palo Alto / Panorama</option>
-    <option value="Secure Remote Access (VPN / ZTNA)">Secure Remote Access (VPN / ZTNA)</option>
-    <option value="Windows 11 Migration">Windows 11 Migration</option>
-    <option value="Clinic / Healthcare Security">Clinic / Healthcare Security</option>
-    <option value="Compliance & Reporting">Compliance & Reporting</option>
-    <option value="Other">Other</option>
-  </select>
-</div>
-<div class="field span-2">
-  <label for="msg">Details</label>
-  <textarea id="msg" name="message" required placeholder="Briefly describe your environment, timeline, and goals."></textarea>
-</div>
-              <p class="form-status">This form sends to Formspree and will email you at <strong>valotechllc@gmail.com</strong>.</p>
+
+                <div class="field span-2">
+                  <label for="service">Service needed</label>
+                  <!-- required + placeholder option that keeps validation working -->
+                  <select id="service" name="service" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="Firewall Operations">Firewall Operations</option>
+                    <option value="Network Hardening">Network Hardening</option>
+                    <option value="Security Assessment">Security Assessment</option>
+                    <option value="Palo Alto / Panorama">Palo Alto / Panorama</option>
+                    <option value="Secure Remote Access (VPN / ZTNA)">Secure Remote Access (VPN / ZTNA)</option>
+                    <option value="Windows 11 Migration">Windows 11 Migration</option>
+                    <option value="Clinic / Healthcare Security">Clinic / Healthcare Security</option>
+                    <option value="Compliance & Reporting">Compliance & Reporting</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="field span-2">
+                  <label for="msg">Details</label>
+                  <textarea id="msg" name="message" required placeholder="Briefly describe your environment, timeline, and goals."></textarea>
+                </div>
+
+                <!-- Helps identify the source in Formspree -->
+                <input type="hidden" name="source" value="Valo Technologies LLC Website - Consultation" />
+
+                <!-- Honeypot bot trap -->
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <div class="form-actions">
+                <p class="fineprint">Clear scope. Clean documentation. No unnecessary complexity.</p>
+                <button class="btn-primary" type="submit">Send request</button>
+              </div>
+
+              <p class="form-status">
+                This form sends to Formspree and will email you at <strong>valotechllc@gmail.com</strong>.
+              </p>
             </form>
           </div>
         </div>
