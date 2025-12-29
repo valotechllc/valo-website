@@ -176,7 +176,7 @@
     .card h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; font-weight: 650; }
     .card p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
 
-    /* Section shell (fixes your “empty background” sections) */
+    /* Section shell (fixes “empty background” sections) */
     .section-shell{
       background: linear-gradient(180deg, var(--card), var(--card-2));
       border: 1px solid rgba(123,158,205,.22);
@@ -184,6 +184,42 @@
       padding: 1.25rem 1.25rem;
       box-shadow: var(--shadow);
     }
+
+    /* =============== BADGES (CERTIFICATIONS) =============== */
+    .badge-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 0.75rem;
+    }
+    .badge{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 0.7rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(123,158,205,.28);
+      background: rgba(2, 6, 12, 0.55);
+    }
+    .badge img{
+      height: 34px;
+      width: auto;
+      display: block;
+      opacity: 0.95;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+    }
+    .badge span{
+      margin-left: 0.55rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    @media (max-width: 600px){
+      .badge img{ height: 30px; }
+    }
+    /* ======================================================= */
 
     /* Inquiry form improvements */
     .form-wrap {
@@ -393,13 +429,35 @@
         </div>
       </section>
 
+      <!-- UPDATED: Certifications with your badge images -->
       <section id="certifications">
         <div class="section-shell">
           <h2>Certifications</h2>
-          <p class="section-subtitle">Credentials and platforms supported (add your real badges/logos here).</p>
+          <p class="section-subtitle">Credentials and platforms supported.</p>
+
           <div class="grid grid-2">
-            <div class="card"><h3>Core Platforms</h3><p>Palo Alto Networks, Cisco, Microsoft, and common enterprise network/security stacks.</p></div>
-            <div class="card"><h3>Badges / Proof</h3><p>Add your certification images in a row or list them here.</p></div>
+            <div class="card">
+              <h3>Badges</h3>
+              <p style="margin-bottom:0.8rem;">If any badge does not display, ensure the image files are in the same folder as this HTML (or update the path).</p>
+
+              <div class="badge-row" aria-label="Certification badges">
+                <div class="badge"><img src="logo-ccna.png" alt="CCNA badge" /><span>CCNA</span></div>
+                <div class="badge"><img src="logo-cysa.png" alt="CySA+ badge" /><span>CySA+</span></div>
+                <div class="badge"><img src="logo-isaca.png" alt="ISACA badge" /><span>ISACA</span></div>
+                <div class="badge"><img src="logo-pccse.png" alt="PCCSE badge" /><span>PCCSE</span></div>
+                <div class="badge"><img src="logo-pentest.png" alt="PenTest badge" /><span>PenTest</span></div>
+                <div class="badge"><img src="logo-proj.png" alt="Project badge" /><span>Project</span></div>
+                <div class="badge"><img src="logo-scrum.png" alt="Scrum badge" /><span>Scrum</span></div>
+                <div class="badge"><img src="logo-exper.png" alt="Experience badge" /><span>Experience</span></div>
+                <div class="badge"><img src="logo-secup.png" alt="Security+ badge" /><span>Security+</span></div>
+                <div class="badge"><img src="logo-secux.png" alt="Security UX badge" /><span>Security UX</span></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Focus Areas</h3>
+              <p>Network security architecture, firewall operations, hardening, risk reduction, and practical implementation support.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -443,7 +501,7 @@
           <div class="contact-grid">
             <div class="card contact-card">
               <small>Email</small><br />
-              <a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a>
+              <a href="mailto:valotechllc@gmail.com">valotechllc@gmail.com</a>
             </div>
 
             <div class="card contact-card">
