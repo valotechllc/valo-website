@@ -485,24 +485,25 @@
                   <label for="email">Email</label>
                   <input id="email" name="email" type="email" required placeholder="you@company.com" />
                 </div>
-
-                <div class="field span-2">
-                  <label for="msg">What do you need help with?</label>
-                  <textarea id="msg" name="message" required placeholder="Briefly describe your environment and the issue."></textarea>
-                </div>
-
-                <!-- Helps you identify the source in Formspree -->
-                <input type="hidden" name="source" value="Valo Technologies LLC Website - Consultation" />
-
-                <!-- Honeypot bot trap (Formspree ignores legit users) -->
-                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-              </div>
-
-              <div class="form-actions">
-                <p class="fineprint">Clear scope. Clean documentation. No unnecessary complexity.</p>
-                <button class="btn-primary" type="submit">Send request</button>
-              </div>
-
+<div class="field span-2">
+  <label for="service">Service needed</label>
+  <select id="service" name="service" required>
+    <option value="" disabled selected>Select a service</option>
+    <option value="Firewall Operations">Firewall Operations</option>
+    <option value="Network Hardening">Network Hardening</option>
+    <option value="Security Assessment">Security Assessment</option>
+    <option value="Palo Alto / Panorama">Palo Alto / Panorama</option>
+    <option value="Secure Remote Access (VPN / ZTNA)">Secure Remote Access (VPN / ZTNA)</option>
+    <option value="Windows 11 Migration">Windows 11 Migration</option>
+    <option value="Clinic / Healthcare Security">Clinic / Healthcare Security</option>
+    <option value="Compliance & Reporting">Compliance & Reporting</option>
+    <option value="Other">Other</option>
+  </select>
+</div>
+<div class="field span-2">
+  <label for="msg">Details</label>
+  <textarea id="msg" name="message" required placeholder="Briefly describe your environment, timeline, and goals."></textarea>
+</div>
               <p class="form-status">This form sends to Formspree and will email you at <strong>valotechllc@gmail.com</strong>.</p>
             </form>
           </div>
