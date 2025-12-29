@@ -264,6 +264,13 @@
       color: var(--text-muted);
     }
 
+    .form-status{
+      margin-top: 0.9rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .form-status strong{ color: var(--text-main); }
+
     /* Contact grid */
     .contact-grid{
       display: grid;
@@ -429,7 +436,7 @@
         </div>
       </section>
 
-      <!-- UPDATED: Certifications with your badge images -->
+      <!-- Certifications with your badge images -->
       <section id="certifications">
         <div class="section-shell">
           <h2>Certifications</h2>
@@ -438,20 +445,24 @@
           <div class="grid grid-2">
             <div class="card">
               <h3>Badges</h3>
-              <p style="margin-bottom:0.8rem;">If any badge does not display, ensure the image files are in the same folder as this HTML (or update the path).</p>
 
               <div class="badge-row" aria-label="Certification badges">
-                <div class="badge"><img src="logo-ccna.png" alt="CCNA badge" /><span>CCNA</span></div>
-                <div class="badge"><img src="logo-cysa.png" alt="CySA+ badge" /><span>CySA+</span></div>
-                <div class="badge"><img src="logo-isaca.png" alt="ISACA badge" /><span>ISACA</span></div>
-                <div class="badge"><img src="logo-pccse.png" alt="PCCSE badge" /><span>PCCSE</span></div>
-                <div class="badge"><img src="logo-pentest.png" alt="PenTest badge" /><span>PenTest</span></div>
-                <div class="badge"><img src="logo-proj.png" alt="Project badge" /><span>Project</span></div>
-                <div class="badge"><img src="logo-scrum.png" alt="Scrum badge" /><span>Scrum</span></div>
-                <div class="badge"><img src="logo-exper.png" alt="Experience badge" /><span>Experience</span></div>
-                <div class="badge"><img src="logo-secup.png" alt="Security+ badge" /><span>Security+</span></div>
-                <div class="badge"><img src="logo-secux.png" alt="Security UX badge" /><span>Security UX</span></div>
+                <div class="badge"><img src="logo-ccna.png" alt="CCNA badge" loading="lazy" /><span>CCNA</span></div>
+                <div class="badge"><img src="logo-cysa.png" alt="CySA+ badge" loading="lazy" /><span>CySA+</span></div>
+                <div class="badge"><img src="logo-isaca.png" alt="ISACA badge" loading="lazy" /><span>ISACA</span></div>
+                <div class="badge"><img src="logo-pccse.png" alt="PCCSE badge" loading="lazy" /><span>PCCSE</span></div>
+                <div class="badge"><img src="logo-pentest.png" alt="PenTest badge" loading="lazy" /><span>PenTest</span></div>
+                <div class="badge"><img src="logo-proj.png" alt="Project badge" loading="lazy" /><span>Project</span></div>
+                <div class="badge"><img src="logo-scrum.png" alt="Scrum badge" loading="lazy" /><span>Scrum</span></div>
+                <div class="badge"><img src="logo-exper.png" alt="Experience badge" loading="lazy" /><span>Experience</span></div>
+                <div class="badge"><img src="logo-secup.png" alt="Security+ badge" loading="lazy" /><span>Security+</span></div>
+                <div class="badge"><img src="logo-secux.png" alt="Security UX badge" loading="lazy" /><span>Security UX</span></div>
               </div>
+
+              <!-- Helpful if images still fail: shows broken image icon + text -->
+              <p class="form-status" style="margin-top:0.9rem;">
+                If badges still don’t appear, open DevTools → Network and confirm these files return <strong>200</strong> (not 404).
+              </p>
             </div>
 
             <div class="card">
@@ -462,32 +473,43 @@
         </div>
       </section>
 
+      <!-- UPDATED: Inquiry form now submits to Formspree -->
       <section id="inquiry">
         <div class="section-shell">
           <h2>Request a Consultation</h2>
           <p class="section-subtitle">Send a quick message and we’ll respond with next steps.</p>
 
           <div class="form-wrap">
-            <form onsubmit="event.preventDefault(); alert('Form placeholder: connect this to Formspree or your backend.');">
+            <form action="https://formspree.io/f/xnnevpwq" method="POST">
               <div class="form-grid">
                 <div class="field">
                   <label for="name">Name</label>
                   <input id="name" name="name" required placeholder="Your name" />
                 </div>
+
                 <div class="field">
                   <label for="email">Email</label>
                   <input id="email" name="email" type="email" required placeholder="you@company.com" />
                 </div>
+
                 <div class="field span-2">
                   <label for="msg">What do you need help with?</label>
                   <textarea id="msg" name="message" required placeholder="Briefly describe your environment and the issue."></textarea>
                 </div>
+
+                <!-- Helps you identify the source in Formspree -->
+                <input type="hidden" name="source" value="Valo Technologies LLC Website - Consultation" />
+
+                <!-- Honeypot bot trap (Formspree ignores legit users) -->
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
               </div>
 
               <div class="form-actions">
                 <p class="fineprint">Clear scope. Clean documentation. No unnecessary complexity.</p>
                 <button class="btn-primary" type="submit">Send request</button>
               </div>
+
+              <p class="form-status">This form sends to Formspree and will email you at <strong>valotechllc@gmail.com</strong>.</p>
             </form>
           </div>
         </div>
