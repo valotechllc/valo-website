@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VALO Technologies LLC | HIPAA Compliance, GRC &amp; Cybersecurity for Healthcare</title>
-
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="valo-favicon.svg" />
 
   <style>
@@ -18,7 +16,6 @@
       --card: rgba(10,18,32,.92);
       --card-2: rgba(8,16,28,.90);
       --border: rgba(123,158,205,.26);
-      --border-strong: rgba(77,163,255,.45);
       --accent:#4da3ff;
       --accent-soft:#2a3a4f;
       --orange:#E8621A;
@@ -26,134 +23,151 @@
       --shadow: 0 18px 40px rgba(0,0,0,.55);
     }
 
-    /* Base / safety */
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; height: 100%; }
+    html, body { margin: 0; padding: 0; }
     html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-    img, svg, video { max-width: 100%; height: auto; }
+    img, svg, video { max-width: 100%; height: auto; display: block; }
     body { overflow-x: hidden; }
-    a, p, li, h1, h2, h3, h4, h5, h6 { overflow-wrap: anywhere; }
+    a, p, li, h1, h2, h3, h4, h5, h6 { overflow-wrap: anywhere; word-break: break-word; }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top left, var(--bg-2) 0, var(--bg-1) 45%, var(--bg-0) 100%) !important;
+      background: radial-gradient(circle at top left, var(--bg-2) 0, var(--bg-1) 45%, var(--bg-0) 100%);
       color: var(--text-main);
       line-height: 1.6;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
     }
     h1, h2, h3, h4, h5, h6 { color: var(--text-main); }
     p, li { color: var(--text-muted); }
     nav a { color: var(--text-muted); }
     nav a:hover { color: var(--accent); }
+    [id] { scroll-margin-top: 80px; }
 
-    [id] { scroll-margin-top: 90px; }
-
+    /* ── WRAPPER ── */
     .wrapper {
       max-width: 1080px;
       margin: 0 auto;
-      padding: 1.5rem;
-      background: transparent;
+      padding: 0 1.25rem;
     }
 
-    /* ── Header + Nav ── */
+    /* ── HEADER ── */
     .site-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 0 0.5rem;
+      padding: 0.9rem 0;
       gap: 1rem;
-      position: relative;
-      z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,11,20,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(123,158,205,0.12);
+      margin: 0 -1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
     }
 
-    .logo-wrapper { display: flex; align-items: center; gap: 0.75rem; min-width: 200px; }
-    .logo-img { height: 44px; width: auto; display: block; }
+    .logo-wrapper { display: flex; align-items: center; flex-shrink: 0; }
+    .logo-svg { height: 38px; width: auto; overflow: visible; }
 
-    .nav-toggle{
+    .nav-toggle {
       display: none;
-      border: 1px solid rgba(123, 158, 205, 0.30);
-      background: rgba(3, 10, 18, 0.55);
+      border: 1px solid rgba(123,158,205,0.3);
+      background: rgba(3,10,18,0.55);
       color: var(--text-main);
-      padding: 0.6rem 0.9rem;
+      padding: 0.5rem 0.85rem;
       border-radius: 999px;
-      font-weight: 650;
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
+      flex-shrink: 0;
+      line-height: 1;
     }
 
     .nav-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: flex-end;
+      flex-wrap: nowrap;
+      gap: 1.25rem;
+      align-items: center;
     }
-    .nav-links a { text-decoration: none; font-size: 0.95rem; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      color: var(--text-muted);
+    }
+    .nav-links a:hover { color: var(--accent); }
     .nav-links a.nav-cta {
       background: var(--orange);
-      color: #fff;
-      padding: 0.4rem 1rem;
+      color: #fff !important;
+      padding: 0.45rem 1.1rem;
       border-radius: 999px;
       font-weight: 700;
       font-size: 0.85rem;
-      letter-spacing: 0.02em;
       transition: filter 0.2s;
     }
-    .nav-links a.nav-cta:hover { filter: brightness(1.1); color: #fff; }
+    .nav-links a.nav-cta:hover { filter: brightness(1.12); }
 
+    /* ── SECTIONS ── */
     section { padding: 2.5rem 0; }
-    section h2 { font-size: 1.6rem; margin: 0 0 0.4rem 0; }
-
+    section h2 { font-size: clamp(1.3rem, 3vw, 1.6rem); margin: 0 0 0.4rem 0; }
     .section-subtitle {
       color: var(--text-muted);
       margin: 0 0 1.2rem 0;
+      font-size: 0.97rem;
       max-width: 44rem;
-      font-size: 0.98rem;
     }
 
     /* ── HERO ── */
     .hero {
-      padding: 3rem 0 2rem;
+      padding: 2.5rem 0 2rem;
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2.5rem;
+      grid-template-columns: 3fr 2fr;
+      gap: 2rem;
       align-items: center;
     }
     .hero h1 {
-      font-size: clamp(2.1rem, 4vw, 2.9rem);
+      font-size: clamp(1.6rem, 4vw, 2.7rem);
       margin: 0 0 0.8rem 0;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
-    .hero-tagline { font-size: 1.65rem; color: var(--accent); font-weight: 650; margin: 0 0 1.2rem 0; }
-    .hero p { color: var(--text-muted); max-width: 40rem; margin: 0 0 1.2rem 0; }
-
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      line-height: 1.3;
+    }
+    .hero p { color: var(--text-muted); margin: 0 0 1.2rem 0; font-size: 0.97rem; }
     .hero-badge {
       display: inline-block;
       padding: 0.25rem 0.75rem;
       border-radius: 999px;
-      background: rgba(77, 163, 255, 0.12);
-      border: 1px solid rgba(77, 163, 255, 0.5);
-      font-size: 0.82rem;
+      background: rgba(77,163,255,0.12);
+      border: 1px solid rgba(77,163,255,0.5);
+      font-size: 0.8rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
-
     .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
-
     .btn-primary {
       display: inline-block;
       padding: 0.75rem 1.4rem;
       border-radius: 999px;
-      font-weight: 650;
+      font-weight: 700;
       text-decoration: none;
       font-size: 0.95rem;
       border: none;
       cursor: pointer;
-      white-space: nowrap;
       background: var(--orange);
       color: #fff;
       transition: filter 0.2s;
+      text-align: center;
     }
     .btn-primary:hover { filter: brightness(1.1); }
-
     .btn-ghost {
       display: inline-block;
       padding: 0.75rem 1.4rem;
@@ -162,47 +176,57 @@
       color: var(--text-main);
       text-decoration: none;
       font-size: 0.95rem;
-      background: rgba(3, 10, 18, 0.6);
-      white-space: nowrap;
+      background: rgba(3,10,18,0.6);
+      text-align: center;
+    }
+    .microcopy { margin-top: 0.9rem; font-size: 0.88rem; color: var(--text-muted); }
+
+    /* Hero side card */
+    .hero-card {
+      background: var(--card-2);
+      border: 1px solid rgba(232,98,26,0.25);
+      box-shadow: var(--shadow);
+      border-radius: 1.2rem;
+      padding: 1.3rem;
+    }
+    .hero-card h3 { margin: 0 0 0.9rem 0; font-size: 1rem; }
+    .hero-card-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .hero-card-item { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.88rem; color: var(--text-muted); }
+    .hero-card-item .arrow { color: var(--orange); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+    .hero-card-price {
+      margin-top: 1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(123,158,205,0.15);
+      font-size: 0.8rem;
+      color: var(--orange);
+      font-weight: 700;
     }
 
-    .microcopy {
-      margin-top: 0.9rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    /* ── Cards / grids ── */
-    .grid { display: grid; gap: 1.2rem; }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-    @media (max-width: 860px){
-      .grid-2 { grid-template-columns: 1fr; }
-    }
-
+    /* ── CARDS ── */
+    .grid { display: grid; gap: 1.1rem; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
     .card {
       background: var(--card);
       border-radius: 1rem;
       padding: 1.2rem 1.3rem;
       border: 1px solid var(--border);
     }
-    .card h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem; font-weight: 650; }
-    .card p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
-
-    .section-shell{
+    .card h3 { margin: 0 0 0.4rem 0; font-size: 1rem; font-weight: 700; }
+    .card p { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
+    .section-shell {
       background: linear-gradient(180deg, var(--card), var(--card-2));
       border: 1px solid rgba(123,158,205,.22);
       border-radius: 1.25rem;
-      padding: 1.25rem 1.25rem;
+      padding: 1.4rem 1.25rem;
       box-shadow: var(--shadow);
     }
 
-    /* ── GRC Section ── */
+    /* ── GRC ── */
     .grc-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+      gap: 1.1rem;
       margin-top: 0.5rem;
     }
     .grc-card {
@@ -225,7 +249,7 @@
     .grc-card p { margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
     .grc-tag {
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -235,78 +259,69 @@
       border-radius: 999px;
       padding: 0.15rem 0.6rem;
       margin-bottom: 0.6rem;
-      display: block;
-      width: fit-content;
     }
-
-    /* ── Badges ── */
-    .badge-row{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      align-items: center;
-      justify-content: flex-start;
-      margin-top: 0.75rem;
-    }
-    .badge{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.55rem 0.7rem;
-      border-radius: 0.9rem;
-      border: 1px solid rgba(123,158,205,.28);
-      background: rgba(2, 6, 12, 0.55);
-    }
-    .badge img{
-      height: 34px;
-      width: auto;
-      display: block;
-      opacity: 0.95;
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
-    }
-    .badge span{
-      margin-left: 0.55rem;
+    .grc-cta-bar {
+      margin-top: 1.4rem;
+      padding: 1rem 1.1rem;
+      background: rgba(232,98,26,0.07);
+      border: 1px solid rgba(232,98,26,0.2);
+      border-radius: 0.85rem;
       font-size: 0.9rem;
       color: var(--text-muted);
-      white-space: nowrap;
     }
-    @media (max-width: 600px){
-      .badge img{ height: 30px; }
-    }
+    .grc-cta-bar strong { color: var(--text-main); }
+    .grc-cta-bar a { color: var(--orange); text-decoration: none; font-weight: 600; }
 
-    /* ── Form ── */
+    /* ── BADGES ── */
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 0.65rem;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(123,158,205,.28);
+      background: rgba(2,6,12,0.55);
+      gap: 0.5rem;
+    }
+    .badge img { height: 30px; width: auto; opacity: 0.95; }
+    .badge span { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
+
+    /* ── FORM ── */
     .form-wrap {
-      max-width: 960px;
-      margin: 0.5rem auto 0;
-      background: rgba(5, 13, 22, 0.96);
-      border: 1px solid rgba(123, 158, 205, 0.28);
+      margin-top: 0.75rem;
+      background: rgba(5,13,22,0.96);
+      border: 1px solid rgba(123,158,205,0.28);
       border-radius: 1.25rem;
-      padding: 1.2rem 1.3rem;
+      padding: 1.2rem;
       box-shadow: var(--shadow);
     }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .field { display: flex; flex-direction: column; gap: 0.35rem; }
-    label { font-size: 0.9rem; color: var(--text-muted); }
-
+    label { font-size: 0.88rem; color: var(--text-muted); }
     input, textarea, select {
       appearance: none;
-      border: 1px solid rgba(123, 158, 205, 0.30);
-      background: rgba(2, 6, 12, 0.65);
+      -webkit-appearance: none;
+      border: 1px solid rgba(123,158,205,0.3);
+      background: rgba(2,6,12,0.65);
       color: var(--text-main);
-      border-radius: 1rem;
+      border-radius: 0.85rem;
       padding: 0.75rem 0.85rem;
-      font-size: 16px;
+      font-size: 16px; /* prevents iOS zoom */
       outline: none;
       width: 100%;
+      font-family: inherit;
     }
     select { cursor: pointer; }
-    textarea { min-height: 140px; resize: vertical; }
-    select:invalid { color: rgba(195, 204, 218, 0.8); }
-    option { color: #0b1224; }
-
+    textarea { min-height: 120px; resize: vertical; }
+    select:invalid { color: rgba(195,204,218,0.8); }
+    option { color: #0b1224; background: #fff; }
     .span-2 { grid-column: span 2; }
-
-    .form-actions{
+    .form-actions {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -314,72 +329,126 @@
       flex-wrap: wrap;
       margin-top: 1rem;
     }
-    .fineprint{ margin: 0; font-size: 0.88rem; color: var(--text-muted); }
+    .fineprint { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+    .form-status { margin-top: 0.9rem; font-size: 0.88rem; color: var(--text-muted); }
+    .form-status strong { color: var(--text-main); }
 
-    .form-status{
-      margin-top: 0.9rem;
-      font-size: 0.92rem;
-      color: var(--text-muted);
-    }
-    .form-status strong{ color: var(--text-main); }
-
-    /* ── Contact ── */
-    .contact-grid{
+    /* ── CONTACT ── */
+    .contact-grid {
       display: grid;
       gap: 1rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
     }
-    @media (max-width: 900px){
-      .contact-grid{ grid-template-columns: 1fr; }
-    }
-    .contact-card small{
-      display: inline-block;
+    .contact-card small {
+      display: block;
       text-transform: uppercase;
       letter-spacing: .12em;
-      font-size: .75rem;
+      font-size: .72rem;
       color: var(--text-muted);
       margin-bottom: .35rem;
     }
-    .contact-card a{ color: var(--accent); text-decoration: none; }
-    .contact-card a:hover{ text-decoration: underline; }
+    .contact-card a { color: var(--accent); text-decoration: none; }
+    .contact-card a:hover { text-decoration: underline; }
 
     footer {
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       color: var(--text-muted);
-      padding: 1.8rem 0 0.75rem;
-      border-top: 1px solid rgba(58, 83, 118, 0.6);
+      padding: 1.8rem 0 1rem;
+      border-top: 1px solid rgba(58,83,118,0.5);
       text-align: center;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+    /* ════════════════════════════════
+       MOBILE STYLES
+    ════════════════════════════════ */
 
-    @media (max-width: 860px){
-      .site-header{ flex-wrap: wrap; }
-      .logo-wrapper{ min-width: unset; }
-      .nav-toggle{ display: inline-flex; align-items: center; justify-content: center; }
-      .nav-links{
+    /* Tablet */
+    @media (max-width: 860px) {
+      .nav-toggle { display: inline-flex; align-items: center; }
+      .nav-links {
         display: none;
-        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
         flex-direction: column;
-        gap: 0.75rem;
-        padding: 0.75rem 0;
-        border-top: 1px solid rgba(58, 83, 118, 0.45);
-        margin-top: 0.5rem;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(7,11,20,0.98);
+        border-bottom: 1px solid rgba(123,158,205,0.15);
+        padding: 0.5rem 1.25rem 1rem;
       }
-      .nav-links.open{ display: flex; }
-      .nav-links a{ padding: 0.25rem 0; font-size: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        padding: 0.7rem 0;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(123,158,205,0.08);
+        color: var(--text-muted);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+      .nav-links a.nav-cta {
+        margin-top: 0.5rem;
+        text-align: center;
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+      }
+      .grid-2 { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 640px){
-      .wrapper { padding: 1.1rem; }
+    /* Mobile */
+    @media (max-width: 640px) {
+      .wrapper { padding: 0 1rem; }
+      .site-header { margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+
+      /* Hero stacks vertically, card hidden on mobile */
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 1.8rem 0 1.5rem;
+        gap: 1.5rem;
+      }
+      .hero-card { display: none; } /* hide sidebar card on mobile - info is in hero text */
+
+      .hero h1 { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .hero-tagline { font-size: 1.1rem; }
+
+      /* Full width buttons on mobile */
+      .btn-row { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+
+      /* Form goes single column */
       .form-grid { grid-template-columns: 1fr; }
       .span-2 { grid-column: auto; }
+
+      /* Form actions stack */
+      .form-actions { flex-direction: column; align-items: stretch; }
+      .form-actions .btn-primary { width: 100%; text-align: center; }
+      .fineprint { text-align: center; }
+
+      /* GRC grid single column on small screens */
+      .grc-grid { grid-template-columns: 1fr; }
+
+      /* Logo smaller on mobile */
+      .logo-svg { height: 32px; }
+
+      /* Section padding tighter */
+      section { padding: 1.8rem 0; }
+      .section-shell { padding: 1.1rem 1rem; }
+
+      /* Cards full width */
+      .grid-3 { grid-template-columns: 1fr; }
+
+      /* Badges smaller */
+      .badge img { height: 26px; }
+      .badge { padding: 0.4rem 0.55rem; }
+
+      /* Contact stacks */
+      .contact-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 600px){
-      .btn-row{ flex-direction: column; align-items: stretch; }
-      .btn-primary, .btn-ghost{ width: 100%; text-align: center; }
+    /* Very small phones */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 1.4rem; }
+      .hero-tagline { font-size: 1rem; }
     }
   </style>
 </head>
@@ -388,21 +457,20 @@
   <div class="wrapper">
     <header class="site-header">
       <div class="logo-wrapper">
-        <!-- NEW: SVG logo replaces valo-logo.png -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 80" height="44" aria-label="VALO Technologies LLC">
-          <defs><clipPath id="nav-mark"><rect x="0" y="8" width="64" height="64" rx="8"/></clipPath></defs>
-          <g clip-path="url(#nav-mark)">
-            <rect x="0" y="8" width="64" height="64" fill="#1B3A52"/>
-            <rect x="0" y="8" width="32" height="32" fill="#E8621A"/>
-            <rect x="32" y="40" width="32" height="32" fill="#E8621A"/>
-            <circle cx="32" cy="40" r="30" fill="#1B3A52"/>
-            <line x1="32" y1="8" x2="32" y2="72" stroke="white" stroke-width="2.5" opacity="0.9"/>
-            <line x1="0" y1="40" x2="64" y2="40" stroke="white" stroke-width="2.5" opacity="0.9"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" class="logo-svg" aria-label="VALO Technologies LLC">
+          <defs><clipPath id="lm"><rect x="0" y="5" width="60" height="60" rx="7"/></clipPath></defs>
+          <g clip-path="url(#lm)">
+            <rect x="0" y="5" width="60" height="60" fill="#1B3A52"/>
+            <rect x="0" y="5" width="30" height="30" fill="#E8621A"/>
+            <rect x="30" y="35" width="30" height="30" fill="#E8621A"/>
+            <circle cx="30" cy="35" r="28" fill="#1B3A52"/>
+            <line x1="30" y1="5" x2="30" y2="65" stroke="white" stroke-width="2.2" opacity="0.9"/>
+            <line x1="0" y1="35" x2="60" y2="35" stroke="white" stroke-width="2.2" opacity="0.9"/>
           </g>
-          <text x="80" y="52" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="38" letter-spacing="-0.5" fill="white">VALO</text>
-          <line x1="192" y1="18" x2="192" y2="62" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-          <text x="201" y="34" font-family="Arial,sans-serif" font-weight="700" font-size="10" letter-spacing="3" fill="rgba(255,255,255,0.45)">TECHNOLOGIES</text>
-          <text x="201" y="49" font-family="Arial,sans-serif" font-weight="700" font-size="10" letter-spacing="3" fill="rgba(255,255,255,0.45)">LLC</text>
+          <text x="70" y="46" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="34" letter-spacing="-0.5" fill="white">VALO</text>
+          <line x1="172" y1="14" x2="172" y2="56" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+          <text x="180" y="30" font-family="Arial,sans-serif" font-weight="700" font-size="9" letter-spacing="2.5" fill="rgba(255,255,255,0.45)">TECHNOLOGIES</text>
+          <text x="180" y="44" font-family="Arial,sans-serif" font-weight="700" font-size="9" letter-spacing="2.5" fill="rgba(255,255,255,0.45)">LLC</text>
         </svg>
       </div>
 
@@ -438,28 +506,23 @@
           <p class="microcopy">Fixed-fee engagements. No surprises. No unnecessary complexity.</p>
         </div>
 
-        <div class="card" style="background: var(--card-2); border: 1px solid rgba(232,98,26,0.25); box-shadow: var(--shadow); border-radius: 1.2rem;">
-          <h3 style="color:var(--text-main); margin-bottom:1rem;">What we deliver</h3>
-          <div style="display:flex; flex-direction:column; gap:0.65rem;">
-            <div style="display:flex; align-items:flex-start; gap:0.6rem;"><span style="color:var(--orange); font-weight:800; margin-top:1px;">&#x2192;</span><span style="font-size:0.9rem; color:var(--text-muted);">HIPAA Security Risk Assessments</span></div>
-            <div style="display:flex; align-items:flex-start; gap:0.6rem;"><span style="color:var(--orange); font-weight:800; margin-top:1px;">&#x2192;</span><span style="font-size:0.9rem; color:var(--text-muted);">GRC programs &amp; audit readiness</span></div>
-            <div style="display:flex; align-items:flex-start; gap:0.6rem;"><span style="color:var(--orange); font-weight:800; margin-top:1px;">&#x2192;</span><span style="font-size:0.9rem; color:var(--text-muted);">Firewall operations &amp; network hardening</span></div>
-            <div style="display:flex; align-items:flex-start; gap:0.6rem;"><span style="color:var(--orange); font-weight:800; margin-top:1px;">&#x2192;</span><span style="font-size:0.9rem; color:var(--text-muted);">Policy development &amp; compliance reporting</span></div>
+        <div class="hero-card">
+          <h3>What we deliver</h3>
+          <div class="hero-card-list">
+            <div class="hero-card-item"><span class="arrow">→</span><span>HIPAA Security Risk Assessments</span></div>
+            <div class="hero-card-item"><span class="arrow">→</span><span>GRC programs &amp; audit readiness</span></div>
+            <div class="hero-card-item"><span class="arrow">→</span><span>Firewall operations &amp; network hardening</span></div>
+            <div class="hero-card-item"><span class="arrow">→</span><span>Policy development &amp; compliance reporting</span></div>
           </div>
-          <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(123,158,205,0.15);">
-            <span style="font-size:0.8rem; color:var(--orange); font-weight:700;">HIPAA SRA from $1,997 &middot; Fixed fee</span>
-          </div>
+          <div class="hero-card-price">HIPAA SRA from $1,997 · Fixed fee</div>
         </div>
       </section>
 
-
-
-      <!-- ── GRC (NEW) ── -->
+      <!-- ── GRC ── -->
       <section id="grc">
         <div class="section-shell">
           <h2>Governance, Risk &amp; Compliance</h2>
-          <p class="section-subtitle">Structured GRC programs for small healthcare practices and businesses — practical, documented, and built for real-world operations.</p>
-
+          <p class="section-subtitle">Structured GRC programs for small healthcare practices — practical, documented, and built for real-world operations.</p>
           <div class="grc-grid">
             <div class="grc-card">
               <span class="grc-tag">HIPAA</span>
@@ -482,35 +545,24 @@
               <p>Evidence packages, control documentation, and executive-ready reporting. Be prepared for an OCR audit before it happens.</p>
             </div>
           </div>
-
-          <div style="margin-top:1.5rem; padding:1rem 1.2rem; background:rgba(232,98,26,0.07); border:1px solid rgba(232,98,26,0.2); border-radius:0.85rem;">
-            <p style="margin:0; font-size:0.92rem; color:var(--text-muted);">
-              <strong style="color:var(--text-main);">HIPAA SRA starting at $1,997</strong> — fixed fee, 2–3 week engagement, includes full report, remediation roadmap, and policy starter kit.
-              <a href="#inquiry" style="color:var(--orange); text-decoration:none; margin-left:0.5rem; font-weight:600;">Request a consultation →</a>
-            </p>
+          <div class="grc-cta-bar">
+            <strong>HIPAA SRA starting at $1,997</strong> — fixed fee, 2–3 week engagement, includes full report, remediation roadmap, and policy starter kit.
+            <a href="#inquiry"> Request a consultation →</a>
           </div>
         </div>
       </section>
 
-      <!-- ── TOP SERVICES ── -->
-      <section id="top-services">
+      <!-- ── SERVICES ── -->
+      <section id="services">
         <h2>Security Services</h2>
         <p class="section-subtitle">Core technical capabilities delivered with engineering depth and clear scope.</p>
         <div class="grid grid-3">
           <div class="card"><h3>Firewall Operations</h3><p>Rule updates, NAT/VPN changes, troubleshooting, and monitoring.</p></div>
           <div class="card"><h3>Network Hardening</h3><p>Secure baselines, segmentation, and vulnerability remediation.</p></div>
           <div class="card"><h3>Security Assessments</h3><p>Practical findings with prioritized remediation steps.</p></div>
-        </div>
-      </section>
-
-      <!-- ── FULL SERVICES ── -->
-      <section id="services">
-        <h2>Services</h2>
-        <p class="section-subtitle">Engineering-driven security services — firewall operations, network hardening, compliance, and GRC — delivered with clear scope and measurable outcomes.</p>
-        <div class="grid grid-3">
           <div class="card"><h3>Palo Alto / Panorama</h3><p>Design, implementation, and day-2 operations.</p></div>
           <div class="card"><h3>Secure Remote Access</h3><p>VPN/ZTNA strategy and deployment.</p></div>
-          <div class="card"><h3>Compliance & Reporting</h3><p>Evidence, controls, and executive-ready reporting.</p></div>
+          <div class="card"><h3>Compliance &amp; Reporting</h3><p>Evidence, controls, and executive-ready reporting.</p></div>
         </div>
       </section>
 
@@ -535,16 +587,16 @@
             <div class="card">
               <h3>Badges</h3>
               <div class="badge-row" aria-label="Certification badges">
-                <div class="badge"><img src="logo-ccna.png" alt="CCNA badge" loading="lazy" /><span>CCNA</span></div>
-                <div class="badge"><img src="logo-cysa.png" alt="CySA+ badge" loading="lazy" /><span>CySA+</span></div>
-                <div class="badge"><img src="logo-isaca.png" alt="ISACA badge" loading="lazy" /><span>ISACA</span></div>
-                <div class="badge"><img src="logo-pccse.png" alt="PCCSE badge" loading="lazy" /><span>PCCSE</span></div>
-                <div class="badge"><img src="logo-pentest.png" alt="PenTest badge" loading="lazy" /><span>PenTest</span></div>
-                <div class="badge"><img src="logo-proj.png" alt="Project badge" loading="lazy" /><span>Project</span></div>
-                <div class="badge"><img src="logo-scrum.png" alt="Scrum badge" loading="lazy" /><span>Scrum</span></div>
-                <div class="badge"><img src="logo-exper.png" alt="Experience badge" loading="lazy" /><span>Experience</span></div>
-                <div class="badge"><img src="logo-secup.png" alt="Security+ badge" loading="lazy" /><span>Security+</span></div>
-                <div class="badge"><img src="logo-secux.png" alt="Security UX badge" loading="lazy" /><span>Security UX</span></div>
+                <div class="badge"><img src="logo-ccna.png" alt="CCNA" loading="lazy"/><span>CCNA</span></div>
+                <div class="badge"><img src="logo-cysa.png" alt="CySA+" loading="lazy"/><span>CySA+</span></div>
+                <div class="badge"><img src="logo-isaca.png" alt="ISACA" loading="lazy"/><span>ISACA</span></div>
+                <div class="badge"><img src="logo-pccse.png" alt="PCCSE" loading="lazy"/><span>PCCSE</span></div>
+                <div class="badge"><img src="logo-pentest.png" alt="PenTest+" loading="lazy"/><span>PenTest+</span></div>
+                <div class="badge"><img src="logo-proj.png" alt="Project" loading="lazy"/><span>Project</span></div>
+                <div class="badge"><img src="logo-scrum.png" alt="Scrum" loading="lazy"/><span>Scrum</span></div>
+                <div class="badge"><img src="logo-exper.png" alt="Experience" loading="lazy"/><span>Experience</span></div>
+                <div class="badge"><img src="logo-secup.png" alt="Security+" loading="lazy"/><span>Security+</span></div>
+                <div class="badge"><img src="logo-secux.png" alt="Security UX" loading="lazy"/><span>Security UX</span></div>
               </div>
             </div>
             <div class="card">
@@ -555,22 +607,21 @@
         </div>
       </section>
 
-      <!-- ── CONSULTATION FORM ── -->
+      <!-- ── FORM ── -->
       <section id="inquiry">
         <div class="section-shell">
           <h2>Request a Consultation</h2>
           <p class="section-subtitle">Send a quick message and we'll respond with next steps.</p>
-
           <div class="form-wrap">
             <form action="https://formspree.io/f/xnnevpwq" method="POST">
               <div class="form-grid">
                 <div class="field">
                   <label for="name">Name</label>
-                  <input id="name" name="name" required placeholder="Your name" />
+                  <input id="name" name="name" required placeholder="Your name" autocomplete="name"/>
                 </div>
                 <div class="field">
                   <label for="email">Email</label>
-                  <input id="email" name="email" type="email" required placeholder="you@company.com" />
+                  <input id="email" name="email" type="email" required placeholder="you@company.com" autocomplete="email"/>
                 </div>
                 <div class="field span-2">
                   <label for="service">Service needed</label>
@@ -592,15 +643,15 @@
                   <label for="msg">Details</label>
                   <textarea id="msg" name="message" required placeholder="Briefly describe your environment, timeline, and goals."></textarea>
                 </div>
-                <input type="hidden" name="source" value="Valo Technologies LLC Website - Consultation" />
-                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+                <input type="hidden" name="source" value="Valo Technologies LLC Website - Consultation"/>
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off"/>
               </div>
               <div class="form-actions">
                 <p class="fineprint">Clear scope. Clean documentation. No unnecessary complexity.</p>
                 <button class="btn-primary" type="submit">Send request</button>
               </div>
               <p class="form-status">
-                This form sends to Formspree and will email you at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8bfdeae7e4ffeee8e3e7e7e8cbece6eae2e7a5e8e4e6">[email&#160;protected]</a></strong>.
+                This form sends to Formspree and will email you at <strong>valotechllc@gmail.com</strong>.
               </p>
             </form>
           </div>
@@ -614,15 +665,15 @@
           <p class="section-subtitle">Use the form above, or reach us directly.</p>
           <div class="contact-grid">
             <div class="card contact-card">
-              <small>Email</small><br />
-              <a href="/cdn-cgi/l/email-protection#f680979a998293959e9a9a95b6919b979f9ad895999b"><span class="__cf_email__" data-cfemail="ee988f82819a8b8d8682828dae89838f8782c08d8183">[email&#160;protected]</span></a>
+              <small>Email</small>
+              <a href="mailto:valotechllc@gmail.com">valotechllc@gmail.com</a>
             </div>
             <div class="card contact-card">
-              <small>Service Area</small><br />
-              <span>Texas-based • Serving clients nationwide</span>
+              <small>Service Area</small>
+              <span style="color:var(--text-muted); font-size:0.92rem;">Texas-based • Serving clients nationwide</span>
             </div>
             <div class="card contact-card">
-              <small>Website</small><br />
+              <small>Website</small>
               <a href="https://www.valotechnologiellc.com">valotechnologiellc.com</a>
             </div>
           </div>
@@ -635,7 +686,7 @@
     </footer>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const toggleBtn = document.querySelector(".nav-toggle");
@@ -644,4 +695,15 @@
     if (toggleBtn && nav) {
       toggleBtn.addEventListener("click", () => {
         const isOpen = nav.classList.toggle("open");
-        toggleBtn.setAttribute("ar
+        toggleBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+      nav.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          nav.classList.remove("open");
+          toggleBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>
