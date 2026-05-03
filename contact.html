@@ -38,7 +38,6 @@
       <li><a href="/services/">Services</a></li>
       <li><a href="/industries/">Industries</a></li>
       <li><a href="/about/">About</a></li>
-
       <li><a href="/contact.html">Contact</a></li>
       <li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
     </ul>
@@ -134,6 +133,17 @@
               </select>
             </div>
             <div class="form-row">
+              <label for="contact-service">Service of Interest <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
+              <select id="contact-service" name="service">
+                <option value="" selected>Not sure yet</option>
+                <option value="Virtual CISO (vCISO)">Virtual CISO (vCISO)</option>
+                <option value="Compliance & Risk">Compliance &amp; Risk</option>
+                <option value="Network Security">Network Security</option>
+                <option value="Penetration Testing">Penetration Testing</option>
+                <option value="Multiple Services">Multiple Services</option>
+              </select>
+            </div>
+            <div class="form-row">
               <label for="contact-message">What's prompting the inquiry? <span aria-hidden="true">*</span></label>
               <textarea id="contact-message" name="message" required placeholder="Brief description of your situation — an audit, a questionnaire, a recent incident, or proactive program development. The more context you share, the more useful the conversation will be."></textarea>
             </div>
@@ -185,12 +195,11 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>About &amp; Resources</h5>
+        <h5>About</h5>
         <ul>
           <li><a href="/about/">About VALO</a></li>
           <li><a href="/about/leadership.html">Leadership</a></li>
           <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
-    
           <li><a href="/contact.html">Contact</a></li>
         </ul>
       </div>
@@ -247,7 +256,6 @@
     reveals.forEach(function(el) { obs.observe(el); });
   } else { reveals.forEach(function(el) { el.classList.add('in'); }); }
 
-  // FORM SUBMISSION — JavaScript fetch with redirect
   var form = document.getElementById('contact-form');
   var btn = document.getElementById('form-submit-btn');
   var errorDiv = document.getElementById('form-error');
@@ -257,7 +265,6 @@
       e.preventDefault();
       errorDiv.style.display = 'none';
 
-      // Basic validation
       var name = form.querySelector('[name="name"]').value.trim();
       var email = form.querySelector('[name="email"]').value.trim();
       var org = form.querySelector('[name="organization"]').value.trim();
