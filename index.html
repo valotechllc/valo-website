@@ -280,6 +280,23 @@
 </main>
 
 <!-- Footer -->
+  <div class="footer-signup">
+  <div class="container">
+    <div class="footer-signup-inner">
+      <div class="footer-signup-text">
+        <h4>The VALO Security Brief</h4>
+        <p>Quarterly notes on regulatory changes, audit trends, and practical security guidance for DFW healthcare, financial services, and professional services firms. No spam. Unsubscribe anytime.</p>
+      </div>
+      <form id="signup-form" class="footer-signup-form" novalidate aria-label="Newsletter signup">
+        <input type="hidden" name="_form_type" value="newsletter_signup" />
+        <input type="hidden" name="_subject" value="New VALO Security Brief signup" />
+        <input type="email" id="signup-email" name="email" required autocomplete="email" placeholder="your@organization.com" aria-label="Email address" />
+        <button type="submit" id="signup-btn">Subscribe</button>
+        <div id="signup-msg" class="signup-msg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</div>
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -401,6 +418,57 @@
   }
 })();
 </script>
+<script>
+(function() {
+  var form = document.getElementById('signup-form');
+  if (!form) return;
+  var btn = document.getElementById('signup-btn');
+  var msg = document.getElementById('signup-msg');
+  var emailInput = document.getElementById('signup-email');
 
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    msg.textContent = '';
+    msg.className = 'signup-msg';
+
+    var email = emailInput.value.trim();
+    if (!email || email.indexOf('@') === -1) {
+      msg.textContent = 'Please enter a valid email address.';
+      msg.classList.add('signup-msg-err');
+      return;
+    }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    var data = new FormData(form);
+
+    fetch('https://formspree.io/f/mgodoabn', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(response) {
+      if (response.ok) {
+        msg.textContent = 'Thank you. You\'re subscribed.';
+        msg.classList.add('signup-msg-ok');
+        emailInput.value = '';
+        btn.textContent = 'Subscribe';
+        btn.disabled = false;
+      } else {
+        return response.json().then(function(d) {
+          throw new Error(d.errors ? d.errors.map(function(e){ return e.message; }).join(', ') : 'Submission failed.');
+        });
+      }
+    })
+    .catch(function(err) {
+      msg.textContent = 'Something went wrong. Please email info@valotechnologiellc.com instead.';
+      msg.classList.add('signup-msg-err');
+      btn.textContent = 'Subscribe';
+      btn.disabled = false;
+    });
+  });
+})();
+</script>
 </body>
 </html>
