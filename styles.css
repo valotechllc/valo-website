@@ -1337,7 +1337,12 @@ footer {
 
 @media (max-width: 640px) {
   section { padding: 72px 0; }
-  .hero { padding: 120px 0 72px; }
+  .hero {
+    padding: 96px 0 56px;
+    min-height: auto;
+    align-items: flex-start;
+  }
+  .card-grid-4 { grid-template-columns: 1fr; }
   .card-grid-4 { grid-template-columns: 1fr; }
   .card-grid-3 { grid-template-columns: 1fr; }
   .card-grid-2 { grid-template-columns: 1fr; }
