@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message Received | VALO Technologies LLC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0c0f;
+      --bg2:       #0f1318;
+      --panel:     #13181f;
+      --border:    #1e2730;
+      --accent:    #00d4ff;
+      --accent2:   #0099cc;
+      --green:     #00ff88;
+      --text:      #c8d6e5;
+      --muted:     #4a5568;
+      --white:     #ffffff;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 70px;
+      background: rgba(10, 12, 15, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* MAIN */
+    main {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      max-width: 620px;
+      width: 100%;
+      padding: 60px 56px;
+      position: relative;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    /* Corner accents */
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+    }
+    .card::before {
+      bottom: -1px;
+      left: -1px;
+      border-bottom: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+    .card::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 36px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .status-text { color: var(--green); }
+
+    /* Icon */
+    .icon-wrap {
+      width: 72px;
+      height: 72px;
+      border: 1px solid var(--border);
+      background: rgba(0,212,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .icon-wrap svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent);
+    }
+
+    /* Corner on icon */
+    .icon-wrap::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      width: 10px;
+      height: 10px;
+      border-top: 1px solid var(--accent);
+      border-right: 1px solid var(--accent);
+    }
+
+    h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .subtitle {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent2);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .divider::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 60px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Meta info */
+    .meta {
+      background: rgba(0,212,255,0.04);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 28px 0;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .meta span { color: var(--accent); }
+
+    /* CTA button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      padding: 14px 32px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      z-index: -1;
+    }
+
+    .btn:hover {
+      color: var(--bg);
+    }
+
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 28px 24px;
+      border-top: 1px solid var(--border);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* Scan line effect */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+      animation: scan 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 200;
+    }
+
+    @keyframes scan {
+      0%   { top: 0; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .card { padding: 40px 28px; }
+      h1 { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scanline"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">VALO <span>Technologies</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="card">
+
+      <div class="status-bar">
+        <div class="status-dot"></div>
+        <span class="status-text">TRANSMISSION RECEIVED</span>
+        <span>&nbsp;//&nbsp; SECURE CHANNEL CONFIRMED</span>
+      </div>
+
+      <div class="icon-wrap">
+        <!-- Shield check icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l7 4v5c0 5-3.5 9.3-7 10.8C8.5 20.3 5 16 5 11V6l7-4z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </div>
+
+      <div class="subtitle">// MESSAGE ENCRYPTED &amp; DELIVERED</div>
+      <h1>Message <span>Received.</span></h1>
+
+      <div class="divider"></div>
+
+      <p>
+        Thank you for reaching out to <span class="highlight">VALO Technologies LLC</span>. Your message has been received and is being reviewed by our team.
+      </p>
+
+      <p>
+        We typically respond within <span class="highlight">1 to 2 business days</span>. For urgent matters or immediate assistance, reach us directly at
+        <span class="highlight">info@valotechnologiellc.com</span>.
+      </p>
+
+      <div class="meta">
+        STATUS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span>RECEIVED</span><br>
+        CHANNEL&nbsp;&nbsp;&nbsp;&nbsp;: <span>SECURE CONTACT FORM</span><br>
+        RESPONSE&nbsp;&nbsp;&nbsp;: <span>1&ndash;2 BUSINESS DAYS</span><br>
+        PRIORITY&nbsp;&nbsp;&nbsp;: <span>STANDARD REVIEW</span>
+      </div>
+
+      <p>
+        While you wait, feel free to explore our services or connect with us on LinkedIn.
+      </p>
+
+      <a href="index.html" class="btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Return to Home
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 VALO Technologies LLC &nbsp;|&nbsp; Rockwall, TX &nbsp;|&nbsp;
+    <a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a>
+  </footer>
+
+</body>
+</html>
