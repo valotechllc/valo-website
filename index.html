@@ -68,7 +68,7 @@
         DFW Cybersecurity Consultancy
       </div>
       <h1>Cybersecurity leadership for organizations that can't afford to get it wrong.</h1>
-      <p class="hero-lead">VALO Technologies is a security-first consultancy serving DFW healthcare, financial services, and professional services firms. Senior expertise. Regulated-industry experience. Engagement models that fit small and mid-sized organizations.</p>
+      <p class="hero-lead">VALO Technologies is a security-first consultancy serving DFW <span class="industry-cycle" aria-live="polite"><span class="industry-word active">healthcare</span><span class="industry-word">financial services</span><span class="industry-word">professional services</span></span> firms. Senior expertise. Regulated-industry experience. Engagement models that fit small and mid-sized organizations.</p>
       <div class="hero-ctas">
         <a href="/contact.html" class="btn btn-lg">Schedule a 30-minute risk conversation</a>
         <a href="/about/credentials.html" class="btn-secondary">See our methodology</a>
@@ -86,6 +86,64 @@
       </div>
     </div>
   </section>
+
+  <!-- Stats row -->
+  <section class="stats-row">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Years of senior experience</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="3">0</span>
+          <span class="stat-label">Regulated industries served</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="6">0</span>
+          <span class="stat-label">Active certifications</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="500">0</span><span class="stat-suffix">-</span><span class="stat-number2">employee</span>
+          <span class="stat-label">Organizations we're built for</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Framework strip -->
+  <div class="framework-strip" aria-label="Compliance frameworks">
+    <div class="framework-track">
+      <span class="framework-item">HIPAA Security Rule</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">SOC 2 Type II</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">CMMC 2.0</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">NIST 800-171</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">GLBA Safeguards Rule</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">NIST CSF</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">PCI DSS</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">HIPAA Security Rule</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">SOC 2 Type II</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">CMMC 2.0</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">NIST 800-171</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">GLBA Safeguards Rule</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">NIST CSF</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+      <span class="framework-item">PCI DSS</span>
+      <span class="framework-sep" aria-hidden="true">·</span>
+    </div>
+  </div>
 
   <!-- Section 1 — The Problem -->
   <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg-elev) 100%);">
@@ -423,6 +481,41 @@
     else if (href !== '/' && href !== '/contact.html' && path.startsWith(href)) { a.classList.add('active'); }
     else if (href === '/contact.html' && path === '/contact.html') { a.classList.add('active'); }
   });
+
+  // Industry word cycler
+  const words = document.querySelectorAll('.industry-word');
+  if (words.length) {
+    let current = 0;
+    setInterval(function() {
+      words[current].classList.remove('active');
+      current = (current + 1) % words.length;
+      words[current].classList.add('active');
+    }, 2400);
+  }
+
+  // Stats counter
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const duration = 1200;
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  if ('IntersectionObserver' in window && counters.length) {
+    const cObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { animateCounter(e.target); cObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(c) { cObs.observe(c); });
+  }
 
   // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
