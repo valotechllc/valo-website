@@ -1330,24 +1330,15 @@ footer {
 
 /* Industry word cycler */
 .industry-cycle {
-  display: inline-block;
-  position: relative;
-  min-width: 220px;
+  display: inline;
 }
 .industry-word {
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  white-space: nowrap;
+  display: none;
   color: var(--pa-orange);
+  transition: opacity 0.5s ease;
 }
 .industry-word.active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
+  display: inline;
 }
 
 /* Stats row */
