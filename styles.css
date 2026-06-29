@@ -311,11 +311,11 @@ nav.topnav.scrolled {
 }
 
 /* --- Hero (home) --- */
-.hero {
-  min-height: 100vh;
-  padding: 140px 0 80px;
+..hero {
+  min-height: auto;
+  padding: 64px 0 88px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
 }
