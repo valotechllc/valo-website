@@ -102,6 +102,7 @@
 
         <div class="contact-form-wrap reveal">
           <form id="contact-form" novalidate aria-label="Contact form">
+            <input type="hidden" name="_subject" id="contact-subject" value="Website inquiry — VALO Technologies" />
             <div class="form-row">
               <label for="contact-name">Name <span aria-hidden="true">*</span></label>
               <input type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Your full name" />
@@ -132,9 +133,10 @@
               <label for="contact-service">Service of Interest <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
               <select id="contact-service" name="service">
                 <option value="" selected>Not sure yet</option>
+                <option value="Network Assessment">Network Assessment</option>
                 <option value="Virtual CISO (vCISO)">Virtual CISO (vCISO)</option>
                 <option value="Compliance & Risk">Compliance &amp; Risk</option>
-                <option value="Network Security">Network Security</option>
+                <option value="Network Infrastructure & Security Engineering">Network Infrastructure &amp; Security Engineering</option>
                 <option value="Penetration Testing">Penetration Testing</option>
                 <option value="Multiple Services">Multiple Services</option>
               </select>
@@ -249,6 +251,25 @@
   var form = document.getElementById('contact-form');
   var btn = document.getElementById('form-submit-btn');
   var errorDiv = document.getElementById('form-error');
+  var subjectField = document.getElementById('contact-subject');
+  var serviceSelect = document.getElementById('contact-service');
+
+  // Pre-select service of interest from a ?service= query parameter (e.g. the
+  // network-security page's "Request a network assessment" button links to
+  // /contact.html?service=network-assessment).
+  var params = new URLSearchParams(window.location.search);
+  var svcParam = (params.get('service') || '').toLowerCase();
+  var svcMap = {
+    'network-assessment': 'Network Assessment',
+    'network': 'Network Infrastructure & Security Engineering',
+    'network-security': 'Network Infrastructure & Security Engineering',
+    'vciso': 'Virtual CISO (vCISO)',
+    'compliance': 'Compliance & Risk',
+    'pentesting': 'Penetration Testing'
+  };
+  if (serviceSelect && svcMap[svcParam]) {
+    serviceSelect.value = svcMap[svcParam];
+  }
 
   if (form) {
     form.addEventListener('submit', function(e) {
@@ -266,6 +287,11 @@
         errorDiv.style.display = 'block';
         return;
       }
+
+      // Give every email a useful subject line so assessment requests stand out
+      // in the inbox: e.g. "Network Assessment — Acme Family Clinic".
+      var svcVal = (serviceSelect && serviceSelect.value) ? serviceSelect.value : 'General inquiry';
+      if (subjectField) subjectField.value = svcVal + ' — ' + org;
 
       btn.textContent = 'Sending...';
       btn.disabled = true;
