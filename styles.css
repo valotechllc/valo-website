@@ -311,7 +311,7 @@ nav.topnav.scrolled {
 }
 
 /* --- Hero (home) --- */
-..hero {
+.hero {
   min-height: auto;
   padding: 64px 0 88px;
   display: flex;
@@ -1308,8 +1308,15 @@ footer {
 
 .tl-org { color: var(--ink-mute); font-size: 14px; }
 
-/* --- Reveal animation --- */
+/* --- Reveal animation ---
+   Safe fallback: content stays visible when JavaScript is blocked or delayed.
+   When JS is available, the inline script adds .js to <html> and animation is enabled. --- */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -1326,7 +1333,7 @@ footer {
     height: 36px;
   }
 }
-.reveal.in { opacity: 1; transform: translateY(0); }
+.js .reveal.in { opacity: 1; transform: translateY(0); }
 
 /* Industry word cycler */
 .industry-cycle {
@@ -1359,12 +1366,14 @@ footer {
 }
 .stat-item:last-child { border-right: none; }
 .stat-number {
+  display: block;
   font-family: var(--display);
-  font-size: clamp(36px, 4vw, 56px);
+  font-size: clamp(34px, 4vw, 54px);
   font-weight: 700;
   color: var(--pa-orange);
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
 }
 .stat-suffix {
   font-family: var(--display);
@@ -1424,6 +1433,12 @@ footer {
   .stat-item:nth-child(3) { border-right: 1px solid var(--line); border-top: 1px solid var(--line); }
   .stat-item:last-child { border-top: 1px solid var(--line); }
   .industry-cycle { min-width: 160px; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none !important; border-top: 1px solid var(--line); }
+  .stat-item:first-child { border-top: none; }
 }
 
 /* --- Responsive --- */
