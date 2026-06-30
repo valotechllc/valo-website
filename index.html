@@ -87,25 +87,54 @@
     </div>
   </section>
 
-  <!-- Stats row -->
+  <!-- Credibility row -->
   <section class="stats-row">
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item reveal">
-          <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
-          <span class="stat-label">Years of senior experience</span>
+          <span class="stat-number">10+</span>
+          <span class="stat-label">Years of senior cybersecurity and infrastructure experience</span>
         </div>
         <div class="stat-item reveal">
-          <span class="stat-number" data-target="3">0</span>
-          <span class="stat-label">Regulated industries served</span>
+          <span class="stat-number">3</span>
+          <span class="stat-label">Primary regulated-industry focus areas</span>
         </div>
         <div class="stat-item reveal">
-          <span class="stat-number" data-target="6">0</span>
-          <span class="stat-label">Active certifications</span>
+          <span class="stat-number">6</span>
+          <span class="stat-label">Active cybersecurity and technology certifications listed</span>
         </div>
         <div class="stat-item reveal">
-          <span class="stat-number" data-target="500">0</span><span class="stat-suffix">-</span><span class="stat-number2">employee</span>
-          <span class="stat-label">Organizations we're built for</span>
+          <span class="stat-number">25–500</span>
+          <span class="stat-label">Employee organizations VALO is built to support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section style="background: var(--bg-elev);">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">Proof</div>
+        <h2 class="section-title">Practical security leadership, not generic consulting language.</h2>
+        <p class="section-sub">VALO is built for organizations that already have IT support but need stronger security ownership, documentation, risk visibility, and compliance readiness.</p>
+      </div>
+      <div class="features-grid reveal">
+        <div class="feature-block">
+          <div class="feature-title">Hands-on network security background</div>
+          <p class="feature-desc">Experience across firewall operations, segmentation, access control, vulnerability remediation, VPN, endpoint security, and regulated infrastructure environments.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-title">Framework-driven approach</div>
+          <p class="feature-desc">Security work is aligned to practical controls from HIPAA, SOC 2, CMMC, NIST 800-171, GLBA, PCI DSS, and cyber insurance readiness requirements.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-title">Executive-readable deliverables</div>
+          <p class="feature-desc">VALO turns technical findings into risk registers, remediation roadmaps, policy gaps, and leadership-ready recommendations.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-title">Built for SMB budgets</div>
+          <p class="feature-desc">Engagements are designed for small and mid-sized organizations that need senior security guidance without hiring a full-time CISO.</p>
         </div>
       </div>
     </div>
@@ -155,6 +184,35 @@
           <p>You have a managed service provider or an internal IT team. They keep the network running, the laptops patched, the email flowing. That is not a security program.</p>
           <p>A security program is a documented set of controls aligned to the regulations you operate under, owned by someone accountable, reviewed on a cadence your auditors and insurers expect, and ready to defend when an incident happens. Most organizations under 500 employees don't have one. Most don't know they don't have one until a breach, a failed audit, or a client questionnaire makes the gap visible.</p>
           <p>VALO Technologies builds and runs that program for you, at a fraction of what hiring a full-time CISO would cost.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1.5 — Why not just an MSP -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">Why security leadership matters</div>
+        <h2 class="section-title">IT support keeps systems running. VALO helps prove they are secure.</h2>
+        <p class="section-sub">Many organizations have an MSP or internal IT support. The gap is usually security ownership, risk documentation, compliance evidence, and a roadmap leadership can act on.</p>
+      </div>
+      <div class="features-grid reveal">
+        <div class="feature-block">
+          <div class="feature-title">MSP / IT support</div>
+          <p class="feature-desc">Handles tickets, user support, device setup, Microsoft 365 administration, backups, patching, and daily IT operations.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-title">VALO cybersecurity advisory</div>
+          <p class="feature-desc">Reviews risk, maps controls to frameworks, evaluates security gaps, builds remediation roadmaps, prepares documentation, and helps leadership make security decisions.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-title">Where the gap appears</div>
+          <p class="feature-desc">Cyber insurance questionnaires, client security reviews, HIPAA or GLBA expectations, SOC 2 readiness, firewall exposure, privileged access, and undocumented risk ownership.</p>
+        </div>
+        <div class="feature-block">
+          <div class="feature-title">How VALO works with IT</div>
+          <p class="feature-desc">VALO does not need to replace your IT provider. We work alongside your MSP or internal team to strengthen the security program around the technology already in place.</p>
         </div>
       </div>
     </div>
@@ -482,30 +540,6 @@
       current = (current + 1) % words.length;
       words[current].classList.add('active');
     }, 2400);
-  }
-
-  // Stats counter
-  function animateCounter(el) {
-    const target = parseInt(el.getAttribute('data-target'), 10);
-    const duration = 1200;
-    const start = performance.now();
-    function step(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(ease * target);
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = target;
-    }
-    requestAnimationFrame(step);
-  }
-  const counters = document.querySelectorAll('.stat-number[data-target]');
-  if ('IntersectionObserver' in window && counters.length) {
-    const cObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { animateCounter(e.target); cObs.unobserve(e.target); }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function(c) { cObs.observe(c); });
   }
 
   // Reveal on scroll
