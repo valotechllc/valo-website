@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sample Network & Security Assessment | VALO Technologies</title>
+<meta name="description" content="Fictional Network and Security Assessment showing architecture findings, risk priorities, qualification criteria, and remediation planning." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Sample Network & Security Assessment | VALO Technologies" />
+<meta property="og:description" content="Fictional Network and Security Assessment showing architecture findings, risk priorities, qualification criteria, and remediation planning." />
+<meta property="og:url" content="https://valotechnologiellc.com/resources/sample-network-security-assessment.html" />
+<meta property="og:image" content="https://valotechnologiellc.com/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/valo-favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>
+.sample-notice{max-width:940px;background:var(--bg-card);border:1px solid var(--line-strong);border-left:4px solid var(--accent);padding:20px 24px;margin:0 0 40px}
+.sample-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 44px}
+.sample-metric{background:var(--bg-card);border:1px solid var(--line);padding:22px}
+.sample-metric strong{display:block;font-family:var(--display);font-size:28px;color:var(--ink);letter-spacing:1px;margin-bottom:6px}
+.sample-table{width:100%;border-collapse:collapse;margin:24px 0 42px;font-size:14px}
+.sample-table th,.sample-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.sample-table th{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-mute)}
+.status-high{font-family:var(--mono);color:#ff8a65;font-weight:600}
+.status-med{font-family:var(--mono);color:#f5c451;font-weight:600}
+.status-good{font-family:var(--mono);color:#7dd3a7;font-weight:600}
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 44px}
+.roadmap-card{background:var(--bg-card);border:1px solid var(--line);padding:24px}
+.roadmap-card h3{font-family:var(--display);letter-spacing:1px;text-transform:uppercase;margin:0 0 14px;color:var(--ink)}
+.roadmap-card ul{margin:0;padding-left:18px;color:var(--ink-dim);line-height:1.7}
+.decision{padding:18px 20px;background:var(--bg-card);border:1px solid var(--line);margin:12px 0}
+@media(max-width:900px){.sample-grid{grid-template-columns:repeat(2,1fr)}.roadmap{grid-template-columns:1fr}.sample-table{display:block;overflow-x:auto}}
+@media(max-width:560px){.sample-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<canvas id="grid-bg" aria-hidden="true"></canvas>
+<nav class="topnav" id="topnav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/industries/">Industries</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/resources/">Resources</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
+  </div>
+</nav>
+<main id="main-content">
+  <div class="page-hero"><div class="container">
+    <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/resources/">Resources</a><span aria-hidden="true"> / </span>Sample Network & Security Assessment</div>
+    <h1>Sample Network & Security Assessment</h1>
+    <p class="page-hero-sub">A proof-of-work example showing how VALO evaluates network reliability, segmentation, firewall controls, and remediation priorities.</p>
+  </div></div>
+  <section><div class="container">
+    <div class="sample-notice reveal"><div class="eyebrow">Fictional demonstration</div><p style="margin:8px 0 0;color:var(--ink-dim);line-height:1.7;">This is not a client case study. The organization, systems, findings, metrics, and risk values below are fictional and exist only to demonstrate the structure and level of detail of a VALO deliverable.</p></div>
+    
+<div class="prose reveal"><h2>Executive context</h2><p><strong>Example organization:</strong> Oak Ridge Family Clinic, a fictional single-site clinic with 55 users, one next-generation firewall, three managed switches, nine wireless access points, two internet circuits, six VLANs, and cloud-hosted business applications.</p><p><strong>Objective:</strong> assess reliability, segmentation, firewall/access controls, administrative exposure, wireless isolation, core services, and HIPAA-relevant network risks.</p></div>
+<div class="sample-grid reveal"><div class="sample-metric"><strong>1 site</strong><span>qualifying small environment</span></div><div class="sample-metric"><strong>13</strong><span>technical findings</span></div><div class="sample-metric"><strong>4</strong><span>high-priority items</span></div><div class="sample-metric"><strong>$2,500</strong><span>example qualifying flat-fee scope</span></div></div>
+<div class="prose reveal"><h2>Sample findings</h2></div>
+<table class="sample-table reveal"><thead><tr><th>ID</th><th>Finding</th><th>Priority</th><th>Impact</th><th>Recommended action</th></tr></thead><tbody>
+<tr><td>N-01</td><td>Clinical workstations and general business endpoints share an overly broad trusted VLAN.</td><td class="status-high">High</td><td>Compromise of one endpoint increases lateral-movement exposure.</td><td>Design role-based segmentation and restrict inter-VLAN flows to documented business requirements.</td></tr>
+<tr><td>N-02</td><td>Firewall rulebase contains stale any/any service objects and rules without current business owners.</td><td class="status-high">High</td><td>Unnecessary network paths increase attack surface and weaken accountability.</td><td>Validate rule ownership, remove stale rules, narrow services, and document recurring review.</td></tr>
+<tr><td>N-03</td><td>Network-device administration is reachable from standard user networks.</td><td class="status-high">High</td><td>User-endpoint compromise could expose network management interfaces.</td><td>Create a management segment and restrict administration by source, protocol, and authorized identities.</td></tr>
+<tr><td>N-04</td><td>Guest wireless isolation is incomplete from selected internal RFC1918 ranges.</td><td class="status-high">High</td><td>Guest devices may reach internal services not intended for public access.</td><td>Enforce firewall isolation, validate ACLs, and retest from guest clients.</td></tr>
+<tr><td>N-05</td><td>Configuration backups are manual and not verified after network changes.</td><td class="status-med">Moderate</td><td>Recovery from hardware failure or configuration error may be delayed.</td><td>Automate configuration backup and periodically test restore procedures.</td></tr>
+</tbody></table>
+<div class="prose reveal"><h2>Example architecture priorities</h2></div>
+<div class="roadmap reveal"><div class="roadmap-card"><h3>0–30 days</h3><ul><li>Restrict management-plane access.</li><li>Correct guest-network isolation.</li><li>Review high-risk firewall rules.</li><li>Capture current configs and topology.</li></ul></div><div class="roadmap-card"><h3>31–60 days</h3><ul><li>Implement segmentation changes.</li><li>Standardize switch management controls.</li><li>Improve configuration backup.</li><li>Review DNS/DHCP dependencies.</li></ul></div><div class="roadmap-card"><h3>61–90 days</h3><ul><li>Retest segmentation.</li><li>Validate failover process.</li><li>Document network standards.</li><li>Close findings with evidence.</li></ul></div></div>
+<div class="prose reveal"><h2>Flat-fee qualification illustrated</h2><p>This fictional environment fits the published $2,500 package because it is one small site with a limited device inventory and conventional architecture. A multi-site estate, data center, SD-WAN environment, large switch/AP population, complex BGP/OSPF, NAC/ISE deployment, cloud transit architecture, or major redesign would be custom-scoped instead.</p></div>
+  </div></section>
+  <section class="cta-section"><div class="container"><h2>Need a clear picture of your network risk?</h2><p>We define the scope before work begins so you know the deliverables, boundaries, timeline, and fee.</p><a href="/contact.html?service=network-assessment" class="btn btn-lg">Request a network assessment</a></div></section>
+</main>
+<footer><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="footer-brand-name">VALO<span>.</span></div><div class="footer-brand-tag">Technologies LLC</div><p>Cybersecurity governance backed by real engineering depth.</p><p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p></div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="/services/">All Services</a></li><li><a href="/services/vciso.html">Fractional vCISO</a></li><li><a href="/services/compliance.html">Governance, Risk &amp; Compliance</a></li><li><a href="/services/network-security.html">Network Security</a></li><li><a href="/services/microsoft-security.html">Microsoft Security</a></li></ul></div>
+    <div class="footer-col"><h5>Sample Deliverables</h5><ul><li><a href="/resources/sample-risk-assessment.html">Risk Assessment</a></li><li><a href="/resources/sample-hipaa-risk-analysis.html">HIPAA Risk Analysis</a></li><li><a href="/resources/sample-m365-security-review.html">Microsoft 365 Review</a></li><li><a href="/resources/sample-network-security-assessment.html">Network Assessment</a></li><li><a href="/resources/sample-vciso-executive-report.html">vCISO Executive Report</a></li></ul></div>
+    <div class="footer-col"><h5>About</h5><ul><li><a href="/about/">About VALO</a></li><li><a href="/about/leadership.html">Leadership</a></li><li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+</div></footer>
+<script>
+(function(){const canvas=document.getElementById('grid-bg');if(canvas){const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;draw();}function draw(){ctx.clearRect(0,0,W,H);const step=48;ctx.strokeStyle='rgba(59,130,246,0.15)';ctx.lineWidth=1;for(let x=0;x<=W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<=H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}resize();window.addEventListener('resize',resize);}const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});const hb=document.getElementById('hamburger'),nl=document.getElementById('navLinks');if(hb&&nl){hb.addEventListener('click',function(){const o=nl.classList.toggle('open');hb.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!nav.contains(e.target)){nl.classList.remove('open');hb.setAttribute('aria-expanded','false');}});}const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}})();
+</script>
+</body></html>
