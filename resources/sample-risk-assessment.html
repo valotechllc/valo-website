@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sample Cybersecurity Risk Assessment | VALO Technologies</title>
+<meta name="description" content="Review a fictional sample cybersecurity risk assessment showing the type of executive findings, risk register entries, ownership, and remediation roadmap VALO Technologies can produce." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Sample Cybersecurity Risk Assessment | VALO Technologies" />
+<meta property="og:description" content="A fictional proof-of-work example showing how VALO turns security findings into executive decisions and remediation priorities." />
+<meta property="og:url" content="https://valotechnologiellc.com/resources/sample-risk-assessment.html" />
+<meta property="og:image" content="https://valotechnologiellc.com/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/valo-favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>
+  .sample-notice{max-width:900px;background:var(--bg-card);border:1px solid var(--line-strong);border-left:4px solid var(--accent);padding:20px 24px;margin:0 0 40px}
+  .sample-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 44px}
+  .sample-metric{background:var(--bg-card);border:1px solid var(--line);padding:24px}
+  .sample-metric strong{display:block;font-family:var(--display);font-size:30px;color:var(--ink);letter-spacing:1px;margin-bottom:6px}
+  .risk-table{width:100%;border-collapse:collapse;margin:24px 0 42px;font-size:14px}
+  .risk-table th,.risk-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .risk-table th{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-mute)}
+  .risk-high{font-family:var(--mono);color:#ff8a65;font-weight:600}
+  .risk-med{font-family:var(--mono);color:#f5c451;font-weight:600}
+  .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 44px}
+  .roadmap-card{background:var(--bg-card);border:1px solid var(--line);padding:24px}
+  .roadmap-card h3{font-family:var(--display);letter-spacing:1px;text-transform:uppercase;margin:0 0 14px;color:var(--ink)}
+  .roadmap-card ul{margin:0;padding-left:18px;color:var(--ink-dim);line-height:1.7}
+  @media(max-width:800px){.sample-grid,.roadmap{grid-template-columns:1fr}.risk-table{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<canvas id="grid-bg" aria-hidden="true"></canvas>
+
+<nav class="topnav" id="topnav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/industries/">Industries</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span>Resources<span aria-hidden="true"> / </span>Sample Risk Assessment</div>
+      <h1>Sample Cybersecurity Risk Assessment</h1>
+      <p class="page-hero-sub">A proof-of-work example showing how VALO translates technical and compliance findings into business risk, ownership, and an actionable remediation roadmap.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="sample-notice reveal">
+        <div class="eyebrow">Fictional demonstration</div>
+        <p style="margin:8px 0 0;color:var(--ink-dim);line-height:1.7;">This is not a client case study. The organization, findings, systems, and risk values below are fictional and are provided only to demonstrate the structure and decision-quality of a typical VALO deliverable.</p>
+      </div>
+
+      <div class="prose reveal">
+        <h2>Executive context</h2>
+        <p><strong>Example organization:</strong> Northstar Specialty Clinic, a fictional 85-employee healthcare practice using Microsoft 365, cloud-hosted clinical applications, a managed network, and several third-party business associates.</p>
+        <p><strong>Assessment objective:</strong> Identify material cybersecurity risks, evaluate selected HIPAA Security Rule safeguards and NIST CSF 2.0 practices, validate key technical controls, and produce a prioritized 90-day remediation plan.</p>
+      </div>
+
+      <div class="sample-grid reveal">
+        <div class="sample-metric"><strong>12</strong><span>material findings documented</span></div>
+        <div class="sample-metric"><strong>5</strong><span>high-priority risks requiring leadership ownership</span></div>
+        <div class="sample-metric"><strong>90 days</strong><span>initial remediation horizon</span></div>
+      </div>
+
+      <div class="prose reveal">
+        <h2>Executive summary</h2>
+        <p>The example environment has a functional IT foundation but lacks consistent security governance around identity, privileged access, vendor oversight, incident readiness, and remediation accountability. The most urgent exposure is not a single missing tool. It is the combination of incomplete MFA enforcement, excessive administrative privilege, weak evidence of third-party oversight, and the absence of a formal risk-remediation cadence.</p>
+        <p>The recommended first phase focuses on reducing identity compromise risk, establishing accountable control ownership, documenting the highest-risk vendors, and creating a repeatable process for tracking remediation. Longer-term work should strengthen endpoint governance, logging, incident exercises, and evidence retention.</p>
+      </div>
+
+      <div class="reveal">
+        <table class="risk-table">
+          <thead><tr><th>ID</th><th>Risk</th><th>Business impact</th><th>Rating</th><th>Owner</th><th>Recommended action</th></tr></thead>
+          <tbody>
+            <tr><td>R-01</td><td>MFA is not consistently enforced for all remote and privileged access paths.</td><td>Account compromise could expose email, sensitive records, administrative functions, or downstream applications.</td><td class="risk-high">High</td><td>IT / Executive Sponsor</td><td>Enforce MFA through Conditional Access, remove legacy authentication paths, validate break-glass controls, and document exceptions.</td></tr>
+            <tr><td>R-02</td><td>Administrative privileges are broader than required and are not reviewed on a defined cadence.</td><td>A compromised privileged account would have an unnecessarily large blast radius.</td><td class="risk-high">High</td><td>IT</td><td>Separate admin identities, implement least privilege, review role assignments quarterly, and document privileged-access standards.</td></tr>
+            <tr><td>R-03</td><td>Business associate and critical-vendor security reviews are inconsistent.</td><td>Third-party compromise or noncompliance may create regulatory, operational, and contractual exposure.</td><td class="risk-high">High</td><td>Compliance / Operations</td><td>Create a vendor inventory, tier vendors by risk, document BAAs, collect security evidence, and track remediation for high-risk vendors.</td></tr>
+            <tr><td>R-04</td><td>The incident response plan has not been exercised in the last 12 months.</td><td>Leadership and technical teams may lose critical time during ransomware, business email compromise, or data-exposure events.</td><td class="risk-med">Moderate</td><td>Executive Sponsor</td><td>Run a tabletop exercise, validate notification paths, update roles, and document lessons learned.</td></tr>
+            <tr><td>R-05</td><td>Security findings are tracked informally without target dates or accountable owners.</td><td>Known weaknesses can remain unresolved and become repeat audit findings or exploitable conditions.</td><td class="risk-med">Moderate</td><td>Executive Sponsor / IT</td><td>Establish a formal risk register and remediation tracker with owners, due dates, status, exceptions, and executive review.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose reveal">
+        <h2>90-day remediation roadmap</h2>
+        <p>The purpose of the roadmap is to convert findings into decisions and owned work—not to generate an endless list of controls.</p>
+      </div>
+
+      <div class="roadmap reveal">
+        <div class="roadmap-card"><h3>0–30 days</h3><ul><li>Enforce MFA and block legacy authentication.</li><li>Inventory privileged accounts and remove unnecessary roles.</li><li>Assign executive owners to all high risks.</li><li>Create the central risk and remediation register.</li></ul></div>
+        <div class="roadmap-card"><h3>31–60 days</h3><ul><li>Tier critical vendors and collect security evidence.</li><li>Review Conditional Access and administrative controls.</li><li>Formalize incident response roles and contact paths.</li><li>Document exceptions and risk acceptance decisions.</li></ul></div>
+        <div class="roadmap-card"><h3>61–90 days</h3><ul><li>Conduct an incident-response tabletop exercise.</li><li>Review endpoint and logging coverage.</li><li>Validate closure evidence for remediated findings.</li><li>Present risk status and remaining decisions to leadership.</li></ul></div>
+      </div>
+
+      <div class="prose reveal">
+        <h2>What a real engagement can include</h2>
+        <p>Depending on scope, a VALO assessment can include an executive summary, risk register, prioritized findings, framework mapping, evidence review, control-owner matrix, remediation roadmap, POA&amp;M-style tracking, architecture observations, and leadership briefing. Technical validation is tailored to the environment rather than treated as a generic checklist.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Want this level of clarity for your environment?</h2>
+      <p>Start with a scoped assessment. You will know what matters, what should happen first, and who needs to own the work before deciding on any longer engagement.</p>
+      <a href="/contact.html?service=risk-assessment" class="btn btn-lg">Discuss a risk assessment</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="footer-brand-name">VALO<span>.</span></div><div class="footer-brand-tag">Technologies LLC</div><p>GRC, Microsoft security, vCISO and security architecture for regulated DFW organizations.</p><p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p><a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a></div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="/services/">All Services</a></li><li><a href="/services/vciso.html">Virtual CISO</a></li><li><a href="/services/compliance.html">Governance, Risk &amp; Compliance</a></li><li><a href="/services/network-security.html">Network Infrastructure &amp; Security Engineering</a></li><li><a href="/services/microsoft-security.html">Microsoft Security</a></li></ul></div>
+    <div class="footer-col"><h5>Industries</h5><ul><li><a href="/industries/">All Industries</a></li><li><a href="/industries/healthcare.html">Healthcare</a></li><li><a href="/industries/financial-services.html">Financial Services</a></li><li><a href="/industries/professional-services.html">Professional Services</a></li><li><a href="/industries/public-sector-sled.html">Public Sector &amp; SLED</a></li></ul></div>
+    <div class="footer-col"><h5>About &amp; Resources</h5><ul><li><a href="/about/">About VALO</a></li><li><a href="/about/leadership.html">Leadership</a></li><li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li><li><a href="/resources/sample-risk-assessment.html">Sample Risk Assessment</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-badges"><div role="list" aria-label="Certifications" class="footer-badge-group"><span class="footer-badge-label">Certifications</span><img src="/logo-isaca.png" alt="ISACA — CISM" class="footer-cert-img" role="listitem" /><img src="/logo-secux.png" alt="CompTIA SecurityX" class="footer-cert-img" role="listitem" /><img src="/logo-pentest.png" alt="CompTIA PenTest+" class="footer-cert-img" role="listitem" /><img src="/logo-cysa.png" alt="CompTIA CySA+" class="footer-cert-img" role="listitem" /><img src="/logo-pccse.png" alt="Palo Alto Networks PCCSE" class="footer-cert-img" role="listitem" /><img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" class="footer-cert-img" role="listitem" /></div><div role="list" aria-label="Technology partners" class="footer-badge-group"><span class="footer-badge-label">Technology partners</span><img src="/logo-pan-reseller.png" alt="Palo Alto Networks — Registered Reseller" class="footer-cert-img" role="listitem" /><img src="/logo-pcisco.png" alt="Cisco Partner" class="footer-cert-img" role="listitem" /></div></div>
+  <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+</div></footer>
+
+<script>
+(function(){const canvas=document.getElementById('grid-bg');if(canvas){const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;draw();}function draw(){ctx.clearRect(0,0,W,H);const s=48;ctx.strokeStyle='rgba(59,130,246,0.15)';ctx.lineWidth=1;for(let x=0;x<=W;x+=s){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<=H;y+=s){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}resize();window.addEventListener('resize',resize);}const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){if(nav)nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});const hb=document.getElementById('hamburger'),nl=document.getElementById('navLinks');if(hb&&nl){hb.addEventListener('click',function(){const o=nl.classList.toggle('open');hb.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(nav&&!nav.contains(e.target)){nl.classList.remove('open');hb.setAttribute('aria-expanded','false');}});}const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}})();
+</script>
+</body>
+</html>
