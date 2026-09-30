@@ -44,6 +44,7 @@
       <li><a href="/services/">Services</a></li>
       <li><a href="/industries/">Industries</a></li>
       <li><a href="/about/">About</a></li>
+      <li><a href="/insights/">Insights</a></li>
       <li><a href="/contact.html">Contact</a></li>
       <li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
     </ul>
@@ -266,6 +267,36 @@
     </div>
   </section>
 
+  <section id="security-brief" style="background:var(--bg-elev);">
+    <div class="container">
+      <div class="reveal" style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:44px;align-items:center;">
+        <div>
+          <div class="eyebrow">VALO Security Brief</div>
+          <h2 class="section-title">Practical cybersecurity guidance. Every other Wednesday.</h2>
+          <p class="section-sub">Governance, risk, compliance, Microsoft 365 security, network/security engineering, and the decisions leaders need to make before a security problem becomes an incident, audit finding, or expensive emergency.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;">
+            <a href="/insights/security-brief-001.html" class="btn btn-secondary">Read Issue #1 &rarr;</a>
+            <a href="/insights/" class="btn btn-secondary">Browse the Brief</a>
+          </div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--line-strong);padding:28px;">
+          <div style="font-family:var(--display);font-size:25px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);margin-bottom:10px;">Subscribe to the Brief</div>
+          <p style="color:var(--ink-dim);font-size:14px;line-height:1.7;margin:0 0 18px;">One focused briefing every other Wednesday. No generic vendor spam.</p>
+          <form id="home-brief-form" style="display:grid;gap:10px;">
+            <input type="hidden" name="_subject" value="VALO Security Brief subscription" />
+            <input type="hidden" name="submission_type" value="Newsletter subscription" />
+            <input type="hidden" name="source" value="Homepage" />
+            <input type="email" name="email" required autocomplete="email" placeholder="you@organization.com" aria-label="Email address" style="width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--line-strong);color:var(--ink);font:inherit;" />
+            <button type="submit" class="btn" id="home-brief-submit" style="border:0;cursor:pointer;">Subscribe</button>
+          </form>
+          <div style="font-size:11px;color:var(--ink-mute);line-height:1.6;margin-top:10px;">By subscribing, you agree to receive the VALO Security Brief by email. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a>.</div>
+          <div id="home-brief-status" role="status" aria-live="polite" style="display:none;font-size:13px;margin-top:12px;"></div>
+        </div>
+      </div>
+      <style>@media(max-width:820px){#security-brief .reveal{grid-template-columns:1fr!important;}}</style>
+    </div>
+  </section>
+
   <section class="cta-section"><div class="container">
     <h2>Build a security program leadership can actually govern.</h2>
     <p>A 30-minute conversation to discuss your regulatory obligations, Microsoft environment, risk ownership, architecture, audit pressure, third-party exposure and the right starting point.</p>
@@ -278,7 +309,7 @@
     <div class="footer-brand"><div class="footer-brand-name">VALO<span>.</span></div><div class="footer-brand-tag">Technologies LLC</div><p>GRC, Microsoft security, vCISO and security architecture for regulated DFW organizations.</p><p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p><a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a></div>
     <div class="footer-col"><h5>Services</h5><ul><li><a href="/services/">All Services</a></li><li><a href="/services/vciso.html">Virtual CISO</a></li><li><a href="/services/compliance.html">Governance, Risk &amp; Compliance</a></li><li><a href="/services/network-security.html">Network Infrastructure &amp; Security Engineering</a></li><li><a href="/services/microsoft-security.html">Microsoft Security</a></li></ul></div>
     <div class="footer-col"><h5>Industries</h5><ul><li><a href="/industries/">All Industries</a></li><li><a href="/industries/healthcare.html">Healthcare</a></li><li><a href="/industries/financial-services.html">Financial Services</a></li><li><a href="/industries/professional-services.html">Professional Services</a></li><li><a href="/industries/public-sector-sled.html">Public Sector &amp; SLED</a></li></ul></div>
-    <div class="footer-col"><h5>About &amp; Resources</h5><ul><li><a href="/about/">About VALO</a></li><li><a href="/about/leadership.html">Leadership</a></li><li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li><li><a href="/resources/">Sample Deliverables</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h5>About &amp; Resources</h5><ul><li><a href="/about/">About VALO</a></li><li><a href="/about/leadership.html">Leadership</a></li><li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li><li><a href="/insights/">VALO Security Brief</a></li><li><a href="/resources/">Sample Deliverables</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
   </div>
   <div class="footer-badges"><div role="list" aria-label="Certifications" class="footer-badge-group"><span class="footer-badge-label">Certifications</span><img src="/logo-isaca.png" alt="ISACA — CISM" class="footer-cert-img" role="listitem" /><img src="/logo-secux.png" alt="CompTIA SecurityX" class="footer-cert-img" role="listitem" /><img src="/logo-pentest.png" alt="CompTIA PenTest+" class="footer-cert-img" role="listitem" /><img src="/logo-cysa.png" alt="CompTIA CySA+" class="footer-cert-img" role="listitem" /><img src="/logo-pccse.png" alt="Palo Alto Networks PCCSE" class="footer-cert-img" role="listitem" /><img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" class="footer-cert-img" role="listitem" /></div><div role="list" aria-label="Technology partners" class="footer-badge-group"><span class="footer-badge-label">Technology partners</span><img src="/logo-pan-reseller.png" alt="Palo Alto Networks — Registered Reseller" class="footer-cert-img" role="listitem" /><img src="/logo-pcisco.png" alt="Cisco Partner" class="footer-cert-img" role="listitem" /></div></div>
   <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
@@ -291,6 +322,9 @@
   const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');if(hamburger&&navLinks){hamburger.addEventListener('click',function(){const open=navLinks.classList.toggle('open');hamburger.setAttribute('aria-expanded',open);});document.addEventListener('click',function(e){if(nav&&!nav.contains(e.target)){navLinks.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}});}
   const words=document.querySelectorAll('.industry-word');if(words.length){let current=0;setInterval(function(){words[current].classList.remove('active');current=(current+1)%words.length;words[current].classList.add('active');},2400);}
   const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver' in window){const observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');observer.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){observer.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}
+
+  const briefForm=document.getElementById('home-brief-form'),briefBtn=document.getElementById('home-brief-submit'),briefStatus=document.getElementById('home-brief-status');
+  if(briefForm){briefForm.addEventListener('submit',function(e){e.preventDefault();briefStatus.style.display='none';briefBtn.disabled=true;briefBtn.textContent='Subscribing...';const data=new FormData(briefForm);fetch('https://formspree.io/f/mgodoabn',{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('Subscription failed');briefStatus.textContent='You’re subscribed. The next VALO Security Brief arrives every other Wednesday.';briefStatus.style.color='var(--ink)';briefStatus.style.display='block';briefForm.reset();}).catch(function(){briefStatus.textContent='We could not complete the signup. Please email info@valotechnologiellc.com with “Security Brief” in the subject.';briefStatus.style.color='#ff8a65';briefStatus.style.display='block';}).finally(function(){briefBtn.disabled=false;briefBtn.textContent='Subscribe';});});}
 })();
 </script>
 </body>
