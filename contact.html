@@ -127,10 +127,11 @@
               <label for="contact-service">Service of Interest <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
               <select id="contact-service" name="service">
                 <option value="" selected>Not sure yet</option>
-                <option value="Microsoft 365 Security Posture Review">Microsoft 365 Security Posture Review</option>
-                <option value="Network Assessment">Network Assessment</option>
-                <option value="Virtual CISO (vCISO)">Virtual CISO (vCISO)</option>
+                <option value="HIPAA Security Risk Analysis">HIPAA Security Risk Analysis</option>
                 <option value="Cybersecurity Risk & Compliance Assessment">Cybersecurity Risk &amp; Compliance Assessment</option>
+                <option value="Microsoft 365 Security Posture Review">Microsoft 365 Security Posture Review</option>
+                <option value="Network & Security Assessment">Network &amp; Security Assessment</option>
+                <option value="Fractional vCISO">Fractional vCISO</option>
                 <option value="Compliance & Risk">Other Governance, Risk &amp; Compliance Work</option>
                 <option value="Network Infrastructure & Security Engineering">Network Infrastructure &amp; Security Engineering</option>
                 <option value="Multiple Services">Multiple Services</option>
@@ -197,12 +198,13 @@
   var svcMap = {
     'microsoft-security': 'Microsoft 365 Security Posture Review',
     'm365-security': 'Microsoft 365 Security Posture Review',
-    'network-assessment': 'Network Assessment',
+    'hipaa-risk-analysis': 'HIPAA Security Risk Analysis',
+    'risk-assessment': 'Cybersecurity Risk & Compliance Assessment',
+    'network-assessment': 'Network & Security Assessment',
     'network': 'Network Infrastructure & Security Engineering',
     'network-security': 'Network Infrastructure & Security Engineering',
-    'vciso': 'Virtual CISO (vCISO)',
-    'compliance': 'Compliance & Risk',
-    'risk-assessment': 'Cybersecurity Risk & Compliance Assessment'
+    'vciso': 'Fractional vCISO',
+    'compliance': 'Compliance & Risk'
   };
   if (serviceSelect && svcMap[svcParam]) serviceSelect.value = svcMap[svcParam];
 
