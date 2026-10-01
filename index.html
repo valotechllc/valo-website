@@ -282,15 +282,8 @@
         <div style="background:var(--bg-card);border:1px solid var(--line-strong);padding:28px;">
           <div style="font-family:var(--display);font-size:25px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);margin-bottom:10px;">Subscribe to the Brief</div>
           <p style="color:var(--ink-dim);font-size:14px;line-height:1.7;margin:0 0 18px;">One focused briefing every other Wednesday. No generic vendor spam.</p>
-          <form id="home-brief-form" style="display:grid;gap:10px;">
-            <input type="hidden" name="_subject" value="VALO Security Brief subscription" />
-            <input type="hidden" name="submission_type" value="Newsletter subscription" />
-            <input type="hidden" name="source" value="Homepage" />
-            <input type="email" name="email" required autocomplete="email" placeholder="you@organization.com" aria-label="Email address" style="width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--line-strong);color:var(--ink);font:inherit;" />
-            <button type="submit" class="btn" id="home-brief-submit" style="border:0;cursor:pointer;">Subscribe</button>
-          </form>
+          <iframe title="VALO Security Brief Signup" width="540" height="305" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="auto" allowfullscreen style="display:block;margin-left:auto;margin-right:auto;max-width:100%;border:0;"></iframe>
           <div style="font-size:11px;color:var(--ink-mute);line-height:1.6;margin-top:10px;">By subscribing, you agree to receive the VALO Security Brief by email. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a>.</div>
-          <div id="home-brief-status" role="status" aria-live="polite" style="display:none;font-size:13px;margin-top:12px;"></div>
         </div>
       </div>
       <style>@media(max-width:820px){#security-brief .reveal{grid-template-columns:1fr!important;}}</style>
@@ -323,8 +316,6 @@
   const words=document.querySelectorAll('.industry-word');if(words.length){let current=0;setInterval(function(){words[current].classList.remove('active');current=(current+1)%words.length;words[current].classList.add('active');},2400);}
   const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver' in window){const observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');observer.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){observer.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}
 
-  const briefForm=document.getElementById('home-brief-form'),briefBtn=document.getElementById('home-brief-submit'),briefStatus=document.getElementById('home-brief-status');
-  if(briefForm){briefForm.addEventListener('submit',function(e){e.preventDefault();briefStatus.style.display='none';briefBtn.disabled=true;briefBtn.textContent='Subscribing...';const data=new FormData(briefForm);fetch('https://formspree.io/f/mgodoabn',{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('Subscription failed');briefStatus.textContent='You’re subscribed. The next VALO Security Brief arrives every other Wednesday.';briefStatus.style.color='var(--ink)';briefStatus.style.display='block';briefForm.reset();}).catch(function(){briefStatus.textContent='We could not complete the signup. Please email info@valotechnologiellc.com with “Security Brief” in the subject.';briefStatus.style.color='#ff8a65';briefStatus.style.display='block';}).finally(function(){briefBtn.disabled=false;briefBtn.textContent='Subscribe';});});}
 })();
 </script>
 </body>

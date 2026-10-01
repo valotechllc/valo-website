@@ -17,17 +17,12 @@
 <link rel="stylesheet" href="/styles.css" />
 <style>
 .brief-signup{max-width:920px;background:var(--bg-card);border:1px solid var(--line-strong);padding:30px;margin:0 0 46px}
-.brief-form{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:20px}
-.brief-form input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--line-strong);color:var(--ink);font:inherit}
-.brief-form button{border:0;cursor:pointer}
 .brief-note{font-size:12px;color:var(--ink-mute);line-height:1.6;margin-top:10px}
-.brief-status{font-size:14px;margin-top:12px;display:none}
 .issue-card{display:block;background:var(--bg-card);border:1px solid var(--line);padding:30px;text-decoration:none;color:inherit;transition:.2s ease}
 .issue-card:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .issue-meta{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
 .issue-title{font-family:var(--display);font-size:30px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
 .issue-desc{color:var(--ink-dim);font-size:15px;line-height:1.7}
-@media(max-width:700px){.brief-form{grid-template-columns:1fr}.brief-form button{width:100%}}
 </style>
 </head>
 <body>
@@ -60,15 +55,8 @@
       <div class="eyebrow">Subscribe</div>
       <h2 class="section-title" style="margin-top:8px;">Security guidance you can actually use.</h2>
       <p class="section-sub">One focused briefing every other Wednesday. No generic vendor spam—just practical security, governance, and engineering guidance tied to decisions organizations actually have to make.</p>
-      <form class="brief-form" id="brief-signup-form">
-        <input type="hidden" name="_subject" value="VALO Security Brief subscription" />
-        <input type="hidden" name="submission_type" value="Newsletter subscription" />
-        <input type="hidden" name="source" value="Insights page" />
-        <input type="email" name="email" id="brief-email" required autocomplete="email" placeholder="you@organization.com" aria-label="Email address" />
-        <button type="submit" class="btn" id="brief-submit">Subscribe to the Brief</button>
-      </form>
+      <iframe title="VALO Security Brief Signup" width="540" height="305" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="auto" allowfullscreen style="display:block;margin-left:auto;margin-right:auto;max-width:100%;border:0;"></iframe>
       <div class="brief-note">By subscribing, you agree to receive the VALO Security Brief by email. You can unsubscribe at any time by replying to a newsletter or emailing <a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a>. See our <a href="/privacy.html">Privacy Policy</a>.</div>
-      <div class="brief-status" id="brief-status" role="status" aria-live="polite"></div>
     </div>
 
     <div class="reveal" style="max-width:860px;margin-bottom:28px;">
@@ -109,8 +97,6 @@
   const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
   const hb=document.getElementById('hamburger'),nl=document.getElementById('navLinks');if(hb&&nl){hb.addEventListener('click',function(){const o=nl.classList.toggle('open');hb.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!nav.contains(e.target)){nl.classList.remove('open');hb.setAttribute('aria-expanded','false');}});}
   const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}
-  const form=document.getElementById('brief-signup-form'),button=document.getElementById('brief-submit'),status=document.getElementById('brief-status');
-  if(form){form.addEventListener('submit',function(e){e.preventDefault();status.style.display='none';button.disabled=true;button.textContent='Subscribing...';const data=new FormData(form);fetch('https://formspree.io/f/mgodoabn',{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('Subscription failed');status.textContent='You’re subscribed. Watch for the next VALO Security Brief every other Wednesday.';status.style.color='var(--ink)';status.style.display='block';form.reset();}).catch(function(){status.textContent='We could not complete the signup. Please email info@valotechnologiellc.com with “Security Brief” in the subject.';status.style.color='#ff8a65';status.style.display='block';}).finally(function(){button.disabled=false;button.textContent='Subscribe to the Brief';});});}
 })();
 </script>
 </body>
