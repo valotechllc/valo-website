@@ -1636,3 +1636,25 @@ footer {
 .experience-detail { border:1px solid var(--line-strong); background:var(--bg-card); font-family:var(--mono); font-size:11px; color:var(--ink-dim); padding:8px 12px; line-height:1.5; }
 .experience-credential-line { margin:25px 0 0; font-size:14px; color:var(--ink-dim); }
 @media (max-width:640px) { .experience-disclosure { padding:18px; } .experience-detail { width:100%; } }
+
+/* Phase 3: substantiated founder experience and visible professional credentials */
+.hero-founder-credentials { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:23px 0 15px; font-family:var(--mono); font-size:12px; line-height:1.8; color:var(--ink-dim); }
+.hero-credentials-label { text-transform:uppercase; letter-spacing:.9px; color:var(--ink-mute); margin-right:6px; font-size:10px; }
+.hero-founder-credentials a { color:var(--ink); text-decoration:none; border-bottom:1px solid var(--blue); }
+.hero-founder-credentials a:hover,.hero-founder-credentials a:focus-visible { color:var(--blue-glow); }
+.proof-stats { padding:38px 0 30px; }
+.proof-stats-heading { font-size:11px; margin:0 0 12px; color:var(--ink-dim); }
+.proof-stats .stats-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.proof-stats .stat-item { padding:17px 25px; }
+.proof-stats .stat-label { line-height:1.6; letter-spacing:.35px; text-transform:none; }
+.proof-stats-note { margin:16px 0 0; text-align:center; color:var(--ink-dim); font-size:12px; line-height:1.8; }
+.proof-stats-note a,.founder-credentials a { color:var(--blue-glow); text-underline-offset:3px; }
+.founder-credentials { margin:0 0 25px; color:var(--ink-dim); font-size:14px; line-height:1.75; }
+.founder-credentials strong { color:var(--ink); font-weight:700; }
+@media(max-width:768px) {
+  .proof-stats .stats-grid { grid-template-columns:1fr; }
+  .proof-stats .stat-item { border-right:0!important; border-top:1px solid var(--line); }
+  .proof-stats .stat-item:first-child { border-top:0; }
+  .proof-stats .stat-item:nth-child(3) { border-right:0!important; }
+  .hero-founder-credentials { gap:7px; }
+}
