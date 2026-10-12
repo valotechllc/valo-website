@@ -1608,3 +1608,14 @@ footer {
   .partner-card-content { padding:26px 22px; }
   .gov-id-card { padding:20px; gap:18px; }
 }
+
+/* Phase 1: reseller sourcing and quote CTA; keep manufacturer badges unchanged */
+.partner-resale-actions { display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-top:28px; padding:22px 26px; border:1px solid var(--line-strong); background:var(--bg-card); }
+.partner-distributor { flex:1 1 280px; }
+.partner-distributor-label { display:block; font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--blue); text-transform:uppercase; margin-bottom:8px; }
+.partner-distributor p { margin:0; font-size:14px; line-height:1.65; color:var(--ink-dim); }
+.partner-distributor strong { color:var(--ink); }
+.partner-resale-actions .btn { white-space:normal; text-align:center; }
+.product-quote-hint { margin:9px 0 0; padding:12px 14px; background:var(--bg-card); border-left:3px solid var(--blue); color:var(--ink-dim); line-height:1.6; font-size:13px; }
+.product-quote-hint[hidden] { display:none; }
+@media (max-width:720px) { .partner-resale-actions { padding:20px; } .partner-resale-actions .btn { width:100%; } }
