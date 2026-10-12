@@ -48,8 +48,8 @@
   <div class="page-hero">
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span>Contact</div>
-      <h1>Discuss Your Security Project</h1>
-      <p class="page-hero-sub">Tell us what you need help with. We’ll review your request and follow up about project fit, scope, and next steps.</p>
+      <h1>Discuss a Project or Request a Product Quote</h1>
+      <p class="page-hero-sub">Tell us about your cybersecurity project or Cisco and Palo Alto Networks product requirements. We’ll review your inquiry and follow up about scope and next steps.</p>
     </div>
   </div>
 
@@ -58,11 +58,12 @@
       <div class="contact-grid">
         <div class="contact-info reveal">
           <h3>What to expect</h3>
-          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 0 0 16px;">Share a brief description of your network security, firewall, or assessment needs. We work with:</p>
+          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 0 0 16px;">Share your engineering, security assessment, or technology procurement needs. We work with:</p>
           <ul>
             <li>Managed service providers needing white-label Cisco or Palo Alto engineering</li>
             <li>Small and midsize businesses requiring additional cybersecurity expertise</li>
             <li>State, local, and education organizations planning security improvements</li>
+            <li>Organizations requesting quotes for eligible Cisco or Palo Alto Networks products and licensing</li>
           </ul>
           <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 16px 0;">We'll follow up to discuss the environment, project scope, timeline, and whether VALO is a fit.</p>
 
@@ -114,10 +115,11 @@
               </select>
             </div>
             <div class="form-row">
-              <label for="contact-service">Service of Interest <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
+              <label for="contact-service">Service or Product of Interest <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
               <select id="contact-service" name="service">
                 <option value="" selected>Not sure yet</option>
                 <option value="MSP White-Label Engineering">MSP White-Label Engineering</option>
+                <option value="Cisco or Palo Alto Networks Product Quote">Cisco or Palo Alto Networks Product Quote</option>
                 <option value="Firewall Migration &amp; Implementation">Firewall Migration &amp; Implementation</option>
                 <option value="Firewall Assessment &amp; Optimization">Firewall Assessment &amp; Optimization</option>
                 <option value="Network &amp; Security Assessment">Network &amp; Security Assessment</option>
@@ -126,10 +128,11 @@
                 <option value="Other Security Consulting">Other Security Consulting</option>
               </select>
               <input type="hidden" id="contact-service-detail" name="service_detail" value="" />
+              <p id="product-quote-hint" class="product-quote-hint" hidden>For a quote, include the manufacturer, model or SKU (if known), quantity, licensing/subscription term, and requested timeframe. Please do not include credentials or sensitive information.</p>
             </div>
             <div class="form-row">
-              <label for="contact-message">What's prompting the inquiry? <span aria-hidden="true">*</span></label>
-              <textarea id="contact-message" name="message" required placeholder="Briefly describe your firewall, network, or assessment project, and any timeline. Please do not include passwords or sensitive data."></textarea>
+              <label for="contact-message">Tell us about your project or product requirements <span aria-hidden="true">*</span></label>
+              <textarea id="contact-message" name="message" required placeholder="Describe your project or products you want quoted, including model, quantity, and timeframe when relevant. Please do not include passwords or sensitive data."></textarea>
             </div>
             <div class="form-row">
               <label for="contact-referral">How did you hear about us? <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
@@ -218,6 +221,7 @@
   var svcMap = {
     'msp': ['MSP White-Label Engineering', 'MSP White-Label Engineering'],
     'msp-engineering': ['MSP White-Label Engineering', 'MSP White-Label Engineering'],
+    'product-quote': ['Cisco or Palo Alto Networks Product Quote', 'Technology resale product quote request'],
     'firewall-migration': ['Firewall Migration & Implementation', 'Firewall Migration & Implementation'],
     'firewall-assessment': ['Firewall Assessment & Optimization', 'Firewall Assessment & Optimization'],
     'microsoft-security': ['Other Security Consulting', 'Microsoft 365 Security Posture Review'],
@@ -233,6 +237,20 @@
   if (serviceSelect && svcMap[svcParam]) {
     serviceSelect.value = svcMap[svcParam][0];
     if (serviceDetail) serviceDetail.value = svcMap[svcParam][1];
+  }
+  var quoteHint = document.getElementById('product-quote-hint');
+  function updateQuoteHint() {
+    if (!quoteHint || !serviceSelect) return;
+    var quoteSelected = serviceSelect.value === 'Cisco or Palo Alto Networks Product Quote';
+    quoteHint.hidden = !quoteSelected;
+    if (serviceDetail) {
+      if (quoteSelected) serviceDetail.value = 'Technology resale product quote request';
+      else if (serviceDetail.value === 'Technology resale product quote request') serviceDetail.value = '';
+    }
+  }
+  if (serviceSelect) {
+    serviceSelect.addEventListener('change', updateQuoteHint);
+    updateQuoteHint();
   }
 
   if (form) {
