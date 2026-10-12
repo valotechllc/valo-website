@@ -1580,3 +1580,31 @@ footer {
     width: 100%;
   }
 }
+
+/* VALO Technology Partner Showcase — scoped addition to the existing design */
+.partner-showcase { background: var(--bg); }
+.partner-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; margin-top:32px; }
+.partner-card { display:grid; grid-template-columns:minmax(150px,38%) minmax(0,1fr); background:var(--bg-card); border:1px solid var(--line-strong); overflow:hidden; min-width:0; }
+.partner-logo-panel { display:flex; align-items:center; justify-content:center; background:#fff; padding:28px 24px; min-height:225px; }
+.partner-logo-panel img { display:block; width:100%; max-width:220px; max-height:145px; object-fit:contain; }
+.partner-card-content { padding:30px 26px; min-width:0; }
+.partner-kicker { display:inline-block; border:1px solid var(--line-strong); padding:5px 9px; margin-bottom:16px; font-family:var(--mono); color:var(--blue); font-size:10px; letter-spacing:1.15px; text-transform:uppercase; }
+.partner-name { font-family:var(--display); font-size:clamp(25px,2.4vw,33px); letter-spacing:.5px; line-height:1.1; color:var(--ink); margin:0 0 14px; }
+.partner-card-content p { font-size:14px; line-height:1.75; color:var(--ink-dim); margin:0; }
+.partner-note { font-size:12px; color:var(--ink-mute); line-height:1.7; margin-top:20px; }
+.partner-note a { color:var(--blue); text-decoration:underline; text-underline-offset:3px; }
+.gov-id-card { display:flex; flex-wrap:wrap; gap:22px; margin:18px 0 0; padding:22px 26px; background:var(--bg-card); border:1px solid var(--line-strong); }
+.gov-id-card > div { display:flex; flex-direction:column; gap:6px; flex:1 1 210px; }
+.gov-id-label { color:var(--ink-mute); font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:1px; }
+.gov-id-card strong { color:var(--ink); font-family:var(--mono); font-size:18px; letter-spacing:.8px; overflow-wrap:anywhere; }
+@media (max-width:1100px) {
+  .partner-grid { grid-template-columns:1fr; }
+  .partner-card { grid-template-columns: minmax(180px,35%) minmax(0,1fr); }
+}
+@media (max-width:640px) {
+  .partner-card { grid-template-columns:1fr; }
+  .partner-logo-panel { min-height:180px; }
+  .partner-logo-panel img { max-height:110px; }
+  .partner-card-content { padding:26px 22px; }
+  .gov-id-card { padding:20px; gap:18px; }
+}
