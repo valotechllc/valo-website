@@ -48,8 +48,8 @@
   <div class="page-hero">
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span>Contact</div>
-      <h1>Schedule a 30-Minute Conversation</h1>
-      <p class="page-hero-sub">No sales pitch. We'll discuss your environment, where the gaps likely sit, and whether VALO is the right fit. If we're not, we'll tell you who is.</p>
+      <h1>Discuss Your Security Project</h1>
+      <p class="page-hero-sub">Tell us what you need help with. We’ll review your request and follow up about project fit, scope, and next steps.</p>
     </div>
   </div>
 
@@ -57,24 +57,14 @@
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info reveal">
-          <h3>How the conversation works</h3>
-          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 0 0 16px;">A 30-minute video or phone call. We'll ask about:</p>
+          <h3>What to expect</h3>
+          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 0 0 16px;">Share a brief description of your network security, firewall, or assessment needs. We work with:</p>
           <ul>
-            <li>The regulatory frameworks that apply to your organization</li>
-            <li>Your current IT support structure and any existing security resources</li>
-            <li>What's prompting the conversation — an audit, a client questionnaire, a recent incident, a Microsoft 365 security concern, a regulatory inquiry, or proactive program development</li>
-            <li>Where you think your biggest exposure is</li>
+            <li>Managed service providers needing white-label Cisco or Palo Alto engineering</li>
+            <li>Small and midsize businesses requiring additional cybersecurity expertise</li>
+            <li>State, local, and education organizations planning security improvements</li>
           </ul>
-
-          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 16px 0;">We'll share:</p>
-          <ul>
-            <li>What we typically see for organizations like yours</li>
-            <li>Whether VALO is a fit for your situation</li>
-            <li>If we're not the right fit, who we'd recommend instead</li>
-            <li>An honest read on what an engagement would look like, in scope and approximate cost</li>
-          </ul>
-
-          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 16px 0 0;">You'll leave with a clearer picture of your situation regardless of whether we work together.</p>
+          <p style="color: var(--ink-dim); font-size: 15px; line-height: 1.7; margin: 16px 0;">We'll follow up to discuss the environment, project scope, timeline, and whether VALO is a fit.</p>
 
           <h3>Direct contact</h3>
           <div class="contact-line">
@@ -114,13 +104,12 @@
               <input type="tel" id="contact-phone" name="phone" autocomplete="tel" placeholder="(555) 000-0000" />
             </div>
             <div class="form-row">
-              <label for="contact-industry">Industry <span aria-hidden="true">*</span></label>
+              <label for="contact-industry">Organization Type <span aria-hidden="true">*</span></label>
               <select id="contact-industry" name="industry" required>
-                <option value="" disabled selected>Select your industry</option>
-                <option value="Healthcare">Healthcare</option>
-                <option value="Financial Services">Financial Services</option>
-                <option value="Professional Services">Professional Services</option>
-                <option value="Public Sector & SLED">Public Sector &amp; SLED</option>
+                <option value="" disabled selected>Select organization type</option>
+                <option value="Managed Service Provider (MSP)">Managed Service Provider (MSP)</option>
+                <option value="Small or Midsize Business (SMB)">Small or Midsize Business (SMB)</option>
+                <option value="State, Local &amp; Education (SLED)">State, Local &amp; Education (SLED)</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -128,19 +117,19 @@
               <label for="contact-service">Service of Interest <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
               <select id="contact-service" name="service">
                 <option value="" selected>Not sure yet</option>
-                <option value="HIPAA Security Risk Analysis">HIPAA Security Risk Analysis</option>
-                <option value="Cybersecurity Risk & Compliance Assessment">Cybersecurity Risk &amp; Compliance Assessment</option>
-                <option value="Microsoft 365 Security Posture Review">Microsoft 365 Security Posture Review</option>
-                <option value="Network & Security Assessment">Network &amp; Security Assessment</option>
-                <option value="Fractional vCISO">Fractional vCISO</option>
-                <option value="Compliance & Risk">Other Governance, Risk &amp; Compliance Work</option>
-                <option value="Network Infrastructure & Security Engineering">Network Infrastructure &amp; Security Engineering</option>
-                <option value="Multiple Services">Multiple Services</option>
+                <option value="MSP White-Label Engineering">MSP White-Label Engineering</option>
+                <option value="Firewall Migration &amp; Implementation">Firewall Migration &amp; Implementation</option>
+                <option value="Firewall Assessment &amp; Optimization">Firewall Assessment &amp; Optimization</option>
+                <option value="Network &amp; Security Assessment">Network &amp; Security Assessment</option>
+                <option value="Network Security Engineering &amp; Segmentation">Network Security Engineering &amp; Segmentation</option>
+                <option value="Cybersecurity Risk Assessment">Cybersecurity Risk Assessment (including HIPAA)</option>
+                <option value="Other Security Consulting">Other Security Consulting</option>
               </select>
+              <input type="hidden" id="contact-service-detail" name="service_detail" value="" />
             </div>
             <div class="form-row">
               <label for="contact-message">What's prompting the inquiry? <span aria-hidden="true">*</span></label>
-              <textarea id="contact-message" name="message" required placeholder="Brief description of your situation — an audit, a questionnaire, a Microsoft 365 security concern, a recent incident, or proactive program development. The more context you share, the more useful the conversation will be."></textarea>
+              <textarea id="contact-message" name="message" required placeholder="Briefly describe your firewall, network, or assessment project, and any timeline. Please do not include passwords or sensitive data."></textarea>
             </div>
             <div class="form-row">
               <label for="contact-referral">How did you hear about us? <span style="color: var(--ink-mute); font-size: 10px;">(optional)</span></label>
@@ -161,7 +150,7 @@
       <div class="footer-brand">
         <div class="footer-brand-name">VALO<span>.</span></div>
         <div class="footer-brand-tag">Technologies LLC</div>
-        <p>Security-first consultancy serving regulated DFW organizations and public-sector/SLED clients.</p>
+        <p>Cybersecurity engineering and consulting for MSPs, SMBs, and SLED organizations.</p>
         <p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
         <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies on LinkedIn">LinkedIn</a>
       </div>
@@ -196,18 +185,27 @@
   var serviceSelect = document.getElementById('contact-service');
   var params = new URLSearchParams(window.location.search);
   var svcParam = (params.get('service') || '').toLowerCase();
+  var serviceDetail = document.getElementById('contact-service-detail');
+  // Keep existing ?service= links functional when visitors arrive from legacy service pages.
   var svcMap = {
-    'microsoft-security': 'Microsoft 365 Security Posture Review',
-    'm365-security': 'Microsoft 365 Security Posture Review',
-    'hipaa-risk-analysis': 'HIPAA Security Risk Analysis',
-    'risk-assessment': 'Cybersecurity Risk & Compliance Assessment',
-    'network-assessment': 'Network & Security Assessment',
-    'network': 'Network Infrastructure & Security Engineering',
-    'network-security': 'Network Infrastructure & Security Engineering',
-    'vciso': 'Fractional vCISO',
-    'compliance': 'Compliance & Risk'
+    'msp': ['MSP White-Label Engineering', 'MSP White-Label Engineering'],
+    'msp-engineering': ['MSP White-Label Engineering', 'MSP White-Label Engineering'],
+    'firewall-migration': ['Firewall Migration & Implementation', 'Firewall Migration & Implementation'],
+    'firewall-assessment': ['Firewall Assessment & Optimization', 'Firewall Assessment & Optimization'],
+    'microsoft-security': ['Other Security Consulting', 'Microsoft 365 Security Posture Review'],
+    'm365-security': ['Other Security Consulting', 'Microsoft 365 Security Posture Review'],
+    'hipaa-risk-analysis': ['Cybersecurity Risk Assessment', 'HIPAA Security Risk Analysis'],
+    'risk-assessment': ['Cybersecurity Risk Assessment', 'Cybersecurity Risk & Compliance Assessment'],
+    'network-assessment': ['Network & Security Assessment', 'Network & Security Assessment'],
+    'network': ['Network Security Engineering & Segmentation', 'Network Infrastructure & Security Engineering'],
+    'network-security': ['Network Security Engineering & Segmentation', 'Network Infrastructure & Security Engineering'],
+    'vciso': ['Other Security Consulting', 'Fractional vCISO'],
+    'compliance': ['Cybersecurity Risk Assessment', 'Governance, Risk & Compliance']
   };
-  if (serviceSelect && svcMap[svcParam]) serviceSelect.value = svcMap[svcParam];
+  if (serviceSelect && svcMap[svcParam]) {
+    serviceSelect.value = svcMap[svcParam][0];
+    if (serviceDetail) serviceDetail.value = svcMap[svcParam][1];
+  }
 
   if (form) {
     form.addEventListener('submit', function(e) {
