@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Firewall Rulebase Is a Risk Register Nobody Reads | VALO Security Brief</title>
+<meta name="description" content="VALO Security Brief Issue 002: five signs of firewall rulebase drift and a safe, low-disruption sequence for cleaning it up." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Your Firewall Rulebase Is a Risk Register Nobody Reads" />
+<meta property="og:description" content="Five signs of firewall rulebase drift, and how MSPs and clients can clean it up without breaking production." />
+<meta property="og:url" content="https://valotechnologiellc.com/insights/security-brief-002.html" />
+<meta property="og:image" content="https://valotechnologiellc.com/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/valo-favicon.svg?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>
+.article-wrap{max-width:840px}
+.article-meta{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.article-wrap .prose p{font-size:17px;line-height:1.85}
+.article-callout{background:var(--bg-card);border:1px solid var(--line-strong);border-left:4px solid var(--accent);padding:24px 26px;margin:32px 0}
+.question{background:var(--bg-card);border:1px solid var(--line);padding:24px;margin:16px 0}
+.question h3{font-family:var(--display);font-size:23px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
+.question p{color:var(--ink-dim);margin:0;line-height:1.75}
+ol.steps-list{padding-left:22px;color:var(--ink-dim)}ol.steps-list li{margin:0 0 14px;line-height:1.8;font-size:17px}ol.steps-list strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<canvas id="grid-bg" aria-hidden="true"></canvas>
+<nav class="topnav" id="topnav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="/services/">Services</a></li><li><a href="/industries/">Industries</a></li><li><a href="/about/">About</a></li><li><a href="/insights/" class="active">Insights</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="page-hero"><div class="container article-wrap">
+    <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/insights/">VALO Security Brief</a><span aria-hidden="true"> / </span>Issue 002</div>
+    <div class="article-meta">Issue 002 · October 14, 2026 · Network &amp; Security Engineering</div>
+    <h1>Your firewall rulebase is a risk register nobody reads</h1>
+    <p class="page-hero-sub">Every firewall rule is a decision someone made about risk. Most organizations can no longer say who made those decisions, why, or whether they still apply.</p>
+  </div></div>
+
+  <section><div class="container article-wrap">
+    <div class="prose reveal">
+      <p>In Issue 001 we talked about risk ownership in general terms. This issue gets specific about one place where unowned risk piles up quietly: the firewall rulebase.</p>
+      <p>Rulebases rarely get worse through one bad decision. They drift. A vendor needs remote access for a project. An application breaks during a migration and someone opens a broad rule "temporarily" to restore service. A server is decommissioned but its rules are not. Staff and providers change, and the context behind each rule leaves with them. After a few years, the firewall is still enforcing hundreds of decisions that nobody currently in the building can explain.</p>
+      <p>That is not a criticism of whoever manages the firewall. Day-to-day operations reward keeping things working, and removing a rule nobody understands feels riskier than leaving it. The result is predictable: the rulebase only grows.</p>
+    </div>
+
+    <div class="article-callout reveal">
+      <div class="eyebrow">Why it matters</div>
+      <p style="margin:8px 0 0;color:var(--ink-dim);line-height:1.8;">An overly permissive or forgotten rule does not show up as an outage. It shows up during an incident, when an attacker uses access that was never supposed to exist, or during an audit, insurance renewal, or customer questionnaire that asks you to prove your network access is reviewed. If you handle card data, PCI DSS v4.0 requirement 1.2.7 expects network security control configurations to be reviewed at least once every six months.</p>
+    </div>
+
+    <div class="prose reveal"><h2>Five signs your rulebase has drifted</h2></div>
+
+    <div class="question reveal"><h3>1. Broad "any" rules</h3><p>Rules that allow any source, any destination, or any service, especially between internal zones or from the internet, are the first thing an attacker benefits from and the first thing an assessor flags. Some exist for a documented reason. Many were created to make a problem go away quickly and never revisited.</p></div>
+    <div class="question reveal"><h3>2. Rules with no recent hits</h3><p>If a rule has not matched traffic in months, it may be supporting a system that no longer exists. Most enterprise firewalls track rule usage. On Palo Alto Networks firewalls, Policy Optimizer and rule hit counts make this visible; on Cisco platforms, hit counts and rule usage reporting serve the same purpose. Zero hits is not proof a rule is safe to remove, but it is a strong reason to ask.</p></div>
+    <div class="question reveal"><h3>3. Shadowed and duplicate rules</h3><p>Firewalls evaluate rules top-down. A rule placed below a broader rule that already matches the same traffic will never be used. Shadowed rules make the policy harder to read and give a false impression of how tightly traffic is controlled.</p></div>
+    <div class="question reveal"><h3>4. "Temporary" rules that became permanent</h3><p>Vendor access, migration rules, and troubleshooting exceptions are normal. Leaving them in place indefinitely is not. If a rule was meant to be temporary, it should have an expiration date and someone responsible for removing it.</p></div>
+    <div class="question reveal"><h3>5. Rules nobody can explain</h3><p>If a rule has no description, no ticket or change reference, and no named business owner, then nobody is accountable for the access it grants. This is the same ownership gap from Issue 001, expressed as configuration.</p></div>
+
+    <div class="prose reveal">
+      <h2>A safe cleanup sequence</h2>
+      <p>The fear of breaking production is legitimate. Cleanup should be phased, monitored, and reversible. A practical sequence:</p>
+      <ol class="steps-list">
+        <li><strong>Export and baseline.</strong> Take a configuration backup and export the full rulebase with hit counts. This is your rollback point and your starting evidence.</li>
+        <li><strong>Assign owners.</strong> For every rule that allows meaningful access, identify a business or technical owner. Rules with no owner go on a review list, not straight to deletion.</li>
+        <li><strong>Watch long enough.</strong> Collect usage data across a full business cycle before acting. Ninety days catches most month-end and quarter-end jobs; annual processes may need a longer look or a direct conversation with the application owner.</li>
+        <li><strong>Replace before you remove.</strong> For broad rules, build narrower replacement rules above them based on the traffic actually observed, keep logging enabled, and confirm the broad rule stops matching before you touch it.</li>
+        <li><strong>Disable first, delete later.</strong> Disable unused and replaced rules during an approved change window and leave them in place for a defined period. Re-enabling a rule takes seconds; reconstructing a deleted one under pressure does not.</li>
+        <li><strong>Document and repeat.</strong> Record what changed, why, and who approved it. Then schedule the next review so the rulebase does not drift back.</li>
+      </ol>
+
+      <h2>Who does what</h2>
+      <p>This works best as a joint effort. The client's leadership confirms which business services must keep working and approves the residual risk of anything left broad. The MSP brings knowledge of the environment, runs the change process, and owns day-to-day operation of the result. Where the rulebase is large, spans multiple firewalls, or involves a platform migration, a specialist engineer can do the analysis and replacement-rule design alongside the MSP rather than in place of it.</p>
+      <p>A useful first step needs no project at all: ask for a count of rules with zero hits in the last 90 days, and a count of rules with no description or owner. Those two numbers tell you quickly whether a deeper review is worth scheduling.</p>
+    </div>
+
+    <div class="article-callout reveal">
+      <div class="eyebrow">From the field</div>
+      <h3 style="margin:8px 0 10px;color:var(--ink);">What a phased remediation looks like in practice.</h3>
+      <p style="color:var(--ink-dim);line-height:1.75;margin:0 0 16px;">VALO's founder led a remediation of more than 150 Palo Alto firewall rules in a prior engineering role, using controlled replacement rules, application-default service settings, and traffic monitoring. The write-up covers the approach and validation steps.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="/experience/firewall-policy-remediation.html" class="btn btn-secondary">Read the project write-up &rarr;</a>
+        <a href="/resources/sample-network-security-assessment.html" class="btn btn-secondary">View a sample network security assessment &rarr;</a>
+      </div>
+    </div>
+
+    <div class="prose reveal">
+      <p><strong>VALO Security Brief</strong> is published every other Wednesday by VALO Technologies. It shares practical network security engineering, risk, and compliance guidance for MSPs and the organizations they support.</p>
+    </div>
+  </div></section>
+
+  <section class="cta-section"><div class="container"><h2>Not sure what's in your rulebase?</h2><p>VALO's firewall assessments review Cisco and Palo Alto rulebases for broad, unused, shadowed, and undocumented rules, and deliver a phased cleanup plan your MSP or internal team can act on.</p><a href="/contact.html?service=firewall-assessment" class="btn btn-lg">Discuss a firewall assessment</a></div></section>
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-name">VALO<span>.</span></div>
+      <div class="footer-brand-tag">Technologies LLC</div>
+      <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
+      <p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+      <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="/services/#msp">MSP White-Label Engineering</a></li>
+        <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
+        <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
+        <li><a href="/services/network-security.html">Network Security Engineering</a></li>
+        <li><a href="/services/compliance.html">Cybersecurity Risk Assessments</a></li>
+        <li><a href="/services/">All Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Who We Serve</h5>
+      <ul>
+        <li><a href="/industries/#msp">Managed Service Providers</a></li>
+        <li><a href="/industries/#smb">Small &amp; Midsize Businesses</a></li>
+        <li><a href="/industries/#sled">State, Local &amp; Education (SLED)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>About &amp; Resources</h5>
+      <ul>
+        <li><a href="/about/">About VALO</a></li>
+        <li><a href="/about/leadership.html">Leadership</a></li>
+        <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/insights/security-brief-001.html">VALO Security Brief</a></li>
+        <li><a href="/resources/">Sample Deliverables</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+</div></footer>
+<script>(function(){const canvas=document.getElementById('grid-bg');if(canvas){const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;draw();}function draw(){ctx.clearRect(0,0,W,H);const step=48;ctx.strokeStyle='rgba(59,130,246,0.15)';ctx.lineWidth=1;for(let x=0;x<=W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<=H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}resize();window.addEventListener('resize',resize);}const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});const hb=document.getElementById('hamburger'),nl=document.getElementById('navLinks');if(hb&&nl){hb.addEventListener('click',function(){const o=nl.classList.toggle('open');hb.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!nav.contains(e.target)){nl.classList.remove('open');hb.setAttribute('aria-expanded','false');}});}const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}})();</script>
+</body>
+</html>
