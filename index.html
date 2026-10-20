@@ -127,6 +127,13 @@ a.pill:hover{border-color:var(--navy)}
 .ind p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
 .ind .link{margin-top:auto}
 
+.ids{margin-top:24px;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 48px}
+.ids-title{margin:0;flex:1 1 100%;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);font-weight:500}
+.ids-row{display:flex;flex-wrap:wrap;gap:16px 64px}
+.ids-row > div{display:flex;flex-direction:column;gap:4px}
+.ids-label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.ids-val{font-family:var(--mono);font-size:22px;font-weight:500;letter-spacing:.04em;color:var(--navy)}
+
 /* projects */
 .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
 .proj-tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
@@ -302,6 +309,14 @@ footer a:hover{color:#fff;text-decoration:underline}
         <div class="ind"><h3>Small &amp; Midsize Businesses</h3><p>Focused firewall, network security, and assessment expertise alongside your existing IT team.</p><a href="/services/network-security.html" class="link">Explore services &rarr;</a></div>
         <div class="ind"><h3>State, Local &amp; Education</h3><p>Support for network modernization, segmentation, and security remediation in public-sector environments.</p><a href="/industries/public-sector-sled.html" class="link">Explore SLED support &rarr;</a></div>
       </div>
+      <div class="ids" aria-label="Federal entity identifiers">
+        <p class="ids-title">Federal entity identifiers</p>
+        <div class="ids-row">
+          <div><span class="ids-label">CAGE code</span><span class="ids-val">0QMV2</span></div>
+          <div><span class="ids-label">Unique Entity ID (UEI)</span><span class="ids-val">ZWY2EB1Q75C4</span></div>
+        </div>
+        <a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf" class="link">Capability statement (PDF) &rarr;</a>
+      </div>
     </div>
   </section>
 
@@ -435,7 +450,7 @@ footer a:hover{color:#fff;text-decoration:underline}
     <img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" />
   </div>
   <div class="wrap f-bottom">
-    <div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div>
+    <div>&copy; 2026 VALO Technologies LLC. All rights reserved. &middot; CAGE 0QMV2 &middot; UEI ZWY2EB1Q75C4</div>
     <div><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
   </div>
 </footer>
