@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>document.documentElement.classList.add('js');</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYGZK210KN"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -30,17 +29,164 @@
 <meta name="theme-color" content="#1a2332" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+:root{--navy:#1A2332;--navy-2:#222D3F;--navy-3:#2B3750;--ink-deep:#141B27;--cream:#F4F1EA;--sand:#EAE5DA;--white:#FFFFFF;--line:#E2DDD1;--line-2:#D5CFC1;--input:#C9C2B2;--rust:#C84B2F;--rust-text:#A83C24;--rust-light:#E07A5F;--body:#3A4352;--mute:#5A6270;--on-navy:#CFD3DA;--on-navy-2:#B8BDC6;--sans:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--navy);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto}
+a{color:var(--rust-text)}a:hover{color:var(--navy)}
+:focus-visible{outline:3px solid var(--rust-light);outline-offset:2px}
+.skip-link{position:absolute;top:-48px;left:0;background:var(--rust);color:#fff;padding:10px 16px;font-weight:700;z-index:999;text-decoration:none}
+.skip-link:focus{top:0}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.eyebrow{margin:0 0 14px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--rust-text)}
+.on-navy .eyebrow{color:var(--rust-light)}
+.h2{margin:0;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.015em;font-weight:700}
+.lead{font-size:17px;line-height:1.6;color:var(--body)}
+.link{font-weight:600;font-size:15px;text-decoration:none;display:inline-block;padding:12px 0}
+.btn{display:inline-block;background:var(--rust);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:15px 24px;border-radius:6px;border:0;cursor:pointer;font-family:inherit}
+.btn:hover{background:#B4422A;color:#fff}
+.btn-ghost{display:inline-block;color:var(--cream);text-decoration:none;font-weight:600;font-size:16px;padding:14px 24px;border-radius:6px;border:1px solid rgba(244,241,234,.4)}
+.btn-ghost:hover{color:#fff;border-color:#fff}
+.section{padding-top:104px;padding-bottom:104px}
+
+/* nav */
+.topnav{background:var(--navy);border-bottom:1px solid rgba(244,241,234,.12);position:sticky;top:0;z-index:50}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center}
+.brand img{height:40px;width:auto;display:block}
+.nav-links{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:28px}
+.nav-links a{color:#E3E0D8;text-decoration:none;font-size:15px;display:inline-block;padding:12px 0}
+.nav-links a:hover{color:#fff}
+.nav-links a.nav-cta{background:var(--rust);color:#fff;font-weight:600;padding:12px 20px;border-radius:6px}
+.nav-links a.nav-cta:hover{background:#B4422A}
+.hamburger{display:none;background:none;border:0;color:var(--cream);width:44px;height:44px;padding:8px;cursor:pointer}
+@media (max-width:900px){
+  .hamburger{display:block}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 20px;border-bottom:1px solid rgba(244,241,234,.12)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:14px 0}
+  .nav-links a.nav-cta{text-align:center;margin-top:8px}
+}
+
+/* hero */
+.hero{background:var(--navy);color:var(--cream)}
+.hero-inner{padding-top:88px;padding-bottom:96px;display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.hero-copy{flex:1 1 600px;min-width:0}
+.hero h1{margin:0;font-size:clamp(38px,5vw,62px);line-height:1.05;font-weight:700;letter-spacing:-.02em}
+.hero-lead{margin:28px 0 0;font-size:19px;line-height:1.6;color:var(--on-navy);max-width:640px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.stats{flex:1 1 300px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(244,241,234,.14);border:1px solid rgba(244,241,234,.14);border-radius:12px;overflow:hidden}
+.stat{background:var(--navy-2);padding:28px 24px}
+.stat.wide{grid-column:1 / -1}
+.stat-num{margin:0;font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.stat-label{margin:6px 0 0;font-size:14px;line-height:1.45;color:var(--on-navy)}
+.stats-note{grid-column:1 / -1;background:var(--navy-2);padding:14px 24px;font-size:13px;color:var(--on-navy-2);margin:0}
+.stats-note a{color:var(--rust-light)}
+
+/* credential strip */
+.strip{background:var(--white);border-bottom:1px solid var(--line)}
+.strip-inner{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px 40px}
+.strip-group{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.strip-label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-right:6px}
+.pill{font-size:14px;font-weight:600;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;color:var(--navy);text-decoration:none}
+a.pill:hover{border-color:var(--navy)}
+.strip-partners{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;font-size:14px;color:var(--body)}
+
+/* services */
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:52px}
+.sec-head > div{flex:1 1 520px;min-width:0}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:36px 32px;display:flex;flex-direction:column;gap:18px}
+.card h3{margin:0;font-size:23px;font-weight:700;line-height:1.25}
+.card p{margin:0;font-size:16px;line-height:1.6;color:var(--body)}
+.card ul{margin:0;padding:0 0 0 18px;font-size:15px;line-height:1.75}
+.card .link{margin-top:auto}
+.card.dark{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+.card.dark p{color:var(--on-navy)}
+.card.dark .link{color:var(--rust-light)}
+.card.dark .link:hover{color:#fff}
+.icon{width:48px;height:48px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center}
+.card.dark .icon{background:var(--navy-3)}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rust-light)}
+.procure{margin-top:24px;background:var(--sand);border-radius:12px;padding:32px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center}
+.procure-logos{display:flex;gap:16px;align-items:center;flex:0 0 auto}
+.procure-logos img{height:64px;width:auto;background:#fff;border-radius:8px;padding:6px}
+.procure-copy{flex:1 1 480px;min-width:0}
+.procure-copy h3{margin:0 0 8px;font-size:20px;font-weight:700}
+.procure-copy p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
+.procure-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:8px}
+
+/* industries */
+.sand{background:var(--sand)}
+.ind{background:var(--cream);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:12px}
+.ind h3{margin:0;font-size:21px;font-weight:700}
+.ind p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
+.ind .link{margin-top:auto}
+
+/* projects */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.proj-tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));border-top:2px solid var(--navy)}
+.steps li{padding:28px 28px 8px 0}
+.step-num{font-family:var(--mono);font-size:14px;color:var(--rust-text);font-weight:500}
+.steps h3{margin:12px 0 10px;font-size:21px;font-weight:700}
+.steps p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
+
+/* founder */
+.navy{background:var(--navy);color:var(--cream)}
+.founder{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.founder-photo{flex:0 1 320px;min-width:220px}
+.founder-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;display:block}
+.founder-copy{flex:1 1 520px;min-width:0}
+.founder-role{margin:8px 0 0;font-size:17px;color:var(--on-navy-2)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(244,241,234,.15)}
+.why h3{margin:0 0 8px;font-size:18px;font-weight:700}
+.why p{margin:0;font-size:15px;line-height:1.55;color:var(--on-navy)}
+.founder-links{display:flex;flex-wrap:wrap;gap:0 28px;margin-top:28px}
+.founder-links a{color:var(--rust-light)}
+.founder-links a:hover{color:#fff}
+
+/* brief */
+.brief{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:48px;align-items:start;border-top:2px solid var(--navy);padding-top:40px}
+.brief-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px}
+.brief-card iframe{display:block;width:100%;max-width:540px;height:720px;overflow:hidden;margin:0 auto;border:0}
+.fine{font-size:12px;color:var(--mute);line-height:1.6;margin-top:10px}
+@media (max-width:820px){.brief{grid-template-columns:1fr}}
+@media (max-width:600px){.brief-card iframe{height:860px}}
+@media (max-width:380px){.brief-card iframe{height:980px}}
+
+/* cta */
+.cta{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(32px,5vw,64px);display:flex;flex-wrap:wrap;gap:32px 48px;align-items:center;justify-content:space-between}
+.cta > div{flex:1 1 480px;min-width:0}
+.cta p{margin:16px 0 0}
+
+/* footer */
+footer{background:var(--ink-deep);color:var(--on-navy-2);font-size:14px}
+footer a{color:var(--on-navy-2);text-decoration:none}
+footer a:hover{color:#fff;text-decoration:underline}
+.f-grid{padding-top:56px;padding-bottom:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
+.f-grid h5{margin:0 0 12px;color:var(--cream);font-size:14px;font-weight:600}
+.f-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.f-brand{color:var(--cream);font-weight:700;letter-spacing:.14em;font-size:18px}
+.f-badges{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding-top:20px;padding-bottom:20px;border-top:1px solid rgba(244,241,234,.1)}
+.f-badges img{height:44px;width:auto;background:#fff;border-radius:6px;padding:4px}
+.f-bottom{padding-top:20px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:13px;border-top:1px solid rgba(244,241,234,.1)}
+.f-bottom div:last-child{display:flex;gap:20px}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
-<canvas id="grid-bg" aria-hidden="true"></canvas>
 
-<nav class="topnav" id="topnav" role="navigation" aria-label="Main navigation">
-  <div class="container nav-inner">
-    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" /></a>
-    <ul class="nav-links" id="navLinks" role="list">
+<nav class="topnav" id="topnav" aria-label="Main navigation">
+  <div class="wrap nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" /></a>
+    <ul class="nav-links" id="navLinks">
       <li><a href="/services/">Services</a></li>
       <li><a href="/industries/">Industries</a></li>
       <li><a href="/about/">About</a></li>
@@ -55,228 +201,200 @@
 </nav>
 
 <main id="main-content">
-  <section class="hero">
-    <div class="container">
-      <div class="hero-tag"><span class="dot" aria-hidden="true"></span>Network Security Engineering &middot; Cisco &middot; Palo Alto Networks</div>
-      <h1>Specialized network security expertise, when you need it.</h1>
-      <p class="hero-lead">VALO Technologies provides hands-on firewall and network security engineering for managed service providers (MSPs), small and midsize businesses (SMBs), and state, local, and education (SLED) organizations. We help secure, optimize, and modernize networks without the overhead of building a dedicated security engineering team.</p>
-      <div class="hero-ctas">
-        <a href="/contact.html" class="btn btn-lg">Discuss a project</a>
-        <a href="#start-here" class="btn-secondary">Explore our services</a>
-      </div>
-      <p class="hero-founder-credentials" aria-label="Professional certifications held by VALO's founder">
-        <span class="hero-credentials-label">Founder credentials</span>
-        <a href="/about/credentials.html">CISM</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="/about/credentials.html">CCNP Enterprise</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="/about/credentials.html">PCCSE</a>
-      </p>
-      <div class="trust-strip" aria-label="Technology partnerships">
-        <span class="trust-label">Registered technology partners</span>
-        <span class="trust-badge">Cisco</span>
-        <span class="trust-badge">Palo Alto Networks</span>
-        <span class="trust-frameworks">Consulting-led. Vendor-neutral assessments when appropriate.</span>
-      </div>
-    </div>
-  </section>
 
-  <section class="stats-row proof-stats" aria-labelledby="founder-proof-title">
-    <div class="container">
-      <div id="founder-proof-title" class="eyebrow proof-stats-heading">Founder experience</div>
-      <div class="stats-grid">
-        <div class="stat-item reveal">
-          <span class="stat-number">9+</span>
-          <span class="stat-label">Years of network security and infrastructure engineering experience</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-number">150+</span>
-          <span class="stat-label">Palo Alto firewall rules remediated in a phased policy cleanup</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-number">3</span>
-          <span class="stat-label">Regulated sectors: healthcare, financial services, and government</span>
+  <section class="hero on-navy">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Cisco &amp; Palo Alto firewall and network security engineering</p>
+        <h1>Specialized network security expertise, when you need it.</h1>
+        <p class="hero-lead">Hands-on firewall and network security engineering for managed service providers (MSPs), small and midsize businesses (SMBs), and state, local, and education (SLED) organizations &mdash; without the overhead of building a dedicated security engineering team.</p>
+        <div class="hero-ctas">
+          <a href="/contact.html" class="btn">Discuss a project</a>
+          <a href="#services" class="btn-ghost">Explore our services</a>
         </div>
       </div>
-      <p class="proof-stats-note">Figures reflect the founder's experience in prior engineering roles. <a href="/experience/">See the project write-ups &rarr;</a></p>
-    </div>
-  </section>
-
-  <section id="start-here" style="background: var(--bg-elev);">
-    <div class="container">
-      <div class="reveal">
-        <div class="eyebrow">What we do</div>
-        <h2 class="section-title">Focused services. Clear outcomes.</h2>
-        <p class="section-sub">VALO leads with technical consulting and engineering. Products and licensing are recommended only when they support the customer's requirements.</p>
-      </div>
-      <div class="card-grid-3 reveal">
-        <a href="/services/#msp" class="svc-card">
-          <div class="svc-card-title">White-Label Engineering for MSPs</div>
-          <div class="svc-card-desc">Specialized Cisco and Palo Alto firewall migrations, policy cleanup, troubleshooting, and network security project support for your clients.</div>
-          <span class="svc-card-link">Explore MSP services &rarr;</span>
-        </a>
-        <a href="/services/network-security.html" class="svc-card">
-          <div class="svc-card-title">Firewall &amp; Network Security Engineering</div>
-          <div class="svc-card-desc">Firewall assessment and optimization, secure network migrations, segmentation, switching, routing, and remediation.</div>
-          <span class="svc-card-link">Explore engineering services &rarr;</span>
-        </a>
-        <a href="/services/compliance.html" class="svc-card">
-          <div class="svc-card-title">Cybersecurity Risk Assessments</div>
-          <div class="svc-card-desc">Vendor-neutral security assessments with practical findings, prioritized risks, and a clear remediation roadmap.</div>
-          <span class="svc-card-link">Explore assessments &rarr;</span>
-        </a>
-      </div>
-      <div class="reveal" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="/services/" class="btn btn-secondary">View all services &rarr;</a>
-        <a href="/resources/" class="btn btn-secondary">See sample deliverables &rarr;</a>
+      <div class="stats" aria-label="Founder experience">
+        <div class="stat"><p class="stat-num">9+</p><p class="stat-label">years of network security and infrastructure engineering</p></div>
+        <div class="stat"><p class="stat-num">150+</p><p class="stat-label">Palo Alto firewall rules remediated in a phased cleanup</p></div>
+        <div class="stat wide"><p class="stat-num">3</p><p class="stat-label">regulated sectors &mdash; healthcare, financial services, and government</p></div>
+        <p class="stats-note">Figures reflect the founder's experience in prior engineering roles. <a href="/experience/">See the write-ups &rarr;</a></p>
       </div>
     </div>
   </section>
 
-
-  <!-- Technology resale: compact band. Consulting leads; procurement is secondary. -->
-  <section id="technology-partners" class="partner-band" aria-labelledby="partners-heading">
-    <div class="container">
-      <div class="partner-band-inner reveal">
-        <div class="partner-band-logos">
-          <img src="/cisco-partner-badge.svg" alt="Cisco Registered Partner" loading="lazy" width="700" height="700" />
-          <img src="/logo-pan-reseller.png" alt="Palo Alto Networks NextWave Registered Reseller" loading="lazy" width="1836" height="1735" />
-        </div>
-        <div class="partner-band-copy">
-          <div class="eyebrow">Need hardware or licensing?</div>
-          <h2 id="partners-heading" class="partner-band-title">Cisco and Palo Alto products, sourced through VALO.</h2>
-          <p>Cisco Registered Partner and Palo Alto Networks NextWave Registered Reseller, supplied through Ingram Micro. Procurement is separate from consulting, and products are recommended only when they fit the requirement.</p>
-          <p class="partner-band-links"><a href="/contact.html?service=product-quote">Request a quote &rarr;</a><a href="/resources/how-to-buy.html">How purchasing works &rarr;</a><a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf">Capability statement (PDF) &rarr;</a></p>
-        </div>
+  <section class="strip" aria-label="Credentials and partnerships">
+    <div class="wrap strip-inner">
+      <div class="strip-group">
+        <span class="strip-label">Founder credentials</span>
+        <a class="pill" href="/about/credentials.html">CCNP Enterprise</a>
+        <a class="pill" href="/about/credentials.html">PCCSE</a>
+        <a class="pill" href="/about/credentials.html">CISM</a>
+        <a class="pill" href="/about/credentials.html">SecurityX</a>
+        <a class="pill" href="/about/credentials.html">PenTest+</a>
+        <a class="pill" href="/about/credentials.html">CySA+</a>
+      </div>
+      <div class="strip-partners">
+        <span class="strip-label">Partners</span>
+        <span>Cisco Registered Partner</span>
+        <span>Palo Alto Networks NextWave Registered Reseller</span>
       </div>
     </div>
   </section>
 
-  <section style="background: var(--bg-elev);">
-    <div class="container">
-      <div class="reveal"><div class="eyebrow">Who we serve</div><h2 class="section-title">Built for teams that need specialized security help.</h2>
-        <p class="section-sub">Our focus is MSPs first, SMBs second, and SLED third.</p>
-      </div>
-      <div class="card-grid-3 reveal">
-        <a href="/services/#msp" class="svc-card"><div class="svc-card-title">Managed Service Providers</div><div class="svc-card-desc">Add Cisco and Palo Alto security engineering capacity without hiring full-time specialists. White-label work available.</div><span class="svc-card-link">Partner with VALO &rarr;</span></a>
-        <a href="/services/network-security.html" class="svc-card"><div class="svc-card-title">Small &amp; Midsize Businesses</div><div class="svc-card-desc">Access focused firewall, network security, and assessment expertise alongside your existing IT team.</div><span class="svc-card-link">Explore services &rarr;</span></a>
-        <a href="/industries/public-sector-sled.html" class="svc-card"><div class="svc-card-title">State, Local &amp; Education</div><div class="svc-card-desc">Support for network modernization, segmentation, and security remediation in public-sector environments.</div><span class="svc-card-link">Explore SLED support &rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="reveal"><div class="eyebrow">Why VALO</div><h2 class="section-title">Deep engineering. Straightforward delivery.</h2></div>
-      <div class="features-grid reveal">
-        <div class="feature-block"><div class="feature-title">Cisco &amp; Palo Alto focus</div><p class="feature-desc">Practical experience supporting firewalls, routing, switching, segmentation, and security policies in complex environments.</p></div>
-        <div class="feature-block"><div class="feature-title">Work directly with the principal</div><p class="feature-desc">Engagements are scoped and led by an experienced engineer, without unnecessary account-management layers.</p></div>
-        <div class="feature-block"><div class="feature-title">Actionable deliverables</div><p class="feature-desc">Clear findings, documented changes, and realistic remediation priorities&mdash;not generic reports.</p></div>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="founder-experience" style="background: var(--bg-elev);">
-    <div class="container">
-      <div class="reveal">
-        <div class="eyebrow">Selected professional experience</div>
-        <h2 class="section-title">Real engineering challenges. Documented technical work.</h2>
-        <p class="section-sub">Selected projects led by VALO's founder in prior engineering roles, demonstrating the Cisco and Palo Alto expertise brought to current consulting engagements.</p>
-      </div>
-      <div class="card-grid-2 reveal" style="margin-top:30px;">
-        <a href="/experience/firewall-policy-remediation.html" class="svc-card">
-          <span class="experience-project-tag">Palo Alto Networks &middot; Policy remediation</span>
-          <div class="svc-card-title">Over 150 Firewall Rules Remediated</div>
-          <div class="svc-card-desc">Led a phased firewall policy remediation effort using controlled replacement rules, application-default service settings where appropriate, traffic monitoring, and validation of CIS-based findings.</div>
-          <span class="svc-card-link">Read founder project &rarr;</span>
-        </a>
-        <a href="/experience/cisco-switch-hardening.html" class="svc-card">
-          <span class="experience-project-tag">Cisco &middot; Infrastructure hardening</span>
-          <div class="svc-card-title">Enterprise Cisco Switch Security Hardening</div>
-          <div class="svc-card-desc">Addressed Rapid7 findings by disabling unnecessary HTTP/HTTPS services, replacing SNMPv2 with SNMPv3, applying advanced management-plane ACLs, and verifying remediation with a follow-up scan.</div>
-          <span class="svc-card-link">Read founder project &rarr;</span>
-        </a>
-      </div>
-      <div class="reveal" style="margin-top:22px;"><a href="/experience/" class="btn btn-secondary">View selected founder experience &rarr;</a></div>
-    </div>
-  </section>
-
-  <section>
-    <style>
-      .founder-block { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: center; max-width: 920px; }
-      .founder-photo { width: 240px; height: 240px; border-radius: 4px; border: 1px solid var(--line-strong); display: block; }
-      .founder-name { font-family: var(--display); font-size: 36px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); margin: 8px 0 16px; }
-      .founder-role { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
-      .founder-bio { color: var(--ink-dim); font-size: 16px; line-height: 1.7; margin-bottom: 16px; }
-      @media (max-width: 720px) { .founder-block { grid-template-columns: 1fr; gap: 28px; } .founder-photo { width: 180px; height: 180px; } .founder-name { font-size: 28px; } }
-    </style>
-    <div class="container"><div class="reveal founder-block">
-      <div><img src="/me.jpg" alt="Loseini Valo Kamara, founder of VALO Technologies" class="founder-photo" /></div>
+  <section id="services" class="wrap section">
+    <div class="sec-head">
       <div>
-        <div class="eyebrow">Principal-led consultancy</div>
-        <h2 class="founder-name">Meet the founder.</h2>
-        <p class="founder-role">Loseini "Valo" Kamara &middot; Founder &amp; Principal Consultant</p>
-        <p class="founder-bio">Loseini has 9+ years of network security and infrastructure engineering experience across healthcare, financial services, and government.</p>
-        <p class="founder-bio">He holds an MS in Cybersecurity and Information Assurance and an MBA in Information Technology Management.</p>
-        <p class="founder-credentials">Selected professional certifications: <strong>CISM &middot; CCNP Enterprise &middot; PCCSE</strong>. <a href="/about/credentials.html">View all credentials &rarr;</a></p>
-        <a href="/about/leadership.html" class="btn btn-secondary">Meet the founder &rarr;</a>
+        <p class="eyebrow">Services</p>
+        <h2 class="h2">Engineering depth, delivered directly by the principal.</h2>
       </div>
-    </div></div>
-  </section>
+      <a href="/services/" class="link">View all services &rarr;</a>
+    </div>
+    <div class="grid-3">
+      <article class="card dark">
+        <div class="card-top">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4F1EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M10.5 10.5l3 3M3 21c0-3 2.5-5 5-5M21 3c0 3-2.5 5-5 5"/></svg></div>
+          <span class="tag">For MSPs</span>
+        </div>
+        <h3>White-Label Engineering for MSPs</h3>
+        <p>Specialized Cisco and Palo Alto project support for your clients &mdash; under your brand, on your timeline.</p>
+        <ul><li>Firewall migrations</li><li>Policy cleanup</li><li>Troubleshooting and escalation support</li></ul>
+        <a href="/services/#msp" class="link">Explore MSP services &rarr;</a>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4F1EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v5M15 9v5M9 14v6"/></svg></div>
+        <h3>Firewall &amp; Network Security Engineering</h3>
+        <p>Design, migration, and remediation work on the infrastructure your security depends on.</p>
+        <ul><li>Firewall assessment and optimization</li><li>Secure network migrations</li><li>Segmentation, switching, and routing</li><li>Remediation</li></ul>
+        <a href="/services/network-security.html" class="link">Explore engineering services &rarr;</a>
+      </article>
+      <article class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4F1EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+        <h3>Cybersecurity Risk Assessments</h3>
+        <p>Vendor-neutral security assessments with practical findings, prioritized risks, and a clear remediation roadmap.</p>
+        <ul><li>Vendor-neutral review</li><li>Risk-ranked findings</li><li>Remediation roadmap</li></ul>
+        <a href="/resources/" class="link">See sample deliverables &rarr;</a>
+      </article>
+    </div>
 
-  <section style="background: var(--bg-elev);">
-    <div class="container">
-      <div class="reveal"><div class="eyebrow">How we work</div><h2 class="section-title">Methodology</h2><p class="section-sub">Every engagement begins with a defined scope and ends with clear, usable results.</p></div>
-      <div class="steps-grid reveal">
-        <div class="step"><div class="step-num">01</div><div class="step-title">Assess</div><p class="step-desc">Review the network, firewall policies, operating requirements, and security risks.</p></div>
-        <div class="step"><div class="step-num">02</div><div class="step-title">Prioritize</div><p class="step-desc">Agree on priorities, scope, change windows, and success criteria.</p></div>
-        <div class="step"><div class="step-num">03</div><div class="step-title">Engineer &amp; Implement</div><p class="step-desc">Deliver agreed network security changes, migrations, or remediation work.</p></div>
-        <div class="step"><div class="step-num">04</div><div class="step-title">Validate &amp; Handover</div><p class="step-desc">Test changes, document findings, and provide a practical handover.</p></div>
+    <div class="procure" id="technology-partners">
+      <div class="procure-logos">
+        <img src="/cisco-partner-badge.svg" alt="Cisco Registered Partner" loading="lazy" width="64" height="64" />
+        <img src="/logo-pan-reseller.png" alt="Palo Alto Networks NextWave Registered Reseller" loading="lazy" width="68" height="64" />
+      </div>
+      <div class="procure-copy">
+        <h3>Need hardware or licensing?</h3>
+        <p>VALO supplies Cisco and Palo Alto Networks products through Ingram Micro. Procurement is kept separate from consulting &mdash; products are recommended only when they fit a requirement.</p>
+        <div class="procure-links">
+          <a href="/contact.html?service=product-quote" class="link">Request a quote &rarr;</a>
+          <a href="/resources/how-to-buy.html" class="link">How purchasing works &rarr;</a>
+          <a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf" class="link">Capability statement (PDF) &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="security-brief" style="background:var(--bg-elev);">
-    <div class="container">
-      <div class="reveal" style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:44px;align-items:center;">
-        <div>
-          <div class="eyebrow">VALO Security Brief</div>
-          <h2 class="section-title">Practical cybersecurity guidance. Every other Wednesday.</h2>
-          <p class="section-sub">Governance, risk, compliance, Microsoft 365 security, network/security engineering, and the decisions leaders need to make before a security problem becomes an incident, audit finding, or expensive emergency.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;">
-            <a href="/insights/security-brief-002.html" class="btn btn-secondary">Read the latest issue &rarr;</a>
-            <a href="/insights/" class="btn btn-secondary">Browse the Brief</a>
-          </div>
-        </div>
-        <div style="background:var(--bg-card);border:1px solid var(--line-strong);padding:28px;">
-          <div style="font-family:var(--display);font-size:25px;letter-spacing:1px;text-transform:uppercase;color:var(--ink);margin-bottom:10px;">Subscribe to the Brief</div>
-          <p style="color:var(--ink-dim);font-size:14px;line-height:1.7;margin:0 0 18px;">One focused briefing every other Wednesday. No generic vendor spam.</p>
-          <iframe class="brief-subscribe-embed" title="VALO Security Brief Signup" width="540" height="720" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="no" loading="lazy" style="display:block;width:100%;max-width:540px;height:720px;overflow:hidden;margin:0 auto;border:0;"></iframe>
-          <div style="font-size:11px;color:var(--ink-mute);line-height:1.6;margin-top:10px;">By subscribing, you agree to receive the VALO Security Brief by email. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a>.</div>
-        </div>
+  <section class="sand">
+    <div class="wrap section">
+      <p class="eyebrow">Who we serve</p>
+      <h2 class="h2" style="max-width:760px;margin-bottom:48px">Senior engineering for teams that don't keep a security engineer on staff.</h2>
+      <div class="grid-3">
+        <div class="ind"><h3>Managed Service Providers</h3><p>Add Cisco and Palo Alto security engineering capacity without hiring full-time specialists. White-label work available.</p><a href="/services/#msp" class="link">Partner with VALO &rarr;</a></div>
+        <div class="ind"><h3>Small &amp; Midsize Businesses</h3><p>Focused firewall, network security, and assessment expertise alongside your existing IT team.</p><a href="/services/network-security.html" class="link">Explore services &rarr;</a></div>
+        <div class="ind"><h3>State, Local &amp; Education</h3><p>Support for network modernization, segmentation, and security remediation in public-sector environments.</p><a href="/industries/public-sector-sled.html" class="link">Explore SLED support &rarr;</a></div>
       </div>
-      <style>@media(max-width:820px){#security-brief .reveal{grid-template-columns:1fr!important;}}@media(max-width:600px){#security-brief .brief-subscribe-embed{height:860px!important;}}@media(max-width:380px){#security-brief .brief-subscribe-embed{height:980px!important;}}</style>
     </div>
   </section>
 
-  <section class="cta-section"><div class="container">
-    <h2>Need specialized network security support?</h2>
-    <p>Tell us about your firewall, network security, or assessment project. We will discuss scope, fit, and next steps.</p>
-    <a href="/contact.html" class="btn btn-lg">Schedule a conversation</a>
-  </div></section>
+  <section class="wrap" style="padding-top:104px;padding-bottom:48px">
+    <p class="eyebrow">Selected founder experience</p>
+    <h2 class="h2" style="margin-bottom:48px">Real engineering challenges. Documented work.</h2>
+    <div class="grid-2">
+      <article class="card">
+        <span class="proj-tag">Palo Alto Networks &middot; Policy remediation</span>
+        <h3>Over 150 firewall rules remediated</h3>
+        <p>A phased policy cleanup using controlled replacement rules, application-default service settings, traffic monitoring, and validation of CIS-based findings.</p>
+        <a href="/experience/firewall-policy-remediation.html" class="link">Read founder project &rarr;</a>
+      </article>
+      <article class="card">
+        <span class="proj-tag">Cisco &middot; Infrastructure hardening</span>
+        <h3>Enterprise Cisco switch security hardening</h3>
+        <p>Remediated Rapid7 findings by disabling unneeded HTTP/HTTPS services, moving SNMPv2 to SNMPv3, applying management-plane ACLs, and verifying with a follow-up scan.</p>
+        <a href="/experience/cisco-switch-hardening.html" class="link">Read founder project &rarr;</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top:56px;padding-bottom:104px">
+    <p class="eyebrow">Methodology</p>
+    <h2 class="h2" style="margin-bottom:48px">How an engagement runs.</h2>
+    <ol class="steps">
+      <li><span class="step-num">01</span><h3>Assess</h3><p>Review the network, firewall policies, operating requirements, and security risks.</p></li>
+      <li><span class="step-num">02</span><h3>Prioritize</h3><p>Agree on priorities, scope, change windows, and success criteria.</p></li>
+      <li><span class="step-num">03</span><h3>Engineer &amp; Implement</h3><p>Deliver the agreed network security changes, migrations, or remediation work.</p></li>
+      <li><span class="step-num">04</span><h3>Validate &amp; Handover</h3><p>Test changes, document findings, and provide a practical handover.</p></li>
+    </ol>
+  </section>
+
+  <section class="navy on-navy">
+    <div class="wrap section founder">
+      <div class="founder-photo"><img src="/me.jpg" alt="Loseini Valo Kamara, founder of VALO Technologies" /></div>
+      <div class="founder-copy">
+        <p class="eyebrow">Why VALO</p>
+        <h2 class="h2">Loseini &ldquo;Valo&rdquo; Kamara</h2>
+        <p class="founder-role">Founder &amp; Principal Consultant &middot; MS Cybersecurity &amp; Information Assurance &middot; MBA, IT Management</p>
+        <div class="why">
+          <div><h3>Cisco &amp; Palo Alto focus</h3><p>Practical experience with firewalls, routing, switching, segmentation, and security policy in complex environments.</p></div>
+          <div><h3>Work directly with the principal</h3><p>Engagements are scoped and led by an experienced engineer, without account-management layers.</p></div>
+          <div><h3>Actionable deliverables</h3><p>Clear findings, documented changes, and realistic remediation priorities &mdash; not generic reports.</p></div>
+        </div>
+        <div class="founder-links">
+          <a href="/about/leadership.html" class="link">Meet the founder &rarr;</a>
+          <a href="/about/credentials.html" class="link">View all credentials &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="security-brief" class="wrap" style="padding-top:96px">
+    <div class="brief">
+      <div>
+        <p class="eyebrow">The VALO Security Brief</p>
+        <h2 class="h2">Practical cybersecurity guidance. Every other Wednesday.</h2>
+        <p class="lead" style="margin:20px 0 0">Network and security engineering, risk, and the decisions leaders need to make before a security problem becomes an incident, audit finding, or expensive emergency.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0 24px;margin-top:12px">
+          <a href="/insights/security-brief-002.html" class="link">Read the latest issue &rarr;</a>
+          <a href="/insights/" class="link">Browse the Brief &rarr;</a>
+        </div>
+      </div>
+      <div class="brief-card">
+        <iframe title="VALO Security Brief Signup" width="540" height="720" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="no" loading="lazy"></iframe>
+        <div class="fine">By subscribing, you agree to receive the VALO Security Brief by email. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="cta">
+      <div>
+        <h2 class="h2">Have a firewall or network project?</h2>
+        <p class="lead">Tell us about your firewall, network security, or assessment project. You'll hear back directly from the principal engineer.</p>
+      </div>
+      <a href="/contact.html" class="btn">Schedule a conversation</a>
+    </div>
+  </section>
+
 </main>
 
-<footer><div class="container">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-brand-name">VALO<span>.</span></div>
-      <div class="footer-brand-tag">Technologies LLC</div>
-      <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
-      <p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
-      <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
+<footer>
+  <div class="wrap f-grid">
+    <div>
+      <div class="f-brand">VALO</div>
+      <p style="margin:6px 0 12px">Technologies LLC</p>
+      <p style="margin:0 0 12px">Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
+      <p style="margin:0 0 12px">Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+      <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
-    <div class="footer-col">
+    <div>
       <h5>Services</h5>
       <ul>
         <li><a href="/services/#msp">MSP White-Label Engineering</a></li>
@@ -287,7 +405,7 @@
         <li><a href="/services/">All Services</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div>
       <h5>Who We Serve</h5>
       <ul>
         <li><a href="/industries/#msp">Managed Service Providers</a></li>
@@ -295,7 +413,7 @@
         <li><a href="/industries/#sled">State, Local &amp; Education (SLED)</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div>
       <h5>About &amp; Resources</h5>
       <ul>
         <li><a href="/about/">About VALO</a></li>
@@ -308,18 +426,27 @@
       </ul>
     </div>
   </div>
-  <div class="footer-badges"><div role="list" aria-label="Certifications" class="footer-badge-group"><span class="footer-badge-label">Certifications</span><img src="/logo-isaca.png" alt="ISACA — CISM" class="footer-cert-img" role="listitem" /><img src="/logo-secux.png" alt="CompTIA SecurityX" class="footer-cert-img" role="listitem" /><img src="/logo-pentest.png" alt="CompTIA PenTest+" class="footer-cert-img" role="listitem" /><img src="/logo-cysa.png" alt="CompTIA CySA+" class="footer-cert-img" role="listitem" /><img src="/logo-pccse.png" alt="Palo Alto Networks PCCSE" class="footer-cert-img" role="listitem" /><img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" class="footer-cert-img" role="listitem" /></div></div>
-  <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
-</div></footer>
+  <div class="wrap f-badges" aria-label="Certifications">
+    <img src="/logo-isaca.png" alt="ISACA CISM" />
+    <img src="/logo-secux.png" alt="CompTIA SecurityX" />
+    <img src="/logo-pentest.png" alt="CompTIA PenTest+" />
+    <img src="/logo-cysa.png" alt="CompTIA CySA+" />
+    <img src="/logo-pccse.png" alt="Palo Alto Networks PCCSE" />
+    <img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" />
+  </div>
+  <div class="wrap f-bottom">
+    <div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div>
+    <div><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+  </div>
+</footer>
 
 <script>
-(function() {
-  const canvas=document.getElementById('grid-bg'); if(canvas){const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;draw();}function draw(){ctx.clearRect(0,0,W,H);const step=48;ctx.strokeStyle='rgba(59,130,246,0.15)';ctx.lineWidth=1;for(let x=0;x<=W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<=H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}resize();window.addEventListener('resize',resize);}
-  const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){if(nav)nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
-  const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');if(hamburger&&navLinks){hamburger.addEventListener('click',function(){const open=navLinks.classList.toggle('open');hamburger.setAttribute('aria-expanded',open);});document.addEventListener('click',function(e){if(nav&&!nav.contains(e.target)){navLinks.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}});}
-  const words=document.querySelectorAll('.industry-word');if(words.length){let current=0;setInterval(function(){words[current].classList.remove('active');current=(current+1)%words.length;words[current].classList.add('active');},2400);}
-  const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver' in window){const observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');observer.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){observer.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}
-
+(function(){
+  var h=document.getElementById('hamburger'),n=document.getElementById('navLinks'),nav=document.getElementById('topnav');
+  if(h&&n){
+    h.addEventListener('click',function(){var o=n.classList.toggle('open');h.setAttribute('aria-expanded',o);});
+    document.addEventListener('click',function(e){if(nav&&!nav.contains(e.target)){n.classList.remove('open');h.setAttribute('aria-expanded','false');}});
+  }
 })();
 </script>
 </body>
