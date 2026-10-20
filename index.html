@@ -134,6 +134,14 @@ a.pill:hover{border-color:var(--navy)}
 .ids-label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
 .ids-val{font-family:var(--mono);font-size:22px;font-weight:500;letter-spacing:.04em;color:var(--navy)}
 
+.mobile-only{display:none}
+.strip-more{font-size:14px;font-weight:600;text-decoration:none;padding:10px 0}
+@media (max-width:640px){
+  .hide-mobile,.pill-extra{display:none}
+  .mobile-only{display:inline-block}
+  .brief{gap:0}
+}
+
 /* projects */
 .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
 .proj-tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
@@ -236,11 +244,12 @@ footer a:hover{color:#fff;text-decoration:underline}
         <a class="pill" href="/about/credentials.html">CCNP Enterprise</a>
         <a class="pill" href="/about/credentials.html">PCCSE</a>
         <a class="pill" href="/about/credentials.html">CISM</a>
-        <a class="pill" href="/about/credentials.html">SecurityX</a>
-        <a class="pill" href="/about/credentials.html">PenTest+</a>
-        <a class="pill" href="/about/credentials.html">CySA+</a>
+        <a class="pill pill-extra" href="/about/credentials.html">SecurityX</a>
+        <a class="pill pill-extra" href="/about/credentials.html">PenTest+</a>
+        <a class="pill pill-extra" href="/about/credentials.html">CySA+</a>
+        <a class="mobile-only strip-more" href="/about/credentials.html">View all credentials &rarr;</a>
       </div>
-      <div class="strip-partners">
+      <div class="strip-partners hide-mobile">
         <span class="strip-label">Partners</span>
         <span>Cisco Registered Partner</span>
         <span>Palo Alto Networks NextWave Registered Reseller</span>
@@ -380,8 +389,9 @@ footer a:hover{color:#fff;text-decoration:underline}
           <a href="/insights/security-brief-002.html" class="link">Read the latest issue &rarr;</a>
           <a href="/insights/" class="link">Browse the Brief &rarr;</a>
         </div>
+        <a href="/insights/#subscribe" class="btn mobile-only" style="margin-top:16px">Subscribe to the Brief</a>
       </div>
-      <div class="brief-card">
+      <div class="brief-card hide-mobile">
         <iframe title="VALO Security Brief Signup" width="540" height="720" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="no" loading="lazy"></iframe>
         <div class="fine">By subscribing, you agree to receive the VALO Security Brief by email. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a>.</div>
       </div>
