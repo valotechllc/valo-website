@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Microsoft 365 MFA Is Enabled. But Is It Phishing-Resistant? | VALO Security Brief</title>
+<meta name="description" content="Issue 003: five checks to assess phishing-resistant MFA and plan for Microsoft's 2027 SMS and voice authentication changes." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Your Microsoft 365 MFA Is Enabled. But Is It Phishing-Resistant?" />
+<meta property="og:description" content="Five Microsoft 365 MFA checks for leaders, MSPs, and IT teams before the 2027 SMS and voice changes." />
+<meta property="og:url" content="https://valotechnologiellc.com/insights/security-brief-003.html" />
+<meta property="og:image" content="https://valotechnologiellc.com/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/valo-favicon.svg?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>
+.article-wrap{max-width:840px}
+.article-meta{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.article-wrap .prose p{font-size:17px;line-height:1.85}
+.article-callout{background:var(--bg-card);border:1px solid var(--line-strong);border-left:4px solid var(--accent);padding:24px 26px;margin:32px 0}
+.question{background:var(--bg-card);border:1px solid var(--line);padding:24px;margin:16px 0}
+.question h3{font-family:var(--display);font-size:23px;letter-spacing: -0.01em; font-weight: 700; text-transform: none;color:var(--ink);margin:0 0 10px}
+.question p{color:var(--ink-dim);margin:0;line-height:1.75}
+ol.steps-list{padding-left:22px;color:var(--ink-dim)}ol.steps-list li{margin:0 0 14px;line-height:1.8;font-size:17px}ol.steps-list strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<canvas id="grid-bg" aria-hidden="true"></canvas>
+<nav class="topnav" id="topnav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="/services/">Services</a></li><li><a href="/industries/">Industries</a></li><li><a href="/about/">About</a></li><li><a href="/insights/" class="active">Insights</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="page-hero"><div class="container article-wrap">
+    <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/insights/">VALO Security Brief</a><span aria-hidden="true"> / </span>Issue 003</div>
+    <div class="article-meta">Issue 003 · October 28, 2026 · Microsoft Security</div>
+    <h1>Your Microsoft 365 MFA is enabled. But is it phishing-resistant?</h1>
+    <p class="page-hero-sub">A five-point review to close the gap between MFA enrollment and effective protection before Microsoft's 2027 SMS and voice changes.</p>
+  </div></div>
+  <section><div class="container article-wrap">
+    <div class="prose reveal">
+      <p>Seeing "MFA enabled" in an admin portal is reassuring. It is not the same as knowing which sign-ins are protected against phishing. Some users may still depend on text messages or voice calls. Administrators may use everyday accounts for privileged work. Conditional Access exceptions may be wider than intended. A configuration checkbox cannot answer those questions.</p>
+      <p>This matters because attackers increasingly target the authentication process, not just passwords. A stolen password plus a phishable second factor can still put business email, files, and administrative access at risk.</p>
+    </div>
+    <div class="article-callout reveal">
+      <div class="eyebrow">Why now</div>
+      <p style="margin:8px 0 0;color:var(--ink-dim);line-height:1.8;">Microsoft began rolling out passkeys as a default authentication experience in September 2026. Its current Entra ID guidance says Microsoft-provided SMS and voice delivery is scheduled to retire on <strong>February 1, 2027</strong> for most users, with <strong>July 1, 2027</strong> applying to Global Administrators and external users. These dates apply to the Entra ID public cloud; confirm the applicable timeline for your tenant. This is a reason to plan, not a reason to abruptly disable working access.</p>
+    </div>
+    <div class="prose reveal"><h2>Five checks worth making this week</h2></div>
+    <div class="question reveal"><h3>1. Who still relies on SMS or voice?</h3><p>Inventory authentication methods and actual sign-in usage. Separate users who merely have a method registered from those who depend on it. Include executives, finance users, contractors, and administrators. Assign an owner to each exception.</p></div>
+    <div class="question reveal"><h3>2. Does policy cover the sign-ins that matter?</h3><p>Review whether Security Defaults or appropriately licensed Conditional Access policies protect users, applications, and privileged actions. Check exclusions and legacy authentication paths. Do not disable Security Defaults without equivalent replacement controls. Test policy changes before enforcing them broadly.</p></div>
+    <div class="question reveal"><h3>3. Are privileged identities handled differently?</h3><p>Separate administrative identities from daily productivity accounts, minimize standing privilege, and prioritize phishing-resistant authentication for high-impact roles. Maintain and periodically test documented emergency-access procedures so a policy mistake does not lock out the tenant.</p></div>
+    <div class="question reveal"><h3>4. Can users enroll and recover safely?</h3><p>Pilot passkeys or other supported phishing-resistant methods with a small group first. Confirm device compatibility, onboarding, account recovery, help-desk support, and workflows for shared or restricted devices. A technically sound control that blocks legitimate work without a recovery path will not last.</p></div>
+    <div class="question reveal"><h3>5. Can leadership see evidence, not assumptions?</h3><p>Track users still dependent on weaker methods, policy coverage, high-risk exceptions, rollout progress, and the owner of each remediation item. Keep dated configuration evidence and review it on a defined cadence. A Secure Score alone is not proof of effective enforcement.</p></div>
+    <div class="prose reveal">
+      <h2>A 30-minute question for your MSP or IT team</h2>
+      <p>Ask for four numbers and one name: (1) how many active users still depend on SMS or voice, (2) how many privileged accounts lack phishing-resistant authentication, (3) how many Conditional Access or authentication-policy exceptions exist, (4) when emergency access was last tested, and (5) who owns the migration plan. You do not need a new product purchase to start this conversation.</p>
+      <h2>Who owns the next step?</h2>
+      <p>Business leadership approves risk and exceptions. The MSP or internal IT team operates the tenant and implements approved changes. An independent reviewer can identify gaps, validate licensing constraints, prioritize fixes, and hand the plan back to the team already supporting the environment. Implementation and ongoing administration should be scoped separately.</p>
+      <p>Do not assume every Microsoft 365 subscription includes the same Conditional Access, Defender, or device-management features. Verify licenses and tenant configuration before prescribing controls.</p>
+    </div>
+    <div class="article-callout reveal">
+      <div class="eyebrow">See the deliverable before the engagement</div>
+      <h3 style="margin:8px 0 10px;color:var(--ink);">What would a Microsoft 365 security review actually produce?</h3>
+      <p style="color:var(--ink-dim);line-height:1.75;margin:0 0 16px;">VALO's fictional sample shows an executive summary, evidence-backed findings across identity and privileged access, a prioritized hardening plan, and clear ownership. It is a demonstration, not a client case study or a claim of compliance.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="/resources/sample-m365-security-review.html" class="btn btn-secondary">View fictional sample deliverable &rarr;</a>
+        <a href="/services/microsoft-security.html" class="btn btn-secondary">Review service scope &rarr;</a>
+      </div>
+    </div>
+    <div class="prose reveal">
+      <p><strong>Source:</strong> <a href="https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement" target="_blank" rel="noopener noreferrer">Microsoft Entra ID guidance on passkeys and SMS/voice retirement</a>; <a href="https://learn.microsoft.com/en-us/entra/fundamentals/security-defaults" target="_blank" rel="noopener noreferrer">Microsoft Security Defaults guidance</a>. Dates and feature availability should be checked against current Microsoft documentation before making tenant changes.</p>
+      <p><strong>VALO Security Brief</strong> is published every other Wednesday by VALO Technologies LLC. We share practical security engineering, governance, and risk guidance for MSPs and the organizations they support.</p>
+    </div>
+  </div></section>
+  <section class="cta-section"><div class="container"><h2>Not sure what your Microsoft 365 MFA settings really protect?</h2><p>VALO's defined-scope Microsoft 365 Security Posture Review evaluates identity, privileged access, email, devices, collaboration, and data controls against the capabilities you actually license. The output is an evidence-backed findings register and prioritized hardening plan.</p><a href="/contact.html?service=microsoft-security" class="btn btn-lg">Discuss a Microsoft 365 Security Posture Review</a></div></section>
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-name">VALO<span>.</span></div>
+      <div class="footer-brand-tag">Technologies LLC</div>
+      <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
+      <p>Rockwall, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+      <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="/services/#msp">MSP White-Label Engineering</a></li>
+        <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
+        <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
+        <li><a href="/services/network-security.html">Network Security Engineering</a></li>
+        <li><a href="/services/compliance.html">Cybersecurity Risk Assessments</a></li>
+        <li><a href="/services/">All Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Who We Serve</h5>
+      <ul>
+        <li><a href="/industries/#msp">Managed Service Providers</a></li>
+        <li><a href="/industries/#smb">Small &amp; Midsize Businesses</a></li>
+        <li><a href="/industries/#sled">State, Local &amp; Education (SLED)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>About &amp; Resources</h5>
+      <ul>
+        <li><a href="/about/">About VALO</a></li>
+        <li><a href="/about/leadership.html">Leadership</a></li>
+        <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/insights/security-brief-001.html">VALO Security Brief</a></li>
+        <li><a href="/resources/">Sample Deliverables</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+</div></footer>
+<script>(function(){const canvas=document.getElementById('grid-bg');if(canvas){const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;draw();}function draw(){ctx.clearRect(0,0,W,H);const step=48;ctx.strokeStyle='rgba(59,130,246,0.15)';ctx.lineWidth=1;for(let x=0;x<=W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<=H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}resize();window.addEventListener('resize',resize);}const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});const hb=document.getElementById('hamburger'),nl=document.getElementById('navLinks');if(hb&&nl){hb.addEventListener('click',function(){const o=nl.classList.toggle('open');hb.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!nav.contains(e.target)){nl.classList.remove('open');hb.setAttribute('aria-expanded','false');}});}const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}})();</script>
+</body>
+</html>
