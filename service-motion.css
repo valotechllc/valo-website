@@ -3,13 +3,8 @@
 .motion-toggle{display:none;border:1px solid #74849366;border-radius:2px;background:#070d1322;color:#c3cdd8;font:500 10px var(--mono);padding:8px 12px;min-height:40px;cursor:pointer}
 .motion-toggle:hover{background:#1e2c38;color:#fff}
 .motion-ready .motion-toggle{display:block}
-.spatial-canvas{display:none;pointer-events:none}
-.scene-rendered>.spatial-canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
-.cinematic-backdrop{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:65% center;transform-origin:65% 45%;animation:cinematic-dolly 30s ease-in-out infinite alternate;animation-play-state:paused}
-.motion-running .cinematic-backdrop{animation-play-state:running}
-.backdrop-assessment{object-position:78% center;filter:saturate(.55) hue-rotate(8deg)}
-.backdrop-msp{object-position:45% center;filter:saturate(.55)}
-@keyframes cinematic-dolly{from{transform:scale(1.025) translate3d(0,0,0)}to{transform:scale(1.12) translate3d(-1%,.5%,0)}}
+.service-film{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
+.film-awaiting-play::before{content:"Use Resume animations to play the workflow";position:absolute;right:24px;top:90px;z-index:5;color:#d9e4ed;font:11px var(--mono)}
 
 /* Opening chapter. Text remains ordinary HTML over decorative artwork. */
 .cinematic-hero{position:relative;min-height:calc(100svh - 76px);background:#070d13;overflow:hidden}
@@ -71,7 +66,7 @@
   .service-copy h3{font-size:56px;max-width:650px}
 }
 @media(max-width:680px){
-  .cinematic-backdrop{object-position:65% 30%}
+  .service-film{object-position:center top}
   .cinematic-hero{min-height:calc(100svh - 73px)}
   .cinematic-hero .hero-inner{min-height:calc(100svh - 73px);padding-top:250px;padding-bottom:118px}
   .cinematic-hero h1{font-size:clamp(62px,15vw,80px)}
@@ -103,7 +98,7 @@
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .cinematic-backdrop,.service-copy{animation:none;transform:none}
+  .service-copy{animation:none;transform:none}
   .service-tab{transition:none}
   .motion-ready .motion-toggle{display:none}
 }
@@ -113,3 +108,8 @@
   .service-panel{min-height:900px}
   .service-visual figcaption{bottom:24px}
 }
+
+.cinematic-hero .network-hero::after,.capability-theater .service-visual::after{background:linear-gradient(90deg,rgba(4,9,15,.4),transparent 55%)}
+@media(max-width:680px){.cinematic-hero .network-hero::after,.capability-theater .service-visual::after{background:linear-gradient(0deg,rgba(4,9,15,.85),transparent 65%)}}
+/* Keep the entire workflow visible rather than cropping its endpoints. */
+.service-film{object-fit:contain;background:#07101a;object-position:center top}
