@@ -1,0 +1,72 @@
+/* Homepage illustrations. All motion is opt-in via service-motion.js. */
+.hero-inner{gap:44px;align-items:center;padding-bottom:44px}
+.hero-copy{flex:1 1 540px}
+.network-hero{flex:1 1 420px;min-width:0;margin:0;position:relative}
+.network-hero::before{content:"";position:absolute;inset:8%;background:radial-gradient(ellipse,rgba(224,122,95,.12),transparent 70%);pointer-events:none}
+.network-hero svg{position:relative;display:block;width:100%;height:auto}
+.network-hero figcaption{color:var(--on-navy-2);font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-align:center}
+.hero .stats{flex:1 1 100%;grid-template-columns:repeat(3,minmax(0,1fr));border-radius:8px}
+.hero .stat{padding:22px 26px;display:flex;align-items:center;gap:18px}
+.hero .stat.wide{grid-column:auto}
+.hero .stat-num{font-size:34px}
+.hero .stat-label{margin:0;font-size:13px}
+.hero .stats-note{padding:10px 26px}
+.service-lab{background:var(--ink-deep);color:var(--cream);border:1px solid var(--navy-3);border-radius:16px;margin-bottom:32px;overflow:hidden}
+.lab-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 28px;border-bottom:1px solid #354052}
+.lab-heading p{margin:0;color:var(--on-navy);font-size:14px}
+.lab-heading .eyebrow{font-size:11px;color:var(--rust-light);margin:0 0 4px}
+.motion-toggle{display:none;flex-shrink:0;border:1px solid #627084;border-radius:5px;padding:10px 14px;background:transparent;color:var(--cream);font:500 12px var(--mono);cursor:pointer;min-height:44px}
+.motion-toggle:hover{background:var(--navy-3)}
+.motion-ready .motion-toggle{display:block}
+.network-hero .motion-toggle{margin:16px auto 0}
+.service-tabs{display:none;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid #354052}
+.motion-ready .service-tabs{display:grid}
+.service-tab{position:relative;border:0;border-right:1px solid #354052;background:transparent;color:var(--on-navy);padding:21px 12px;font:500 13px var(--sans);cursor:pointer;min-height:64px}
+.service-tab:last-child{border-right:0}
+.service-tab[aria-selected="true"]{background:var(--navy-2);color:#fff}
+.service-tab[aria-selected="true"]::after{content:"";position:absolute;height:3px;bottom:0;left:0;right:0;background:var(--rust-light)}
+.service-tab:hover{background:var(--navy-3);color:#fff}
+.service-panel{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;gap:38px;padding:40px 36px}
+.service-panel[hidden]{display:none}
+.service-panel + .service-panel{border-top:1px solid #354052}
+.service-visual{margin:0;min-width:0}
+.service-visual svg{display:block;width:100%;height:auto}
+.service-visual figcaption{font:10px var(--mono);color:var(--on-navy-2);margin-top:14px;letter-spacing:.04em}
+.service-copy h3{font-size:clamp(24px,2.5vw,32px);line-height:1.15;margin:8px 0 18px;letter-spacing:-.02em}
+.service-copy p{font-size:15px;color:var(--on-navy);margin:0 0 20px;line-height:1.7}
+.service-copy .eyebrow{font-size:11px;color:var(--rust-light);margin:0}
+.service-copy .link{color:var(--rust-light)}
+.service-copy .link:hover{color:white}
+.service-steps{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0 0 12px;font:11px var(--mono);color:var(--on-navy)}
+.service-steps li{border:1px solid #465268;border-radius:4px;padding:7px 9px}
+.diagram{font-family:var(--mono);fill:var(--cream)}
+.diagram .wire{fill:none;stroke:#526077;stroke-width:1.5}
+.diagram .box{fill:#222D3F;stroke:#627084;stroke-width:1}
+.diagram .accent-box{fill:#302B31;stroke:#E07A5F;stroke-width:1.5}
+.diagram .label{font-size:11px;text-anchor:middle;fill:#F4F1EA}
+.diagram .small{font-size:9px;text-anchor:middle;fill:#B8BDC6}
+.diagram .accent{fill:#EAA58F}
+.diagram .good{fill:#9CD6C6}
+.diagram .bad{fill:#F2A594}
+.diagram .packet{fill:none;stroke:#9CD6C6;stroke-width:3;stroke-linecap:round;stroke-dasharray:9 190;stroke-dashoffset:0}
+.diagram .packet-blocked{stroke:#F2A594;stroke-dasharray:7 180}
+.diagram .pulse-ring{fill:none;stroke:#E07A5F;stroke-width:1;opacity:.45;transform-box:fill-box;transform-origin:center}
+.diagram .scan{stroke:#E07A5F;stroke-width:1;opacity:.6}
+.diagram .risk-row{opacity:1}
+.motion-running .packet{animation:packet-flow 3.4s linear infinite}
+.motion-running .packet.slow{animation-duration:5s;animation-delay:-1.5s}
+.motion-running .packet.reverse{animation-direction:reverse;animation-delay:-1s}
+.motion-running .packet-blocked{animation-duration:4s}
+.motion-running .pulse-ring{animation:boundary-pulse 4s ease-out infinite}
+.motion-running .scan{animation:assessment-scan 5s ease-in-out infinite}
+.motion-running .risk-row{animation:risk-highlight 6s ease-in-out infinite}
+.motion-running .risk-row:nth-of-type(2){animation-delay:1s}
+.motion-running .risk-row:nth-of-type(3){animation-delay:2s}
+@keyframes packet-flow{to{stroke-dashoffset:-199}}
+@keyframes boundary-pulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
+@keyframes assessment-scan{0%,100%{transform:translateX(0);opacity:.2}50%{transform:translateX(120px);opacity:.8}}
+@keyframes risk-highlight{0%,100%{opacity:.55}35%,65%{opacity:1}}
+@media(max-width:1100px){.hero-copy{flex-basis:440px}.network-hero{flex-basis:360px}.hero h1{font-size:clamp(38px,4.5vw,56px)}}
+@media(max-width:900px){.hero-inner{padding-top:56px}.hero-copy{flex-basis:100%}.network-hero{flex:1 1 100%;max-width:580px;margin:0 auto}.hero .stat{display:block}.hero .stat-label{margin-top:8px}.service-panel{gap:24px;padding:30px 24px}}
+@media(max-width:680px){.service-panel{grid-template-columns:1fr;gap:28px}.service-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.service-tab{padding:16px 8px;border-bottom:1px solid #354052;min-height:54px}.service-tab:nth-child(2){border-right:0}.lab-heading{padding:20px;align-items:flex-start}.lab-heading p{font-size:12px}.motion-toggle{padding:8px 10px;font-size:10px}.hero .stats{grid-template-columns:1fr}.hero .stat{display:flex;padding:18px 22px}.hero .stat-num{min-width:80px}.hero .stat-label{margin:0}.network-hero{margin-top:-12px}.service-lab{border-radius:10px}.service-visual figcaption{font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.motion-running *{animation:none!important;transition:none!important}.motion-ready .motion-toggle{display:none}}
