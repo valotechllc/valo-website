@@ -17,7 +17,7 @@ const ease=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
 function scene(c,W,H,mode,time){
  c.resetTransform();c.clearRect(0,0,W,H);
  const bg=c.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#070e17');bg.addColorStop(.55,'#152738');bg.addColorStop(1,'#070f19');c.fillStyle=bg;c.fillRect(0,0,W,H);
- const mobile=W<H, S=mobile?W/790:W/1400, X=mobile?W*.5:W*.69,Y=mobile?H*.235:H*.36;
+ const mobile=W<900, S=mobile?W/900:W/1400, X=mobile?W*.5:W*.69,Y=mobile?H*.44:H*.36;
  c.save();c.translate(X,Y);c.scale(S,S);
  const glow=c.createRadialGradient(0,30,10,0,30,450);glow.addColorStop(0,'rgba(97,143,169,.13)');glow.addColorStop(1,'rgba(8,16,26,0)');c.fillStyle=glow;c.fillRect(-500,-350,1000,700);
  c.strokeStyle='#88a7bd10';c.lineWidth=1;
@@ -29,15 +29,19 @@ function scene(c,W,H,mode,time){
   for(let n=0;n<4;n++){let t=(time*.28+n*.25)%1;if(blocked&&t>.63)continue;const u=1-t;const x=u*u*u*x1+3*u*u*t*bend+3*u*t*t*bend+t*t*t*x2,y=u*u*u*y1+3*u*u*t*y1+3*u*t*t*y2+t*t*t*y2;c.shadowColor=color;c.shadowBlur=15;c.fillStyle=color;c.beginPath();c.arc(x,y,3.5,0,Math.PI*2);c.fill();}
   if(blocked){const x=x1+(x2-x1)*.63,y=y1+(y2-y1)*.63;c.shadowBlur=0;path([[x-7,y-7],[x+7,y+7]],copper,2);path([[x+7,y-7],[x-7,y+7]],copper,2);}c.restore();}
  function device(x,y,label,accent=copper,opacity=1,scale=1){c.save();c.globalAlpha=opacity;c.translate(x,y);c.scale(scale,scale);
-  c.shadowColor='#0009';c.shadowBlur=28;c.shadowOffsetY=20;path([[-115,30],[91,30],[128,-3],[-78,-3],[-115,30]],'#000',22);c.shadowBlur=0;c.shadowOffsetY=0;
-  const top=c.createLinearGradient(-120,-100,100,0);top.addColorStop(0,'#617486');top.addColorStop(1,'#233747');c.fillStyle=top;c.beginPath();c.moveTo(-120,-75);c.lineTo(-76,-116);c.lineTo(120,-116);c.lineTo(76,-75);c.closePath();c.fill();
-  c.fillStyle='#15212e';c.beginPath();c.moveTo(76,-75);c.lineTo(120,-116);c.lineTo(120,-38);c.lineTo(76,3);c.closePath();c.fill();
-  const face=c.createLinearGradient(0,-75,0,3);face.addColorStop(0,'#344c5e');face.addColorStop(.25,'#142432');face.addColorStop(1,'#0b1722');rect(-120,-75,196,78,3,face,'#71869a');
-  for(let i=0;i<12;i++){const px=-105+i*13;rect(px,-58,9,15,1,'#050c12','#425b6e');rect(px,-32,9,15,1,'#050c12','#425b6e');}
-  c.shadowColor=accent;c.shadowBlur=13;path([[-120,4],[76,4],[120,-38]],accent,2);c.shadowBlur=0;
-  for(let i=0;i<6;i++){c.fillStyle=i%2?accent:mint;c.fillRect(-105+i*27,-8,4,2)}
-  for(let i=0;i<8;i++)path([[-75+i*18,-105],[-100+i*18,-82]],'#8da2af65',1);
-  text(label,-1,40,17,accent);c.restore();}
+  const modern=accent===copper;
+  c.shadowColor='#0008';c.shadowBlur=22;c.shadowOffsetY=12;
+  rect(-121,-30,207,36,5,'#142331',null);c.shadowBlur=0;c.shadowOffsetY=0;
+  const top=c.createLinearGradient(-100,-65,90,-20);top.addColorStop(0,modern?'#a9b8c3':'#536778');top.addColorStop(1,modern?'#536a7c':'#233949');c.fillStyle=top;c.beginPath();c.moveTo(-120,-30);c.lineTo(-86,-59);c.lineTo(120,-59);c.lineTo(86,-30);c.closePath();c.fill();
+  c.fillStyle=modern?'#596f80':'#203547';c.beginPath();c.moveTo(86,-30);c.lineTo(120,-59);c.lineTo(120,-24);c.lineTo(86,5);c.closePath();c.fill();
+  const face=c.createLinearGradient(0,-30,0,5);face.addColorStop(0,modern?'#dce4e9':'#526b7e');face.addColorStop(1,modern?'#91a5b5':'#253d50');rect(-120,-30,206,35,4,face,modern?'#dce5eb':'#718a9d');
+  rect(-108,-21,93,18,3,'#142735',null);
+  for(let i=0;i<4;i++)rect(-101+i*19,-17,12,10,1,'#09151f','#607b8d');
+  rect(0,-19,14,12,1,'#102331','#617c90');rect(21,-19,14,12,1,'#102331','#617c90');
+  c.shadowColor=mint;c.shadowBlur=5;c.fillStyle=mint;c.beginPath();c.arc(65,-12,2.5,0,Math.PI*2);c.fill();c.shadowBlur=0;
+  path([[-114,6],[86,6],[120,-24]],accent,1.4);
+  path([[-70,-51],[92,-51]],modern?'#d4e0e655':'#b5cad533',.7);
+  text(label,0,35,17,accent);c.restore();}
  function endpoint(x,y,label,color=cyan){rect(x-45,y-26,90,52,6,'#142636',color+'80');text(label,x,y+6,16,color)}
  function check(x,y,label,on=true){c.strokeStyle=on?mint:'#546a7c';c.lineWidth=2;c.beginPath();c.arc(x,y,9,0,Math.PI*2);c.stroke();if(on)path([[x-4,y],[x-1,y+3],[x+5,y-4]],mint,2);text(label,x+19,y+5,15,on?white:muted,'left')}
  function document(x,y,title,lines,color=copper,opacity=1){c.save();c.globalAlpha=opacity;const gr=c.createLinearGradient(x,y,x,y+145);gr.addColorStop(0,'#304759');gr.addColorStop(1,'#142432');rect(x-68,y-75,136,150,7,gr,color+'90');path([[x-49,y-50],[x-20,y-50]],color,3);text(title,x,y-23,15,white);lines.forEach((l,i)=>{text(l,x,y+4+i*22,12,muted)});c.restore()}
@@ -101,7 +105,7 @@ function scene(c,W,H,mode,time){
  const vignette=c.createLinearGradient(0,0,W,0);vignette.addColorStop(0,'rgba(3,9,16,.82)');vignette.addColorStop(mobile?.2:.36,'rgba(3,9,16,.12)');vignette.addColorStop(1,'rgba(3,9,16,0)');c.fillStyle=vignette;c.fillRect(0,0,W,H);
 }
 async function render(mode,mobile=false){
- const W=mobile?720:1280,H=mobile?1280:720,fps=24,duration=12;
+ const W=mobile?720:1280,H=mobile?680:720,fps=24,duration=12;
  const canvas=createCanvas(W,H),c=canvas.getContext('2d');
  const filename=`${out}/service-${mode}${mobile?'-mobile':''}.mp4`;
  const ff=spawn('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','rawvideo','-pixel_format','rgba','-video_size',`${W}x${H}`,'-framerate',String(fps),'-i','pipe:0','-an','-c:v','libx264','-preset','fast','-crf','22','-pix_fmt','yuv420p','-movflags','+faststart',filename],{stdio:['pipe','inherit','inherit']});

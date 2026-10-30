@@ -1852,3 +1852,6 @@ footer { background: var(--navy-deep); border-top: 0; }
 /* Sticky nav: no gap between the nav and the first section */
 nav.topnav { position: sticky; }
 main { padding-top: 0; }
+
+/* Phone form readability and grid containment. */
+@media(max-width:640px){.form-row input,.form-row select,.form-row textarea,.footer-signup-form input[type="email"]{font-size:16px;min-height:44px;max-width:100%}.contact-grid>*,.card-grid-2>*,.card-grid-3>*,.tier-grid>*{min-width:0}.prose{overflow-wrap:anywhere}}

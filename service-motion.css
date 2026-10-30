@@ -113,3 +113,60 @@
 @media(max-width:680px){.cinematic-hero .network-hero::after,.capability-theater .service-visual::after{background:linear-gradient(0deg,rgba(4,9,15,.85),transparent 65%)}}
 /* Keep the entire workflow visible rather than cropping its endpoints. */
 .service-film{object-fit:contain;background:#07101a;object-position:center top}
+
+/* Phones/tablets use a readable page flow, not text over a tall background film. */
+@media(max-width:900px){
+ .wrap{padding-left:20px;padding-right:20px}
+ .cinematic-hero{display:flex;flex-direction:column;min-height:0}
+ .cinematic-hero .hero-inner{order:0;display:block;min-height:0;padding:36px 20px 24px;pointer-events:auto;width:100%}
+ .cinematic-hero .hero-copy{max-width:650px}
+ .cinematic-hero h1{font-size:clamp(44px,12vw,68px);line-height:1;letter-spacing:-.035em;overflow-wrap:normal}
+ .cinematic-hero .eyebrow{font-size:11px;line-height:1.7;max-width:550px;margin-bottom:18px}
+ .cinematic-hero .hero-lead{font-size:16px;line-height:1.65;max-width:600px;margin-top:22px}
+ .cinematic-hero .hero-ctas{gap:12px;margin-top:24px}
+ .cinematic-hero .hero-ctas a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;padding:12px 18px;flex:1 1 140px}
+ .cinematic-hero .network-hero{order:1;position:relative;inset:auto;width:100%;height:auto;min-height:0;max-width:720px;margin:0 auto;display:block}
+ .service-film{position:relative;inset:auto;display:block;width:100%;height:auto;aspect-ratio:720/680;object-fit:contain}
+ .cinematic-hero .network-hero::after,.capability-theater .service-visual::after{display:none}
+ .cinematic-hero .network-hero figcaption{position:relative;right:auto;bottom:auto;display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:12px 20px 20px;font-size:10px;line-height:1.7;letter-spacing:.02em}
+ .cinematic-hero .network-hero .motion-toggle{margin:12px 0 0}
+ .motion-toggle,.capability-theater .motion-toggle{min-height:44px;font-size:12px;padding:10px 14px}
+ .proof-band .stats{grid-template-columns:minmax(0,1fr)}
+ .proof-band .stat{display:flex;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid #344352}
+ .proof-band .stat-num{min-width:76px;font-size:36px}
+ .proof-band .stat-label{max-width:none;margin:0;font-size:14px;line-height:1.6}
+ .proof-band .stats-note{font-size:12px;line-height:1.7;padding-top:18px}
+ .capability-theater .lab-heading{position:relative;inset:auto;padding:24px 20px;gap:16px;align-items:center}
+ .capability-theater .lab-heading .eyebrow{font-size:11px;line-height:1.6;margin-bottom:8px}
+ .capability-theater .lab-heading p{font-size:14px;line-height:1.6;max-width:none}
+ .service-tabs{position:relative;inset:auto;padding:0 20px;grid-template-columns:repeat(2,minmax(0,1fr));background:#0c1825;border-bottom:1px solid #344352}
+ .service-tab{min-height:56px;font-size:14px;padding:12px 8px;gap:9px;line-height:1.5}
+ .service-tab::before{font-size:11px}
+ .service-tab:nth-child(-n+2){border-bottom:1px solid #344352}
+ .service-panel{height:auto;min-height:0;isolation:auto}
+ .service-visual{position:relative;inset:auto;z-index:0;max-width:720px;margin:0 auto}
+ .service-visual figcaption{position:relative;inset:auto;text-align:left;padding:12px 20px;font-size:10px;line-height:1.7}
+ .scene-phase{font-size:12px;line-height:1.6;letter-spacing:.03em;padding-bottom:4px}
+ .service-copy{position:relative;inset:auto;padding:24px 20px 36px;animation:none}
+ .service-copy h3{font-size:clamp(30px,7vw,42px);line-height:1.12;max-width:none;letter-spacing:-.025em;margin:14px 0 20px}
+ .service-copy>p{font-size:16px;line-height:1.7;max-width:650px}
+ .service-copy .eyebrow{font-size:11px;line-height:1.7;letter-spacing:.08em}
+ .service-steps{gap:12px 18px;margin:24px 0 16px}
+ .service-steps li{font-size:12px;line-height:1.6}
+ .service-copy .link{display:inline-flex;align-items:center;min-height:48px;font-size:15px}
+ .grid-3,.grid-2{grid-template-columns:minmax(0,1fr)}
+ .card{padding:28px 22px}
+ .ind{padding:26px 22px}
+ .procure{padding:24px 20px}
+ .section{padding-top:60px;padding-bottom:60px}
+ .sec-head{margin-bottom:32px}
+ .capability-theater{scroll-margin-top:73px}
+ .film-awaiting-play::before{top:12px;font-size:12px}
+}
+@media(max-width:380px){
+ .capability-theater .lab-heading{align-items:flex-start;flex-direction:column}
+ .service-tab{font-size:13px;gap:6px;padding-left:0;padding-right:4px}
+ .ids{padding:22px 18px}
+ .ids-val{font-size:18px}
+}
+@media(max-width:450px){.cinematic-hero .hero-ctas{flex-direction:column;align-items:stretch}.cinematic-hero .hero-ctas a{flex:none;width:100%;line-height:1.4;min-height:48px}}
