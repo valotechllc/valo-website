@@ -28,7 +28,9 @@ They look like stylised 3D product renders, not filmed or studio-rendered footag
 
 All in-scene text (config extracts, findings, the roadmap, the handover document, "YOUR MSP") is synthetic and labelled illustrative where it could be mistaken for real data. The engineering chapter's inline SVG is labelled "Illustrative".
 
-No longer used by any page, kept in the repo: `cinematic-migration.webp`, `cinematic-segmentation.webp`, `cinematic-network.webp` (origin and licence unknown, added in commit `611312b`), and `service-*.mp4`, `service-*-poster.webp`, `service-films-render.mjs` (earlier diagram films). They can be deleted.
+Removed: `cinematic-migration.webp`, `cinematic-segmentation.webp`, `cinematic-network.webp` (origin and licence unknown, added in commit `611312b`; recoverable from git history if ever needed).
+
+No longer used by any page, kept in the repo: `service-*.mp4`, `service-*-poster.webp`, `service-films-render.mjs` (earlier diagram films). They can be deleted.
 
 ## If you commission filmed or studio-rendered footage later
 
