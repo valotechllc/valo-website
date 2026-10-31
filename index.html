@@ -194,14 +194,15 @@ footer a:hover{color:#fff;text-decoration:underline}
 .f-bottom{padding-top:20px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:13px;border-top:1px solid rgba(244,241,234,.1)}
 .f-bottom div:last-child{display:flex;gap:20px}
 </style>
-<link rel="stylesheet" href="/msp-story.css?v=msp2" />
+<link rel="stylesheet" href="/msp-story.css?v=msp4" />
 <script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
-<link rel="stylesheet" href="/home.css?v=home1" />
-<script type="module" src="/home-hero.js?v=home1"></script>
-<script type="module" src="/msp-story.js?v=msp1"></script>
+<link rel="stylesheet" href="/home.css?v=home3" />
+<script type="module" src="/home-monolith.js?v=home3"></script>
+<script type="module" src="/msp-story.js?v=msp3"></script>
 <script src="/home-services.js?v=home1" defer></script>
+  <script type="module" src="/home-services-3d.js?v=svc1"></script>
 </head>
-<body>
+<body class="home-dark">
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav class="topnav" id="topnav" aria-label="Main navigation">
@@ -223,36 +224,24 @@ footer a:hover{color:#fff;text-decoration:underline}
 
 <main id="main-content">
 
-  <section id="hh" class="on-navy" aria-labelledby="hh-title">
-    <div class="hh-stage" aria-hidden="true"></div>
-    <div class="hh-labels" aria-label="Network zones. Activate a zone to send a test attack from it."></div>
-    <div class="wrap">
-      <div class="hh-copy">
-        <p class="eyebrow">Cisco &amp; Palo Alto network security engineering</p>
-        <h1 id="hh-title">Security.<br><em>Engineered.</em></h1>
-        <p class="hh-lead">Firewall migrations, policy cleanup and risk assessments for MSPs, SMBs and public-sector teams. Scoped, built and validated by the principal engineer.</p>
-        <div class="hero-ctas">
-          <a href="/contact.html" class="btn">Discuss a project</a>
-          <a href="#msp-story" class="btn-ghost">How MSPs use VALO</a>
-        </div>
+  <section id="hm" aria-labelledby="hm-title">
+    <div class="hm-sticky">
+      <div class="hm-stage" aria-hidden="true"></div>
+      <div class="hm-intro">
+        <p class="hm-eyebrow">Cisco &amp; Palo Alto network security engineering</p>
+        <h1 id="hm-title">Security.<br>Engineered.</h1>
+        <p class="hm-sub">Firewall migrations, policy cleanup and risk assessments for MSPs, SMBs and public-sector teams.</p>
+        <a class="hm-cta" href="/contact.html">Discuss a project</a>
       </div>
+      <ol class="hm-layers" aria-label="What VALO engineers">
+        <li class="hm-layer" data-tier="3"><span>04</span><b>MSP white-label engineering</b><em>Specialist work, delivered under your brand.</em></li>
+        <li class="hm-layer" data-tier="2"><span>03</span><b>Firewall migration</b><em>Cutovers with rollback and validation.</em></li>
+        <li class="hm-layer" data-tier="1"><span>02</span><b>Firewall optimization</b><em>Policy, NAT and segmentation cleanup.</em></li>
+        <li class="hm-layer" data-tier="0"><span>01</span><b>Risk assessment</b><em>Risk-ranked findings and a roadmap.</em></li>
+      </ol>
+      <div class="hm-tag" aria-hidden="true"><span>Scoped</span><span>Built</span><span>Validated</span></div>
+      <p class="hm-cue" aria-hidden="true">Scroll</p>
     </div>
-    <div class="hh-console" role="group" aria-label="Policy simulation" data-state="secure">
-      <div class="hh-head"><span>Policy simulation</span><span class="hh-live"><i></i><span id="hh-mode-label">Segmented</span></span></div>
-      <div class="hh-readout">
-        <div><span>Threats blocked</span><b id="hh-blocked">0</b></div>
-        <div id="hh-exposed-box"><span>Zones exposed</span><b id="hh-exposed">0 / 5</b></div>
-      </div>
-      <div class="hh-controls">
-        <button class="hh-switch" id="hh-seg" type="button" aria-pressed="true"><span>Segmentation <span id="hh-seg-word">on</span></span><span class="hh-track" aria-hidden="true"></span></button>
-        <div class="hh-row">
-          <button class="hh-mini" id="hh-attack" type="button">Send attack</button>
-          <button class="hh-mini" id="hh-pause" type="button" aria-pressed="false">Pause motion</button>
-        </div>
-      </div>
-      <p class="hh-status" id="hh-status" aria-live="polite">Every flow crosses the policy gateway. Pick a zone to send a test attack.</p>
-    </div>
-    <p class="hh-hint">Click a zone to attack it &nbsp;&middot;&nbsp; drag to look around</p>
   </section>
 
   <section class="strip" aria-label="Credentials and partnerships">
@@ -337,6 +326,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 
         <div class="hs-panel" role="tabpanel" id="hs-p1" aria-labelledby="hs-t1">
           <div class="hs-ptitle"><span>Cutover simulator</span><b id="hs-mig-stage">Plan</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
           <div class="hs-mig">
             <div class="hs-box"><b>Legacy firewall</b><span class="hs-pct" id="hs-old">100%</span><br>of traffic</div>
             <div class="hs-flow" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -358,6 +348,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 
         <div class="hs-panel" role="tabpanel" id="hs-p2" aria-labelledby="hs-t2" hidden>
           <div class="hs-ptitle"><span>Rulebase cleanup</span><b>Illustrative rulebase</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
           <div class="hs-meter"><div><b id="hs-rule-count">8</b>Rules</div><div><b id="hs-risky">2</b>Overly broad</div><div><b id="hs-unused">1</b>Unused</div></div>
           <div class="hs-scroll">
             <table class="hs-rules" id="hs-rules">
@@ -380,6 +371,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 
         <div class="hs-panel" role="tabpanel" id="hs-p3" aria-labelledby="hs-t3" hidden>
           <div class="hs-ptitle"><span>Findings to roadmap</span><b>Illustrative findings</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
           <div class="hs-pool" id="hs-pool">
             <span class="hs-chip h" data-sev="h">No MFA on admin VPN</span>
             <span class="hs-chip m" data-sev="m">Shared local admin accounts</span>
