@@ -4,33 +4,35 @@ Status as of November 2026. This file is the record the design brief asks for: w
 
 ## Honest status
 
-The homepage layout, type, colour system and controls are built. **The service films are not.** Every moving-image slot currently shows a still image (poster preview). No animation is presented as finished cinematic work.
+**Homepage hero (Nov 2026):** the hero runs four live, real-time 3D service scenes built in code with three.js (`stage/`): firewall migration, network segmentation, risk assessment and MSP white-label. Each is a 22-second, four-shot sequence with its own subject and story. The hero rotates through them Shield-style and stops rotating once the visitor clicks a service or step, or moves keyboard focus into the controls. Interaction: cursor parallax, service tabs, step buttons, and HTML labels projected from the scenes.
 
-What this means against the brief's acceptance criteria:
+They look like stylised 3D product renders, not filmed or studio-rendered footage. Higher-end footage would still need a 3D studio or motion designer (brief below).
 
 | Criterion | Status |
 |---|---|
-| First frame reads as a composed stage, not a small diagram beside text | Met with a still poster |
-| Visitor sees genuine subject/camera/scene change within 5 seconds, without scrolling | **Not met.** Needs Film A–D and the hero montage below |
-| No service film is merely a zoom/pan over a still | Met by not animating stills at all |
-| Each service has a distinct visual identity | Partly. Assessment and MSP use HTML document compositions; migration image is reused in hero and card 01 |
-| Pause control, reduced motion, offscreen/background pause | Built and tested with a stand-in clip; activates automatically once real films are wired in |
+| First frame reads as a composed stage | Met (live scene, poster fallback) |
+| Visitor sees genuine subject/camera/scene change within 5 seconds, without scrolling | Met on devices with WebGL2 |
+| No service film is merely a zoom/pan over a still | Met |
+| Each service has a distinct visual identity | Met: hardware/rack aisle, architectural zones, evidence table, hub and clients |
+| Pause control, reduced motion, offscreen/background pause | Built and tested in headless Chromium; not yet tested on real phones |
 
 ## Assets currently used
 
 | File | Used for | Origin / licence | Notes |
 |---|---|---|---|
-| `cinematic-migration.webp` (1672×941) | Homepage hero poster; service card 01 (tighter crop) | **Unknown.** Added in commit `611312b` (30 Oct 2026). Appears AI-generated. | Confirm origin and right to use before launch. |
-| `cinematic-segmentation.webp` (1672×941) | Service card 02 | **Unknown**, same commit | Same as above. |
-| `cinematic-network.webp` (1672×941) | MSP feature background | **Unknown**, same commit | Generic data-hall image; weak fit for the MSP story. Replace with Film D poster. |
+| `media/migration-poster.webp`, `media/migration-poster-portrait.webp` | Hero fallback posters | Rendered from `stage/scene-migration.js` | Re-render with `?capture` if the scene changes. |
+| `media/card-migration.webp`, `card-segmentation.webp`, `card-assessment.webp`, `card-msp.webp` | Service gallery cards | Rendered from the four `stage/scene-*.js` files | Same. |
+| `media/msp-feature.webp` | MSP feature background | Rendered from `stage/scene-msp.js` | Same. |
 | `me.jpg` | Founder section | Owner-supplied | |
 | Certification and partner badges | Footer, procurement | Issuer marks | Existing usage, unchanged. |
 
-HTML compositions (no image files): the findings register (card 03) and the MSP handover package (card 04) use synthetic, labelled-illustrative content taken from the existing site copy. The engineering chapter uses an inline SVG schematic labelled "Illustrative".
+All in-scene text (config extracts, findings, the roadmap, the handover document, "YOUR MSP") is synthetic and labelled illustrative where it could be mistaken for real data. The engineering chapter's inline SVG is labelled "Illustrative".
 
-Unused files kept in the repo: `service-*.mp4`, `service-*-poster.webp` and `service-films-render.mjs` (diagram-style films from an earlier iteration). They are not loaded by any page. They are fine as technical explainers but do not meet the cinematic bar.
+No longer used by any page, kept in the repo: `cinematic-migration.webp`, `cinematic-segmentation.webp`, `cinematic-network.webp` (origin and licence unknown, added in commit `611312b`), and `service-*.mp4`, `service-*-poster.webp`, `service-films-render.mjs` (earlier diagram films). They can be deleted.
 
-## Files to produce
+## If you commission filmed or studio-rendered footage later
+
+### Files to produce
 
 | File | Size target | Notes |
 |---|---|---|
