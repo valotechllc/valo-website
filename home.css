@@ -70,7 +70,7 @@
 .h-chapters button span{color:var(--orange)}
 .h-chapters button[aria-current="step"]{color:#fff}
 .h-chapters button:hover{color:#fff}
-.h-hero:not(.stage-live) .h-chapters button{cursor:default}
+.h-hero:not(.stage-live) .h-chapters{visibility:hidden}
 .h-motion{position:absolute;z-index:3;top:92px;right:max(var(--gutter),calc((100% - var(--container)) / 2 + var(--gutter)));min-height:44px;padding:0 16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(7,16,34,.82);border:1px solid var(--rule-dark);cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .h-motion:hover{border-color:var(--orange)}
 
