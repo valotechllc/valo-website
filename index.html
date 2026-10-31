@@ -40,6 +40,7 @@
 <script src="/home.js?v=nav1" defer></script>
 <script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
 <link rel="modulepreload" href="/stage/stage.js" />
+<link rel="modulepreload" href="/stage/lib.js" />
 <script type="module" src="/stage/hero.js"></script>
 </head>
 <body class="home">
@@ -76,22 +77,31 @@
       </picture>
     </div>
     <div class="h-hero-shade" aria-hidden="true"></div>
+    <div class="h-labels" aria-hidden="true"></div>
     <div class="container h-hero-inner">
       <h1 id="h-title" class="h-kicker">Cisco &amp; Palo Alto network security engineering</h1>
-      <p class="h-st">Firewall migration</p>
-      <p class="h-hero-sub">Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p>
+      <p class="h-st" data-field="title">Firewall migration</p>
+      <p class="h-hero-sub" data-field="sub">Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p>
       <div class="h-actions">
-        <a class="h-btn h-btn-frame" href="/contact.html?service=firewall-migration">Discuss a migration</a>
+        <a class="h-btn h-btn-frame" data-field="cta" href="/contact.html?service=firewall-migration">Discuss a migration</a>
         <a class="h-btn h-btn-quiet" href="#services">All services</a>
       </div>
     </div>
     <div class="container h-hero-foot">
-      <p class="h-chapter-caption" aria-live="off">Inventory the current firewall: policy, NAT and dependencies.</p>
-      <div class="h-chapters" role="group" aria-label="Firewall migration, step by step">
-        <button type="button" data-chapter="0" data-caption="Inventory the current firewall: policy, NAT and dependencies." aria-current="step"><span>01</span>Scope</button>
-        <button type="button" data-chapter="1" data-caption="Stage the replacement and map policy, with rollback ready."><span>02</span>Stage</button>
-        <button type="button" data-chapter="2" data-caption="Shift approved traffic inside the change window, cable by cable."><span>03</span>Cut over</button>
-        <button type="button" data-chapter="3" data-caption="Test what should pass and what should not, then hand over."><span>04</span>Validate</button>
+      <div class="h-now">
+        <p class="h-chapter-caption"><b>01 Scope</b> Inventory the current firewall: policy, NAT and dependencies.</p>
+        <div class="h-stepnav" role="group" aria-label="Steps in this service">
+          <button type="button" data-chapter="0" aria-label="Step 1" aria-current="step">01</button>
+          <button type="button" data-chapter="1" aria-label="Step 2">02</button>
+          <button type="button" data-chapter="2" aria-label="Step 3">03</button>
+          <button type="button" data-chapter="3" aria-label="Step 4">04</button>
+        </div>
+      </div>
+      <div class="h-tabs" role="group" aria-label="Services">
+        <button type="button" data-service="0" aria-current="true"><span>01</span>Firewall migration</button>
+        <button type="button" data-service="1"><span>02</span>Network segmentation</button>
+        <button type="button" data-service="2"><span>03</span>Risk assessment</button>
+        <button type="button" data-service="3"><span>04</span>MSP white-label</button>
       </div>
     </div>
   </section>
@@ -127,52 +137,28 @@
 
     <ul class="h-track" id="h-track" role="list">
       <li class="h-card" id="svc-migration">
-        <div class="h-card-media" aria-hidden="true"><img src="/cinematic-migration.webp" alt="" width="1672" height="941" loading="lazy" style="object-position:82% 55%" /></div>
+        <div class="h-card-media" aria-hidden="true"><img src="/media/card-migration.webp" alt="" width="1200" height="900" loading="lazy" /></div>
         <p class="h-card-num">01</p>
         <h3><a href="/contact.html?service=firewall-migration">Firewall migration &amp; implementation</a></h3>
         <p class="h-card-desc">Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p>
         <span class="h-card-cta" aria-hidden="true">Discuss a migration</span>
       </li>
       <li class="h-card" id="svc-segmentation">
-        <div class="h-card-media" aria-hidden="true"><img src="/cinematic-segmentation.webp" alt="" width="1672" height="941" loading="lazy" style="object-position:40% 45%" /></div>
+        <div class="h-card-media" aria-hidden="true"><img src="/media/card-segmentation.webp" alt="" width="1200" height="900" loading="lazy" /></div>
         <p class="h-card-num">02</p>
         <h3><a href="/services/network-security.html">Network segmentation &amp; security engineering</a></h3>
         <p class="h-card-desc">Segmentation, Cisco switching and routing, and security remediation, so what should never talk, doesn&rsquo;t.</p>
         <span class="h-card-cta" aria-hidden="true">Explore network engineering</span>
       </li>
       <li class="h-card" id="svc-assessment">
-        <div class="h-card-media h-doc" aria-hidden="true">
-          <div class="h-doc-sheet">
-            <div class="h-doc-top"><span>Findings register</span><span>Illustrative</span></div>
-            <ol class="h-doc-rows">
-              <li><i class="sev-h"></i>Admin VPN without MFA<b>Fix now</b></li>
-              <li><i class="sev-h"></i>Firewall OS out of support<b>Fix now</b></li>
-              <li><i class="sev-m"></i>Vendor access never reviewed<b>90 days</b></li>
-              <li><i class="sev-m"></i>Backups never restore-tested<b>90 days</b></li>
-              <li><i class="sev-l"></i>Logging not centralized<b>Planned</b></li>
-            </ol>
-          </div>
-        </div>
+        <div class="h-card-media" aria-hidden="true"><img src="/media/card-assessment.webp" alt="" width="1200" height="900" loading="lazy" /></div>
         <p class="h-card-num">03</p>
         <h3><a href="/services/compliance.html">Cybersecurity risk assessment</a></h3>
         <p class="h-card-desc">Vendor-neutral, engineer-led review with risk-ranked findings and a remediation roadmap you can act on.</p>
         <span class="h-card-cta" aria-hidden="true">See how assessments work</span>
       </li>
       <li class="h-card" id="svc-msp">
-        <div class="h-card-media h-doc h-doc-msp" aria-hidden="true">
-          <div class="h-doc-sheet">
-            <div class="h-doc-top"><span>Handover package</span><span>Illustrative</span></div>
-            <p class="h-doc-brand">YOUR&nbsp;MSP</p>
-            <p class="h-doc-title">Firewall migration &mdash; client handover</p>
-            <ul class="h-doc-list">
-              <li>Migration plan<b>&check;</b></li>
-              <li>Rollback plan<b>&check;</b></li>
-              <li>Path-validation checklist<b>&check;</b></li>
-              <li>Handover documentation<b>&check;</b></li>
-            </ul>
-            <p class="h-doc-foot">Delivered under your brand</p>
-          </div>
-        </div>
+        <div class="h-card-media" aria-hidden="true"><img src="/media/card-msp.webp" alt="" width="1200" height="900" loading="lazy" /></div>
         <p class="h-card-num">04</p>
         <h3><a href="/services/#msp">MSP white-label engineering</a></h3>
         <p class="h-card-desc">Cisco and Palo Alto engineering capacity behind your MSP. The client relationship stays with you.</p>
@@ -240,7 +226,7 @@
   <!-- 5. MSP partnership feature.
        MEDIA STATUS: still image preview. Film D (white-label MSP engineering) is not produced yet. -->
   <section class="h-msp" id="msp" aria-labelledby="h-msp-title" data-media-status="poster-preview">
-    <div class="h-msp-media" aria-hidden="true"><img src="/cinematic-network.webp" alt="" width="1672" height="941" loading="lazy" /></div>
+    <div class="h-msp-media" aria-hidden="true"><img src="/media/msp-feature.webp" alt="" width="1920" height="1080" loading="lazy" /></div>
     <div class="h-msp-shade" aria-hidden="true"></div>
     <div class="container h-msp-inner">
       <p class="h-label">For MSPs</p>
