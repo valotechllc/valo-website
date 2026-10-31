@@ -32,11 +32,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="/cinematic-migration.webp" fetchpriority="high" />
+<link rel="preload" as="image" href="/media/migration-poster.webp" media="(min-width: 761px)" fetchpriority="high" />
+<link rel="preload" as="image" href="/media/migration-poster-portrait.webp" media="(max-width: 760px)" fetchpriority="high" />
 <link rel="stylesheet" href="/styles.css?v=nav1" />
 <link rel="stylesheet" href="/home.css?v=nav1" />
 <script src="/site.js?v=nav1" defer></script>
 <script src="/home.js?v=nav1" defer></script>
+<script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
+<link rel="modulepreload" href="/stage/stage.js" />
+<script type="module" src="/stage/hero.js"></script>
 </head>
 <body class="home">
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -62,30 +66,34 @@
 
 <main id="main-content">
 
-  <!-- 1. Opening stage.
-       MEDIA STATUS: poster preview. The hero service film is not produced yet (see docs/media-manifest.md).
-       When hero-desktop.mp4 / hero-mobile.mp4 exist, add data-film-desktop and data-film-mobile to this
-       section; home.js then attaches a muted, looping inline video and shows the pause control. -->
-  <section class="h-hero" aria-labelledby="h-title" data-media-status="poster-preview">
+  <!-- 1. Opening stage: live 3D service scene (stage/hero.js) over a poster rendered from the same scene.
+       The poster is the complete fallback for no WebGL2, reduced motion, and loading. -->
+  <section class="h-hero" aria-labelledby="h-title" data-stage="migration">
     <div class="h-hero-media" aria-hidden="true">
-      <img src="/cinematic-migration.webp" alt="" width="1672" height="941" fetchpriority="high" />
+      <picture>
+        <source media="(max-width: 760px)" srcset="/media/migration-poster-portrait.webp" />
+        <img class="h-poster" src="/media/migration-poster.webp" alt="" width="1920" height="1080" fetchpriority="high" />
+      </picture>
     </div>
     <div class="h-hero-shade" aria-hidden="true"></div>
     <div class="container h-hero-inner">
-      <p class="h-kicker">Cisco &amp; Palo Alto network security engineering</p>
-      <h1 id="h-title">Security.<br class="h-br" /> Engineered.</h1>
-      <p class="h-hero-sub">Firewall migrations, policy cleanup, segmentation and risk assessments for MSPs, SMBs and public-sector teams.</p>
+      <h1 id="h-title" class="h-kicker">Cisco &amp; Palo Alto network security engineering</h1>
+      <p class="h-st">Firewall migration</p>
+      <p class="h-hero-sub">Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p>
       <div class="h-actions">
-        <a class="h-btn h-btn-solid" href="/contact.html">Discuss a project</a>
-        <a class="h-btn h-btn-frame" href="#services">See the services</a>
+        <a class="h-btn h-btn-frame" href="/contact.html?service=firewall-migration">Discuss a migration</a>
+        <a class="h-btn h-btn-quiet" href="#services">All services</a>
       </div>
     </div>
-    <ol class="container h-hero-index" aria-label="Core services">
-      <li><a href="#svc-migration"><span>01</span>Firewall migration</a></li>
-      <li><a href="#svc-segmentation"><span>02</span>Network segmentation</a></li>
-      <li><a href="#svc-assessment"><span>03</span>Risk assessment</a></li>
-      <li><a href="#svc-msp"><span>04</span>MSP white-label</a></li>
-    </ol>
+    <div class="container h-hero-foot">
+      <p class="h-chapter-caption" aria-live="off">Inventory the current firewall: policy, NAT and dependencies.</p>
+      <div class="h-chapters" role="group" aria-label="Firewall migration, step by step">
+        <button type="button" data-chapter="0" data-caption="Inventory the current firewall: policy, NAT and dependencies." aria-current="step"><span>01</span>Scope</button>
+        <button type="button" data-chapter="1" data-caption="Stage the replacement and map policy, with rollback ready."><span>02</span>Stage</button>
+        <button type="button" data-chapter="2" data-caption="Shift approved traffic inside the change window, cable by cable."><span>03</span>Cut over</button>
+        <button type="button" data-chapter="3" data-caption="Test what should pass and what should not, then hand over."><span>04</span>Validate</button>
+      </div>
+    </div>
   </section>
 
   <!-- 2. Quiet statement and proof line -->

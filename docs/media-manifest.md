@@ -4,23 +4,24 @@ Status as of November 2026. This file is the record the design brief asks for: w
 
 ## Honest status
 
-The homepage layout, type, colour system and controls are built. **The service films are not.** Every moving-image slot currently shows a still image (poster preview). No animation is presented as finished cinematic work.
+**Homepage hero (prototype, Nov 2026):** the hero now runs a live, real-time 3D scene for firewall migration (`stage/`), built in code with three.js. It is interactive (cursor parallax, four clickable chapters) and plays a 22-second, four-shot sequence: scope, stage, cut over, validate. It looks like a stylised 3D product render, not filmed or studio-rendered footage. The other three service scenes (segmentation, risk assessment, MSP) are not built yet.
 
-What this means against the brief's acceptance criteria:
+The hero posters (`media/migration-poster*.webp`) are frames rendered from that scene, so they are original assets with no third-party licence question.
 
 | Criterion | Status |
 |---|---|
-| First frame reads as a composed stage, not a small diagram beside text | Met with a still poster |
-| Visitor sees genuine subject/camera/scene change within 5 seconds, without scrolling | **Not met.** Needs Film A–D and the hero montage below |
-| No service film is merely a zoom/pan over a still | Met by not animating stills at all |
-| Each service has a distinct visual identity | Partly. Assessment and MSP use HTML document compositions; migration image is reused in hero and card 01 |
-| Pause control, reduced motion, offscreen/background pause | Built and tested with a stand-in clip; activates automatically once real films are wired in |
+| First frame reads as a composed stage | Met (live scene, poster fallback) |
+| Visitor sees genuine subject/camera/scene change within 5 seconds, without scrolling | Met for the hero on devices with WebGL2; not met for the other three services yet |
+| No service film is merely a zoom/pan over a still | Met |
+| Each service has a distinct visual identity | Not yet: only the migration scene exists |
+| Pause control, reduced motion, offscreen/background pause | Built and tested in headless Chromium; not yet tested on real phones |
 
 ## Assets currently used
 
 | File | Used for | Origin / licence | Notes |
 |---|---|---|---|
-| `cinematic-migration.webp` (1672×941) | Homepage hero poster; service card 01 (tighter crop) | **Unknown.** Added in commit `611312b` (30 Oct 2026). Appears AI-generated. | Confirm origin and right to use before launch. |
+| `media/migration-poster.webp`, `media/migration-poster-portrait.webp` | Hero fallback posters | Rendered from `stage/scene-migration.js` in this repo | Re-render with the capture mode if the scene changes. |
+| `cinematic-migration.webp` (1672×941) | Service card 01 (no longer the hero) | **Unknown.** Added in commit `611312b` (30 Oct 2026). Appears AI-generated. | Confirm origin and right to use before launch. |
 | `cinematic-segmentation.webp` (1672×941) | Service card 02 | **Unknown**, same commit | Same as above. |
 | `cinematic-network.webp` (1672×941) | MSP feature background | **Unknown**, same commit | Generic data-hall image; weak fit for the MSP story. Replace with Film D poster. |
 | `me.jpg` | Founder section | Owner-supplied | |
