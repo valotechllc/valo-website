@@ -5,33 +5,35 @@
    - Offscreen or background tab -> rendering stops.
    - Services rotate after each scene until the visitor takes control (click or keyboard focus).
    - ?capture -> deterministic frame rendering for posters and recordings. */
-import { createStage, webglAvailable } from './stage.js';
-import { migrationScene } from './scene-migration.js';
-import { segmentationScene } from './scene-segmentation.js';
-import { assessmentScene } from './scene-assessment.js';
-import { mspScene } from './scene-msp.js';
+// The 3D code (three.js and the scenes, ~800 KB) is fetched only when it is going to run,
+// so reduced-motion visitors and browsers without WebGL2 never download it.
+const loadScenes = () => Promise.all([
+  import('./stage.js'),
+  import('./scene-migration.js'), import('./scene-segmentation.js'), import('./scene-assessment.js'), import('./scene-msp.js')
+]).then(([core, a, b, c, d]) => ({ createStage: core.createStage, scenes: [a.migrationScene, b.segmentationScene, c.assessmentScene, d.mspScene] }));
+const webglAvailable = () => { try { const c = document.createElement('canvas'); return !!(window.WebGL2RenderingContext && c.getContext('webgl2')); } catch (e) { return false; } };
 
 const SERVICES = [
   {
-    scene: migrationScene, title: 'Firewall migration',
+    title: 'Firewall migration',
     sub: 'Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.',
     cta: ['Discuss a migration', '/contact.html?service=firewall-migration'],
     steps: ['Inventory the current firewall: policy, NAT and dependencies.', 'Stage the replacement and map policy, with rollback ready.', 'Shift approved traffic inside the change window, cable by cable.', 'Test what should pass and what should not, then hand over.']
   },
   {
-    scene: segmentationScene, title: 'Network segmentation',
+    title: 'Network segmentation',
     sub: 'Segmentation, Cisco switching and routing, and security remediation, so what should never talk, doesn’t.',
     cta: ['Explore network engineering', '/services/network-security.html'],
     steps: ['Workforce, applications and guest devices share one flat network.', 'Group systems into zones with clear boundaries.', 'Permit only the paths the business needs, through policy.', 'Test what is allowed and what is blocked, then document it.']
   },
   {
-    scene: assessmentScene, title: 'Risk assessment',
+    title: 'Risk assessment',
     sub: 'Vendor-neutral, engineer-led review with risk-ranked findings and a remediation roadmap you can act on.',
     cta: ['See how assessments work', '/services/compliance.html'],
     steps: ['Review the environment’s configuration and architecture.', 'Record each finding with the evidence behind it.', 'Rank findings by risk: fix now, next 90 days, planned.', 'Deliver a remediation roadmap you can act on.']
   },
   {
-    scene: mspScene, title: 'MSP white-label',
+    title: 'MSP white-label',
     sub: 'Cisco and Palo Alto engineering capacity behind your MSP. The client relationship stays with you.',
     cta: ['Discuss an MSP engagement', '/services/#msp'],
     steps: ['Scope, change windows and rollback are agreed with your team first.', 'Specialist work is done inside your process and your tools.', 'Every change is checked against what should pass and what should not.', 'Documentation goes out in your name. The client stays yours.']
@@ -74,16 +76,21 @@ if (hero && media && webglAvailable()) {
   const goTo = (i, t = 0) => { stage.setScene(i, t); showService(i); };
   const takeControl = () => { if (auto) { auto = false; if (stage) stage.loop = true; } };
 
+  let mounting = null;
   const mount = () => {
-    if (stage) return stage;
-    try {
+    if (stage) return Promise.resolve(stage);
+    if (mounting) return mounting;
+    mounting = loadScenes().then(({ createStage, scenes }) => {
       const q = new URLSearchParams(location.search);
       const extra = capture && q.has('shift') ? { shift: Number(q.get('shift')), shiftPortrait: Number(q.get('shift')) } : {};
-      stage = createStage(media, SERVICES.map((s) => s.scene), { capture, labelLayer, ...extra });
-    } catch (err) {
-      hero.classList.add('stage-failed');
-      return null;
-    }
+      stage = createStage(media, scenes, { capture, labelLayer, ...extra });
+      wire();
+      return stage;
+    }).catch(() => { hero.classList.add('stage-failed'); return null; });
+    return mounting;
+  };
+
+  const wire = () => {
     stage.loop = !auto;
     stage.on(({ scene, progress, chapter, chapterProgress, changed, ended }) => {
       if (ended) { if (auto) goTo((scene + 1) % SERVICES.length); return; }
@@ -99,12 +106,11 @@ if (hero && media && webglAvailable()) {
     steps.forEach((b, k) => b.addEventListener('click', () => { takeControl(); stage.seek(stage.chapters[k].start + 0.4); if (!stage.running && !paused && visible) stage.play(); }));
     hero.addEventListener('focusin', (e) => { if (e.target.closest('.h-hero-foot, .h-actions')) takeControl(); });
     hero.classList.add('stage-live');
-    return stage;
   };
 
   if (capture) {
-    const s = mount();
-    if (s) {
+    mount().then((s) => {
+      if (!s) return;
       s.renderAt(0);
       hero.classList.add('stage-ready');
       window.__valoStage = {
@@ -112,7 +118,7 @@ if (hero && media && webglAvailable()) {
         setScene: (i) => { goTo(i, 0); },
         renderAt: (t) => s.renderAt(t)
       };
-    }
+    });
   } else {
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -120,7 +126,7 @@ if (hero && media && webglAvailable()) {
     hero.appendChild(btn);
 
     const apply = () => {
-      if (!paused && !stage) mount();
+      if (!paused && !stage) { mount().then((s) => { if (s) apply(); }); }
       if (stage) {
         if (!paused && visible && !document.hidden) stage.play(); else stage.pause();
         if (!hero.classList.contains('stage-ready')) { if (!stage.running) stage.renderAt(0.6); requestAnimationFrame(() => hero.classList.add('stage-ready')); }
