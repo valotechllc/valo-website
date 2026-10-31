@@ -9,7 +9,7 @@
 #hm .hm-intro>*{pointer-events:auto;position:relative}
 #hm .hm-intro::before{content:"";position:absolute;inset:-12% -8%;background:radial-gradient(closest-side,rgba(8,9,11,.62),rgba(8,9,11,0));pointer-events:none}
 #hm .hm-eyebrow{margin:0 0 22px;font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,239,233,.62)}
-#hm h1{margin:0;font-size:clamp(56px,10.5vw,156px);line-height:.92;letter-spacing:-.045em;font-weight:500;color:#F2EFE9;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+#hm h1{margin:0;font-size:clamp(50px,8.2vw,108px);line-height:.98;letter-spacing:-.035em;font-weight:400;color:#F2EFE9;text-shadow:0 2px 40px rgba(0,0,0,.45)}
 #hm .hm-sub{margin:26px auto 0;max-width:34em;font-size:17px;line-height:1.6;color:rgba(242,239,233,.72)}
 #hm .hm-cta{display:inline-block;margin-top:30px;padding:14px 22px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#F2EFE9;text-decoration:none;background:rgba(122,40,22,.45);border:1px solid rgba(232,135,95,.7)}
 #hm .hm-cta:hover{background:rgba(200,75,47,.6)}
@@ -198,3 +198,13 @@ body.home-dark footer{background:#050607}
 .hq-card figcaption em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#E8875F}
 .hq-note{margin:18px 0 0;font-size:13px;color:rgba(242,239,233,.45)}
 @media (max-width:860px){.hq{padding:64px 0}.hq-grid{grid-template-columns:1fr}.hq-card{padding:28px 22px}.hq-card.hq-lead p{font-size:19px}.hq-card p{font-size:16px}}
+
+/* square, thin-framed controls (dark theme) */
+body.home-dark .hs-tab,body.home-dark .hs-panel,body.home-dark .hs-chip,body.home-dark .hs-bucket,body.home-dark .hs-box,body.home-dark .hs-more,body.home-dark .hs-btn,body.home-dark .procure{border-radius:0}
+html.motion-stopped .hs-flow i{animation:none;display:none}
+/* global motion pause */
+.motion-pause{position:fixed;z-index:60;right:16px;bottom:16px;min-height:44px;padding:0 16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#F2EFE9;background:rgba(8,9,11,.78);border:1px solid rgba(242,239,233,.24);cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.motion-pause:hover{border-color:#E8875F}
+.motion-pause:focus-visible{outline:2px solid #E8875F;outline-offset:3px}
+@media (max-width:520px){.motion-pause{right:12px;bottom:12px;padding:0 12px;font-size:10px}}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}

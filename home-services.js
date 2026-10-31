@@ -1,4 +1,4 @@
-/* VALO homepage: hands-on service demos (migration, rulebase cleanup, risk sorting).
+/* VALO homepage: hands-on service demos (migration, rulebase cleanup, segmentation, risk sorting) and the global motion pause.
    Plain DOM, no dependencies. Every demo is illustrative and readable without JavaScript. */
 (() => {
   const lab = document.querySelector('.hs-lab');
@@ -71,5 +71,29 @@
       });
       btn.textContent = sorted ? 'Reset findings' : 'Prioritize findings';
     });
+  }
+  // network segmentation: split a flat network into zones with a few allowed paths
+  const segBtn = document.getElementById('hs-seg');
+  if (segBtn) {
+    let seg = false;
+    const checks = [...document.querySelectorAll('#hs-seg-checks li')];
+    segBtn.addEventListener('click', () => {
+      seg = !seg;
+      document.getElementById('hs-zones').textContent = seg ? '3' : '1';
+      document.getElementById('hs-paths').textContent = seg ? '3 defined' : 'Any to any';
+      document.getElementById('hs-seg-state').textContent = seg ? 'Segmented and validated' : 'Flat network';
+      checks.forEach((c, i) => reduced ? c.classList.toggle('ok', seg) : setTimeout(() => c.classList.toggle('ok', seg), seg ? 300 + i * 220 : 0));
+      segBtn.textContent = seg ? 'Show flat network' : 'Segment the network';
+    });
+  }
+
+  // global motion pause, remembered for this visitor
+  const pause = document.querySelector('.motion-pause');
+  if (pause) {
+    let stopped = false;
+    try { stopped = localStorage.getItem('valo-motion') === 'off'; } catch (e) {}
+    const apply = () => { document.documentElement.classList.toggle('motion-stopped', stopped); pause.setAttribute('aria-pressed', String(stopped)); pause.textContent = stopped ? 'Play motion' : 'Pause motion'; };
+    pause.addEventListener('click', () => { stopped = !stopped; try { localStorage.setItem('valo-motion', stopped ? 'off' : 'on'); } catch (e) {} apply(); });
+    apply();
   }
 })();

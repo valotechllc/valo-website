@@ -196,11 +196,11 @@ footer a:hover{color:#fff;text-decoration:underline}
 </style>
 <link rel="stylesheet" href="/msp-story.css?v=msp4" />
 <script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
-<link rel="stylesheet" href="/home.css?v=home4" />
-<script type="module" src="/home-monolith.js?v=home3"></script>
+<link rel="stylesheet" href="/home.css?v=home5" />
+<script type="module" src="/home-monolith.js?v=home4"></script>
 <script type="module" src="/msp-story.js?v=msp3"></script>
-<script src="/home-services.js?v=home1" defer></script>
-  <script type="module" src="/home-services-3d.js?v=svc1"></script>
+<script src="/home-services.js?v=home2" defer></script>
+  <script type="module" src="/home-services-3d.js?v=svc2"></script>
 </head>
 <body class="home-dark">
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -230,7 +230,7 @@ footer a:hover{color:#fff;text-decoration:underline}
       <div class="hm-intro">
         <p class="hm-eyebrow">Cisco &amp; Palo Alto network security engineering</p>
         <h1 id="hm-title">Security.<br>Engineered.</h1>
-        <p class="hm-sub">Firewall migrations, policy cleanup and risk assessments for MSPs, SMBs and public-sector teams.</p>
+        <p class="hm-sub">Firewall migrations, policy cleanup, segmentation and risk assessments for MSPs, SMBs and public-sector teams.</p>
         <a class="hm-cta" href="/contact.html">Discuss a project</a>
       </div>
       <ol class="hm-layers" aria-label="What VALO engineers">
@@ -338,6 +338,7 @@ footer a:hover{color:#fff;text-decoration:underline}
         <div class="hs-tabs" role="tablist" aria-label="Core services" aria-orientation="vertical">
           <button class="hs-tab" role="tab" id="hs-t1" aria-controls="hs-p1" aria-selected="true"><span class="hs-k">Firewall migration &amp; implementation</span><h3>Move to the new firewall without an outage.</h3><p>Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p></button>
           <button class="hs-tab" role="tab" id="hs-t2" aria-controls="hs-p2" aria-selected="false" tabindex="-1"><span class="hs-k">Firewall assessment &amp; optimization</span><h3>Turn a rulebase nobody trusts into one you can read.</h3><p>Policy, NAT, segmentation and access review, with prioritized findings and a cleanup plan.</p></button>
+          <button class="hs-tab" role="tab" id="hs-t4" aria-controls="hs-p4" aria-selected="false" tabindex="-1"><span class="hs-k">Network security engineering</span><h3>Separate what should never talk.</h3><p>Segmentation, Cisco switching and routing, and security remediation for direct clients.</p></button>
           <button class="hs-tab" role="tab" id="hs-t3" aria-controls="hs-p3" aria-selected="false" tabindex="-1"><span class="hs-k">Cybersecurity risk assessment</span><h3>Know which gaps to close first.</h3><p>Vendor-neutral review with risk-ranked findings and a remediation roadmap.</p></button>
         </div>
 
@@ -384,6 +385,20 @@ footer a:hover{color:#fff;text-decoration:underline}
           </div>
           <div><button class="hs-btn" id="hs-clean" type="button">Run the cleanup</button></div>
           <a href="/contact.html?service=firewall-assessment" class="link">Request a firewall assessment &rarr;</a>
+        </div>
+
+        <div class="hs-panel" role="tabpanel" id="hs-p4" aria-labelledby="hs-t4" hidden>
+          <div class="hs-ptitle"><span>Segmentation planner</span><b id="hs-seg-state">Flat network</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
+          <div class="hs-meter"><div><b id="hs-zones">1</b>Zones</div><div><b id="hs-paths">Any to any</b>Allowed paths</div></div>
+          <ul class="hs-checks" id="hs-seg-checks">
+            <li>Workforce reaches applications on approved ports only</li>
+            <li>Guest and IoT devices blocked from internal systems</li>
+            <li>Management access from the admin zone only</li>
+            <li>Allowed and blocked paths tested after the change</li>
+          </ul>
+          <div><button class="hs-btn" id="hs-seg" type="button">Segment the network</button></div>
+          <a href="/services/network-security.html" class="link">Discuss network segmentation &rarr;</a>
         </div>
 
         <div class="hs-panel" role="tabpanel" id="hs-p3" aria-labelledby="hs-t3" hidden>
@@ -566,5 +581,6 @@ footer a:hover{color:#fff;text-decoration:underline}
   }
 })();
 </script>
+<button class="motion-pause" type="button" aria-pressed="false">Pause motion</button>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /* VALO homepage: a cinematic 3D view for each service tab. The buttons and slider in each panel stay the
    source of truth (they work without WebGL); this file only reads their state and stages it.
-   Illustrative only. three.js is vendored under /vendor/three. */
+   Illustrative only. Panels: migration, rulebase cleanup, segmentation, risk. three.js is vendored under /vendor/three. */
 import * as THREE from 'three';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
@@ -110,7 +110,46 @@ const risk=(()=>{
   }};
 })();
 
-const scenes={'hs-p1':mig,'hs-p2':opt,'hs-p3':risk};
+
+/* ---------- segmentation: a flat network separates into zones with a few allowed paths ---------- */
+const segScene=(()=>{
+  const s=baseScene();const btn=document.getElementById('hs-seg');
+  const G=[{c:WARM,x:-3},{c:STEEL,x:0},{c:AMBER,x:3}],nodes=[];
+  G.forEach((g,gi)=>{
+    const plate=new THREE.Mesh(new THREE.BoxGeometry(2.4,.08,2.4),metal());plate.position.set(g.x,.04,0);s.add(plate);g.plate=plate;
+    const edge=new THREE.Mesh(new THREE.BoxGeometry(2.42,.015,2.42),glow(g.c));edge.position.set(g.x,.09,0);edge.material.opacity=0;s.add(edge);g.edge=edge;
+    for(let k=0;k<5;k++){const m=new THREE.Mesh(new THREE.BoxGeometry(.32,.32,.32),metal());const cap=new THREE.Mesh(new THREE.BoxGeometry(.33,.03,.33),glow(g.c));cap.position.y=.17;m.add(cap);s.add(m);
+      const a=(gi*5+k)*2.399,r=.7+((gi*5+k)*.37%1)*2.1;
+      nodes.push({m,g:gi,flat:new THREE.Vector3(Math.cos(a)*r,.2,Math.sin(a)*r*.75),zone:new THREE.Vector3(g.x+((k%3)-1)*.7,.24,(k<3?-.45:.45))});}
+  });
+  const walls=[-1.5,1.5].map(x=>{const w=new THREE.Mesh(new THREE.PlaneGeometry(2.6,1.3),new THREE.MeshBasicMaterial({color:COPPER.clone().multiplyScalar(.9),transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}));w.rotation.y=Math.PI/2;w.position.set(x,.65,0);s.add(w);return w;});
+  const flatPairs=[];for(let i=0;i<26;i++){const a=(i*7)%15,b=(i*11+4)%15;if(a!==b)flatPairs.push([a,b]);}
+  const allowed=[[0,5],[2,7],[4,6]];
+  const lines=new THREE.LineSegments(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:WARM.clone().multiplyScalar(1.2),transparent:true,opacity:.5,toneMapped:false}));
+  const lp=new Float32Array((flatPairs.length+allowed.length+1)*6);lines.geometry.setAttribute('position',new THREE.BufferAttribute(lp,3));s.add(lines);
+  const stop=new THREE.Mesh(new THREE.BoxGeometry(.06,.36,.36),glow(RED));stop.position.set(1.5,.4,.45);s.add(stop);
+  const PK=18,pk=new THREE.InstancedMesh(new THREE.SphereGeometry(.05,10,8),glow(WARM),PK);s.add(pk);const d=new THREE.Object3D(),va=new THREE.Vector3();
+  let seg=0;
+  return {scene:s,cam:{pos:[0,4.2,7.6],look:[0,.4,0]},update(dt,time){
+    seg=damp(seg,btn&&/flat/i.test(btn.textContent)?1:0,2.4,dt);
+    nodes.forEach((n,i)=>{const f=smooth(i/15*.4,i/15*.4+.6,seg);n.m.position.lerpVectors(n.flat,n.zone,f);n.m.position.y+=Math.sin(f*Math.PI)*.6;n.m.rotation.y=(1-f)*(i*.7);});
+    G.forEach(g=>{g.edge.material.opacity=seg*(.35+.12*Math.sin(time*2));g.plate.scale.setScalar(.6+.4*seg);});
+    walls.forEach(w=>{w.material.opacity=seg*.09;w.scale.y=Math.max(.001,seg);});
+    let o=0;const put=(a,b)=>{lp.set([a.x,a.y,a.z,b.x,b.y,b.z],o);o+=6};
+    const flatOn=seg<.5;
+    flatPairs.forEach(([a,b])=>flatOn?put(nodes[a].m.position,nodes[b].m.position):put(va.set(0,-9,0),va));
+    allowed.forEach(([a,b])=>!flatOn?put(nodes[a].m.position,nodes[b].m.position):put(va.set(0,-9,0),va));
+    if(!flatOn){const g=nodes[12].m.position;put(g,va.set(1.5,.4,.45));}else put(va.set(0,-9,0),va);
+    lines.geometry.attributes.position.needsUpdate=true;lines.geometry.setDrawRange(0,o/3);
+    lines.material.opacity=flatOn?.35*(1-seg*2):.7*(seg*2-1);
+    stop.material.opacity=smooth(.7,1,seg)*(.7+.3*Math.sin(time*4));stop.visible=seg>.6;
+    const list=flatOn?flatPairs:allowed;
+    for(let i=0;i<PK;i++){const [a,b]=list[i%list.length];const u=(time*.35+i*.173)%1;d.position.lerpVectors(nodes[a].m.position,nodes[b].m.position,u);d.position.y+=.05;d.updateMatrix();pk.setMatrixAt(i,d.matrix);}
+    pk.instanceMatrix.needsUpdate=true;
+  }};
+})();
+
+const scenes={'hs-p1':mig,'hs-p2':opt,'hs-p3':risk,'hs-p4':segScene};
 let active=null,W=1,H=1;
 function mount(){const panel=lab.querySelector('[role="tabpanel"]:not([hidden])');if(!panel)return;const view=panel.querySelector('.hs-view');if(!view)return;
   if(renderer.domElement.parentNode!==view)view.appendChild(renderer.domElement);active=scenes[panel.id];renderPass.scene=active.scene;size();}
@@ -125,7 +164,7 @@ let px=0,py=0;lab.addEventListener('pointermove',e=>{const r=lab.getBoundingClie
 let visible=false;new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(lab);
 let time=0,last=performance.now();
 const look=new THREE.Vector3();
-function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last)/1000);last=now;
+function frame(now){requestAnimationFrame(frame);const dt=Math.max(0,Math.min(.05,(now-last)/1000));last=now;
   if(!visible||document.hidden||!active)return;
   const still=reduced||document.documentElement.classList.contains('motion-stopped');if(!still)time+=dt;
   active.update(dt,time);

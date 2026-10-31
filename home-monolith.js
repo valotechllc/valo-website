@@ -49,6 +49,9 @@ for(let i=0;i<TIERS;i++){
   const y0=.5+TH/2+i*TH;g.userData={y0,spin:(i%2?1:-1)*.22};g.position.y=y0;scene.add(g);tiers.push(g);
 }
 const cap=new THREE.Mesh(new THREE.BoxGeometry(3.04,.04,2.14),seamMat);scene.add(cap);
+/* a scan band that travels the stack: the hero is never a still frame */
+const scanMat=new THREE.MeshBasicMaterial({color:WARM.clone().multiplyScalar(2.2),transparent:true,opacity:.0,toneMapped:false,blending:THREE.AdditiveBlending,depthWrite:false});
+const scan=new THREE.Mesh(new THREE.BoxGeometry(3.12,.03,2.22),scanMat);scene.add(scan);
 
 /* a shaft of light and dust drifting through it */
 const beamMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms:{uI:{value:.5}},
@@ -83,7 +86,7 @@ const tmp=new THREE.Vector3();
 let time=0,last=performance.now();
 function frame(now){
   requestAnimationFrame(frame);
-  const dt=Math.min(.05,(now-last)/1000);last=now;
+  const dt=Math.max(0,Math.min(.05,(now-last)/1000));last=now;
   if(!visible||document.hidden)return;
   const still=reduced||document.documentElement.classList.contains('motion-stopped');
   if(!still)time+=dt;
@@ -91,7 +94,7 @@ function frame(now){
   const open=smooth(.12,.6,pos),out=smooth(.82,1,pos);
 
   // tiers lift apart and turn slightly, like an exploded drawing
-  tiers.forEach((g,i)=>{const lift=open*(i*.95+.35);g.position.y=g.userData.y0+lift;g.rotation.y=open*g.userData.spin*(i+1)*.5;
+  tiers.forEach((g,i)=>{const lift=open*(i*.95+.35)+Math.sin(time*.7+i*.9)*.04*(.4+open);g.position.y=g.userData.y0+lift;g.rotation.y=open*g.userData.spin*(i+1)*.5;
     g.children.forEach(c=>{if(c.userData.phase!==undefined)c.material.color.copy(WARM).multiplyScalar(1.4+Math.sin(time*2+c.userData.phase)*.6)});});
   const top=tiers[TIERS-1];cap.position.set(0,top.position.y+TH/2-.02,0);cap.rotation.y=top.rotation.y;
   seamMat.color.copy(COPPER).multiplyScalar(2+open*1.4);
@@ -103,7 +106,8 @@ function frame(now){
   // camera: low and close, pushing in; pulls back and rises as the stack opens
   const drift=still?0:Math.sin(time*.08)*.35;
   const dist=(mobile?15:13.5)+open*(mobile?6:5),h=1.4+open*3.6;
-  const ang=(mobile?.12:.32)+drift*.2+px*.12+open*.35;
+  const ang=(mobile?.12:.32)+drift*.9+Math.sin(time*.13)*.28+px*.12+open*.35;
+  const sc=(time*.18)%1,top0=tiers[0].position.y-TH/2,top1=tiers[TIERS-1].position.y+TH/2;scan.position.y=top0+(top1-top0)*sc;scan.rotation.y=tiers[Math.min(TIERS-1,Math.floor(sc*TIERS))].rotation.y;scanMat.opacity=still?0:Math.sin(sc*Math.PI)*.85;
   camera.position.set(Math.sin(ang)*dist,h-py*.6,Math.cos(ang)*dist);
   camera.lookAt(0,(mobile?3.4:3.1)+open*2.2,0);
   grain.uniforms.uT.value=still?0:time;
