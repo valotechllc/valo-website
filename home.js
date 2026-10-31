@@ -22,31 +22,6 @@
     links.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) closeMenu(); });
   }
 
-  /* ---- service gallery: arrow buttons for the horizontal track (desktop only) ---- */
-  var track = document.getElementById('h-track');
-  var ctrl = document.querySelector('.h-track-ctrl');
-  if (track && ctrl) {
-    var back = ctrl.querySelector('[data-dir="-1"]');
-    var fwd = ctrl.querySelector('[data-dir="1"]');
-    var update = function () {
-      var max = track.scrollWidth - track.clientWidth - 2;
-      ctrl.hidden = max <= 0;
-      back.disabled = track.scrollLeft <= 2;
-      fwd.disabled = track.scrollLeft >= max;
-    };
-    [back, fwd].forEach(function (b) {
-      b.addEventListener('click', function () {
-        var card = track.querySelector('.h-card');
-        var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-        var step = card ? card.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
-        track.scrollBy({ left: step * Number(b.getAttribute('data-dir')), behavior: reduceMq.matches ? 'auto' : 'smooth' });
-      });
-    });
-    track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  }
-
   /* ---- service films ----
      A stage opts in with data-film-desktop (and optionally data-film-mobile).
      No stage does yet: the films are listed as outstanding in docs/media-manifest.md.

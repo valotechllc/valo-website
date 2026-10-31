@@ -98,13 +98,8 @@
 
 /* ---------- 3. services gallery ---------- */
 .h-services{background:var(--navy-900);color:#fff;padding:clamp(96px,11vw,152px) 0}
-.h-arrow{display:inline-grid;place-items:center;width:48px;height:48px;padding:0;margin:0;background:transparent;border:1px solid var(--rule-dark);color:#fff;font:16px/1 var(--mono);cursor:pointer;transition:border-color .2s ease,opacity .2s ease}
-.h-arrow+.h-arrow{margin-left:8px}
-.h-arrow:hover{border-color:var(--orange)}
-.h-arrow:disabled{opacity:.35;cursor:default;border-color:var(--rule-dark)}
-.h-track{--lead:calc(max(0px,(100% - var(--container)) / 2) + var(--gutter));display:grid;grid-auto-flow:column;grid-auto-columns:clamp(300px,30vw,420px);gap:clamp(24px,3.4vw,48px);margin:0;padding:0 var(--gutter) 4px var(--lead);list-style:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-left:var(--lead);scrollbar-width:none}
-.h-track::-webkit-scrollbar{display:none}
-.h-card{position:relative;display:flex;flex-direction:column;min-width:0;scroll-snap-align:start}
+.h-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(48px,5vw,72px) clamp(24px,3.4vw,48px);max-width:var(--container);margin:0 auto;padding:0 var(--gutter);list-style:none}
+.h-card{position:relative;display:flex;flex-direction:column;min-width:0}
 .h-card-media{position:relative;aspect-ratio:4/3;margin-bottom:24px;overflow:hidden;background:var(--navy-800);container-type:inline-size}
 .h-card-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .h-card-media::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.08);pointer-events:none;transition:border-color .2s ease}
@@ -263,8 +258,7 @@
   .h-motion{top:84px;min-height:36px;padding:0 10px;font-size:10px}
   .h-actions .h-btn{flex:1 1 100%}
   .h-proof .h-link{margin-left:0}
-  .h-head-side .h-track-ctrl{display:none}
-  .h-track{grid-auto-flow:row;grid-auto-columns:auto;gap:56px;padding:0 var(--gutter);overflow:visible;scroll-snap-type:none}
+  .h-track{grid-template-columns:1fr;gap:56px}
   .h-msp-shade{background:linear-gradient(0deg,var(--navy-950) 0%,rgba(7,16,34,.9) 50%,rgba(7,16,34,.55) 100%),linear-gradient(180deg,var(--navy-950) 0%,rgba(7,16,34,0) 20%)}
   .h-msp-steps{grid-template-columns:1fr;gap:20px}
   .h-msp .h-btn,.h-contact .h-btn{width:100%}
