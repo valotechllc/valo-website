@@ -183,3 +183,18 @@ body.home-dark .why{border-top-color:#23262B}
 body.home-dark .hb{border-top-color:#2C3036}
 body.home-dark .cta{background:#0E0F12;border-color:#1F2227;border-radius:0}
 body.home-dark footer{background:#050607}
+
+/* ---------- colleague recommendations ---------- */
+.hq{background:#08090B;color:#F2EFE9;padding:96px 0}
+.hq-k{margin:0 0 32px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E8875F}
+.hq-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:1px;background:#23262B;border:1px solid #23262B}
+.hq-card{margin:0;padding:40px;background:#0B0C0F;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.hq-card blockquote{margin:0}
+.hq-card p{margin:0;font-size:18px;line-height:1.6;color:rgba(242,239,233,.82)}
+.hq-card.hq-lead p{font-size:22px;line-height:1.5;color:#F2EFE9;letter-spacing:-.01em}
+.hq-card figcaption{display:flex;flex-direction:column;gap:4px;padding-top:20px;border-top:1px solid #23262B}
+.hq-card figcaption b{font-size:15px;font-weight:600;color:#F2EFE9}
+.hq-card figcaption span{font-size:14px;color:rgba(242,239,233,.62)}
+.hq-card figcaption em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#E8875F}
+.hq-note{margin:18px 0 0;font-size:13px;color:rgba(242,239,233,.45)}
+@media (max-width:860px){.hq{padding:64px 0}.hq-grid{grid-template-columns:1fr}.hq-card{padding:28px 22px}.hq-card.hq-lead p{font-size:19px}.hq-card p{font-size:16px}}
