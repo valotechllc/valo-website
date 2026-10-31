@@ -30,7 +30,7 @@ All in-scene text (config extracts, findings, the roadmap, the handover document
 
 Removed: `cinematic-migration.webp`, `cinematic-segmentation.webp`, `cinematic-network.webp` (origin and licence unknown, added in commit `611312b`; recoverable from git history if ever needed).
 
-No longer used by any page, kept in the repo: `service-*.mp4`, `service-*-poster.webp`, `service-films-render.mjs` (earlier diagram films). They can be deleted.
+Also removed: the earlier diagram-style service films (`service-*.mp4`, `service-*-poster.webp`) and the script that rendered them (`service-films-render.mjs`). All recoverable from git history.
 
 ## If you commission filmed or studio-rendered footage later
 
