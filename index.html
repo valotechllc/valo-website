@@ -194,14 +194,15 @@ footer a:hover{color:#fff;text-decoration:underline}
 .f-bottom{padding-top:20px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:13px;border-top:1px solid rgba(244,241,234,.1)}
 .f-bottom div:last-child{display:flex;gap:20px}
 </style>
-<link rel="stylesheet" href="/service-motion.css?v=worlds-v1" />
-<link rel="stylesheet" href="/msp-story.css?v=msp1" />
+<link rel="stylesheet" href="/msp-story.css?v=msp4" />
 <script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
-<script type="module" src="/msp-story.js?v=msp1"></script>
-<script src="/service-worlds.js?v=worlds-v1" defer></script>
-<script src="/service-motion.js?v=worlds-v1" defer></script>
+<link rel="stylesheet" href="/home.css?v=home5" />
+<script type="module" src="/home-monolith.js?v=home4"></script>
+<script type="module" src="/msp-story.js?v=msp3"></script>
+<script src="/home-services.js?v=home2" defer></script>
+  <script type="module" src="/home-services-3d.js?v=svc2"></script>
 </head>
-<body>
+<body class="home-dark">
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav class="topnav" id="topnav" aria-label="Main navigation">
@@ -223,31 +224,25 @@ footer a:hover{color:#fff;text-decoration:underline}
 
 <main id="main-content">
 
-  <section class="hero on-navy cinematic-hero"><figure class="network-hero" data-render-scene="hero" data-motion-scene aria-label="Animated illustration: a firewall controls connections between users, cloud services, applications, servers, and branches.">
-        <video class="service-film" muted loop playsinline preload="auto" poster="/service-migration-poster.webp?v=worlds-v1" aria-hidden="true" data-service-film="migration"><source src="/service-migration-mobile.mp4?v=worlds-v1" media="(max-width:900px)" type="video/mp4"><source src="/service-migration.mp4?v=worlds-v1" type="video/mp4"></video>
-
-        <figcaption><span class="scene-phase">01 / Map the environment</span><br>SECURE CONNECTIONS. ENGINEERED WITH INTENT.<button class="motion-toggle" type="button" aria-pressed="false">Pause animations</button></figcaption>
-        </figure>
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">Cisco &amp; Palo Alto firewall and network security engineering</p>
-        <h1>Security.<br>Engineered.</h1>
-        <p class="hero-lead">Specialized Cisco and Palo Alto network security expertise. Scoped, implemented, and validated by the principal engineer.</p>
-        <div class="hero-ctas">
-          <a href="/contact.html" class="btn">Discuss a project</a>
-          <a href="#capabilities" class="btn-ghost">Explore our services</a>
-        </div>
+  <section id="hm" aria-labelledby="hm-title">
+    <div class="hm-sticky">
+      <div class="hm-stage" aria-hidden="true"></div>
+      <div class="hm-intro">
+        <p class="hm-eyebrow">Cisco &amp; Palo Alto network security engineering</p>
+        <h1 id="hm-title">Security.<br>Engineered.</h1>
+        <p class="hm-sub">Firewall migrations, policy cleanup, segmentation and risk assessments for MSPs, SMBs and public-sector teams.</p>
+        <a class="hm-cta" href="/contact.html">Discuss a project</a>
       </div>
-
-
+      <ol class="hm-layers" aria-label="What VALO engineers">
+        <li class="hm-layer" data-tier="3"><span>04</span><b>MSP white-label engineering</b><em>Specialist work, delivered under your brand.</em></li>
+        <li class="hm-layer" data-tier="2"><span>03</span><b>Firewall migration</b><em>Cutovers with rollback and validation.</em></li>
+        <li class="hm-layer" data-tier="1"><span>02</span><b>Firewall optimization</b><em>Policy, NAT and segmentation cleanup.</em></li>
+        <li class="hm-layer" data-tier="0"><span>01</span><b>Risk assessment</b><em>Risk-ranked findings and a roadmap.</em></li>
+      </ol>
+      <div class="hm-tag" aria-hidden="true"><span>Scoped</span><span>Built</span><span>Validated</span></div>
+      <p class="hm-cue" aria-hidden="true">Scroll</p>
     </div>
   </section>
-<section class="proof-band" aria-label="Founder experience"><div class="wrap"><div class="stats" aria-label="Founder experience">
-        <div class="stat"><p class="stat-num">9+</p><p class="stat-label">years of network security and infrastructure engineering</p></div>
-        <div class="stat"><p class="stat-num">150+</p><p class="stat-label">Palo Alto firewall rules remediated in a phased cleanup</p></div>
-        <div class="stat wide"><p class="stat-num">3</p><p class="stat-label">regulated sectors &mdash; healthcare, financial services, and government</p></div>
-        <p class="stats-note">Figures reflect the founder's experience in prior engineering roles. <a href="/experience/">See the write-ups &rarr;</a></p>
-      </div></div></section>
 
   <section class="strip" aria-label="Credentials and partnerships">
     <div class="wrap strip-inner">
@@ -257,7 +252,6 @@ footer a:hover{color:#fff;text-decoration:underline}
         <a class="pill" href="/about/credentials.html">PCCSE</a>
         <a class="pill" href="/about/credentials.html">CISM</a>
         <a class="pill pill-extra" href="/about/credentials.html">SecurityX</a>
-        <a class="pill pill-extra" href="/about/credentials.html">PenTest+</a>
         <a class="pill pill-extra" href="/about/credentials.html">CySA+</a>
         <a class="mobile-only strip-more" href="/about/credentials.html">View all credentials &rarr;</a>
       </div>
@@ -269,89 +263,23 @@ footer a:hover{color:#fff;text-decoration:underline}
     </div>
   </section>
 
-  <section id="capabilities" class="capability-theater" aria-label="Explore VALO capabilities"><div class="service-lab cinematic-lab" aria-labelledby="lab-title">
-      <div class="lab-heading">
-        <div>
-        <p class="eyebrow" id="lab-title">Complexity, under control.</p>
-        <p>Explore the engineering behind a more resilient network.</p>
-        </div>
-        <button class="motion-toggle" type="button" aria-pressed="false">Pause animations</button>
-        </div>
-      <div class="service-tabs" role="tablist" aria-label="Explore VALO services">
-        <button class="service-tab" type="button" id="tab-migration" aria-label="Firewall migration" role="tab" aria-controls="scene-migration" aria-selected="true" tabindex="0">Firewall migration</button>
-        <button class="service-tab" type="button" id="tab-segmentation" aria-label="Segmentation" role="tab" aria-controls="scene-segmentation" aria-selected="false" tabindex="-1">Segmentation</button>
-        <button class="service-tab" type="button" id="tab-assessment" aria-label="Risk assessment" role="tab" aria-controls="scene-assessment" aria-selected="false" tabindex="-1">Risk assessment</button>
-        <button class="service-tab" type="button" id="tab-msp" aria-label="MSP engineering" role="tab" aria-controls="scene-msp" aria-selected="false" tabindex="-1">MSP engineering</button>
-        </div>
-        <div class="service-panel" id="scene-migration" role="tabpanel" aria-labelledby="tab-migration" tabindex="0" data-motion-scene>
-      <figure class="service-visual" aria-label="Animated illustration: existing and replacement firewalls provide staged paths between business traffic and services." data-render-scene="migration"><video class="service-film" muted loop playsinline preload="metadata" poster="/service-migration-poster.webp?v=worlds-v1" aria-hidden="true" data-service-film="migration"><source src="/service-migration-mobile.mp4?v=worlds-v1" media="(max-width:900px)" type="video/mp4"><source src="/service-migration.mp4?v=worlds-v1" type="video/mp4"></video>
+<section class="hq" aria-labelledby="hq-title">
+  <div class="wrap">
+    <p class="hq-k" id="hq-title">Recommendations from former colleagues</p>
+    <div class="hq-grid">
+      <figure class="hq-card hq-lead">
+        <blockquote><p>&ldquo;Working with Loseini was an absolute highlight of my time on the team. He combines strong technical expertise with excellent communication, ownership, and a positive, solutions-oriented mindset. Loseini repeatedly proved himself to be someone you can rely on to handle complex challenges from start to finish. I would gladly work with Loseini again in a heartbeat and give him my highest recommendation.&rdquo;</p></blockquote>
+        <figcaption><b>Saif Albdairi</b><span>Lead Sr. Network Engineer, Dallas County</span><em>Managed Loseini directly</em></figcaption>
+      </figure>
+      <figure class="hq-card">
+        <blockquote><p>&ldquo;It was a pleasure working with Loseini at Dallas County. He has a proven track record of going above and beyond to engineer effective technical solutions. His impact was felt across Dallas County, both directly and indirectly. I knew I could always count on him to do his part and help push projects through to the finish line.&rdquo;</p></blockquote>
+        <figcaption><b>Andrew Jones</b><span>Azure Cloud Engineer</span><em>Worked with Loseini on the same team</em></figcaption>
+      </figure>
+    </div>
+    <p class="hq-note">Shared from LinkedIn with permission. These are personal recommendations of the founder&rsquo;s prior work, not client testimonials or endorsements by Dallas County.</p>
+  </div>
+</section>
 
-        <figcaption><span class="scene-phase">01 / Policy review</span><br>ILLUSTRATIVE ENGINEERING SEQUENCE</figcaption>
-        </figure>
-      <div class="service-copy">
-        <p class="eyebrow">01 / FIREWALL MIGRATION &amp; VALIDATION</p>
-        <h3>Move forward.<br>Keep traffic moving.</h3>
-        <p>Policy review, replacement configuration, a planned cutover, and post-change validation. Each migration is scoped around the environment and its operating requirements.</p>
-        <ol class="service-steps">
-        <li>Review policy</li>
-        <li>Stage changes</li>
-        <li>Validate</li>
-        </ol>
-        <a class="link" href="/contact.html?service=firewall-migration">Discuss a firewall migration &rarr;</a>
-        </div>
-        </div>
-        <div class="service-panel" id="scene-segmentation" role="tabpanel" aria-labelledby="tab-segmentation" tabindex="0" data-motion-scene>
-      <figure class="service-visual" aria-label="Animated illustration: policy controls access between workforce, application, and isolated network zones." data-render-scene="segmentation"><video class="service-film" muted loop playsinline preload="metadata" poster="/service-segmentation-poster.webp?v=worlds-v1" aria-hidden="true" data-service-film="segmentation"><source src="/service-segmentation-mobile.mp4?v=worlds-v1" media="(max-width:900px)" type="video/mp4"><source src="/service-segmentation.mp4?v=worlds-v1" type="video/mp4"></video>
-
-        <figcaption><span class="scene-phase">01 / Map trust zones</span><br>ILLUSTRATIVE ENGINEERING SEQUENCE</figcaption>
-        </figure>
-      <div class="service-copy">
-        <p class="eyebrow">02 / NETWORK SEGMENTATION</p>
-        <h3>Clear boundaries.<br>Purposeful connections.</h3>
-        <p>Separate users, applications, and guest devices into defined zones. Review and implement the access rules that govern traffic between them.</p>
-        <ol class="service-steps">
-        <li>Define zones</li>
-        <li>Control access</li>
-        <li>Test paths</li>
-        </ol>
-        <a class="link" href="/services/network-security.html">Explore network engineering &rarr;</a>
-        </div>
-        </div>
-        <div class="service-panel" id="scene-assessment" role="tabpanel" aria-labelledby="tab-assessment" tabindex="0" data-motion-scene>
-      <figure class="service-visual" aria-label="Animated illustration: firewall and network evidence is reviewed and turned into a prioritized remediation roadmap." data-render-scene="assessment"><video class="service-film" muted loop playsinline preload="metadata" poster="/service-assessment-poster.webp?v=worlds-v1" aria-hidden="true" data-service-film="assessment"><source src="/service-assessment-mobile.mp4?v=worlds-v1" media="(max-width:900px)" type="video/mp4"><source src="/service-assessment.mp4?v=worlds-v1" type="video/mp4"></video>
-
-        <figcaption><span class="scene-phase">01 / Review the evidence</span><br>ILLUSTRATIVE ENGINEERING SEQUENCE</figcaption>
-        </figure>
-      <div class="service-copy">
-        <p class="eyebrow">03 / CYBERSECURITY RISK ASSESSMENTS</p>
-        <h3>Find the exposure.<br>Define the next move.</h3>
-        <p>Review the environment, identify security gaps, and rank findings by risk. Leave with a remediation roadmap your organization can act on.</p>
-        <ol class="service-steps">
-        <li>Gather evidence</li>
-        <li>Rank risks</li>
-        <li>Plan remediation</li>
-        </ol>
-        <a class="link" href="/resources/">See sample deliverables &rarr;</a>
-        </div>
-        </div>
-        <div class="service-panel" id="scene-msp" role="tabpanel" aria-labelledby="tab-msp" tabindex="0" data-motion-scene>
-      <figure class="service-visual" aria-label="Animated illustration: VALO provides specialist support through an MSP to its client environments." data-render-scene="msp"><video class="service-film" muted loop playsinline preload="metadata" poster="/service-msp-poster.webp?v=worlds-v1" aria-hidden="true" data-service-film="msp"><source src="/service-msp-mobile.mp4?v=worlds-v1" media="(max-width:900px)" type="video/mp4"><source src="/service-msp.mp4?v=worlds-v1" type="video/mp4"></video>
-
-        <figcaption><span class="scene-phase">01 / Scope the client project</span><br>ILLUSTRATIVE ENGINEERING SEQUENCE</figcaption>
-        </figure>
-      <div class="service-copy">
-        <p class="eyebrow">04 / WHITE-LABEL MSP ENGINEERING</p>
-        <h3>Your brand.<br>Our engineering.</h3>
-        <p>Bring Cisco and Palo Alto engineering into client projects under your MSP brand. Scope the work, resolve the technical challenge, and hand over clear documentation.</p>
-        <ol class="service-steps">
-        <li>Scope together</li>
-        <li>Engineer</li>
-        <li>Hand over</li>
-        </ol>
-        <a class="link" href="/services/#msp">Explore MSP support &rarr;</a>
-        </div>
-        </div>
-        </div></section>
 <section id="msp-story" aria-label="How VALO works with MSPs">
   <div class="ms-sticky">
     <div class="ms-stage" aria-hidden="true"></div>
@@ -395,54 +323,127 @@ footer a:hover{color:#fff;text-decoration:underline}
     <p class="ms-note">Illustrative engagement</p>
   </div>
 </section>
-<section id="services" class="wrap section">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow">Services</p>
-        <h2 class="h2">Engineering depth, delivered directly by the principal.</h2>
-      </div>
-      <a href="/services/" class="link">View all services &rarr;</a>
-    </div>
 
-    <div class="grid-3">
-      <article class="card dark">
-        <div class="card-top">
-          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4F1EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M10.5 10.5l3 3M3 21c0-3 2.5-5 5-5M21 3c0 3-2.5 5-5 5"/></svg></div>
-          <span class="tag">For MSPs</span>
+  <section id="services" class="hs">
+    <div class="wrap section">
+      <div class="hs-head">
+        <div>
+          <p class="eyebrow">Direct engineering</p>
+          <h2 class="h2">Three ways in. Try each one.</h2>
         </div>
-        <h3>White-Label Engineering for MSPs</h3>
-        <p>Specialized Cisco and Palo Alto project support for your clients &mdash; under your brand, on your timeline.</p>
-        <ul><li>Firewall migrations</li><li>Policy cleanup</li><li>Troubleshooting and escalation support</li></ul>
-        <a href="/services/#msp" class="link">Explore MSP services &rarr;</a>
-      </article>
-      <article class="card">
-        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4F1EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v5M15 9v5M9 14v6"/></svg></div>
-        <h3>Firewall &amp; Network Security Engineering</h3>
-        <p>Design, migration, and remediation work on the infrastructure your security depends on.</p>
-        <ul><li>Firewall assessment and optimization</li><li>Secure network migrations</li><li>Segmentation, switching, and routing</li><li>Remediation</li></ul>
-        <a href="/services/network-security.html" class="link">Explore engineering services &rarr;</a>
-      </article>
-      <article class="card">
-        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4F1EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
-        <h3>Cybersecurity Risk Assessments</h3>
-        <p>Vendor-neutral security assessments with practical findings, prioritized risks, and a clear remediation roadmap.</p>
-        <ul><li>Vendor-neutral review</li><li>Risk-ranked findings</li><li>Remediation roadmap</li></ul>
-        <a href="/resources/" class="link">See sample deliverables &rarr;</a>
-      </article>
-    </div>
-
-    <div class="procure" id="technology-partners">
-      <div class="procure-logos">
-        <img src="/cisco-partner-badge.svg" alt="Cisco Registered Partner" loading="lazy" width="64" height="64" />
-        <img src="/logo-pan-reseller.png" alt="Palo Alto Networks NextWave Registered Reseller" loading="lazy" width="68" height="64" />
+        <a href="/services/" class="link">View all services &rarr;</a>
       </div>
-      <div class="procure-copy">
-        <h3>Need hardware or licensing?</h3>
-        <p>VALO supplies Cisco and Palo Alto Networks products through Ingram Micro. Procurement is kept separate from consulting &mdash; products are recommended only when they fit a requirement.</p>
-        <div class="procure-links">
-          <a href="/contact.html?service=product-quote" class="link">Request a quote &rarr;</a>
-          <a href="/resources/how-to-buy.html" class="link">How purchasing works &rarr;</a>
-          <a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf" class="link">Capability statement (PDF) &rarr;</a>
+
+      <div class="hs-lab">
+        <div class="hs-tabs" role="tablist" aria-label="Core services" aria-orientation="vertical">
+          <button class="hs-tab" role="tab" id="hs-t1" aria-controls="hs-p1" aria-selected="true"><span class="hs-k">Firewall migration &amp; implementation</span><h3>Move to the new firewall without an outage.</h3><p>Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p></button>
+          <button class="hs-tab" role="tab" id="hs-t2" aria-controls="hs-p2" aria-selected="false" tabindex="-1"><span class="hs-k">Firewall assessment &amp; optimization</span><h3>Turn a rulebase nobody trusts into one you can read.</h3><p>Policy, NAT, segmentation and access review, with prioritized findings and a cleanup plan.</p></button>
+          <button class="hs-tab" role="tab" id="hs-t4" aria-controls="hs-p4" aria-selected="false" tabindex="-1"><span class="hs-k">Network security engineering</span><h3>Separate what should never talk.</h3><p>Segmentation, Cisco switching and routing, and security remediation for direct clients.</p></button>
+          <button class="hs-tab" role="tab" id="hs-t3" aria-controls="hs-p3" aria-selected="false" tabindex="-1"><span class="hs-k">Cybersecurity risk assessment</span><h3>Know which gaps to close first.</h3><p>Vendor-neutral review with risk-ranked findings and a remediation roadmap.</p></button>
+        </div>
+
+        <div class="hs-panel" role="tabpanel" id="hs-p1" aria-labelledby="hs-t1">
+          <div class="hs-ptitle"><span>Cutover simulator</span><b id="hs-mig-stage">Plan</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
+          <div class="hs-mig">
+            <div class="hs-box"><b>Legacy firewall</b><span class="hs-pct" id="hs-old">100%</span><br>of traffic</div>
+            <div class="hs-flow" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="hs-box new"><b>New Palo Alto NGFW</b><span class="hs-pct" id="hs-new">0%</span><br>of traffic</div>
+          </div>
+          <div>
+            <label class="hs-range-l" for="hs-cutover"><span>Drag to cut over</span><span>Change window</span></label>
+            <input class="hs-range" id="hs-cutover" type="range" min="0" max="100" step="5" value="0">
+          </div>
+          <ul class="hs-checks" id="hs-mig-checks">
+            <li data-at="20">Policy and NAT translated</li>
+            <li data-at="45">Rollback plan staged</li>
+            <li data-at="75">Traffic shifted in the window</li>
+            <li data-at="100">Post-change validation passed</li>
+          </ul>
+          <div><button class="hs-btn ghost" id="hs-rollback" type="button">Roll back</button></div>
+          <a href="/contact.html?service=firewall-migration" class="link">Discuss a firewall migration &rarr;</a>
+        </div>
+
+        <div class="hs-panel" role="tabpanel" id="hs-p2" aria-labelledby="hs-t2" hidden>
+          <div class="hs-ptitle"><span>Rulebase cleanup</span><b>Illustrative rulebase</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
+          <div class="hs-meter"><div><b id="hs-rule-count">8</b>Rules</div><div><b id="hs-risky">2</b>Overly broad</div><div><b id="hs-unused">1</b>Unused</div></div>
+          <div class="hs-scroll">
+            <table class="hs-rules" id="hs-rules">
+              <thead><tr><th>#</th><th>From</th><th>To</th><th>App</th><th>Finding</th></tr></thead>
+              <tbody>
+                <tr class="flag" data-kind="risky"><td>1</td><td>any</td><td>any</td><td>any</td><td>Allow any/any</td></tr>
+                <tr><td>2</td><td>Users</td><td>Web</td><td>web, ssl</td><td>OK</td></tr>
+                <tr class="flag" data-kind="shadow"><td>3</td><td>Users</td><td>Web</td><td>ssl</td><td>Shadowed by rule 2</td></tr>
+                <tr class="flag" data-kind="risky"><td>4</td><td>Guest</td><td>Internal</td><td>any</td><td>Guest reaches internal</td></tr>
+                <tr><td>5</td><td>Servers</td><td>DNS</td><td>dns</td><td>OK</td></tr>
+                <tr class="flag" data-kind="unused"><td>6</td><td>Old VPN</td><td>Servers</td><td>any</td><td>0 hits in 90 days</td></tr>
+                <tr><td>7</td><td>Admins</td><td>Mgmt</td><td>ssh, https</td><td>OK</td></tr>
+                <tr><td>8</td><td>any</td><td>any</td><td>any</td><td>Deny and log</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div><button class="hs-btn" id="hs-clean" type="button">Run the cleanup</button></div>
+          <a href="/contact.html?service=firewall-assessment" class="link">Request a firewall assessment &rarr;</a>
+        </div>
+
+        <div class="hs-panel" role="tabpanel" id="hs-p4" aria-labelledby="hs-t4" hidden>
+          <div class="hs-ptitle"><span>Segmentation planner</span><b id="hs-seg-state">Flat network</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
+          <div class="hs-meter"><div><b id="hs-zones">1</b>Zones</div><div><b id="hs-paths">Any to any</b>Allowed paths</div></div>
+          <ul class="hs-checks" id="hs-seg-checks">
+            <li>Workforce reaches applications on approved ports only</li>
+            <li>Guest and IoT devices blocked from internal systems</li>
+            <li>Management access from the admin zone only</li>
+            <li>Allowed and blocked paths tested after the change</li>
+          </ul>
+          <div><button class="hs-btn" id="hs-seg" type="button">Segment the network</button></div>
+          <a href="/services/network-security.html" class="link">Discuss network segmentation &rarr;</a>
+        </div>
+
+        <div class="hs-panel" role="tabpanel" id="hs-p3" aria-labelledby="hs-t3" hidden>
+          <div class="hs-ptitle"><span>Findings to roadmap</span><b>Illustrative findings</b></div>
+          <div class="hs-view" aria-hidden="true"></div>
+          <div class="hs-pool" id="hs-pool">
+            <span class="hs-chip h" data-sev="h">No MFA on admin VPN</span>
+            <span class="hs-chip m" data-sev="m">Shared local admin accounts</span>
+            <span class="hs-chip l" data-sev="l">Logging not centralized</span>
+            <span class="hs-chip h" data-sev="h">Flat network, no segmentation</span>
+            <span class="hs-chip m" data-sev="m">Backups never restore-tested</span>
+            <span class="hs-chip l" data-sev="l">Security policy out of date</span>
+            <span class="hs-chip h" data-sev="h">Firewall OS out of support</span>
+            <span class="hs-chip m" data-sev="m">Vendor access never reviewed</span>
+          </div>
+          <div class="hs-buckets">
+            <div class="hs-bucket h"><h4>Fix now</h4><div class="hs-list"></div></div>
+            <div class="hs-bucket m"><h4>Next 90 days</h4><div class="hs-list"></div></div>
+            <div class="hs-bucket l"><h4>Planned</h4><div class="hs-list"></div></div>
+          </div>
+          <div><button class="hs-btn" id="hs-sort" type="button">Prioritize findings</button></div>
+          <a href="/resources/" class="link">See a sample risk register &rarr;</a>
+        </div>
+      </div>
+
+      <div class="hs-more" aria-label="Defined engagements">
+        <a href="/services/microsoft-security.html"><b>Microsoft 365 security review</b><span>Independent baseline and a prioritized hardening plan.</span><em>Typically 1&ndash;2 weeks</em></a>
+        <a href="/services/"><b>SMB network &amp; security assessment</b><span>Findings and a remediation roadmap for qualifying single-site environments.</span><em>$2,500 flat</em></a>
+        <a href="/services/vciso.html"><b>Fractional vCISO</b><span>A named security leader and governance cadence, without a full-time hire.</span><em>Monthly</em></a>
+        <a href="/services/compliance/hipaa.html"><b>HIPAA security risk analysis</b><span>A documented risk analysis for clinics and healthcare organizations.</span><em>Healthcare</em></a>
+      </div>
+
+      <div class="procure" id="technology-partners">
+        <div class="procure-logos">
+          <img src="/cisco-partner-badge.svg" alt="Cisco Registered Partner" loading="lazy" width="64" height="64" />
+          <img src="/logo-pan-reseller.png" alt="Palo Alto Networks NextWave Registered Reseller" loading="lazy" width="68" height="64" />
+        </div>
+        <div class="procure-copy">
+          <h3>Need hardware or licensing?</h3>
+          <p>VALO supplies Cisco and Palo Alto Networks products through Ingram Micro. Procurement is kept separate from consulting &mdash; products are recommended only when they fit a requirement.</p>
+          <div class="procure-links">
+            <a href="/contact.html?service=product-quote" class="link">Request a quote &rarr;</a>
+            <a href="/resources/how-to-buy.html" class="link">How purchasing works &rarr;</a>
+            <a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf" class="link">Capability statement (PDF) &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -468,36 +469,6 @@ footer a:hover{color:#fff;text-decoration:underline}
     </div>
   </section>
 
-  <section class="wrap" style="padding-top:104px;padding-bottom:48px">
-    <p class="eyebrow">Selected founder experience</p>
-    <h2 class="h2" style="margin-bottom:48px">Real engineering challenges. Documented work.</h2>
-    <div class="grid-2">
-      <article class="card">
-        <span class="proj-tag">Palo Alto Networks &middot; Policy remediation</span>
-        <h3>Over 150 firewall rules remediated</h3>
-        <p>A phased policy cleanup using controlled replacement rules, application-default service settings, traffic monitoring, and validation of CIS-based findings.</p>
-        <a href="/experience/firewall-policy-remediation.html" class="link">Read founder project &rarr;</a>
-      </article>
-      <article class="card">
-        <span class="proj-tag">Cisco &middot; Infrastructure hardening</span>
-        <h3>Enterprise Cisco switch security hardening</h3>
-        <p>Remediated Rapid7 findings by disabling unneeded HTTP/HTTPS services, moving SNMPv2 to SNMPv3, applying management-plane ACLs, and verifying with a follow-up scan.</p>
-        <a href="/experience/cisco-switch-hardening.html" class="link">Read founder project &rarr;</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="wrap" style="padding-top:56px;padding-bottom:104px">
-    <p class="eyebrow">Methodology</p>
-    <h2 class="h2" style="margin-bottom:48px">How an engagement runs.</h2>
-    <ol class="steps">
-      <li><span class="step-num">01</span><h3>Assess</h3><p>Review the network, firewall policies, operating requirements, and security risks.</p></li>
-      <li><span class="step-num">02</span><h3>Prioritize</h3><p>Agree on priorities, scope, change windows, and success criteria.</p></li>
-      <li><span class="step-num">03</span><h3>Engineer &amp; Implement</h3><p>Deliver the agreed network security changes, migrations, or remediation work.</p></li>
-      <li><span class="step-num">04</span><h3>Validate &amp; Handover</h3><p>Test changes, document findings, and provide a practical handover.</p></li>
-    </ol>
-  </section>
-
   <section class="navy on-navy">
     <div class="wrap section founder">
       <div class="founder-photo"><img src="/me.jpg" alt="Loseini Valo Kamara, founder of VALO Technologies" /></div>
@@ -512,27 +483,23 @@ footer a:hover{color:#fff;text-decoration:underline}
         </div>
         <div class="founder-links">
           <a href="/about/leadership.html" class="link">Meet the founder &rarr;</a>
-          <a href="/about/credentials.html" class="link">View all credentials &rarr;</a>
+          <a href="/experience/firewall-policy-remediation.html" class="link">Founder project: 150+ firewall rules remediated &rarr;</a>
+          <a href="/experience/cisco-switch-hardening.html" class="link">Founder project: Cisco switch hardening &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
   <section id="security-brief" class="wrap" style="padding-top:96px">
-    <div class="brief">
+    <div class="hb">
       <div>
         <p class="eyebrow">The VALO Security Brief</p>
         <h2 class="h2">Practical cybersecurity guidance. Every other Wednesday.</h2>
-        <p class="lead" style="margin:20px 0 0">Network and security engineering, risk, and the decisions leaders need to make before a security problem becomes an incident, audit finding, or expensive emergency.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0 24px;margin-top:12px">
-          <a href="/insights/security-brief-003.html" class="link">Read the latest issue &rarr;</a>
-          <a href="/insights/" class="link">Browse the Brief &rarr;</a>
-        </div>
-        <a href="/insights/#subscribe" class="btn mobile-only" style="margin-top:16px">Subscribe to the Brief</a>
+        <p class="lead" style="margin:16px 0 0">Network and security engineering, risk, and the decisions leaders need to make before a security problem becomes an incident, audit finding, or expensive emergency.</p>
       </div>
-      <div class="brief-card hide-mobile">
-        <iframe title="VALO Security Brief Signup" width="540" height="720" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="no" loading="lazy"></iframe>
-        <div class="fine">By subscribing, you agree to receive the VALO Security Brief by email. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a>.</div>
+      <div class="hb-actions">
+        <a href="/insights/#subscribe" class="btn">Subscribe to the Brief</a>
+        <a href="/insights/security-brief-003.html" class="link">Read the latest issue &rarr;</a>
       </div>
     </div>
   </section>
@@ -548,6 +515,7 @@ footer a:hover{color:#fff;text-decoration:underline}
   </section>
 
 </main>
+
 
 <footer>
   <div class="wrap f-grid">
@@ -613,5 +581,6 @@ footer a:hover{color:#fff;text-decoration:underline}
   }
 })();
 </script>
+<button class="motion-pause" type="button" aria-pressed="false">Pause motion</button>
 </body>
 </html>

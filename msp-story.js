@@ -13,18 +13,18 @@ let renderer;
 try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch(e){story.classList.add('ms-no-webgl');throw e;}
 renderer.setClearColor(0,0);renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
 stage.appendChild(renderer.domElement);
-const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x090e16,.022);
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x0a0a0b,.026);
 const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(renderer),.04).texture;
 const camera=new THREE.PerspectiveCamera(34,1,.1,220);
 
-const COL={ice:new THREE.Color('#8FD8EE'),mint:new THREE.Color('#84E6BD'),copper:new THREE.Color('#E8876A'),red:new THREE.Color('#FF4A2C'),cream:new THREE.Color('#F4F1EA')};
+const COL={ice:new THREE.Color('#B9C2CC'),mint:new THREE.Color('#FFB27A'),copper:new THREE.Color('#E8876A'),red:new THREE.Color('#FF4A2C'),cream:new THREE.Color('#F4F1EA')};
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t)},mix=(a,b,t)=>a+(b-a)*t;
 const bump=(a,b,c,d,x)=>smooth(a,b,x)*(1-smooth(c,d,x));
 
 /* lighting: soft studio environment for reflections, a cool key, and the copper glow of VALO inside */
-scene.add(new THREE.HemisphereLight(0x9cc3d8,0x080c12,.35));
-const key=new THREE.DirectionalLight(0xcfe4f2,1.4);key.position.set(-8,14,10);scene.add(key);
-const rim=new THREE.PointLight(0x5fb6d6,30,40,1.7);rim.position.set(8,6,-10);scene.add(rim);
+scene.add(new THREE.HemisphereLight(0x8a7a6c,0x080808,.3));
+const key=new THREE.DirectionalLight(0xffd2b0,1.3);key.position.set(-8,14,10);scene.add(key);
+const rim=new THREE.PointLight(0xff8a55,26,40,1.7);rim.position.set(8,6,-10);scene.add(rim);
 const valoLight=new THREE.PointLight(0xE8876A,0,12,1.5);valoLight.position.set(0,2.6,0);scene.add(valoLight);
 
 /* floor: blueprint dot grid with a soft vignette */
@@ -32,13 +32,13 @@ const floorMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,unifo
 vertexShader:`varying vec2 vP;void main(){vP=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
 fragmentShader:`varying vec2 vP;uniform vec2 uFocus;uniform float uHL;void main(){vec2 g=fract(vP*1.1)-.5;float d=smoothstep(.06,0.,length(g));float r=length(vP);float fade=smoothstep(26.,4.,r);
 vec2 l=abs(fract(vP*.22)-.5);float line=smoothstep(.012,0.,min(l.x,l.y))*.35;float near=smoothstep(4.,0.,length(vP-uFocus))*uHL;
-vec3 c=vec3(.35,.6,.72)*(d*.35+line*.25)*fade+vec3(.5,.9,.74)*near*(d+.2)*.6;gl_FragColor=vec4(c,clamp((d*.5+line*.3)*fade+near*.25,0.,1.));}`});
+vec3 c=vec3(.45,.36,.29)*(d*.35+line*.25)*fade+vec3(1.,.7,.48)*near*(d+.2)*.6;gl_FragColor=vec4(c,clamp((d*.5+line*.3)*fade+near*.25,0.,1.));}`});
 const floor=new THREE.Mesh(new THREE.PlaneGeometry(70,70),floorMat);floor.rotation.x=-Math.PI/2;scene.add(floor);
 
 /* clients: six real-world client types the MSP looks after */
 const CLIENTS=['Dental clinic','Law firm','County office','Credit union','Manufacturer','School district'];
-const darkMetal=new THREE.MeshStandardMaterial({color:0x1a2533,metalness:.85,roughness:.32});
-const rackMat=new THREE.MeshStandardMaterial({color:0x24364a,metalness:.7,roughness:.28});
+const darkMetal=new THREE.MeshStandardMaterial({color:0x18191c,metalness:.85,roughness:.32});
+const rackMat=new THREE.MeshStandardMaterial({color:0x222428,metalness:.7,roughness:.28});
 const clients=CLIENTS.map((name,i)=>{
   const a=i/CLIENTS.length*Math.PI*2+.55,R=11;
   const g=new THREE.Group();g.position.set(Math.cos(a)*R,0,Math.sin(a)*R);scene.add(g);
@@ -59,7 +59,7 @@ const glassMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:
 vertexShader:`varying vec3 vN;varying vec3 vV;varying vec2 vU;void main(){vec4 w=modelMatrix*vec4(position,1.);vN=normalize(mat3(modelMatrix)*normal);vV=normalize(cameraPosition-w.xyz);vU=uv;gl_Position=projectionMatrix*viewMatrix*w;}`,
 fragmentShader:`varying vec3 vN;varying vec3 vV;varying vec2 vU;uniform float uClear,uTime;void main(){float f=pow(1.-abs(dot(normalize(vN),vV)),2.4);
 float frost=mix(.62,.04,uClear);float streak=smoothstep(.0,.02,abs(fract(vU.x*6.+vU.y*.6-uTime*.03)-.5))*.0+smoothstep(.49,.5,fract(vU.x*6.))*.08;
-vec3 c=mix(vec3(.06,.1,.15),vec3(.42,.6,.72),f)*(1.+streak);float a=frost+f*mix(.5,.3,uClear)+streak*.5;gl_FragColor=vec4(c,clamp(a,0.,.92));}`});
+vec3 c=mix(vec3(.07,.065,.06),vec3(.4,.33,.27),f)*(1.+streak);float a=frost+f*mix(.5,.3,uClear)+streak*.5;gl_FragColor=vec4(c,clamp(a,0.,.92));}`});
 const msp=new THREE.Group();scene.add(msp);
 const SHELL_R=4.1,SHELL_H=3.4;
 const shell=new THREE.Mesh(new THREE.CylinderGeometry(SHELL_R,SHELL_R,SHELL_H,6,1,true),glassMat);shell.position.y=SHELL_H/2+.3;shell.renderOrder=5;msp.add(shell);
@@ -74,7 +74,7 @@ for(let k=0;k<6;k++){const a=k/6*Math.PI*2+Math.PI/6,desk=new THREE.Mesh(new THR
 
 /* VALO inside: a firewall assembled tier by tier under a copper engineering core */
 const fw=new THREE.Group();scene.add(fw);
-const slabMat=new THREE.MeshStandardMaterial({color:0x2a3a4e,metalness:.9,roughness:.22});
+const slabMat=new THREE.MeshStandardMaterial({color:0x26272b,metalness:.9,roughness:.22});
 const slabs=[];
 for(let k=0;k<7;k++){const s=new THREE.Mesh(new THREE.BoxGeometry(2,.16,1.2),slabMat);const e=new THREE.LineSegments(new THREE.EdgesGeometry(s.geometry),new THREE.LineBasicMaterial({color:COL.copper.clone().multiplyScalar(1.8),toneMapped:false,transparent:true,opacity:0}));s.add(e);
   const strip=new THREE.Mesh(new THREE.BoxGeometry(1.5,.025,.01),new THREE.MeshBasicMaterial({color:COL.ice.clone().multiplyScalar(2),toneMapped:false,transparent:true,opacity:0}));strip.position.set(0,0,.61);s.add(strip);
