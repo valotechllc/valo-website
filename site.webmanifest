@@ -4,8 +4,8 @@
   "description": "Cybersecurity, GRC, and vCISO services for healthcare and regulated industries.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a2332",
-  "theme_color": "#1a2332",
+  "background_color": "#0B1526",
+  "theme_color": "#0B1526",
   "icons": [
     {
       "src": "/valo-favicon-192.png",

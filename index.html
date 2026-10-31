@@ -12,6 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>VALO Technologies | Cisco &amp; Palo Alto Network Security Consulting</title>
 <meta name="description" content="VALO Technologies delivers specialized Cisco and Palo Alto network security engineering, firewall services, and cybersecurity assessments for MSPs, SMBs, and SLED organizations." />
+<link rel="canonical" href="https://valotechnologiellc.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="VALO Technologies | Network Security Engineering &amp; Consulting" />
 <meta property="og:description" content="Cisco and Palo Alto network security engineering for MSPs, SMBs, and SLED organizations." />
@@ -22,193 +23,30 @@
 <meta name="twitter:description" content="Cisco and Palo Alto network security engineering for MSPs, SMBs, and SLED organizations." />
 <meta name="twitter:image" content="https://valotechnologiellc.com/og-image.png" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/valo-favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="/valo-favicon-32.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="/valo-favicon-192.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/valo-favicon-180.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<meta name="theme-color" content="#1a2332" />
+<meta name="theme-color" content="#0B1526" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-<style>
-:root{--navy:#1A2332;--navy-2:#222D3F;--navy-3:#2B3750;--ink-deep:#141B27;--cream:#F4F1EA;--sand:#EAE5DA;--white:#FFFFFF;--line:#E2DDD1;--line-2:#D5CFC1;--input:#C9C2B2;--rust:#C84B2F;--rust-text:#A83C24;--rust-light:#E07A5F;--body:#3A4352;--mute:#5A6270;--on-navy:#CFD3DA;--on-navy-2:#B8BDC6;--sans:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--navy);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto}
-a{color:var(--rust-text)}a:hover{color:var(--navy)}
-:focus-visible{outline:3px solid var(--rust-light);outline-offset:2px}
-.skip-link{position:absolute;top:-48px;left:0;background:var(--rust);color:#fff;padding:10px 16px;font-weight:700;z-index:999;text-decoration:none}
-.skip-link:focus{top:0}
-.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
-.eyebrow{margin:0 0 14px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--rust-text)}
-.on-navy .eyebrow{color:var(--rust-light)}
-.h2{margin:0;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.015em;font-weight:700}
-.lead{font-size:17px;line-height:1.6;color:var(--body)}
-.link{font-weight:600;font-size:15px;text-decoration:none;display:inline-block;padding:12px 0}
-.btn{display:inline-block;background:var(--rust);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:15px 24px;border-radius:6px;border:0;cursor:pointer;font-family:inherit}
-.btn:hover{background:#B4422A;color:#fff}
-.btn-ghost{display:inline-block;color:var(--cream);text-decoration:none;font-weight:600;font-size:16px;padding:14px 24px;border-radius:6px;border:1px solid rgba(244,241,234,.4)}
-.btn-ghost:hover{color:#fff;border-color:#fff}
-.section{padding-top:104px;padding-bottom:104px}
-
-/* nav */
-.topnav{background:var(--navy);border-bottom:1px solid rgba(244,241,234,.12);position:sticky;top:0;z-index:50}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
-.brand{display:flex;align-items:center}
-.brand img{height:40px;width:auto;display:block}
-.nav-links{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:28px}
-.nav-links a{color:#E3E0D8;text-decoration:none;font-size:15px;display:inline-block;padding:12px 0}
-.nav-links a:hover{color:#fff}
-.nav-links a.nav-cta{background:var(--rust);color:#fff;font-weight:600;padding:12px 20px;border-radius:6px}
-.nav-links a.nav-cta:hover{background:#B4422A}
-.hamburger{display:none;background:none;border:0;color:var(--cream);width:44px;height:44px;padding:8px;cursor:pointer}
-@media (max-width:900px){
-  .hamburger{display:block}
-  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 20px;border-bottom:1px solid rgba(244,241,234,.12)}
-  .nav-links.open{display:flex}
-  .nav-links a{display:block;padding:14px 0}
-  .nav-links a.nav-cta{text-align:center;margin-top:8px}
-}
-
-/* hero */
-.hero{background:var(--navy);color:var(--cream)}
-.hero-inner{padding-top:88px;padding-bottom:96px;display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-.hero-copy{flex:1 1 600px;min-width:0}
-.hero h1{margin:0;font-size:clamp(38px,5vw,62px);line-height:1.05;font-weight:700;letter-spacing:-.02em}
-.hero-lead{margin:28px 0 0;font-size:19px;line-height:1.6;color:var(--on-navy);max-width:640px}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.stats{flex:1 1 300px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(244,241,234,.14);border:1px solid rgba(244,241,234,.14);border-radius:12px;overflow:hidden}
-.stat{background:var(--navy-2);padding:28px 24px}
-.stat.wide{grid-column:1 / -1}
-.stat-num{margin:0;font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
-.stat-label{margin:6px 0 0;font-size:14px;line-height:1.45;color:var(--on-navy)}
-.stats-note{grid-column:1 / -1;background:var(--navy-2);padding:14px 24px;font-size:13px;color:var(--on-navy-2);margin:0}
-.stats-note a{color:var(--rust-light)}
-
-/* credential strip */
-.strip{background:var(--white);border-bottom:1px solid var(--line)}
-.strip-inner{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px 40px}
-.strip-group{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.strip-label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-right:6px}
-.pill{font-size:14px;font-weight:600;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;color:var(--navy);text-decoration:none}
-a.pill:hover{border-color:var(--navy)}
-.strip-partners{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;font-size:14px;color:var(--body)}
-
-/* services */
-.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:52px}
-.sec-head > div{flex:1 1 520px;min-width:0}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:36px 32px;display:flex;flex-direction:column;gap:18px}
-.card h3{margin:0;font-size:23px;font-weight:700;line-height:1.25}
-.card p{margin:0;font-size:16px;line-height:1.6;color:var(--body)}
-.card ul{margin:0;padding:0 0 0 18px;font-size:15px;line-height:1.75}
-.card .link{margin-top:auto}
-.card.dark{background:var(--navy);color:var(--cream);border-color:var(--navy)}
-.card.dark p{color:var(--on-navy)}
-.card.dark .link{color:var(--rust-light)}
-.card.dark .link:hover{color:#fff}
-.icon{width:48px;height:48px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center}
-.card.dark .icon{background:var(--navy-3)}
-.card-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--rust-light)}
-.procure{margin-top:24px;background:var(--sand);border-radius:12px;padding:32px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center}
-.procure-logos{display:flex;gap:16px;align-items:center;flex:0 0 auto}
-.procure-logos img{height:64px;width:auto;background:#fff;border-radius:8px;padding:6px}
-.procure-copy{flex:1 1 480px;min-width:0}
-.procure-copy h3{margin:0 0 8px;font-size:20px;font-weight:700}
-.procure-copy p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
-.procure-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:8px}
-
-/* industries */
-.sand{background:var(--sand)}
-.ind{background:var(--cream);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:12px}
-.ind h3{margin:0;font-size:21px;font-weight:700}
-.ind p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
-.ind .link{margin-top:auto}
-
-.ids{margin-top:24px;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 48px}
-.ids-title{margin:0;flex:1 1 100%;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);font-weight:500}
-.ids-row{display:flex;flex-wrap:wrap;gap:16px 64px}
-.ids-row > div{display:flex;flex-direction:column;gap:4px}
-.ids-label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
-.ids-val{font-family:var(--mono);font-size:22px;font-weight:500;letter-spacing:.04em;color:var(--navy)}
-
-.mobile-only{display:none}
-.strip-more{font-size:14px;font-weight:600;text-decoration:none;padding:10px 0}
-@media (max-width:640px){
-  .hide-mobile,.pill-extra{display:none}
-  .mobile-only{display:inline-block}
-  .brief{gap:0}
-}
-
-/* projects */
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
-.proj-tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
-
-/* steps */
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));border-top:2px solid var(--navy)}
-.steps li{padding:28px 28px 8px 0}
-.step-num{font-family:var(--mono);font-size:14px;color:var(--rust-text);font-weight:500}
-.steps h3{margin:12px 0 10px;font-size:21px;font-weight:700}
-.steps p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
-
-/* founder */
-.navy{background:var(--navy);color:var(--cream)}
-.founder{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-.founder-photo{flex:0 1 320px;min-width:220px}
-.founder-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;display:block}
-.founder-copy{flex:1 1 520px;min-width:0}
-.founder-role{margin:8px 0 0;font-size:17px;color:var(--on-navy-2)}
-.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(244,241,234,.15)}
-.why h3{margin:0 0 8px;font-size:18px;font-weight:700}
-.why p{margin:0;font-size:15px;line-height:1.55;color:var(--on-navy)}
-.founder-links{display:flex;flex-wrap:wrap;gap:0 28px;margin-top:28px}
-.founder-links a{color:var(--rust-light)}
-.founder-links a:hover{color:#fff}
-
-/* brief */
-.brief{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:48px;align-items:start;border-top:2px solid var(--navy);padding-top:40px}
-.brief-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px}
-.brief-card iframe{display:block;width:100%;max-width:540px;height:720px;overflow:hidden;margin:0 auto;border:0}
-.fine{font-size:12px;color:var(--mute);line-height:1.6;margin-top:10px}
-@media (max-width:820px){.brief{grid-template-columns:1fr}}
-@media (max-width:600px){.brief-card iframe{height:860px}}
-@media (max-width:380px){.brief-card iframe{height:980px}}
-
-/* cta */
-.cta{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(32px,5vw,64px);display:flex;flex-wrap:wrap;gap:32px 48px;align-items:center;justify-content:space-between}
-.cta > div{flex:1 1 480px;min-width:0}
-.cta p{margin:16px 0 0}
-
-/* footer */
-footer{background:var(--ink-deep);color:var(--on-navy-2);font-size:14px}
-footer a{color:var(--on-navy-2);text-decoration:none}
-footer a:hover{color:#fff;text-decoration:underline}
-.f-grid{padding-top:56px;padding-bottom:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
-.f-grid h5{margin:0 0 12px;color:var(--cream);font-size:14px;font-weight:600}
-.f-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.f-brand{color:var(--cream);font-weight:700;letter-spacing:.14em;font-size:18px}
-.f-badges{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding-top:20px;padding-bottom:20px;border-top:1px solid rgba(244,241,234,.1)}
-.f-badges img{height:44px;width:auto;background:#fff;border-radius:6px;padding:4px}
-.f-bottom{padding-top:20px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:13px;border-top:1px solid rgba(244,241,234,.1)}
-.f-bottom div:last-child{display:flex;gap:20px}
-</style>
-<link rel="stylesheet" href="/msp-story.css?v=msp4" />
-<script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
-<link rel="stylesheet" href="/home.css?v=home5" />
-<script type="module" src="/home-monolith.js?v=home4"></script>
-<script type="module" src="/msp-story.js?v=msp3"></script>
-<script src="/home-services.js?v=home2" defer></script>
-  <script type="module" src="/home-services-3d.js?v=svc2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/cinematic-migration.webp" fetchpriority="high" />
+<link rel="stylesheet" href="/styles.css?v=nav1" />
+<link rel="stylesheet" href="/home.css?v=nav1" />
+<script src="/site.js?v=nav1" defer></script>
+<script src="/home.js?v=nav1" defer></script>
 </head>
-<body class="home-dark">
+<body class="home">
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav class="topnav" id="topnav" aria-label="Main navigation">
-  <div class="wrap nav-inner">
-    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" /></a>
-    <ul class="nav-links" id="navLinks">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home">
+      <img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" width="320" height="64" />
+    </a>
+    <ul class="nav-links" id="navLinks" role="list">
       <li><a href="/services/">Services</a></li>
       <li><a href="/industries/">Industries</a></li>
       <li><a href="/about/">About</a></li>
@@ -224,363 +62,364 @@ footer a:hover{color:#fff;text-decoration:underline}
 
 <main id="main-content">
 
-  <section id="hm" aria-labelledby="hm-title">
-    <div class="hm-sticky">
-      <div class="hm-stage" aria-hidden="true"></div>
-      <div class="hm-intro">
-        <p class="hm-eyebrow">Cisco &amp; Palo Alto network security engineering</p>
-        <h1 id="hm-title">Security.<br>Engineered.</h1>
-        <p class="hm-sub">Firewall migrations, policy cleanup, segmentation and risk assessments for MSPs, SMBs and public-sector teams.</p>
-        <a class="hm-cta" href="/contact.html">Discuss a project</a>
+  <!-- 1. Opening stage.
+       MEDIA STATUS: poster preview. The hero service film is not produced yet (see docs/media-manifest.md).
+       When hero-desktop.mp4 / hero-mobile.mp4 exist, add data-film-desktop and data-film-mobile to this
+       section; home.js then attaches a muted, looping inline video and shows the pause control. -->
+  <section class="h-hero" aria-labelledby="h-title" data-media-status="poster-preview">
+    <div class="h-hero-media" aria-hidden="true">
+      <img src="/cinematic-migration.webp" alt="" width="1672" height="941" fetchpriority="high" />
+    </div>
+    <div class="h-hero-shade" aria-hidden="true"></div>
+    <div class="container h-hero-inner">
+      <p class="h-kicker">Cisco &amp; Palo Alto network security engineering</p>
+      <h1 id="h-title">Security.<br class="h-br" /> Engineered.</h1>
+      <p class="h-hero-sub">Firewall migrations, policy cleanup, segmentation and risk assessments for MSPs, SMBs and public-sector teams.</p>
+      <div class="h-actions">
+        <a class="h-btn h-btn-solid" href="/contact.html">Discuss a project</a>
+        <a class="h-btn h-btn-frame" href="#services">See the services</a>
       </div>
-      <ol class="hm-layers" aria-label="What VALO engineers">
-        <li class="hm-layer" data-tier="3"><span>04</span><b>MSP white-label engineering</b><em>Specialist work, delivered under your brand.</em></li>
-        <li class="hm-layer" data-tier="2"><span>03</span><b>Firewall migration</b><em>Cutovers with rollback and validation.</em></li>
-        <li class="hm-layer" data-tier="1"><span>02</span><b>Firewall optimization</b><em>Policy, NAT and segmentation cleanup.</em></li>
-        <li class="hm-layer" data-tier="0"><span>01</span><b>Risk assessment</b><em>Risk-ranked findings and a roadmap.</em></li>
+    </div>
+    <ol class="container h-hero-index" aria-label="Core services">
+      <li><a href="#svc-migration"><span>01</span>Firewall migration</a></li>
+      <li><a href="#svc-segmentation"><span>02</span>Network segmentation</a></li>
+      <li><a href="#svc-assessment"><span>03</span>Risk assessment</a></li>
+      <li><a href="#svc-msp"><span>04</span>MSP white-label</a></li>
+    </ol>
+  </section>
+
+  <!-- 2. Quiet statement and proof line -->
+  <section class="h-statement" aria-labelledby="h-statement-title">
+    <div class="container">
+      <h2 id="h-statement-title" class="sr-only">How VALO works</h2>
+      <p class="h-statement-text">Specialist engineering for the firewalls and networks a business runs on. Scoped before work starts, changed deliberately, and validated before handover.</p>
+      <div class="h-proof">
+        <p><span class="h-label">Founder credentials</span>CCNP Enterprise &middot; PCCSE &middot; CISM &middot; SecurityX &middot; CySA+</p>
+        <p><span class="h-label">Partners</span>Cisco Registered Partner &middot; Palo Alto Networks NextWave Registered Reseller</p>
+        <a class="h-link" href="/about/credentials.html">Credentials &amp; methodology</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Service gallery: horizontal track on desktop, full stacked list on phones -->
+  <section class="h-services" id="services" aria-labelledby="h-services-title">
+    <div class="container h-head">
+      <div>
+        <p class="h-label">What VALO engineers</p>
+        <h2 id="h-services-title" class="h-h2">Four ways in.</h2>
+      </div>
+      <div class="h-head-side">
+        <a class="h-link" href="/services/">All services</a>
+        <div class="h-track-ctrl" hidden>
+          <button type="button" class="h-arrow" data-dir="-1" aria-controls="h-track" aria-label="Scroll services back">&larr;</button>
+          <button type="button" class="h-arrow" data-dir="1" aria-controls="h-track" aria-label="Scroll services forward">&rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="h-track" id="h-track" role="list">
+      <li class="h-card" id="svc-migration">
+        <div class="h-card-media" aria-hidden="true"><img src="/cinematic-migration.webp" alt="" width="1672" height="941" loading="lazy" style="object-position:82% 55%" /></div>
+        <p class="h-card-num">01</p>
+        <h3><a href="/contact.html?service=firewall-migration">Firewall migration &amp; implementation</a></h3>
+        <p class="h-card-desc">Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p>
+        <span class="h-card-cta" aria-hidden="true">Discuss a migration</span>
+      </li>
+      <li class="h-card" id="svc-segmentation">
+        <div class="h-card-media" aria-hidden="true"><img src="/cinematic-segmentation.webp" alt="" width="1672" height="941" loading="lazy" style="object-position:40% 45%" /></div>
+        <p class="h-card-num">02</p>
+        <h3><a href="/services/network-security.html">Network segmentation &amp; security engineering</a></h3>
+        <p class="h-card-desc">Segmentation, Cisco switching and routing, and security remediation, so what should never talk, doesn&rsquo;t.</p>
+        <span class="h-card-cta" aria-hidden="true">Explore network engineering</span>
+      </li>
+      <li class="h-card" id="svc-assessment">
+        <div class="h-card-media h-doc" aria-hidden="true">
+          <div class="h-doc-sheet">
+            <div class="h-doc-top"><span>Findings register</span><span>Illustrative</span></div>
+            <ol class="h-doc-rows">
+              <li><i class="sev-h"></i>Admin VPN without MFA<b>Fix now</b></li>
+              <li><i class="sev-h"></i>Firewall OS out of support<b>Fix now</b></li>
+              <li><i class="sev-m"></i>Vendor access never reviewed<b>90 days</b></li>
+              <li><i class="sev-m"></i>Backups never restore-tested<b>90 days</b></li>
+              <li><i class="sev-l"></i>Logging not centralized<b>Planned</b></li>
+            </ol>
+          </div>
+        </div>
+        <p class="h-card-num">03</p>
+        <h3><a href="/services/compliance.html">Cybersecurity risk assessment</a></h3>
+        <p class="h-card-desc">Vendor-neutral, engineer-led review with risk-ranked findings and a remediation roadmap you can act on.</p>
+        <span class="h-card-cta" aria-hidden="true">See how assessments work</span>
+      </li>
+      <li class="h-card" id="svc-msp">
+        <div class="h-card-media h-doc h-doc-msp" aria-hidden="true">
+          <div class="h-doc-sheet">
+            <div class="h-doc-top"><span>Handover package</span><span>Illustrative</span></div>
+            <p class="h-doc-brand">YOUR&nbsp;MSP</p>
+            <p class="h-doc-title">Firewall migration &mdash; client handover</p>
+            <ul class="h-doc-list">
+              <li>Migration plan<b>&check;</b></li>
+              <li>Rollback plan<b>&check;</b></li>
+              <li>Path-validation checklist<b>&check;</b></li>
+              <li>Handover documentation<b>&check;</b></li>
+            </ul>
+            <p class="h-doc-foot">Delivered under your brand</p>
+          </div>
+        </div>
+        <p class="h-card-num">04</p>
+        <h3><a href="/services/#msp">MSP white-label engineering</a></h3>
+        <p class="h-card-desc">Cisco and Palo Alto engineering capacity behind your MSP. The client relationship stays with you.</p>
+        <span class="h-card-cta" aria-hidden="true">Partner with VALO</span>
+      </li>
+    </ul>
+
+    <div class="container h-also">
+      <p class="h-label">Also engineered</p>
+      <ul role="list">
+        <li><a href="/contact.html?service=firewall-assessment"><b>Firewall assessment &amp; optimization</b><span>Policy, NAT, segmentation and access review, with prioritized findings and a cleanup plan.</span><em>Rulebase cleanup</em></a></li>
+        <li><a href="/services/network-security.html"><b>SMB network &amp; security assessment</b><span>Findings and a remediation roadmap for qualifying single-site environments.</span><em>$2,500 flat</em></a></li>
+        <li><a href="/services/microsoft-security.html"><b>Microsoft 365 security review</b><span>Independent baseline and a prioritized hardening plan.</span><em>Typically 1&ndash;2 weeks</em></a></li>
+        <li><a href="/services/vciso.html"><b>Fractional vCISO</b><span>A named security leader and governance cadence, without a full-time hire.</span><em>Monthly</em></a></li>
+        <li><a href="/services/compliance/hipaa.html"><b>HIPAA security risk analysis</b><span>A documented risk analysis for clinics and healthcare organizations.</span><em>Healthcare</em></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. Editorial engineering chapter: one transformation, explained -->
+  <section class="h-chapter" aria-labelledby="h-chapter-title">
+    <div class="container h-chapter-grid">
+      <div class="h-chapter-copy">
+        <p class="h-label">How a change is engineered</p>
+        <h2 id="h-chapter-title" class="h-h2">The cutover should be the uneventful part.</h2>
+        <p class="h-lead">The work that protects a change window happens before it: knowing what the current firewall actually does, staging the replacement, and agreeing how to back out.</p>
+        <ol class="h-steps">
+          <li><span>01</span><b>Scope</b><em>Inventory current policy, NAT and dependencies. Agree the change window and rollback before work starts.</em></li>
+          <li><span>02</span><b>Stage</b><em>Translate and stage the new configuration with the rollback plan ready.</em></li>
+          <li><span>03</span><b>Cut over</b><em>Shift approved traffic inside the agreed window.</em></li>
+          <li><span>04</span><b>Validate &amp; hand over</b><em>Test what should pass and what should not, then hand over the documentation.</em></li>
+        </ol>
+      </div>
+      <figure class="h-chapter-visual">
+        <svg class="h-sch" viewBox="0 0 400 470" role="img" aria-labelledby="h-sch-t h-sch-d">
+          <title id="h-sch-t">Illustrative firewall migration path</title>
+          <desc id="h-sch-d">Traffic from users and sites to applications moves from the current firewall to a staged replacement. Policy is mapped before the change, a rollback path stays ready, and paths are validated before the current firewall is retired.</desc>
+          <path class="old" d="M200 64 C200 130 85 130 85 200 M85 260 C85 330 200 330 200 404" />
+          <path class="new" d="M200 64 C200 130 315 130 315 200 M315 260 C315 330 200 330 200 404" />
+          <path class="rb" d="M248 244 L156 244" />
+          <path class="rb-head" d="M163 239 L156 244 L163 249" />
+          <text class="m" x="202" y="262" text-anchor="middle">ROLLBACK</text>
+          <rect class="node" x="140" y="16" width="120" height="48" />
+          <text x="200" y="45" text-anchor="middle">Users &amp; sites</text>
+          <rect class="node" x="140" y="404" width="120" height="48" />
+          <text x="200" y="433" text-anchor="middle">Applications</text>
+          <rect class="node dim" x="20" y="200" width="130" height="60" />
+          <text class="dimt" x="85" y="226" text-anchor="middle">Current</text>
+          <text class="dimt" x="85" y="246" text-anchor="middle">firewall</text>
+          <text class="m" x="20" y="190">BEFORE</text>
+          <rect class="node hot" x="250" y="200" width="130" height="60" />
+          <text x="315" y="226" text-anchor="middle">Replacement</text>
+          <text x="315" y="246" text-anchor="middle">firewall</text>
+          <text class="m o" x="380" y="190" text-anchor="end">AFTER</text>
+          <circle class="chk" cx="257.5" cy="130.5" r="5" />
+          <text class="m" x="270" y="127">POLICY MAPPED</text>
+          <circle class="chk" cx="257.5" cy="330.5" r="5" />
+          <text class="m" x="270" y="335">PATHS VALIDATED</text>
+        </svg>
+        <figcaption>Illustrative change path &middot; dashed: current path, retired after validation &middot; orange: staged replacement</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5. MSP partnership feature.
+       MEDIA STATUS: still image preview. Film D (white-label MSP engineering) is not produced yet. -->
+  <section class="h-msp" id="msp" aria-labelledby="h-msp-title" data-media-status="poster-preview">
+    <div class="h-msp-media" aria-hidden="true"><img src="/cinematic-network.webp" alt="" width="1672" height="941" loading="lazy" /></div>
+    <div class="h-msp-shade" aria-hidden="true"></div>
+    <div class="container h-msp-inner">
+      <p class="h-label">For MSPs</p>
+      <h2 id="h-msp-title" class="h-display">Specialist engineering, <em>under your brand.</em></h2>
+      <p class="h-lead">Your clients see your MSP. Behind it, VALO handles the Cisco and Palo Alto work your team doesn&rsquo;t have the hours or depth for.</p>
+      <ol class="h-msp-steps">
+        <li><span>01</span><b>Scope</b><em>Responsibilities, change windows and rollback are settled with you before anyone touches a client network.</em></li>
+        <li><span>02</span><b>Engineer</b><em>Firewall migrations, policy cleanup and troubleshooting, done by the principal engineer inside your process and your tools.</em></li>
+        <li><span>03</span><b>Validate</b><em>Every change is checked against what should pass and what should not, so the cutover is boring.</em></li>
+        <li><span>04</span><b>Hand over</b><em>Documentation and handover go out in your name. The client relationship stays with you.</em></li>
       </ol>
-      <div class="hm-tag" aria-hidden="true"><span>Scoped</span><span>Built</span><span>Validated</span></div>
-      <p class="hm-cue" aria-hidden="true">Scroll</p>
+      <a class="h-btn h-btn-solid" href="/services/#msp">Discuss an MSP engagement</a>
     </div>
   </section>
 
-  <section class="strip" aria-label="Credentials and partnerships">
-    <div class="wrap strip-inner">
-      <div class="strip-group">
-        <span class="strip-label">Founder credentials</span>
-        <a class="pill" href="/about/credentials.html">CCNP Enterprise</a>
-        <a class="pill" href="/about/credentials.html">PCCSE</a>
-        <a class="pill" href="/about/credentials.html">CISM</a>
-        <a class="pill pill-extra" href="/about/credentials.html">SecurityX</a>
-        <a class="pill pill-extra" href="/about/credentials.html">CySA+</a>
-        <a class="mobile-only strip-more" href="/about/credentials.html">View all credentials &rarr;</a>
-      </div>
-      <div class="strip-partners hide-mobile">
-        <span class="strip-label">Partners</span>
-        <span>Cisco Registered Partner</span>
-        <span>Palo Alto Networks NextWave Registered Reseller</span>
-      </div>
-    </div>
-  </section>
-
-<section class="hq" aria-labelledby="hq-title">
-  <div class="wrap">
-    <p class="hq-k" id="hq-title">Recommendations from former colleagues</p>
-    <div class="hq-grid">
-      <figure class="hq-card hq-lead">
-        <blockquote><p>&ldquo;Working with Loseini was an absolute highlight of my time on the team. He combines strong technical expertise with excellent communication, ownership, and a positive, solutions-oriented mindset. Loseini repeatedly proved himself to be someone you can rely on to handle complex challenges from start to finish. I would gladly work with Loseini again in a heartbeat and give him my highest recommendation.&rdquo;</p></blockquote>
-        <figcaption><b>Saif Albdairi</b><span>Lead Sr. Network Engineer, Dallas County</span><em>Managed Loseini directly</em></figcaption>
-      </figure>
-      <figure class="hq-card">
-        <blockquote><p>&ldquo;It was a pleasure working with Loseini at Dallas County. He has a proven track record of going above and beyond to engineer effective technical solutions. His impact was felt across Dallas County, both directly and indirectly. I knew I could always count on him to do his part and help push projects through to the finish line.&rdquo;</p></blockquote>
-        <figcaption><b>Andrew Jones</b><span>Azure Cloud Engineer</span><em>Worked with Loseini on the same team</em></figcaption>
-      </figure>
-    </div>
-    <p class="hq-note">Shared from LinkedIn with permission. These are personal recommendations of the founder&rsquo;s prior work, not client testimonials or endorsements by Dallas County.</p>
-  </div>
-</section>
-
-<section id="msp-story" aria-label="How VALO works with MSPs">
-  <div class="ms-sticky">
-    <div class="ms-stage" aria-hidden="true"></div>
-    <div class="ms-labels" aria-hidden="true"></div>
-    <div class="ms-chapters">
-      <article class="ms-chapter ms-on" data-step="0">
-        <p class="ms-kicker">For MSPs</p>
-        <h2>Specialist engineering, <em>under your brand.</em></h2>
-        <p>Your clients see your MSP. Behind it, VALO handles the Cisco and Palo Alto work your team doesn't have the hours or depth for.</p>
-      </article>
-      <article class="ms-chapter" data-step="1">
-        <p class="ms-kicker"><b>01</b>Scope</p>
-        <h2>Agree the work with your team first.</h2>
-        <p>Scope, responsibilities, change windows and rollback are settled with you before anyone touches a client network.</p>
-      </article>
-      <article class="ms-chapter" data-step="2">
-        <p class="ms-kicker"><b>02</b>Engineer</p>
-        <h2>Built behind the glass.</h2>
-        <p>Firewall migrations, policy cleanup and troubleshooting, done by the principal engineer inside your process and your tools.</p>
-      </article>
-      <article class="ms-chapter" data-step="3">
-        <p class="ms-kicker"><b>03</b>Validate</p>
-        <h2>Tested before anyone calls it done.</h2>
-        <p>Every change is checked against what should pass and what should not, so the cutover is boring.</p>
-      </article>
-      <article class="ms-chapter" data-step="4">
-        <p class="ms-kicker"><b>04</b>Hand over</p>
-        <h2>Delivered as <em>your</em> work.</h2>
-        <p>Documentation and handover go out in your name. The client relationship stays with you.</p>
-        <a class="ms-btn" href="/services/#msp">Discuss an MSP engagement</a>
-      </article>
-    </div>
-    <nav class="ms-rail" aria-label="MSP story steps">
-      <button type="button" data-go="0" aria-current="step"><span>Overview</span></button>
-      <button type="button" data-go="1"><span>Scope</span></button>
-      <button type="button" data-go="2"><span>Engineer</span></button>
-      <button type="button" data-go="3"><span>Validate</span></button>
-      <button type="button" data-go="4"><span>Hand over</span></button>
-    </nav>
-    <p class="ms-scrollcue">Scroll to go behind the glass</p>
-    <p class="ms-note">Illustrative engagement</p>
-  </div>
-</section>
-
-  <section id="services" class="hs">
-    <div class="wrap section">
-      <div class="hs-head">
+  <!-- 6. Evidence, on the light surface -->
+  <section class="h-evidence h-light" aria-labelledby="h-evidence-title">
+    <div class="container">
+      <div class="h-head">
         <div>
-          <p class="eyebrow">Direct engineering</p>
-          <h2 class="h2">Three ways in. Try each one.</h2>
+          <p class="h-label">Evidence</p>
+          <h2 id="h-evidence-title" class="h-h2">Documented work, attributed plainly.</h2>
         </div>
-        <a href="/services/" class="link">View all services &rarr;</a>
+        <a class="h-link" href="/experience/">Founder experience</a>
+      </div>
+      <div class="h-proj">
+        <article>
+          <p class="h-meta">Founder project &middot; prior role</p>
+          <h3><a href="/experience/firewall-policy-remediation.html">Over 150 Palo Alto firewall rules remediated</a></h3>
+          <p>A structured security policy remediation project led by VALO&rsquo;s founder in a prior senior network security engineering role.</p>
+          <span class="h-more" aria-hidden="true">Read the write-up</span>
+        </article>
+        <article>
+          <p class="h-meta">Founder project &middot; prior role</p>
+          <h3><a href="/experience/cisco-switch-hardening.html">Enterprise Cisco switch security hardening</a></h3>
+          <p>Management-plane security improvements driven by Rapid7 vulnerability findings and confirmed through follow-up scanning.</p>
+          <span class="h-more" aria-hidden="true">Read the write-up</span>
+        </article>
+        <article>
+          <p class="h-meta">Sample deliverables &middot; fictional, labeled</p>
+          <h3><a href="/resources/">See the deliverables before you buy</a></h3>
+          <p>Sample risk register, network assessment, Microsoft 365 review and vCISO report, so you can judge the structure and depth of the work.</p>
+          <span class="h-more" aria-hidden="true">Browse samples</span>
+        </article>
       </div>
 
-      <div class="hs-lab">
-        <div class="hs-tabs" role="tablist" aria-label="Core services" aria-orientation="vertical">
-          <button class="hs-tab" role="tab" id="hs-t1" aria-controls="hs-p1" aria-selected="true"><span class="hs-k">Firewall migration &amp; implementation</span><h3>Move to the new firewall without an outage.</h3><p>Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.</p></button>
-          <button class="hs-tab" role="tab" id="hs-t2" aria-controls="hs-p2" aria-selected="false" tabindex="-1"><span class="hs-k">Firewall assessment &amp; optimization</span><h3>Turn a rulebase nobody trusts into one you can read.</h3><p>Policy, NAT, segmentation and access review, with prioritized findings and a cleanup plan.</p></button>
-          <button class="hs-tab" role="tab" id="hs-t4" aria-controls="hs-p4" aria-selected="false" tabindex="-1"><span class="hs-k">Network security engineering</span><h3>Separate what should never talk.</h3><p>Segmentation, Cisco switching and routing, and security remediation for direct clients.</p></button>
-          <button class="hs-tab" role="tab" id="hs-t3" aria-controls="hs-p3" aria-selected="false" tabindex="-1"><span class="hs-k">Cybersecurity risk assessment</span><h3>Know which gaps to close first.</h3><p>Vendor-neutral review with risk-ranked findings and a remediation roadmap.</p></button>
-        </div>
-
-        <div class="hs-panel" role="tabpanel" id="hs-p1" aria-labelledby="hs-t1">
-          <div class="hs-ptitle"><span>Cutover simulator</span><b id="hs-mig-stage">Plan</b></div>
-          <div class="hs-view" aria-hidden="true"></div>
-          <div class="hs-mig">
-            <div class="hs-box"><b>Legacy firewall</b><span class="hs-pct" id="hs-old">100%</span><br>of traffic</div>
-            <div class="hs-flow" aria-hidden="true"><i></i><i></i><i></i></div>
-            <div class="hs-box new"><b>New Palo Alto NGFW</b><span class="hs-pct" id="hs-new">0%</span><br>of traffic</div>
-          </div>
-          <div>
-            <label class="hs-range-l" for="hs-cutover"><span>Drag to cut over</span><span>Change window</span></label>
-            <input class="hs-range" id="hs-cutover" type="range" min="0" max="100" step="5" value="0">
-          </div>
-          <ul class="hs-checks" id="hs-mig-checks">
-            <li data-at="20">Policy and NAT translated</li>
-            <li data-at="45">Rollback plan staged</li>
-            <li data-at="75">Traffic shifted in the window</li>
-            <li data-at="100">Post-change validation passed</li>
-          </ul>
-          <div><button class="hs-btn ghost" id="hs-rollback" type="button">Roll back</button></div>
-          <a href="/contact.html?service=firewall-migration" class="link">Discuss a firewall migration &rarr;</a>
-        </div>
-
-        <div class="hs-panel" role="tabpanel" id="hs-p2" aria-labelledby="hs-t2" hidden>
-          <div class="hs-ptitle"><span>Rulebase cleanup</span><b>Illustrative rulebase</b></div>
-          <div class="hs-view" aria-hidden="true"></div>
-          <div class="hs-meter"><div><b id="hs-rule-count">8</b>Rules</div><div><b id="hs-risky">2</b>Overly broad</div><div><b id="hs-unused">1</b>Unused</div></div>
-          <div class="hs-scroll">
-            <table class="hs-rules" id="hs-rules">
-              <thead><tr><th>#</th><th>From</th><th>To</th><th>App</th><th>Finding</th></tr></thead>
-              <tbody>
-                <tr class="flag" data-kind="risky"><td>1</td><td>any</td><td>any</td><td>any</td><td>Allow any/any</td></tr>
-                <tr><td>2</td><td>Users</td><td>Web</td><td>web, ssl</td><td>OK</td></tr>
-                <tr class="flag" data-kind="shadow"><td>3</td><td>Users</td><td>Web</td><td>ssl</td><td>Shadowed by rule 2</td></tr>
-                <tr class="flag" data-kind="risky"><td>4</td><td>Guest</td><td>Internal</td><td>any</td><td>Guest reaches internal</td></tr>
-                <tr><td>5</td><td>Servers</td><td>DNS</td><td>dns</td><td>OK</td></tr>
-                <tr class="flag" data-kind="unused"><td>6</td><td>Old VPN</td><td>Servers</td><td>any</td><td>0 hits in 90 days</td></tr>
-                <tr><td>7</td><td>Admins</td><td>Mgmt</td><td>ssh, https</td><td>OK</td></tr>
-                <tr><td>8</td><td>any</td><td>any</td><td>any</td><td>Deny and log</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div><button class="hs-btn" id="hs-clean" type="button">Run the cleanup</button></div>
-          <a href="/contact.html?service=firewall-assessment" class="link">Request a firewall assessment &rarr;</a>
-        </div>
-
-        <div class="hs-panel" role="tabpanel" id="hs-p4" aria-labelledby="hs-t4" hidden>
-          <div class="hs-ptitle"><span>Segmentation planner</span><b id="hs-seg-state">Flat network</b></div>
-          <div class="hs-view" aria-hidden="true"></div>
-          <div class="hs-meter"><div><b id="hs-zones">1</b>Zones</div><div><b id="hs-paths">Any to any</b>Allowed paths</div></div>
-          <ul class="hs-checks" id="hs-seg-checks">
-            <li>Workforce reaches applications on approved ports only</li>
-            <li>Guest and IoT devices blocked from internal systems</li>
-            <li>Management access from the admin zone only</li>
-            <li>Allowed and blocked paths tested after the change</li>
-          </ul>
-          <div><button class="hs-btn" id="hs-seg" type="button">Segment the network</button></div>
-          <a href="/services/network-security.html" class="link">Discuss network segmentation &rarr;</a>
-        </div>
-
-        <div class="hs-panel" role="tabpanel" id="hs-p3" aria-labelledby="hs-t3" hidden>
-          <div class="hs-ptitle"><span>Findings to roadmap</span><b>Illustrative findings</b></div>
-          <div class="hs-view" aria-hidden="true"></div>
-          <div class="hs-pool" id="hs-pool">
-            <span class="hs-chip h" data-sev="h">No MFA on admin VPN</span>
-            <span class="hs-chip m" data-sev="m">Shared local admin accounts</span>
-            <span class="hs-chip l" data-sev="l">Logging not centralized</span>
-            <span class="hs-chip h" data-sev="h">Flat network, no segmentation</span>
-            <span class="hs-chip m" data-sev="m">Backups never restore-tested</span>
-            <span class="hs-chip l" data-sev="l">Security policy out of date</span>
-            <span class="hs-chip h" data-sev="h">Firewall OS out of support</span>
-            <span class="hs-chip m" data-sev="m">Vendor access never reviewed</span>
-          </div>
-          <div class="hs-buckets">
-            <div class="hs-bucket h"><h4>Fix now</h4><div class="hs-list"></div></div>
-            <div class="hs-bucket m"><h4>Next 90 days</h4><div class="hs-list"></div></div>
-            <div class="hs-bucket l"><h4>Planned</h4><div class="hs-list"></div></div>
-          </div>
-          <div><button class="hs-btn" id="hs-sort" type="button">Prioritize findings</button></div>
-          <a href="/resources/" class="link">See a sample risk register &rarr;</a>
-        </div>
-      </div>
-
-      <div class="hs-more" aria-label="Defined engagements">
-        <a href="/services/microsoft-security.html"><b>Microsoft 365 security review</b><span>Independent baseline and a prioritized hardening plan.</span><em>Typically 1&ndash;2 weeks</em></a>
-        <a href="/services/"><b>SMB network &amp; security assessment</b><span>Findings and a remediation roadmap for qualifying single-site environments.</span><em>$2,500 flat</em></a>
-        <a href="/services/vciso.html"><b>Fractional vCISO</b><span>A named security leader and governance cadence, without a full-time hire.</span><em>Monthly</em></a>
-        <a href="/services/compliance/hipaa.html"><b>HIPAA security risk analysis</b><span>A documented risk analysis for clinics and healthcare organizations.</span><em>Healthcare</em></a>
-      </div>
-
-      <div class="procure" id="technology-partners">
-        <div class="procure-logos">
-          <img src="/cisco-partner-badge.svg" alt="Cisco Registered Partner" loading="lazy" width="64" height="64" />
-          <img src="/logo-pan-reseller.png" alt="Palo Alto Networks NextWave Registered Reseller" loading="lazy" width="68" height="64" />
-        </div>
-        <div class="procure-copy">
-          <h3>Need hardware or licensing?</h3>
-          <p>VALO supplies Cisco and Palo Alto Networks products through Ingram Micro. Procurement is kept separate from consulting &mdash; products are recommended only when they fit a requirement.</p>
-          <div class="procure-links">
-            <a href="/contact.html?service=product-quote" class="link">Request a quote &rarr;</a>
-            <a href="/resources/how-to-buy.html" class="link">How purchasing works &rarr;</a>
-            <a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf" class="link">Capability statement (PDF) &rarr;</a>
-          </div>
-        </div>
+      <div class="h-quotes">
+        <p class="h-label h-quotes-k" id="hq-title">Recommendations from former colleagues</p>
+        <figure class="h-quote h-quote-lead">
+          <blockquote><p>&ldquo;Working with Loseini was an absolute highlight of my time on the team. He combines strong technical expertise with excellent communication, ownership, and a positive, solutions-oriented mindset. Loseini repeatedly proved himself to be someone you can rely on to handle complex challenges from start to finish. I would gladly work with Loseini again in a heartbeat and give him my highest recommendation.&rdquo;</p></blockquote>
+          <figcaption><b>Saif Albdairi</b><span>Lead Sr. Network Engineer, Dallas County &middot; Managed Loseini directly</span></figcaption>
+        </figure>
+        <figure class="h-quote">
+          <blockquote><p>&ldquo;It was a pleasure working with Loseini at Dallas County. He has a proven track record of going above and beyond to engineer effective technical solutions. His impact was felt across Dallas County, both directly and indirectly. I knew I could always count on him to do his part and help push projects through to the finish line.&rdquo;</p></blockquote>
+          <figcaption><b>Andrew Jones</b><span>Azure Cloud Engineer &middot; Worked with Loseini on the same team</span></figcaption>
+        </figure>
+        <p class="h-note">Shared from LinkedIn with permission. These are personal recommendations of the founder&rsquo;s prior work, not client testimonials or endorsements by Dallas County.</p>
       </div>
     </div>
   </section>
 
-  <section class="sand">
-    <div class="wrap section">
-      <p class="eyebrow">Who we serve</p>
-      <h2 class="h2" style="max-width:760px;margin-bottom:48px">Senior engineering for teams that don't keep a security engineer on staff.</h2>
-      <div class="grid-3">
-        <div class="ind"><h3>Managed Service Providers</h3><p>Add Cisco and Palo Alto security engineering capacity without hiring full-time specialists. White-label work available.</p><a href="/services/#msp" class="link">Partner with VALO &rarr;</a></div>
-        <div class="ind"><h3>Small &amp; Midsize Businesses</h3><p>Focused firewall, network security, and assessment expertise alongside your existing IT team.</p><a href="/services/network-security.html" class="link">Explore services &rarr;</a></div>
-        <div class="ind"><h3>State, Local &amp; Education</h3><p>Support for network modernization, segmentation, and security remediation in public-sector environments.</p><a href="/industries/public-sector-sled.html" class="link">Explore SLED support &rarr;</a></div>
-      </div>
-      <div class="ids" aria-label="Federal entity identifiers">
-        <p class="ids-title">Federal entity identifiers</p>
-        <div class="ids-row">
-          <div><span class="ids-label">CAGE code</span><span class="ids-val">0QMV2</span></div>
-          <div><span class="ids-label">Unique Entity ID (UEI)</span><span class="ids-val">ZWY2EB1Q75C4</span></div>
-        </div>
-        <a href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf" class="link">Capability statement (PDF) &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="navy on-navy">
-    <div class="wrap section founder">
-      <div class="founder-photo"><img src="/me.jpg" alt="Loseini Valo Kamara, founder of VALO Technologies" /></div>
-      <div class="founder-copy">
-        <p class="eyebrow">Why VALO</p>
-        <h2 class="h2">Loseini &ldquo;Valo&rdquo; Kamara</h2>
-        <p class="founder-role">Founder &amp; Principal Consultant &middot; MS Cybersecurity &amp; Information Assurance &middot; MBA, IT Management</p>
-        <div class="why">
+  <!-- 7. Principal-led delivery -->
+  <section class="h-founder h-paper" aria-labelledby="h-founder-title">
+    <div class="container h-founder-grid">
+      <div class="h-founder-photo"><img src="/me.jpg" alt="Loseini Valo Kamara, founder of VALO Technologies" width="640" height="640" loading="lazy" /></div>
+      <div>
+        <p class="h-label">Who does the work</p>
+        <h2 id="h-founder-title" class="h-h2">Loseini &ldquo;Valo&rdquo; Kamara</h2>
+        <p class="h-founder-role">Founder &amp; Principal Consultant &middot; MS Cybersecurity &amp; Information Assurance &middot; MBA, IT Management</p>
+        <div class="h-why">
           <div><h3>Cisco &amp; Palo Alto focus</h3><p>Practical experience with firewalls, routing, switching, segmentation, and security policy in complex environments.</p></div>
           <div><h3>Work directly with the principal</h3><p>Engagements are scoped and led by an experienced engineer, without account-management layers.</p></div>
-          <div><h3>Actionable deliverables</h3><p>Clear findings, documented changes, and realistic remediation priorities &mdash; not generic reports.</p></div>
+          <div><h3>Actionable deliverables</h3><p>Clear findings, documented changes, and realistic remediation priorities, not generic reports.</p></div>
         </div>
-        <div class="founder-links">
-          <a href="/about/leadership.html" class="link">Meet the founder &rarr;</a>
-          <a href="/experience/firewall-policy-remediation.html" class="link">Founder project: 150+ firewall rules remediated &rarr;</a>
-          <a href="/experience/cisco-switch-hardening.html" class="link">Founder project: Cisco switch hardening &rarr;</a>
+        <a class="h-link" href="/about/leadership.html">Meet the founder</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Who VALO serves, identifiers, procurement -->
+  <section class="h-serve h-light" aria-labelledby="h-serve-title">
+    <div class="container">
+      <p class="h-label">Who we serve</p>
+      <h2 id="h-serve-title" class="h-h2 h-serve-h">Senior engineering for teams that don&rsquo;t keep a security engineer on staff.</h2>
+      <div class="h-aud">
+        <div><h3>Managed Service Providers</h3><p>Add Cisco and Palo Alto security engineering capacity without hiring full-time specialists. White-label work available.</p><a class="h-link" href="/services/#msp">Partner with VALO</a></div>
+        <div><h3>Small &amp; Midsize Businesses</h3><p>Focused firewall, network security, and assessment expertise alongside your existing IT team.</p><a class="h-link" href="/services/network-security.html">Explore services</a></div>
+        <div><h3>State, Local &amp; Education</h3><p>Support for network modernization, segmentation, and security remediation in public-sector environments.</p><a class="h-link" href="/industries/public-sector-sled.html">Explore SLED support</a></div>
+      </div>
+      <div class="h-facts">
+        <div class="h-fact" aria-label="Federal entity identifiers">
+          <p class="h-meta">Federal entity identifiers</p>
+          <dl class="h-ids">
+            <div><dt>CAGE code</dt><dd>0QMV2</dd></div>
+            <div><dt>Unique Entity ID (UEI)</dt><dd>ZWY2EB1Q75C4</dd></div>
+          </dl>
+          <a class="h-link" href="/resources/VALO_Technologies_Capability_Statement_2026.pdf" download="VALO_Technologies_Capability_Statement_2026.pdf">Capability statement (PDF)</a>
+        </div>
+        <div class="h-fact" id="technology-partners">
+          <p class="h-meta">Hardware &amp; licensing</p>
+          <div class="h-procure">
+            <img src="/cisco-partner-badge.svg" alt="Cisco Registered Partner" loading="lazy" width="56" height="56" />
+            <img src="/logo-pan-reseller.png" alt="Palo Alto Networks NextWave Registered Reseller" loading="lazy" width="60" height="56" />
+            <p>VALO supplies Cisco and Palo Alto Networks products through Ingram Micro. Procurement is kept separate from consulting; products are recommended only when they fit a requirement.</p>
+          </div>
+          <div class="h-procure-links">
+            <a class="h-link" href="/contact.html?service=product-quote">Request a quote</a>
+            <a class="h-link" href="/resources/how-to-buy.html">How purchasing works</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="security-brief" class="wrap" style="padding-top:96px">
-    <div class="hb">
-      <div>
-        <p class="eyebrow">The VALO Security Brief</p>
-        <h2 class="h2">Practical cybersecurity guidance. Every other Wednesday.</h2>
-        <p class="lead" style="margin:16px 0 0">Network and security engineering, risk, and the decisions leaders need to make before a security problem becomes an incident, audit finding, or expensive emergency.</p>
+  <!-- 9. One clear next step -->
+  <section class="h-contact h-light" aria-labelledby="h-contact-title">
+    <div class="container">
+      <div class="h-contact-grid">
+        <div>
+          <p class="h-label">Next step</p>
+          <h2 id="h-contact-title" class="h-display">Have a firewall or network project?</h2>
+        </div>
+        <div>
+          <p class="h-contact-lead">Tell us about your firewall, network security, or assessment project. You&rsquo;ll hear back directly from the principal engineer.</p>
+          <a class="h-btn h-btn-solid" href="/contact.html">Schedule a conversation</a>
+        </div>
       </div>
-      <div class="hb-actions">
-        <a href="/insights/#subscribe" class="btn">Subscribe to the Brief</a>
-        <a href="/insights/security-brief-003.html" class="link">Read the latest issue &rarr;</a>
+      <div class="h-brief" id="security-brief">
+        <div>
+          <p class="h-meta">The VALO Security Brief</p>
+          <p class="h-brief-t">Practical cybersecurity guidance, every other Wednesday.</p>
+        </div>
+        <div class="h-brief-links">
+          <a class="h-link" href="/insights/#subscribe">Subscribe</a>
+          <a class="h-link" href="/insights/security-brief-003.html">Read the latest issue</a>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="wrap section">
-    <div class="cta">
-      <div>
-        <h2 class="h2">Have a firewall or network project?</h2>
-        <p class="lead">Tell us about your firewall, network security, or assessment project. You'll hear back directly from the principal engineer.</p>
-      </div>
-      <a href="/contact.html" class="btn">Schedule a conversation</a>
     </div>
   </section>
 
 </main>
 
-
 <footer>
-  <div class="wrap f-grid">
-    <div>
-      <div class="f-brand">VALO</div>
-      <p style="margin:6px 0 12px">Technologies LLC</p>
-      <p style="margin:0 0 12px">Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
-      <p style="margin:0 0 12px">10228 Northwest Hwy, Unit 446<br>Dallas, TX 75238<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
-      <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">VALO<span>.</span></div>
+        <div class="footer-brand-tag">Technologies LLC</div>
+        <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
+        <p>10228 Northwest Hwy, Unit 446<br />Dallas, TX 75238<br /><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+        <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="/services/#msp">MSP White-Label Engineering</a></li>
+          <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
+          <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
+          <li><a href="/services/network-security.html">Network Security Engineering</a></li>
+          <li><a href="/services/compliance.html">Cybersecurity Risk Assessments</a></li>
+          <li><a href="/services/">All Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Who We Serve</h5>
+        <ul>
+          <li><a href="/industries/#msp">Managed Service Providers</a></li>
+          <li><a href="/industries/#smb">Small &amp; Midsize Businesses</a></li>
+          <li><a href="/industries/#sled">State, Local &amp; Education (SLED)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>About &amp; Resources</h5>
+        <ul>
+          <li><a href="/about/">About VALO</a></li>
+          <li><a href="/about/leadership.html">Leadership</a></li>
+          <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
+          <li><a href="/insights/">Insights</a></li>
+          <li><a href="/insights/security-brief-001.html">VALO Security Brief</a></li>
+          <li><a href="/resources/">Sample Deliverables</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h5>Services</h5>
-      <ul>
-        <li><a href="/services/#msp">MSP White-Label Engineering</a></li>
-        <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
-        <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
-        <li><a href="/services/network-security.html">Network Security Engineering</a></li>
-        <li><a href="/services/compliance.html">Cybersecurity Risk Assessments</a></li>
-        <li><a href="/services/">All Services</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Who We Serve</h5>
-      <ul>
-        <li><a href="/industries/#msp">Managed Service Providers</a></li>
-        <li><a href="/industries/#smb">Small &amp; Midsize Businesses</a></li>
-        <li><a href="/industries/#sled">State, Local &amp; Education (SLED)</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>About &amp; Resources</h5>
-      <ul>
-        <li><a href="/about/">About VALO</a></li>
-        <li><a href="/about/leadership.html">Leadership</a></li>
-        <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
-        <li><a href="/insights/">Insights</a></li>
-        <li><a href="/insights/security-brief-001.html">VALO Security Brief</a></li>
-        <li><a href="/resources/">Sample Deliverables</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="wrap f-badges" aria-label="Certifications">
-    <img src="/logo-isaca.png" alt="ISACA CISM" />
-    <img src="/logo-secux.png" alt="CompTIA SecurityX" />
-    <img src="/logo-pentest.png" alt="CompTIA PenTest+" />
-    <img src="/logo-cysa.png" alt="CompTIA CySA+" />
-    <img src="/logo-pccse.png" alt="Palo Alto Networks PCCSE" />
-    <img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" />
-  </div>
-  <div class="wrap f-bottom">
-    <div>&copy; 2026 VALO Technologies LLC. All rights reserved. &middot; CAGE 0QMV2 &middot; UEI ZWY2EB1Q75C4</div>
-    <div><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+    <div class="footer-badges"><div role="list" aria-label="Certifications" class="footer-badge-group"><span class="footer-badge-label">Certifications</span><img src="/logo-isaca.png" alt="ISACA CISM" class="footer-cert-img" role="listitem" loading="lazy" /><img src="/logo-secux.png" alt="CompTIA SecurityX" class="footer-cert-img" role="listitem" loading="lazy" /><img src="/logo-pentest.png" alt="CompTIA PenTest+" class="footer-cert-img" role="listitem" loading="lazy" /><img src="/logo-cysa.png" alt="CompTIA CySA+" class="footer-cert-img" role="listitem" loading="lazy" /><img src="/logo-pccse.png" alt="Palo Alto Networks PCCSE" class="footer-cert-img" role="listitem" loading="lazy" /><img src="/logo-ccnp-enterprise.png" alt="CCNP Enterprise" class="footer-cert-img" role="listitem" loading="lazy" /></div></div>
+    <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved. &middot; CAGE 0QMV2 &middot; UEI ZWY2EB1Q75C4</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
   </div>
 </footer>
-
-<script>
-(function(){
-  var h=document.getElementById('hamburger'),n=document.getElementById('navLinks'),nav=document.getElementById('topnav');
-  if(h&&n){
-    h.addEventListener('click',function(){var o=n.classList.toggle('open');h.setAttribute('aria-expanded',o);});
-    document.addEventListener('click',function(e){if(nav&&!nav.contains(e.target)){n.classList.remove('open');h.setAttribute('aria-expanded','false');}});
-  }
-})();
-</script>
-<button class="motion-pause" type="button" aria-pressed="false">Pause motion</button>
 </body>
 </html>
