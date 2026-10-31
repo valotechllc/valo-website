@@ -8,7 +8,7 @@
 #msp-story .ms-labels{position:absolute;inset:0;z-index:2;pointer-events:none}
 #msp-story .ms-tag{position:absolute;left:0;top:0;font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;letter-spacing:.08em;white-space:nowrap;color:var(--ms-on);will-change:transform,opacity;display:flex;align-items:center;gap:7px}
 #msp-story .ms-tag i{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
-#msp-story .ms-tag.ms-msp{font-family:var(--body,'DM Sans',sans-serif);font-size:15px;font-weight:600;letter-spacing:.01em;color:var(--ms-cream);padding:6px 12px;border:1px solid rgba(244,241,234,.28);border-radius:999px;background:rgba(9,14,22,.45)}
+#msp-story .ms-tag.ms-msp{font-family:var(--sans,'DM Sans',sans-serif);font-size:15px;font-weight:600;letter-spacing:.01em;color:var(--ms-cream);padding:6px 12px;border:1px solid rgba(244,241,234,.28);border-radius:999px;background:rgba(9,14,22,.45)}
 #msp-story .ms-tag.ms-valo{color:var(--ms-rust-light)}
 #msp-story .ms-tag.ms-hl{color:var(--ms-mint)}
 #msp-story .ms-chapters{position:absolute;z-index:3;left:max(24px,calc((100% - 1200px)/2 + 24px));top:50%;transform:translateY(-40%);width:min(460px,calc(100% - 48px));display:grid}
