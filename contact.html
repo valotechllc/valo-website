@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/styles.css?v=nav1" />
+<link rel="stylesheet" href="/styles.css?v=nav2" />
 <script src="/site.js?v=nav1" defer></script>
 </head>
 <body>
@@ -75,7 +75,7 @@
           </div>
           <div class="contact-line">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            <span>10228 Northwest Hwy, Unit 446, Dallas, TX 75238</span>
+            <span>Dallas, TX</span>
           </div>
           <div class="contact-line">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px;height:18px;color:var(--pa-orange);"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -125,7 +125,6 @@
                 <option value="Firewall Assessment &amp; Optimization">Firewall Assessment &amp; Optimization</option>
                 <option value="Network &amp; Security Assessment">Network &amp; Security Assessment</option>
                 <option value="Network Security Engineering &amp; Segmentation">Network Security Engineering &amp; Segmentation</option>
-                <option value="Cybersecurity Risk Assessment">Cybersecurity Risk Assessment (including HIPAA)</option>
                 <option value="Other Security Consulting">Other Security Consulting</option>
               </select>
               <input type="hidden" id="contact-service-detail" name="service_detail" value="" />
@@ -155,7 +154,7 @@
       <div class="footer-brand-name">VALO<span>.</span></div>
       <div class="footer-brand-tag">Technologies LLC</div>
       <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
-      <p>10228 Northwest Hwy, Unit 446<br>Dallas, TX 75238<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+      <p>Dallas, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
       <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
@@ -165,7 +164,7 @@
         <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
         <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
         <li><a href="/services/network-security.html">Network Security Engineering</a></li>
-        <li><a href="/services/compliance.html">Cybersecurity Risk Assessments</a></li>
+        <li><a href="/services/network-security.html#assessment">Network &amp; Security Assessment</a></li>
         <li><a href="/services/">All Services</a></li>
       </ul>
     </div>
@@ -184,7 +183,7 @@
         <li><a href="/about/leadership.html">Leadership</a></li>
         <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
         <li><a href="/insights/">Insights</a></li>
-        <li><a href="/insights/security-brief-001.html">VALO Security Brief</a></li>
+        <li><a href="/insights/">VALO Security Brief</a></li>
         <li><a href="/resources/">Sample Deliverables</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
@@ -227,13 +226,13 @@
     'firewall-assessment': ['Firewall Assessment & Optimization', 'Firewall Assessment & Optimization'],
     'microsoft-security': ['Other Security Consulting', 'Microsoft 365 Security Posture Review'],
     'm365-security': ['Other Security Consulting', 'Microsoft 365 Security Posture Review'],
-    'hipaa-risk-analysis': ['Cybersecurity Risk Assessment', 'HIPAA Security Risk Analysis'],
-    'risk-assessment': ['Cybersecurity Risk Assessment', 'Cybersecurity Risk & Compliance Assessment'],
+    'hipaa-risk-analysis': ['Network & Security Assessment', 'HIPAA Security Risk Analysis'],
+    'risk-assessment': ['Network & Security Assessment', 'Cybersecurity Risk Assessment'],
     'network-assessment': ['Network & Security Assessment', 'Network & Security Assessment'],
     'network': ['Network Security Engineering & Segmentation', 'Network Infrastructure & Security Engineering'],
     'network-security': ['Network Security Engineering & Segmentation', 'Network Infrastructure & Security Engineering'],
     'vciso': ['Other Security Consulting', 'Fractional vCISO'],
-    'compliance': ['Cybersecurity Risk Assessment', 'Governance, Risk & Compliance']
+    'compliance': ['Network & Security Assessment', 'Governance, Risk & Compliance']
   };
   if (serviceSelect && svcMap[svcParam]) {
     serviceSelect.value = svcMap[svcParam][0];

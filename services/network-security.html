@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/styles.css?v=nav1" />
+<link rel="stylesheet" href="/styles.css?v=nav2" />
 <script src="/site.js?v=nav1" defer></script>
 </head>
 <body>
@@ -62,8 +62,8 @@
       <div class="prose reveal">
 
         <h2>Most firms make you choose</h2>
-        <p>A network engineer who builds fast but leaves you to worry about compliance later. Or a security consultant who audits the network but can't touch the hardware. VALO does both in one engagement &mdash; we design, migrate, and troubleshoot the infrastructure your day runs on, and we build it so uptime, security, and HIPAA or PCI requirements are handled together, not bolted on after.</p>
-        <p>That combination is the point. A pure network engineer can't tell you whether your segmentation satisfies the HIPAA Security Rule. A pure compliance consultant can't reconfigure the switch. We do.</p>
+        <p>A network engineer who builds fast but leaves you to worry about compliance later. Or a security consultant who audits the network but can't touch the hardware. VALO does both in one engagement &mdash; we design, migrate, and troubleshoot the infrastructure your day runs on, and we build it so uptime, security, and compliance requirements are handled together, not bolted on after.</p>
+        <p>That combination is the point. A pure network engineer can't tell you whether your segmentation will stand up to an audit. A pure compliance consultant can't reconfigure the switch. We do.</p>
 
         <h2>What we do</h2>
       </div>
@@ -125,7 +125,7 @@
       </div>
 
       <div class="prose reveal" style="margin-top: 56px;">
-        <h2>How the assessment works</h2>
+        <h2 id="assessment">How the assessment works</h2>
         <p>Five phases, scoped to a single site. Most small-practice assessments are completed within about a week start to finish.</p>
       </div>
 
@@ -140,11 +140,11 @@
         </div>
         <div style="display: grid; grid-template-columns: 60px 1fr; border-bottom: 1px solid var(--line);">
           <div style="background: var(--bg-elev); border-right: 1px solid var(--line); display: grid; place-items: center; padding: 20px; font-family: var(--mono); font-size: 11px; color: var(--blue); font-weight: 600;">03</div>
-          <div style="padding: 20px 24px; background: var(--bg-card);"><strong style="color: var(--ink); font-size: 15px;">Analysis</strong> &mdash; <span style="color: var(--ink-dim); font-size: 14px;">We score the environment for reliability, security, and whether the network design supports your HIPAA obligations.</span></div>
+          <div style="padding: 20px 24px; background: var(--bg-card);"><strong style="color: var(--ink); font-size: 15px;">Analysis</strong> &mdash; <span style="color: var(--ink-dim); font-size: 14px;">We score the environment for reliability, security, and whether the network design supports your compliance obligations.</span></div>
         </div>
         <div style="display: grid; grid-template-columns: 60px 1fr; border-bottom: 1px solid var(--line);">
           <div style="background: var(--bg-elev); border-right: 1px solid var(--line); display: grid; place-items: center; padding: 20px; font-family: var(--mono); font-size: 11px; color: var(--blue); font-weight: 600;">04</div>
-          <div style="padding: 20px 24px; background: var(--bg-card);"><strong style="color: var(--ink); font-size: 15px;">Report &amp; roadmap</strong> &mdash; <span style="color: var(--ink-dim); font-size: 14px;">Prioritized findings by severity, compliance gaps mapped to the HIPAA Security Rule, and a vendor-neutral remediation roadmap.</span></div>
+          <div style="padding: 20px 24px; background: var(--bg-card);"><strong style="color: var(--ink); font-size: 15px;">Report &amp; roadmap</strong> &mdash; <span style="color: var(--ink-dim); font-size: 14px;">Prioritized findings by severity, compliance gaps mapped to the framework you answer to, and a vendor-neutral remediation roadmap.</span></div>
         </div>
         <div style="display: grid; grid-template-columns: 60px 1fr;">
           <div style="background: var(--bg-elev); border-right: 1px solid var(--line); display: grid; place-items: center; padding: 20px; font-family: var(--mono); font-size: 11px; color: var(--blue); font-weight: 600;">05</div>
@@ -176,7 +176,7 @@
       <div class="footer-brand-name">VALO<span>.</span></div>
       <div class="footer-brand-tag">Technologies LLC</div>
       <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
-      <p>10228 Northwest Hwy, Unit 446<br>Dallas, TX 75238<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+      <p>Dallas, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
       <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
@@ -186,7 +186,7 @@
         <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
         <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
         <li><a href="/services/network-security.html">Network Security Engineering</a></li>
-        <li><a href="/services/compliance.html">Cybersecurity Risk Assessments</a></li>
+        <li><a href="/services/network-security.html#assessment">Network &amp; Security Assessment</a></li>
         <li><a href="/services/">All Services</a></li>
       </ul>
     </div>
@@ -205,7 +205,7 @@
         <li><a href="/about/leadership.html">Leadership</a></li>
         <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
         <li><a href="/insights/">Insights</a></li>
-        <li><a href="/insights/security-brief-001.html">VALO Security Brief</a></li>
+        <li><a href="/insights/">VALO Security Brief</a></li>
         <li><a href="/resources/">Sample Deliverables</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
