@@ -166,6 +166,7 @@
 .h-msp-steps span{display:block;margin-bottom:8px;font-family:var(--mono);font-size:12px;color:var(--orange)}
 .h-msp-steps b{display:block;margin-bottom:6px;font-weight:500;font-size:17px}
 .h-msp-steps em{display:block;font-style:normal;font-size:15px;line-height:1.55;color:var(--on-dark-2)}
+.h-msp-inner .h-lead + .h-btn{margin-top:36px}
 
 /* ---------- 6. evidence (light) ---------- */
 .h-evidence{padding:clamp(96px,11vw,160px) 0}
