@@ -8,12 +8,12 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Contact | VALO Technologies" />
 <meta property="og:description" content="Schedule a 30-minute conversation. No sales pitch — we'll discuss your environment and whether VALO is the right fit." />
-<meta property="og:url" content="https://valotechnologiellc.com/contact.html" />
-<meta property="og:image" content="https://valotechnologiellc.com/og-image.png" />
+<meta property="og:url" content="https://www.valotechnologiesllc.com/contact.html" />
+<meta property="og:image" content="https://www.valotechnologiesllc.com/og-image.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Contact | VALO Technologies" />
 <meta name="twitter:description" content="Schedule a 30-minute conversation. No sales pitch." />
-<meta name="twitter:image" content="https://valotechnologiellc.com/og-image.png" />
+<meta name="twitter:image" content="https://www.valotechnologiesllc.com/og-image.png" />
 <link rel="icon" type="image/svg+xml" href="/valo-favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -71,7 +71,7 @@
           <h3>Direct contact</h3>
           <div class="contact-line">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-            <a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a>
+            <a href="mailto:info@valotechnologiesllc.com">info@valotechnologiesllc.com</a>
           </div>
           <div class="contact-line">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -268,7 +268,7 @@
       var data = new FormData(form);
       fetch('https://formspree.io/f/mgodoabn', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
       .then(function(response) { if (response.ok) { window.location.href = '/thank-you.html'; } else { return response.json().then(function(data) { throw new Error(data.errors ? data.errors.map(function(e){ return e.message; }).join(', ') : 'Submission failed.'); }); } })
-      .catch(function() { errorDiv.textContent = 'Something went wrong. Please email us directly at info@valotechnologiellc.com'; errorDiv.style.display = 'block'; btn.textContent = 'Send inquiry →'; btn.disabled = false; });
+      .catch(function() { errorDiv.textContent = 'Something went wrong. Please email us directly at info@valotechnologiesllc.com'; errorDiv.style.display = 'block'; btn.textContent = 'Send inquiry →'; btn.disabled = false; });
     });
   }
 })();

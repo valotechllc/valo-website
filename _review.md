@@ -113,7 +113,7 @@ Both legal pages carry `<!-- LEGAL REVIEW REQUIRED — do not deploy without att
 | `https://fonts.googleapis.com` | Every page `<head>` | Google Fonts CDN |
 | `https://fonts.gstatic.com` | Every page `<head>` | Google Fonts static assets |
 | `https://formspree.io/f/xnnevpwq` | `contact.html` form action | Formspree endpoint — verify endpoint is active |
-| `mailto:lk@valotechnologiellc.com` | Every page footer, contact page, privacy, terms | Email address |
+| `mailto:lk@valotechnologiesllc.com` | Every page footer, contact page, privacy, terms | Email address |
 | `#` (placeholder) | Every LinkedIn link | **Replace before launch** — see TODO section above |
 
 ---
@@ -175,7 +175,7 @@ All pages use `/valo-logo-dark.svg` as the `og:image` and `twitter:image`. SVG f
 **Note:** `/contact.html` activates only on `/contact.html` exactly. `/services/compliance/hipaa.html` activates the Services nav link via startsWith `/services/`.
 
 ### OG URL paths
-**Decision:** Industry and service detail pages use full absolute OG URLs based on the `valotechnologiellc.com` domain.
+**Decision:** Industry and service detail pages use full absolute OG URLs based on the `valotechnologiesllc.com` domain.
 
 ### `services/compliance/` subdirectory
 **Decision:** HIPAA, SOC 2, and CMMC detail pages are nested under `services/compliance/` as the architecture doc specifies.  

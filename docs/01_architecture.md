@@ -53,13 +53,13 @@ Services | Industries | About | Insights | Contact
 
 **Footer (every page):**
 Four-column sitemap: Services / Industries / About / Resources
-Logo, address (Rockwall, TX), email (lk@valotechnologiellc.com)
+Logo, address (Rockwall, TX), email (lk@valotechnologiesllc.com)
 LinkedIn icon
 Certification badges strip
 Copyright + Privacy + Terms links
 
 ## Domain & Hosting
 
-- Domain: valotechnologiellc.com
+- Domain: valotechnologiesllc.com
 - Hosting: GitHub Pages
-- Contact form: Formspree (endpoint xnnevpwq → lk@valotechnologiellc.com)
+- Contact form: Formspree (endpoint xnnevpwq → lk@valotechnologiesllc.com)
