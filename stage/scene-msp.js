@@ -58,6 +58,7 @@ function texRow(THREE, s, i) {
 export function mspScene(ctx) {
   const { THREE, scene, renderer } = ctx;
   scene.fog.density = 0.055;
+  scene.background.setHex(0x10151f); scene.fog.color.setHex(0x212b3d); // per-scene tint
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
 
   scene.add(new THREE.HemisphereLight(0x22355c, 0x020308, 0.55));
@@ -143,7 +144,7 @@ export function mspScene(ctx) {
 
   return {
     duration: L,
-    floor: { tile: 0.7, base: 0x04070d, reflect: 0.85 },
+    floor: { tile: 0.7, base: 0x0c1119, reflect: 0.85 },
     chapters: [{ start: 0, label: 'Scope' }, { start: 5.5, label: 'Engineer' }, { start: 11, label: 'Validate' }, { start: 16.5, label: 'Hand over' }],
     labels: [
       { text: 'Your clients', at: (t, v) => v.set(-1.62, 0.42, 0.3), alpha: (t) => smooth(0.6, 1.3, t) * (1 - smooth(4.6, 5.2, t)) },

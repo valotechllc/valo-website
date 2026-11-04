@@ -83,6 +83,7 @@ function texRoadmap(THREE) {
 export function assessmentScene(ctx) {
   const { THREE, scene, renderer } = ctx;
   scene.fog.density = 0.07;
+  scene.background.setHex(0x1c130c); scene.fog.color.setHex(0x2e2016); // per-scene tint
   const brushed = texBrushed(THREE);
 
   // lights
@@ -190,7 +191,7 @@ export function assessmentScene(ctx) {
 
   return {
     duration: L,
-    floor: { tile: 0.8, base: 0x04070d, reflect: 0.8 },
+    floor: { tile: 0.8, base: 0x150e09, reflect: 0.8 },
     chapters: [{ start: 0, label: 'Inspect' }, { start: 5.5, label: 'Evidence' }, { start: 11, label: 'Prioritize' }, { start: 16.5, label: 'Roadmap' }],
     labels: [
       { text: 'Network map', at: (t, v) => v.set(-1.25, 1.36, -1.05), alpha: (t) => smooth(6.0, 6.6, t) * (1 - smooth(8.6, 9.0, t)) },
