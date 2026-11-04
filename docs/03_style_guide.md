@@ -37,7 +37,7 @@ This document defines voice, visual identity, component patterns, and technical 
 
 ### Aesthetic
 
-Dark tactical. The existing single-page site at valotechnologiellc.com already establishes this — keep it as the foundation and expand into a full visual system across multiple pages.
+Dark tactical. The existing single-page site at valotechnologiesllc.com already establishes this — keep it as the foundation and expand into a full visual system across multiple pages.
 
 ### Color palette
 
@@ -99,7 +99,7 @@ Consistent structure — heading, subheading, why this industry, what VALO bring
 Same on every page.
 - Logo
 - Address (Rockwall, TX)
-- Email: lk@valotechnologiellc.com
+- Email: lk@valotechnologiesllc.com
 - Phone (if published)
 - Four-column sitemap: Services / Industries / About / Resources
 - LinkedIn icon
@@ -122,8 +122,8 @@ No "Get started today!" energy. The voice is calm and confident.
 - Single HTML file per page (matches existing approach)
 - Mobile-responsive across breakpoints (mobile, tablet, desktop)
 - Accessible: WCAG AA at minimum (color contrast, semantic HTML, alt text, keyboard navigation)
-- Formspree contact form integration (endpoint xnnevpwq, lk@valotechnologiellc.com)
-- Domain: valotechnologiellc.com
+- Formspree contact form integration (endpoint xnnevpwq, lk@valotechnologiesllc.com)
+- Domain: valotechnologiesllc.com
 - Privacy policy and terms of service pages required (linked from footer, not in main nav) — Claude Code can draft these from standard templates
 - Page load: under 2 seconds on 3G, all assets optimized
 - No analytics tracking on launch (add later if needed)
@@ -135,4 +135,4 @@ No "Get started today!" energy. The voice is calm and confident.
 
 ## Build Prompt for Claude Code
 
-> Build a multi-page static website for VALO Technologies, LLC. Use the attached information architecture (01_architecture.md), page copy (02_page_copy.md), and this style guide (03_style_guide.md). Single HTML file per page, deploy-ready for GitHub Pages. Dark tactical aesthetic, mobile-responsive, WCAG AA accessibility. Integrate the existing Formspree contact form (endpoint xnnevpwq). Set up on a feature branch for review before deploying to main. Reference the existing single-page site at valotechnologiellc.com for visual continuity, but expand into the full multi-page architecture defined here.
+> Build a multi-page static website for VALO Technologies, LLC. Use the attached information architecture (01_architecture.md), page copy (02_page_copy.md), and this style guide (03_style_guide.md). Single HTML file per page, deploy-ready for GitHub Pages. Dark tactical aesthetic, mobile-responsive, WCAG AA accessibility. Integrate the existing Formspree contact form (endpoint xnnevpwq). Set up on a feature branch for review before deploying to main. Reference the existing single-page site at valotechnologiesllc.com for visual continuity, but expand into the full multi-page architecture defined here.

@@ -683,7 +683,7 @@ Valo lives in the Dallas-Fort Worth area and is involved in community charitable
 ## Connect
 
 LinkedIn: [TODO BEFORE LAUNCH: replace with actual LinkedIn URL — do not silently substitute "#"]
-Email: lk@valotechnologiellc.com
+Email: lk@valotechnologiesllc.com
 
 ## CTA
 
@@ -815,7 +815,7 @@ You'll leave with a clearer picture of your situation regardless of whether we w
 
 ## Contact form
 
-Existing Formspree integration to lk@valotechnologiellc.com (endpoint: xnnevpwq).
+Existing Formspree integration to lk@valotechnologiesllc.com (endpoint: xnnevpwq).
 Fields:
 - Name
 - Organization
@@ -827,7 +827,7 @@ Fields:
 
 ## Direct contact
 
-**Email:** lk@valotechnologiellc.com
+**Email:** lk@valotechnologiesllc.com
 **Address:** Rockwall, TX
 **LinkedIn:** [TODO BEFORE LAUNCH: replace with actual LinkedIn URL — do not silently substitute "#"]
 
