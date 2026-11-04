@@ -20,7 +20,7 @@ They look like stylised 3D product renders, not filmed or studio-rendered footag
 
 | File | Used for | Origin / licence | Notes |
 |---|---|---|---|
-| `media/migration-poster.webp`, `media/migration-poster-portrait.webp` | Hero fallback posters | Rendered from `stage/scene-migration.js` | Re-render with `?capture` if the scene changes. |
+| `media/migration-poster.webp`, `media/migration-poster-portrait.webp` | Hero fallback posters | Rendered from `stage/scene-migration.js` (v2, rulebase scene) at t = 2.5 s | Re-render with `?capture` if the scene changes. |
 | `media/card-migration.webp`, `card-segmentation.webp`, `card-assessment.webp`, `card-msp.webp` | Service gallery cards | Rendered from the four `stage/scene-*.js` files | Same. |
 | `media/msp-feature.webp` | MSP feature background | Rendered from `stage/scene-msp.js` | Same. |
 | `me.jpg` | Founder section | Owner-supplied | |
