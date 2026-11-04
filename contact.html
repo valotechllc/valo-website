@@ -154,7 +154,7 @@
       <div class="footer-brand-name">VALO<span>.</span></div>
       <div class="footer-brand-tag">Technologies LLC</div>
       <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
-      <p>Dallas, TX<br><a href="mailto:info@valotechnologiellc.com">info@valotechnologiellc.com</a></p>
+      <p>Dallas, TX<br><a href="mailto:info@valotechnologiesllc.com">info@valotechnologiesllc.com</a></p>
       <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
@@ -267,7 +267,7 @@
       btn.textContent = 'Sending...'; btn.disabled = true;
       var data = new FormData(form);
       fetch('https://formspree.io/f/mgodoabn', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-      .then(function(response) { if (response.ok) { window.location.href = 'https://www.valotechnologiellc.com/thank-you.html'; } else { return response.json().then(function(data) { throw new Error(data.errors ? data.errors.map(function(e){ return e.message; }).join(', ') : 'Submission failed.'); }); } })
+      .then(function(response) { if (response.ok) { window.location.href = '/thank-you.html'; } else { return response.json().then(function(data) { throw new Error(data.errors ? data.errors.map(function(e){ return e.message; }).join(', ') : 'Submission failed.'); }); } })
       .catch(function() { errorDiv.textContent = 'Something went wrong. Please email us directly at info@valotechnologiellc.com'; errorDiv.style.display = 'block'; btn.textContent = 'Send inquiry →'; btn.disabled = false; });
     });
   }
