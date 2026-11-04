@@ -218,6 +218,7 @@
 .h-procure{display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px}
 .h-procure img{width:auto;height:56px;padding:4px;background:#fff;border:1px solid var(--line)}
 .h-procure p{flex:1 1 260px;min-width:0;margin:0;font-size:15px;line-height:1.6;color:var(--ink-dim)}
+.h-procure p strong{color:var(--ink);font-weight:700}
 .h-procure-links{display:flex;flex-wrap:wrap;gap:0 28px;margin-top:8px}
 
 /* ---------- 9. contact ---------- */
