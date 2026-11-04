@@ -11,12 +11,19 @@ const ORANGE = 0xff6a1f;
 const TABLE_Y = 0.42;
 
 const FINDINGS = [
-  { title: 'Admin VPN without MFA', sev: 'h', col: 0, sheet: 0, row: 6 },
-  { title: 'Firewall OS out of support', sev: 'h', col: 0, sheet: 1, row: 3 },
-  { title: 'Vendor access never reviewed', sev: 'm', col: 1, sheet: 2, row: 9 },
-  { title: 'Backups never restore-tested', sev: 'm', col: 1, sheet: 3, row: 5 },
-  { title: 'Logging not centralized', sev: 'l', col: 2, sheet: 4, row: 11 }
+  { title: 'Admin VPN without MFA', sev: 'h', col: 0, sheet: 0, row: 6, node: 1 },
+  { title: 'Firewall OS out of support', sev: 'h', col: 0, sheet: 1, row: 3, node: 2 },
+  { title: 'Vendor access never reviewed', sev: 'm', col: 1, sheet: 2, row: 9, node: 7 },
+  { title: 'Backups never restore-tested', sev: 'm', col: 1, sheet: 3, row: 5, node: 9 },
+  { title: 'Logging not centralized', sev: 'l', col: 2, sheet: 4, row: 11, node: 11 }
 ];
+// Network map floating behind the table: [x, y, z, label]. Findings pin to these devices.
+const MAP = [
+  [-1.25, 1.18, -1.05, 'Internet'], [-0.85, 1.02, -1.0, 'VPN'], [-0.35, 1.08, -1.05, 'Firewall'], [0.1, 1.24, -1.12, 'Core'],
+  [0.12, 0.9, -1.0, 'Users'], [0.55, 1.32, -1.15, 'Servers'], [0.62, 0.98, -1.02, 'Wi-Fi'], [-0.62, 1.34, -1.12, 'Vendor link'],
+  [1.0, 1.18, -1.08, 'Apps'], [1.0, 1.42, -1.18, 'Backups'], [1.35, 0.98, -1.04, 'Cloud'], [1.42, 1.32, -1.16, 'Logs']
+];
+const MAP_LINKS = [[0, 1], [0, 2], [1, 2], [2, 3], [3, 4], [3, 5], [3, 6], [7, 2], [5, 8], [5, 9], [8, 10], [5, 11], [4, 6], [8, 11]];
 const SEV = { h: '#ff6a1f', m: '#f6b486', l: '#9aa6b6' };
 const ROWS = 15, SHEET_W = 0.95, SHEET_D = 0.62;
 const rowZ = (row) => -SHEET_D / 2 + 0.07 + row * ((SHEET_D - 0.1) / ROWS); // local z on a flat sheet
@@ -145,6 +152,31 @@ export function assessmentScene(ctx) {
   const paperMat = new THREE.MeshStandardMaterial({ map: texRoadmap(THREE), color: new THREE.Color(0x8d96a3), roughness: 0.9, metalness: 0, transparent: true, opacity: 0, envMapIntensity: 0.1 });
   const paper = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 1.3), paperMat); paper.rotation.x = -Math.PI / 2; paper.position.set(0, TABLE_Y + 0.006, 0.05); paper.receiveShadow = true; scene.add(paper);
 
+  // network map: devices and links floating behind the table; findings pin to it, then it becomes a heatmap
+  const glowTex = canvasTex(THREE, 128, 128, (g, w, h) => { const grd = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2); grd.addColorStop(0, 'rgba(255,255,255,1)'); grd.addColorStop(0.25, 'rgba(255,255,255,0.45)'); grd.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = grd; g.fillRect(0, 0, w, h); }, { srgb: false });
+  const mapNodes = MAP.map(([x, y, z]) => {
+    const g = new THREE.Group(); g.position.set(x, y, z); scene.add(g);
+    const cMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.028, 0), cMat); g.add(core);
+    const hMat = new THREE.SpriteMaterial({ map: glowTex, color: 0x000000, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+    const halo = new THREE.Sprite(hMat); halo.scale.setScalar(0.22); g.add(halo);
+    const rMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
+    const ring = new THREE.Mesh(new THREE.RingGeometry(0.06, 0.07, 48), rMat); g.add(ring);
+    return { g, core, cMat, hMat, halo, rMat, ring, pos: new THREE.Vector3(x, y, z), sev: null, at: 99 };
+  });
+  FINDINGS.forEach((f, i) => { const n = mapNodes[f.node]; n.sev = f.sev; n.fi = i; });
+  const mlPos = []; MAP_LINKS.forEach(([a, b]) => { mlPos.push(...MAP[a].slice(0, 3), ...MAP[b].slice(0, 3)); });
+  const mlGeo = new THREE.BufferGeometry(); mlGeo.setAttribute('position', new THREE.Float32BufferAttribute(mlPos, 3));
+  const mlMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+  scene.add(new THREE.LineSegments(mlGeo, mlMat));
+  // beams from each marked line on the sheets up to the device it concerns
+  const beams = FINDINGS.map((f, i) => {
+    const mat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+    const geo = new THREE.BufferGeometry().setFromPoints([markers[i].pos.clone(), mapNodes[f.node].pos.clone()]);
+    const line = new THREE.Line(geo, mat); scene.add(line);
+    return { mat, line };
+  });
+
   // distant points for depth
   const dp = [], dc = [], ds = [], dr = rand(77);
   for (let i = 0; i < 220; i++) { dp.push((dr() - 0.5) * 18, 0.2 + dr() * 4, -4 - dr() * 12); dc.push(0.45, 0.62, 1.3); ds.push(dr()); }
@@ -153,7 +185,7 @@ export function assessmentScene(ctx) {
 
   const qFlat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
   const qFace = new THREE.Quaternion().setFromEuler(new THREE.Euler(-0.42, 0, 0));
-  const tmpQ = new THREE.Quaternion(), size = new THREE.Vector2();
+  const tmpQ = new THREE.Quaternion(), size = new THREE.Vector2(), camPos = new THREE.Vector3();
   const colLabel = (i) => (t, v) => v.set(COLX[i], TABLE_Y + 0.02, -0.36);
 
   return {
@@ -161,6 +193,8 @@ export function assessmentScene(ctx) {
     floor: { tile: 0.8, base: 0x04070d, reflect: 0.8 },
     chapters: [{ start: 0, label: 'Inspect' }, { start: 5.5, label: 'Evidence' }, { start: 11, label: 'Prioritize' }, { start: 16.5, label: 'Roadmap' }],
     labels: [
+      { text: 'Network map', at: (t, v) => v.set(-1.25, 1.36, -1.05), alpha: (t) => smooth(6.0, 6.6, t) * (1 - smooth(8.6, 9.0, t)) },
+      { text: 'Risk heatmap', tone: 'accent', at: (t, v) => v.set(0.1, 1.5, -1.1), alpha: (t) => smooth(9.2, 9.8, t) * (1 - smooth(10.6, 11.0, t)) },
       { text: 'Fix now', tone: 'accent', at: colLabel(0), alpha: (t) => smooth(11.8, 12.6, t) * (1 - smooth(16.6, 17.2, t)) },
       { text: 'Next 90 days', at: colLabel(1), alpha: (t) => smooth(12.0, 12.8, t) * (1 - smooth(16.6, 17.2, t)) },
       { text: 'Planned', at: colLabel(2), alpha: (t) => smooth(12.2, 13.0, t) * (1 - smooth(16.6, 17.2, t)) }
@@ -208,12 +242,39 @@ export function assessmentScene(ctx) {
         c.m.visible = a > 0.01;
       });
 
+      // network map: faint until the scan starts, findings pin to devices, ranking turns it into a heatmap
+      const mapOn = smooth(0.4, 1.4, t) * (1 - smooth(17.4, 18.6, t) * 0.75);
+      const heat = smooth(8.8, 10.2, t);
+      mlMat.color.set(0x5f86d6).multiplyScalar(0.35 * mapOn);
+      mapNodes.forEach((n, k) => {
+        const hasF = n.sev !== null;
+        const hit = hasF ? smooth(cards[n.fi].reveal, cards[n.fi].reveal + 0.3, t) : 0;
+        const base = 0.5 * mapOn;
+        const sevCol = hasF ? SEV[n.sev] : '#5f86d6';
+        n.cMat.color.set(hit > 0.01 ? sevCol : '#9cc0ff').multiplyScalar(base + hit * (1.4 + 0.8 * heat));
+        n.hMat.color.set(hasF ? sevCol : '#2a3f66').multiplyScalar(mapOn * (hasF ? hit * (0.5 + 0.7 * heat) : 0.35 * (1 - 0.6 * heat)));
+        n.halo.scale.setScalar(0.22 * (1 + (hasF ? heat * (n.sev === 'h' ? 1.6 : n.sev === 'm' ? 0.9 : 0.3) : 0)));
+        const ru = hasF ? ((t - cards[n.fi].reveal) % 1.4) / 1.4 : -1;
+        const pinging = hasF && t > cards[n.fi].reveal && t < 8.8;
+        n.ring.scale.setScalar(pinging ? 1 + ru * 2.2 : 1);
+        n.rMat.color.set(sevCol).multiplyScalar(pinging ? (1 - ru) * 1.4 * mapOn : 0);
+        n.ring.lookAt(camPos);
+        n.core.rotation.y = t * 0.6 + k;
+      });
+      beams.forEach((b, i) => {
+        const r0 = cards[i].reveal;
+        const a = smooth(r0, r0 + 0.2, t) * (1 - smooth(r0 + 0.9, r0 + 1.6, t));
+        b.mat.color.set(SEV[FINDINGS[i].sev]).multiplyScalar(1.4 * a);
+        b.line.visible = a > 0.01;
+      });
+
       paperMat.opacity = smooth(16.6, 17.8, t);
       paper.visible = paperMat.opacity > 0.01;
       key.intensity = 22 + 3 * smooth(16.6, 18, t);
       renderer.getDrawingBufferSize(size); dMat.uniforms.uTime.value = t; dMat.uniforms.uScale.value = size.y * 0.012;
     },
     camera(t, out) {
+      ctx.camera.getWorldPosition(camPos);
       shotCamera(SHOTS, [
         [[-1.4, 1.0, 1.3], [-0.3, 0.95, 1.22], [-0.6, TABLE_Y, -0.08], [0.45, TABLE_Y, -0.08], 28, -0.04],
         [[0.7, 1.15, 2.0], [0.25, 1.25, 1.85], [0.0, 0.82, 0.0], [0.0, 0.86, 0.0], 32, -0.1],
