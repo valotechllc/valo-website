@@ -69,6 +69,7 @@ function texHeader(THREE, title, sub, accent) {
 export function migrationScene(ctx) {
   const { THREE, scene, renderer } = ctx;
   scene.fog.density = 0.06;
+  scene.background.setHex(0x040a18); scene.fog.color.setHex(0x07122a); // per-scene tint
 
   // lights: cool ambient, one warm accent that follows the new platform
   scene.add(new THREE.HemisphereLight(0x22355c, 0x020308, 0.55));
@@ -199,7 +200,7 @@ export function migrationScene(ctx) {
 
   return {
     duration: L,
-    floor: { tile: 0.8, base: 0x04070d, reflect: 0.85 },
+    floor: { tile: 0.8, base: 0x050b18, reflect: 0.85 },
     chapters: [{ start: 0, label: 'Scope' }, { start: 5.5, label: 'Stage' }, { start: 11, label: 'Cut over' }, { start: 16.5, label: 'Validate' }],
     labels: [
       { text: '0 hits · remove', tone: 'accent', at: rowLabel(firstDrop, 0.86), alpha: (t) => smooth(flagAt(firstDrop) + 0.2, flagAt(firstDrop) + 0.6, t) * (1 - smooth(5.4, 5.9, t)) },

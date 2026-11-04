@@ -24,6 +24,7 @@ const CUT0 = 8.2, CUT1 = 10.0;                 // cross-zone links cut
 export function segmentationScene(ctx) {
   const { THREE, scene, renderer } = ctx;
   scene.fog.density = 0.055;
+  scene.background.setHex(0x03141c); scene.fog.color.setHex(0x0b2c38); // per-scene tint
   const r = rand(21);
 
   scene.add(new THREE.HemisphereLight(0x22355c, 0x020308, 0.55));
@@ -136,7 +137,7 @@ export function segmentationScene(ctx) {
 
   return {
     duration: L,
-    floor: { tile: 0.6, base: 0x04070d, reflect: 0.85 },
+    floor: { tile: 0.6, base: 0x04121a, reflect: 0.85 },
     chapters: [{ start: 0, label: 'Flat network' }, { start: 5.5, label: 'Zones' }, { start: 11, label: 'Approved paths' }, { start: 16.5, label: 'Test' }],
     labels: [
       { text: 'Flat network · everything reaches everything', tone: 'stop', at: (t, v) => v.set(0.4, 0.62, -1.3), alpha: (t) => smooth(1.2, 1.8, t) * (1 - smooth(5.0, 5.6, t)) },
