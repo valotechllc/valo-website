@@ -98,7 +98,7 @@ Consistent structure — heading, subheading, why this industry, what VALO bring
 
 Same on every page.
 - Logo
-- Address (Rockwall, TX)
+- Address (Dallas, TX)
 - Email: lk@valotechnologiesllc.com
 - Phone (if published)
 - Four-column sitemap: Services / Industries / About / Resources

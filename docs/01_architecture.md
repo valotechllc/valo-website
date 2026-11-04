@@ -53,7 +53,7 @@ Services | Industries | About | Insights | Contact
 
 **Footer (every page):**
 Four-column sitemap: Services / Industries / About / Resources
-Logo, address (Rockwall, TX), email (lk@valotechnologiesllc.com)
+Logo, address (Dallas, TX), email (lk@valotechnologiesllc.com)
 LinkedIn icon
 Certification badges strip
 Copyright + Privacy + Terms links
