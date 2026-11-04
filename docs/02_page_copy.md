@@ -828,7 +828,7 @@ Fields:
 ## Direct contact
 
 **Email:** lk@valotechnologiesllc.com
-**Address:** Rockwall, TX
+**Address:** Dallas, TX
 **LinkedIn:** [TODO BEFORE LAUNCH: replace with actual LinkedIn URL — do not silently substitute "#"]
 
 ## Response time
