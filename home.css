@@ -6,6 +6,13 @@
 
 /* ---------- shared homepage primitives ---------- */
 .h-label{display:block;margin:0 0 20px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+/* VALO signature: a mini bar mark taken from the logo (tall, mid, short orange centre, mid, tall) */
+.h-label::before,.h-btn-frame::before{content:"";display:inline-block;flex:none;width:14px;height:12px;margin-right:12px;vertical-align:-1px;background:
+  linear-gradient(currentColor,currentColor) 0 100%/2px 100% no-repeat,
+  linear-gradient(currentColor,currentColor) 3px 100%/2px 72% no-repeat,
+  linear-gradient(var(--orange),var(--orange)) 6px 100%/2px 42% no-repeat,
+  linear-gradient(currentColor,currentColor) 9px 100%/2px 72% no-repeat,
+  linear-gradient(currentColor,currentColor) 12px 100%/2px 100% no-repeat}
 .h-meta{margin:0 0 14px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-3)}
 .h-h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(34px,4.4vw,58px);line-height:1.04;letter-spacing:-.035em;text-wrap:balance}
 .h-display{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(42px,5.6vw,80px);line-height:1;letter-spacing:-.045em;text-wrap:balance}
@@ -20,9 +27,8 @@
 .h-btn-solid{background:var(--orange);border:1px solid var(--orange);color:var(--navy-900)}
 .h-btn-solid:hover{background:var(--orange-hi);border-color:var(--orange-hi);color:var(--navy-900)}
 .h-btn-frame{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.3);color:#fff}
-.h-btn-frame::before,.h-btn-frame::after{content:"";position:absolute;width:9px;height:9px;border:0 solid var(--orange)}
-.h-btn-frame::before{top:-1px;left:-1px;border-width:1px 0 0 1px}
-.h-btn-frame::after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
+.h-btn-frame::after{content:"";position:absolute;left:-1px;right:-1px;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--orange) 0 28%,transparent 28%)}
+.h-btn-frame:hover::after{background:var(--orange)}
 .h-btn-frame:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6);color:#fff}
 
 .h-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 48px;margin-bottom:clamp(40px,5vw,64px)}

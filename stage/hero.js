@@ -16,25 +16,25 @@ const webglAvailable = () => { try { const c = document.createElement('canvas');
 const SERVICES = [
   {
     title: 'Firewall migration',
-    sub: 'Migrations, configuration changes, VPN deployments and cutovers with rollback and validation steps.',
+    sub: 'Cutovers with rollback ready and every change validated.',
     cta: ['Discuss a migration', '/contact.html?service=firewall-migration'],
     steps: ['Inventory the current firewall: policy, NAT and dependencies.', 'Stage the replacement and map policy, with rollback ready.', 'Shift approved traffic inside the change window, cable by cable.', 'Test what should pass and what should not, then hand over.']
   },
   {
     title: 'Network segmentation',
-    sub: 'Segmentation, Cisco switching and routing, and security remediation, so what should never talk, doesn’t.',
+    sub: 'Zones and policy, so what should never talk, doesn’t.',
     cta: ['Explore network engineering', '/services/network-security.html'],
     steps: ['Workforce, applications and guest devices share one flat network.', 'Group systems into zones with clear boundaries.', 'Permit only the paths the business needs, through policy.', 'Test what is allowed and what is blocked, then document it.']
   },
   {
     title: 'Network assessment',
-    sub: 'Vendor-neutral, engineer-led review with risk-ranked findings and a remediation roadmap. $2,500 flat for qualifying single-site environments.',
+    sub: 'Risk-ranked findings and a roadmap. $2,500 flat for a qualifying single site.',
     cta: ['See how assessments work', '/services/network-security.html'],
     steps: ['Review the environment’s configuration and architecture.', 'Record each finding with the evidence behind it.', 'Rank findings by risk: fix now, next 90 days, planned.', 'Deliver a remediation roadmap you can act on.']
   },
   {
     title: 'MSP white-label',
-    sub: 'Cisco and Palo Alto engineering capacity behind your MSP. The client relationship stays with you.',
+    sub: 'Specialist engineering behind your brand. The client stays yours.',
     cta: ['Discuss an MSP engagement', '/services/#msp'],
     steps: ['Scope, change windows and rollback are agreed with your team first.', 'Specialist work is done inside your process and your tools.', 'Every change is checked against what should pass and what should not.', 'Documentation goes out in your name. The client stays yours.']
   }
