@@ -36,6 +36,7 @@ const SERVICES = [
     title: 'MSP white-label',
     sub: 'Specialist engineering behind your brand. The client stays yours.',
     cta: ['Discuss an MSP engagement', '/services/#msp'],
+    light: true, // beige scene: hero text switches to navy
     steps: ['Scope, change windows and rollback are agreed with your team first.', 'Specialist work is done inside your process and your tools.', 'Every change is checked against what should pass and what should not.', 'Documentation goes out in your name. The client stays yours.']
   }
 ];
@@ -67,6 +68,7 @@ if (hero && media && webglAvailable()) {
       fields.sub.textContent = s.sub;
       fields.cta.textContent = s.cta[0];
       fields.cta.setAttribute('href', s.cta[1]);
+      hero.classList.toggle('is-light', !!s.light);
       hero.classList.remove('is-switching');
     };
     if (capture) swap(); else { hero.classList.add('is-switching'); setTimeout(swap, 280); }

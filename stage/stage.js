@@ -16,18 +16,18 @@ export const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 
 
 /* Film grade applied after tone mapping: vignette, navy-lifted shadows, fine grain, fades. */
 const GradeShader = {
-  uniforms: { tDiffuse: { value: null }, uTime: { value: 0 }, uFade: { value: 1 }, uRes: { value: new THREE.Vector2(1, 1) } },
+  uniforms: { tDiffuse: { value: null }, uTime: { value: 0 }, uFade: { value: 1 }, uRes: { value: new THREE.Vector2(1, 1) }, uVig: { value: 1 } },
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
   fragmentShader: `
-    uniform sampler2D tDiffuse; uniform float uTime; uniform float uFade; uniform vec2 uRes; varying vec2 vUv;
+    uniform sampler2D tDiffuse; uniform float uTime; uniform float uFade; uniform vec2 uRes; uniform float uVig; varying vec2 vUv;
     float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
     void main(){
       vec4 c = texture2D(tDiffuse, vUv);
       vec2 q = vUv - 0.5; q.x *= uRes.x / uRes.y;
       float vig = smoothstep(1.15, 0.35, length(q));
-      c.rgb *= mix(0.55, 1.0, vig);
+      c.rgb *= mix(1.0, mix(0.55, 1.0, vig), uVig);
       float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));
-      c.rgb += vec3(0.0, 0.006, 0.022) * (1.0 - smoothstep(0.0, 0.35, l));
+      c.rgb += vec3(0.0, 0.006, 0.022) * (1.0 - smoothstep(0.0, 0.35, l)) * uVig;
       float g = hash(vUv * uRes + fract(uTime * 7.13) * 91.7) - 0.5;
       c.rgb += g * 0.028;
       c.rgb *= uFade;
@@ -226,6 +226,7 @@ export function createStage(container, factories, opts = {}) {
     camera.updateMatrixWorld();
     floor.update(scene, camera);
     grade.uniforms.uTime.value = t;
+    grade.uniforms.uVig.value = film.vignette ?? 1; // light scenes switch off the dark vignette
     const fade = film.fade ? film.fade(t) : 1;
     grade.uniforms.uFade.value = fade;
     composer.render();
