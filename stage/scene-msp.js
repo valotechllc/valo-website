@@ -44,7 +44,8 @@ export function mspScene(ctx) {
   const slots = SLOTS.map((x) => {
     const g = new THREE.Group(); g.position.set(x, 0, SLOT_Z); scene.add(g);
     const tMat = new THREE.MeshStandardMaterial({ color: 0xdfe6f2, metalness: 0.1, roughness: 0.5, emissive: new THREE.Color(MSP), emissiveIntensity: 0.05 });
-    const tile = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.035, 0.26), tMat); tile.position.y = 0.018; g.add(tile);
+    const under = new THREE.MeshStandardMaterial({ color: 0x24467f, metalness: 0.2, roughness: 0.4, emissive: new THREE.Color(0x24467f), emissiveIntensity: 0.35 });
+    const tile = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.035, 0.26), [tMat, tMat, tMat, under, tMat, tMat]); tile.position.y = 0.018; g.add(tile);
     const eMat = new THREE.LineBasicMaterial({ color: 0x000000 });
     const edge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.4, 0.035, 0.26)), eMat); edge.position.y = 0.018; g.add(edge);
     const hMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
@@ -59,6 +60,12 @@ export function mspScene(ctx) {
   }, { srgb: false, repeat: [6, 6] });
   const glassMat = new THREE.MeshBasicMaterial({ map: gridTex, color: 0x000000, transparent: true, depthWrite: false, side: THREE.BackSide });
   const glass = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), glassMat); glass.rotation.x = -Math.PI / 2; glass.position.y = -0.004; scene.add(glass);
+
+  const crossRings = SLOTS.map((x) => {
+    const mat = new THREE.MeshBasicMaterial({ color: 0x24467f, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide });
+    const m = new THREE.Mesh(new THREE.RingGeometry(0.1, 0.13, 48), mat); m.rotation.x = -Math.PI / 2; m.position.set(x, -0.006, SLOT_Z); scene.add(m);
+    return { m, mat };
+  });
 
   // ---------- below: the specialist layer ----------
   const below = new THREE.Group(); scene.add(below);
@@ -104,7 +111,7 @@ export function mspScene(ctx) {
       { text: 'Your team', at: (t, v) => v.set(-0.3, 0.42, SLOT_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(4.6, 5.2, t)) },
       { text: 'Cisco & Palo Alto backlog', tone: 'accent', at: (t, v) => v.set(STACK[0], 0.32, STACK[1]), alpha: (t) => smooth(2.6, 3.2, t) * (1 - smooth(5.0, 5.5, t)) },
       { text: 'Specialist engineering · beneath the surface', tone: 'accent', at: (t, v) => v.set(1.45, BENCH_Y + 0.28, 0.25), alpha: (t) => smooth(6.6, 7.2, t) * (1 - smooth(10.4, 10.9, t)) },
-      { text: 'Checked · now in your colours', tone: 'ok', at: (t, v) => v.set(0.3, 0.05, SLOT_Z), alpha: (t) => smooth(12.8, 13.4, t) * (1 - smooth(16.0, 16.5, t)) },
+      { text: 'Checked · now in your colours', tone: 'ok', at: (t, v) => v.set(-0.55, -0.5, SLOT_Z + 0.15), alpha: (t) => smooth(12.8, 13.4, t) * (1 - smooth(16.0, 16.5, t)) },
       { text: 'Delivered in your name', tone: 'ok', at: (t, v) => v.set(0.0, 0.45, -1.4), alpha: (t) => smooth(18.2, 18.8, t) * (1 - smooth(21.2, 21.7, t)) }
     ],
     fade: (t) => shotFade(SHOTS, t),
@@ -112,7 +119,7 @@ export function mspScene(ctx) {
       const belowOn = t > 5.45 && t < 16.55;   // camera is beneath the floor for shots 2 and 3
       scene.background.setHex(belowOn ? 0xe7cdb3 : 0xf3ead9); scene.fog.color.setHex(belowOn ? 0xe3c6aa : 0xefe5d2); scene.fog.density = belowOn ? 0.03 : 0.03;
       below.visible = belowOn; glass.visible = belowOn;
-      glassMat.color.set(0x24467f); glassMat.opacity = 0.28;
+      glassMat.color.set(0x24467f); glassMat.opacity = 0.5;
       const layer = smooth(5.6, 6.6, t) * (1 - smooth(15.8, 16.5, t));
       dEdgeMat.color.copy(cOr).multiplyScalar(0.6 + 0.4 * layer);
       deckMat.emissiveIntensity = 0.05 + 0.1 * layer;
@@ -140,6 +147,7 @@ export function mspScene(ctx) {
 
       // specialist tickets: queue -> backlog -> drop -> worked -> rise (recolour at surface) -> deliver
       let ripple = new Array(CLIENTS.length).fill(0);
+      const cross = new Array(SLOTS.length).fill(0);
       spec.forEach((s) => {
         const k = s.k, p = s.m.position;
         const a0 = s.arrive, d0 = drop(k), w0 = work(k), r0 = rise(k), h0 = deliver(k);
@@ -152,6 +160,7 @@ export function mspScene(ctx) {
         else if (t < r0 + 1.3) {
           const u = smooth(r0, r0 + 1.3, t); p.copy(arc(benchPos(k), slots[s.s].pos, u, 0.15));
           const crossed = smooth(-0.05, 0.05, p.y); col = cTmp.copy(cOr).lerp(cMsp, crossed); bright = 1.0 + 0.8 * Math.exp(-Math.pow(p.y * 14, 2));
+          cross[s.s] = Math.max(cross[s.s], Math.exp(-Math.pow(p.y / 0.12, 2)));   // ring flashes as the ticket passes the surface
         }
         else if (t < h0) { p.copy(slots[s.s].pos).add(tmp.set(0, 0.02 + k * 0.008, 0)); col = cMsp; }
         else if (t < h0 + 1.3) { const u = smooth(h0, h0 + 1.3, t); p.copy(arc(slots[s.s].pos, clients[s.c].pos, u, 0.4)); col = cMsp; op = 1 - smooth(0.9, 1, u); if (u > 0.85) ripple[s.c] = Math.max(ripple[s.c], (u - 0.85) / 0.15); }
@@ -161,6 +170,7 @@ export function mspScene(ctx) {
         s.mat.color.copy(col).multiplyScalar(bright);
         s.mat.opacity = op; s.m.visible = op > 0.01;
       });
+      crossRings.forEach((cr, j) => { const v = clamp01(cross[j]); cr.m.scale.setScalar(1 + (1 - v) * 1.6); cr.mat.opacity = 0.85 * v; cr.m.visible = belowOn && v > 0.01; });
       clients.forEach((c, i) => { const u = ripple[i]; c.ripple.scale.setScalar(1 + (1 - u) * 1.8); c.pMat.color.copy(cIce); c.pMat.opacity = u * 0.9; });
 
       
