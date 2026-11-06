@@ -108,7 +108,7 @@ export function mspScene(ctx) {
     return { beacon, bm, top: V(x, h, z) };
   });
   // wall signs
-  const mspSign = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.172), crisp(THREE, texSign(THREE, 'YOUR MSP', '#24467f', '#ffffff'), { transparent: false }));
+  const mspSign = new THREE.Mesh(new THREE.PlaneGeometry(1.45, 0.25), crisp(THREE, texSign(THREE, 'MSP SERVICE DESK', '#24467f', '#ffffff'), { transparent: false }));
   mspSign.position.set(-0.42, 1.36, WALL_Z + 0.03); scene.add(mspSign);
 
   // ---------- the rail ----------
