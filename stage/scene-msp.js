@@ -13,8 +13,8 @@ const ORANGE = 0xd24305, ICE = 0x2f5fb3, MSP = 0x24467f;   // beige scene: the M
 
 const CLIENTS = [[-2.1, -1.0], [-1.35, -1.45], [-0.45, -1.7], [0.45, -1.7], [1.35, -1.45], [2.1, -1.0]];
 const SLOTS = [-0.9, -0.3, 0.3, 0.9];          // the MSP's team, x positions at z = SLOT_Z
-const SLOT_Z = 0.35;
-const STACK = [1.6, 0.35];                      // backlog pile (x, z)
+const SLOT_Z = -0.3;
+const STACK = [1.6, -0.3];                      // backlog pile (x, z)
 const BENCH_Y = -1.35;                          // the specialist layer beneath the floor
 const N_SPEC = 6;
 const BENCH = Array.from({ length: N_SPEC }, (_, k) => [1.05 + (k % 3) * 0.42, 0.05 + Math.floor(k / 3) * 0.42]);
@@ -108,10 +108,9 @@ export function mspScene(ctx) {
     vignette: 0,
     chapters: [{ start: 0, label: 'Scope' }, { start: 5.5, label: 'Engineer' }, { start: 11, label: 'Validate' }, { start: 16.5, label: 'Hand over' }],
     labels: [
-      { text: 'Your team', at: (t, v) => v.set(-0.3, 0.42, SLOT_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(4.6, 5.2, t)) },
+      ...SLOTS.map((x) => ({ text: 'MSP', at: (t, v) => v.set(x, t > 5.45 && t < 16.55 ? -0.09 : 0.36, SLOT_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(21.2, 21.7, t)) })),
       { text: 'Cisco & Palo Alto backlog', tone: 'accent', at: (t, v) => v.set(STACK[0], 0.32, STACK[1]), alpha: (t) => smooth(2.6, 3.2, t) * (1 - smooth(5.0, 5.5, t)) },
       { text: 'Specialist engineering · beneath the surface', tone: 'accent', at: (t, v) => v.set(1.45, BENCH_Y + 0.28, 0.25), alpha: (t) => smooth(6.6, 7.2, t) * (1 - smooth(10.4, 10.9, t)) },
-      { text: 'Checked · now in your colours', tone: 'ok', at: (t, v) => v.set(-0.55, -0.5, SLOT_Z + 0.15), alpha: (t) => smooth(12.8, 13.4, t) * (1 - smooth(16.0, 16.5, t)) },
       { text: 'Delivered in your name', tone: 'ok', at: (t, v) => v.set(0.0, 0.45, -1.4), alpha: (t) => smooth(18.2, 18.8, t) * (1 - smooth(21.2, 21.7, t)) }
     ],
     fade: (t) => shotFade(SHOTS, t),
@@ -182,7 +181,7 @@ export function mspScene(ctx) {
         // engineer: beneath the glass, over the specialist layer
         [[2.8, -0.95, 2.3], [2.35, -0.98, 1.95], [1.4, -1.38, 0.22], [1.4, -1.38, 0.24], 32, 0.06],
         // validate: still below, looking up as finished tickets rise through the surface
-        [[1.6, -2.1, 2.9], [1.0, -1.85, 2.6], [0.6, -0.3, 0.25], [0.45, -0.15, 0.3], 32, 0.06],
+        [[1.6, -2.1, 2.3], [1.0, -1.85, 2.0], [0.6, -0.3, -0.4], [0.45, -0.15, -0.35], 32, 0.06],
         // hand over: back above, wide, as the team delivers to clients
         [[0.0, 2.3, 4.2], [0.0, 2.55, 4.7], [0.0, 0.15, -0.5], [0.0, 0.15, -0.5], 32, 0.0]
       ], t, out);
