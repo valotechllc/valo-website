@@ -78,19 +78,21 @@ function texScreen(THREE, line, bg) {
 
 export function mspScene(ctx) {
   const { THREE, scene } = ctx;
-  scene.fog.density = 0.012;
-  scene.background.setHex(0xe9dfcf); scene.fog.color.setHex(0xe9dfcf); // per-scene tint: warm office
+  scene.fog.density = 0.045;
+  scene.background.setHex(0x0a0f1d); scene.fog.color.setHex(0x0f1830); // per-scene tint: night office
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
   const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.05, ...o });
   const box = (w, h, d, m, x, y, z, parent = scene) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); b.position.set(x, y, z); parent.add(b); return b; };
+  const edgeM = (c, i = 1) => new THREE.LineBasicMaterial({ color: new THREE.Color(c).multiplyScalar(i), transparent: true, opacity: 0.9 });
+  const lined = (w, h, d, m, lm, x, y, z, parent = scene) => { const b = box(w, h, d, m, x, y, z, parent); const e = new THREE.LineSegments(new THREE.EdgesGeometry(b.geometry), lm); e.position.copy(b.position); parent.add(e); return b; };
 
-  scene.add(new THREE.HemisphereLight(0xfff7ea, 0x8d7a60, 0.75));
-  const sun = new THREE.DirectionalLight(0xfff0d8, 1.1); sun.position.set(-3, 4, 4); scene.add(sun);
-  const podLamp = new THREE.PointLight(0xff7a33, 0, 1.6, 2); podLamp.position.set(POD.x, 0.8, -0.25); scene.add(podLamp);
+  scene.add(new THREE.HemisphereLight(0x2a3a66, 0x05070c, 0.5));
+  const moon = new THREE.DirectionalLight(0x8fb4ff, 0.35); moon.position.set(-3, 4, 4); scene.add(moon);
+  const podLamp = new THREE.PointLight(0xff7a33, 0, 2.2, 2); podLamp.position.set(POD.x, 0.8, -0.25); scene.add(podLamp);
 
   // ---------- room ----------
-  box(11, 0.01, 3.2, mat(0x9b6b47, { roughness: 0.55 }), 0, 0.005, 0.45);              // oak floor
-  const wallM = mat(0xf3ece0);
+  box(11, 0.01, 3.2, mat(0x0c1222, { roughness: 0.35, metalness: 0.3 }), 0, 0.005, 0.45);   // dark floor
+  const wallM = mat(0x111a30, { roughness: 0.9 });
   const WALL_H = 1.85;
   box(WIN.x0 + 5.5, WALL_H + 1, 0.05, wallM, (-5.5 + WIN.x0) / 2, (WALL_H + 1) / 2, WALL_Z);
   box(5.5 - WIN.x1, WALL_H + 1, 0.05, wallM, (WIN.x1 + 5.5) / 2, (WALL_H + 1) / 2, WALL_Z);
@@ -100,35 +102,48 @@ export function mspScene(ctx) {
   [[WIN.x0, WIN.y1 - WIN.y0, 0.03], [WIN.x1, WIN.y1 - WIN.y0, 0.03], [(WIN.x0 + WIN.x1) / 2, WIN.y1 - WIN.y0, 0.018]].forEach(([x, h, w]) => box(w, h, 0.06, frameM, x, (WIN.y0 + WIN.y1) / 2, WALL_Z));
   [WIN.y0, WIN.y1, (WIN.y0 + WIN.y1) / 2].forEach((y) => box(WIN.x1 - WIN.x0, 0.018, 0.06, frameM, (WIN.x0 + WIN.x1) / 2, y, WALL_Z));
   // the MSP's clients outside the window (sky and buildings)
-  const sky = new THREE.Mesh(new THREE.PlaneGeometry(3, 2.2), new THREE.MeshBasicMaterial({ color: 0xbcd3ea, toneMapped: false })); sky.position.set(-2.55, 1.0, -2.6); scene.add(sky);
+  const sky = new THREE.Mesh(new THREE.PlaneGeometry(3, 2.2), new THREE.MeshBasicMaterial({ color: 0x14224a, toneMapped: false })); sky.position.set(-2.55, 1.0, -2.6); scene.add(sky);
   const buildings = [[-2.85, 0.95, -2.2], [-2.62, 1.25, -2.4], [-2.4, 1.05, -2.15], [-2.22, 1.32, -2.45]].map(([x, h, z], i) => {
-    box(0.17, h, 0.17, mat(i % 2 ? 0x7f95b5 : 0x93a7c4), x, h / 2, z);
-    const bm = new THREE.MeshBasicMaterial({ color: 0x7fd39a, transparent: true, opacity: 0, toneMapped: false, depthWrite: false });
+    box(0.17, h, 0.17, mat(0x1a2440), x, h / 2, z);
+    const winTex = canvasTex(THREE, 64, 256, (g, w, hh) => { g.fillStyle = '#1a2440'; g.fillRect(0, 0, w, hh); const r = rand(20 + i); for (let yy = 8; yy < hh; yy += 18) for (let xx = 8; xx < w; xx += 18) { if (r() > 0.45) { g.fillStyle = r() > 0.8 ? '#ffd58a' : '#7fa6e8'; g.fillRect(xx, yy, 9, 10); } } });
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(0.17, h), new THREE.MeshBasicMaterial({ map: winTex, toneMapped: false })); face.position.set(x, h / 2, z + 0.086); scene.add(face);
+    const bm = new THREE.MeshBasicMaterial({ color: 0x7fd39a, transparent: true, opacity: 0, depthWrite: false });
     const beacon = new THREE.Mesh(new THREE.CircleGeometry(0.05, 24), bm); beacon.position.set(x, h + 0.08, z + 0.09); scene.add(beacon);
     return { beacon, bm, top: V(x, h, z) };
   });
   // wall signs
-  const mspSign = new THREE.Mesh(new THREE.PlaneGeometry(1.45, 0.25), crisp(THREE, texSign(THREE, 'MSP SERVICE DESK', '#24467f', '#ffffff'), { transparent: false }));
+  const mspSign = new THREE.Mesh(new THREE.PlaneGeometry(1.45, 0.25), crisp(THREE, texSign(THREE, 'MSP SERVICE DESK', '#1d3a6e', '#ffffff'), { transparent: false, toneMapped: true }));
   mspSign.position.set(-0.42, 1.36, WALL_Z + 0.03); scene.add(mspSign);
 
   // ---------- the rail ----------
-  const railM = mat(0x2b2f36, { metalness: 0.6, roughness: 0.35 });
-  const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, RAIL.x1 - RAIL.x0, 12), railM); rail.rotation.z = Math.PI / 2; rail.position.set((RAIL.x0 + RAIL.x1) / 2, RAIL.y, RAIL.z); scene.add(rail);
+  const railM = mat(0x2b3550, { metalness: 0.6, roughness: 0.35 });
+  const railLen = RAIL.x1 - RAIL.x0;
+  const railGlowM = new THREE.ShaderMaterial({
+    uniforms: { uT: { value: 0 } },
+    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'uniform float uT; varying vec2 vUv; void main(){ float x = vUv.y; float p = 0.0; for (int k = 0; k < 3; k++) { float c = fract(uT * 0.09 + float(k) / 3.0); float d = (x - c) * 30.0; p += exp(-d * d); } vec3 base = vec3(0.35, 0.5, 0.95) * 0.9; gl_FragColor = vec4(base + vec3(0.7, 0.85, 1.6) * p * 1.6, 1.0); }'
+  });
+  const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, railLen, 12), railGlowM); rail.rotation.z = Math.PI / 2; rail.position.set((RAIL.x0 + RAIL.x1) / 2, RAIL.y, RAIL.z); scene.add(rail);
   for (let x = RAIL.x0 + 0.3; x < RAIL.x1; x += 1.2) box(0.012, 1.85 - RAIL.y, 0.012, railM, x, (RAIL.y + 1.85) / 2, RAIL.z);
   const counters = Array.from({ length: SPEC.length + 1 }, (_, n) => texCounter(THREE, n));
   const counterMat = crisp(THREE, counters[0], { transparent: false });
   const counter = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.18), counterMat); counter.position.set(PILE_X, RAIL.y + 0.2, RAIL.z - 0.01); scene.add(counter);
 
   // ---------- MSP cubicles ----------
-  const partM = mat(0x2c3e63, { roughness: 0.9 }), deskM = mat(0xdcc29d, { roughness: 0.5 }), monM = mat(0x1a2236, { roughness: 0.4 });
+  const podFrameM = mat(0x1a0c05, { roughness: 0.6, emissive: new THREE.Color(0xff6a1f), emissiveIntensity: 0.07 });
+  const partM = mat(0x15213d, { roughness: 0.85 }), deskM = mat(0x1d2944, { roughness: 0.5 }), monM = mat(0x0b0f1a, { roughness: 0.4 });
+  const navyEdge = edgeM(0x6f95dd, 1.0), orangeEdge = edgeM(0xff7a33, 1.4);
   const legM = mat(0x2b2f36, { metalness: 0.6, roughness: 0.35 });
   const badgeN = texBadge(THREE, '#24467f', '#2bb673'), badgeV = texBadge(THREE, '#c2410c', '#2bb673');
   const scrN = texScreen(THREE, '#9cc0ff', '#13203a'), scrS = texScreen(THREE, '#ffb48a', '#2a1408');
   const mkDesk = (x, pM, scrTex, parentSide, badgeTex, chairM) => {
     const g = new THREE.Group(); g.position.set(x, 0, -0.35); scene.add(g);
-    box(0.025, 0.5, 0.5, pM, -0.36, 0.25, 0.02, g); if (parentSide) box(0.025, 0.5, 0.5, pM, 0.36, 0.25, 0.02, g);
-    box(0.74, 0.5, 0.025, pM, 0, 0.25, -0.23, g);
-    box(0.6, 0.025, 0.3, deskM, 0, 0.36, -0.07, g);
+    const em = pM === podFrameM ? orangeEdge : navyEdge;
+    lined(0.025, 0.5, 0.5, pM, em, -0.36, 0.25, 0.02, g); if (parentSide) lined(0.025, 0.5, 0.5, pM, em, 0.36, 0.25, 0.02, g);
+    lined(0.74, 0.5, 0.025, pM, em, 0, 0.25, -0.23, g);
+    lined(0.6, 0.025, 0.3, deskM, em, 0, 0.36, -0.07, g);
+    const spill = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.3), new THREE.MeshBasicMaterial({ color: pM === podFrameM ? 0xff7a33 : 0x5f86d6, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false }));
+    spill.rotation.x = -Math.PI / 2; spill.position.set(0, 0.375, -0.07); g.add(spill);
     box(0.28, 0.17, 0.02, monM, 0, 0.5, -0.18, g);
     const scrM = new THREE.MeshBasicMaterial({ map: scrTex, toneMapped: false });
     const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.25, 0.14), scrM); scr.position.set(0, 0.5, -0.169); g.add(scr);
@@ -141,15 +156,14 @@ export function mspScene(ctx) {
     badge.scale.setScalar(0.17); badge.position.set(0, 0.74, 0.0); g.add(badge);
     return { g, scrM, chair, badge, top: V(x, 0.42, -0.42) };
   };
-  const desks = DESKS.map((x, i) => mkDesk(x, partM, scrN, i === DESKS.length - 1, badgeN, mat(0x1d2b45, { roughness: 0.6 })));
+  const desks = DESKS.map((x, i) => mkDesk(x, partM, scrN, i === DESKS.length - 1, badgeN, mat(0x2a3656, { roughness: 0.6 })));
 
   // ---------- VALO Engineering pod, standing apart ----------
   const podG = new THREE.Group(); podG.position.set(POD.x, 0, -0.35); scene.add(podG);
-  box(POD.w + 0.2, 0.008, 0.85, mat(0x5a2208, { roughness: 0.9 }), 0, 0.012, 0.12, podG);
-  const glassM = new THREE.MeshStandardMaterial({ color: 0xffd9c2, transparent: true, opacity: 0.28, roughness: 0.1, metalness: 0.1, depthWrite: false });
-  const podFrameM = mat(ORANGE, { roughness: 0.45 });
+  const podMat = new THREE.Mesh(new THREE.PlaneGeometry(POD.w + 0.3, 0.9), new THREE.MeshBasicMaterial({ color: 0xff6a1f, transparent: true, opacity: 0.12, blending: THREE.AdditiveBlending, depthWrite: false })); podMat.rotation.x = -Math.PI / 2; podMat.position.set(0, 0.012, 0.12); podG.add(podMat);
+  const glassM = new THREE.MeshBasicMaterial({ color: 0xff7a33, transparent: true, opacity: 0.08, blending: THREE.AdditiveBlending, depthWrite: false });
   [-1, 1].forEach((sx) => { box(0.012, 0.62, 0.6, glassM, sx * POD.w / 2, 0.31, 0.02, podG); box(0.02, 0.62, 0.02, podFrameM, sx * POD.w / 2, 0.31, 0.31, podG); });
-  box(POD.w, 0.62, 0.02, mat(0xb4400f, { roughness: 0.8 }), 0, 0.31, -0.25, podG);
+  lined(POD.w, 0.62, 0.02, mat(0x2a1206, { roughness: 0.8 }), orangeEdge, 0, 0.31, -0.25, podG);
   box(POD.w, 0.02, 0.6, podFrameM, 0, 0.62, 0.02, podG);
   const podSign = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.155), crisp(THREE, texSign(THREE, 'VALO ENGINEERING', '#c2410c', '#ffffff'), { transparent: false }));
   podSign.position.set(0, 0.69, -0.2); podG.add(podSign);
@@ -174,8 +188,8 @@ export function mspScene(ctx) {
 
   return {
     duration: L,
-    floor: { tile: 0.6, base: 0x7a5236, reflect: 0.2 },
-    vignette: 0, bloom: 0.03, exposure: 0.8,
+    floor: { tile: 0.6, base: 0x070b16, reflect: 0.9 },
+    bloom: 0.5, exposure: 1.0,
     chapters: [{ start: 0, label: 'Backlog' }, { start: 5.5, label: 'Specialist' }, { start: 11, label: 'Validate' }, { start: 16.5, label: 'Hand over' }],
     labels: [
       { text: 'Client tickets', at: (t, v) => v.set(WIN.x1 + 0.15, WIN.y1 + 0.08, WALL_Z + 0.1), alpha: (t) => smooth(0.4, 1.0, t) * (1 - smooth(5.0, 5.5, t)) },
@@ -185,14 +199,14 @@ export function mspScene(ctx) {
     ],
     fade: (t) => shotFade(SHOTS, t),
     update(t) {
-      scrN.offset.y = (t * 0.35) % 1; scrS.offset.y = (t * 0.5) % 1;
+      scrN.offset.y = (t * 0.35) % 1; scrS.offset.y = (t * 0.5) % 1; railGlowM.uniforms.uT.value = t;
       desks.forEach((d, i) => { d.badge.position.y = 0.74 + Math.sin(t * 1.6 + i * 1.3) * 0.008; d.chair.rotation.y = Math.sin(t * 0.6 + i * 2) * 0.12; });
       const podOn = smooth(5.7, 6.5, t);
       pod.badge.visible = podOn > 0.01; pod.badge.scale.setScalar(0.17 * (0.5 + 0.5 * podOn) * (1 + 0.25 * Math.sin(clamp01((t - 5.7) / 0.8) * Math.PI)));
       pod.badge.position.y = 0.95 + Math.sin(t * 1.6) * 0.008;
       pod.scrM.color.setScalar(0.15 + 0.85 * podOn);
       podLamp.intensity = 1.2 * podOn;
-      glassM.opacity = 0.2 + 0.15 * podOn;
+      glassM.opacity = 0.05 + 0.12 * podOn; podMat.material.opacity = 0.04 + 0.16 * podOn; orangeEdge.opacity = 0.35 + 0.65 * podOn;
 
       // routine tickets: window -> along the rail -> drop into a generalist's cubicle
       routine.forEach((r) => {
@@ -232,7 +246,7 @@ export function mspScene(ctx) {
 
       buildings.forEach((b, i) => {
         let v = 0; spec.forEach((s) => { if (s.bld === i) { const a = t - (s.out + 2.1); if (a > 0 && a < 1.2) v = Math.max(v, 1 - a / 1.2); } });
-        b.bm.opacity = v; b.beacon.scale.setScalar(1 + (1 - v) * 1.5);
+        b.bm.opacity = v; b.bm.color.set(0x7fd39a).multiplyScalar(2.2); b.beacon.scale.setScalar(1 + (1 - v) * 1.5);
       });
     },
     camera(t, out) {
