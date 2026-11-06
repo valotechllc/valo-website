@@ -186,23 +186,6 @@
   linear-gradient(180deg,var(--navy-950) 0%,rgba(7,16,34,0) 22%),
   linear-gradient(0deg,rgba(14,36,78,.22),rgba(14,36,78,.22))}
 .h-msp-inner>.h-display{max-width:12.5em;font-size:clamp(42px,5vw,72px)}
-/* Beige MSP section, matching the beige MSP hero scene */
-.h-msp{background:#f3ead9;color:var(--navy-900)}
-.h-msp-shade{background:
-  linear-gradient(90deg,#f3ead9 0%,rgba(243,234,217,.94) 36%,rgba(243,234,217,.45) 66%,rgba(243,234,217,.15) 100%),
-  linear-gradient(0deg,#f3ead9 0%,rgba(243,234,217,0) 26%),
-  linear-gradient(180deg,#f3ead9 0%,rgba(243,234,217,0) 20%)}
-.h-msp .h-display{color:var(--navy-900)}
-.h-msp .h-display em{color:#c2450a}
-.h-msp .h-lead{color:rgba(11,21,38,.78)}
-.h-msp .h-label{color:#b8470f}
-.h-msp-inner>.h-lead{max-width:600px}
-.h-msp-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 36px;max-width:660px;margin:48px 0 44px;padding:0;list-style:none}
-.h-msp-steps li{padding-top:16px;border-top:1px solid var(--rule-dark)}
-.h-msp-steps span{display:block;margin-bottom:8px;font-family:var(--mono);font-size:12px;color:var(--orange)}
-.h-msp-steps b{display:block;margin-bottom:6px;font-weight:500;font-size:17px}
-.h-msp-steps em{display:block;font-style:normal;font-size:15px;line-height:1.55;color:var(--on-dark-2)}
-.h-msp-inner .h-lead + .h-btn{margin-top:36px}
 
 /* ---------- 6. evidence (light) ---------- */
 .h-evidence{padding:clamp(96px,11vw,160px) 0}
