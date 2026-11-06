@@ -1,180 +1,228 @@
-/* Film D, white-label MSP engineering, as a real-time scene (v3: the backlog, beneath the surface).
-   Story (22 s loop): client tickets flow to the MSP's team; routine work is handled but Cisco and
-   Palo Alto tickets pile up as a backlog -> beneath the glass floor, a specialist layer works them ->
-   finished tickets rise back through the floor, taking the MSP's colour as they cross the surface ->
-   the MSP's team delivers them to its clients; nothing orange ever reaches a client.
-   No vendor hardware is modelled. All values are functions of scene time t. */
+/* Film D, white-label MSP engineering, as a real-time scene (v4: the office).
+   Story (22 s loop): an MSP's generalist IT team works routine tickets from their cubicles while
+   Cisco and Palo Alto work piles up in a specialist backlog on the board -> the empty cubicle lights
+   up and a specialist joins, wearing the MSP's colours -> each backlog card is worked and checked,
+   turns the MSP's navy and moves to Done -> the finished work goes out to the MSP's clients in its name.
+   Stylised, people are abstract figures, no vendor hardware. All values are functions of scene time t. */
 import { smooth, clamp01 } from './stage.js';
 import { canvasTex, rand, shotCamera, shotFade } from './lib.js';
 
 const L = 22;
 const SHOTS = [0, 5.5, 11, 16.5, L];
-const ORANGE = 0xd24305, ICE = 0x2f5fb3, MSP = 0x24467f;   // beige scene: the MSP's colour is navy
+const NAVY = 0x24467f, ORANGE = 0xd24305, BEIGE = 0xf3ead9;
+const DESKS = [-1.9, -0.95, 0.0, 0.95, 1.9];   // the last cubicle starts empty
+const SPEC = 4;
+const ROW_Z = -0.25;
+const WALL_Z = -1.6;
+const BOARD = { x: 0.55, y: 1.35, w: 3.0, h: 1.0 };
+const ROUTINE_TITLES = ['Password reset', 'New laptop', 'Printer offline', 'M365 licence', 'Shared drive', 'New starter', 'Phone setup', 'VPN client'];
+const SPEC_TITLES = ['PAN-OS upgrade', 'Switch migration', 'VPN redesign', 'ISE policy', 'Rule cleanup', 'BGP failover'];
 
-const CLIENTS = [[-2.1, -1.0], [-1.35, -1.45], [-0.45, -1.7], [0.45, -1.7], [1.35, -1.45], [2.1, -1.0]];
-const SLOTS = [-0.9, -0.3, 0.3, 0.9];          // the MSP's team, x positions at z = SLOT_Z
-const SLOT_Z = 0.35;
-const STACK = [1.6, 0.35];                      // backlog pile (x, z)
-const BENCH_Y = -1.35;                          // the specialist layer beneath the floor
-const N_SPEC = 6;
-const BENCH = Array.from({ length: N_SPEC }, (_, k) => [1.05 + (k % 3) * 0.42, 0.05 + Math.floor(k / 3) * 0.42]);
+function texCard(THREE, title, tag, bg, fg, accent) {
+  return canvasTex(THREE, 320, 200, (g, w, h) => {
+    g.fillStyle = bg; g.fillRect(0, 0, w, h);
+    g.fillStyle = accent; g.fillRect(0, 0, w, 14);
+    g.font = '600 36px Inter, sans-serif'; g.fillStyle = fg; g.fillText(title, 18, 92);
+    g.font = '500 24px "JetBrains Mono", monospace'; g.fillStyle = accent; g.fillText(tag, 18, 160);
+  });
+}
+function texBoard(THREE) {
+  return canvasTex(THREE, 1024, 460, (g, w, h) => {
+    g.fillStyle = '#fbf8f2'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(36,70,127,0.35)'; g.lineWidth = 3; g.strokeRect(2, 2, w - 4, h - 4);
+    const cols = [['ROUTINE', '#24467f'], ['SPECIALIST BACKLOG', '#d24305'], ['DONE', '#24467f']];
+    cols.forEach(([t, c], i) => {
+      const x = i * w / 3;
+      if (i) { g.fillStyle = 'rgba(36,70,127,0.18)'; g.fillRect(x - 1, 20, 2, h - 40); }
+      g.font = '600 26px "JetBrains Mono", monospace'; g.fillStyle = c; g.fillText(t, x + 22, 52);
+      g.fillStyle = c; g.globalAlpha = 0.5; g.fillRect(x + 22, 66, w / 3 - 44, 3); g.globalAlpha = 1;
+    });
+  });
+}
+function texScreen(THREE, line, bg) {
+  return canvasTex(THREE, 256, 256, (g, w, h) => {
+    g.fillStyle = bg; g.fillRect(0, 0, w, h);
+    const r = rand(3);
+    for (let y = 16; y < h; y += 22) { g.fillStyle = line; g.globalAlpha = 0.5 + r() * 0.5; g.fillRect(16, y, 40 + r() * 170, 9); }
+    g.globalAlpha = 1;
+  }, { repeat: [1, 1] });
+}
 
 export function mspScene(ctx) {
-  const { THREE, scene, renderer } = ctx;
-  scene.fog.density = 0.03;
-  scene.background.setHex(0xf3ead9); scene.fog.color.setHex(0xefe5d2); // per-scene tint: beige
+  const { THREE, scene } = ctx;
+  scene.fog.density = 0.02;
+  scene.background.setHex(BEIGE); scene.fog.color.setHex(0xefe5d2); // per-scene tint: beige office
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
-  const r = rand(9);
+  const r = rand(14);
 
-  scene.add(new THREE.HemisphereLight(0xfff6e8, 0xb9a98e, 1.4));
-  const fill = new THREE.PointLight(0xffffff, 3.0, 0, 2); fill.position.set(0, 2.4, 3.2); scene.add(fill);
-  const under = new THREE.PointLight(ORANGE, 0, 3.5, 2); under.position.set(1.4, -0.35, 0.3); scene.add(under);
+  scene.add(new THREE.HemisphereLight(0xfff6e8, 0x9a8a70, 0.55));
+  const key = new THREE.DirectionalLight(0xfff1dc, 0.9); key.position.set(-2, 4, 3); scene.add(key);
+  const specLamp = new THREE.PointLight(0xff8a4c, 0, 1.6, 2); specLamp.position.set(DESKS[SPEC], 0.75, ROW_Z - 0.1); scene.add(specLamp);
 
-  // ---------- above: clients and the MSP's team ----------
-  const clients = CLIENTS.map(([x, z], i) => {
-    const g = new THREE.Group(); g.position.set(x, 0.01, z); scene.add(g);
-    const rMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.15, 0.006, 8, 56), rMat); ring.rotation.x = Math.PI / 2; g.add(ring);
-    const cMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.04, 0), cMat); core.position.y = 0.14; g.add(core);
-    const pMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, depthWrite: false });
-    const ripple = new THREE.Mesh(new THREE.RingGeometry(0.15, 0.165, 56), pMat); ripple.rotation.x = -Math.PI / 2; ripple.position.y = 0.006; g.add(ripple);
-    return { g, rMat, cMat, pMat, ripple, core, pos: V(x, 0.16, z), last: -9 };
+  const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.75, metalness: 0.05, ...o });
+  const box = (w, h, d, m, x, y, z, parent = scene) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); b.position.set(x, y, z); parent.add(b); return b; };
+
+  // ---------- room: carpet, back wall with a window, client buildings outside ----------
+  box(5.6, 0.004, 2.6, mat(0xe2d7c3), 0, 0.002, -0.35);
+  const wallM = mat(0xece2d0);
+  const WALL_H = 2.0;
+  const WIN = { x0: -2.75, x1: -1.15, y0: 0.75, y1: 1.85 };
+  box(0.25, WALL_H, 0.06, wallM, -2.875, WALL_H / 2, WALL_Z);
+  box(WIN.x1 - WIN.x0, WIN.y0, 0.06, wallM, (WIN.x0 + WIN.x1) / 2, WIN.y0 / 2, WALL_Z);
+  box(WIN.x1 - WIN.x0, WALL_H - WIN.y1, 0.06, wallM, (WIN.x0 + WIN.x1) / 2, (WIN.y1 + WALL_H) / 2, WALL_Z);
+  box(3.0 - WIN.x1, WALL_H, 0.06, wallM, (WIN.x1 + 3.0) / 2, WALL_H / 2, WALL_Z);
+  const frameM = mat(NAVY, { roughness: 0.5 });
+  [[WIN.x0, (WIN.y0 + WIN.y1) / 2, 0.025, WIN.y1 - WIN.y0], [WIN.x1, (WIN.y0 + WIN.y1) / 2, 0.025, WIN.y1 - WIN.y0], [(WIN.x0 + WIN.x1) / 2, (WIN.y0 + WIN.y1) / 2, 0.02, WIN.y1 - WIN.y0]].forEach(([x, y, w, h]) => box(w, h, 0.07, frameM, x, y, WALL_Z));
+  [[WIN.y0], [WIN.y1]].forEach(([y]) => box(WIN.x1 - WIN.x0, 0.025, 0.07, frameM, (WIN.x0 + WIN.x1) / 2, y, WALL_Z));
+  const glass = new THREE.Mesh(new THREE.PlaneGeometry(WIN.x1 - WIN.x0, WIN.y1 - WIN.y0), new THREE.MeshBasicMaterial({ color: 0xcfe0f2, transparent: true, opacity: 0.22, depthWrite: false }));
+  glass.position.set((WIN.x0 + WIN.x1) / 2, (WIN.y0 + WIN.y1) / 2, WALL_Z); scene.add(glass);
+  // the MSP's clients, seen through the window
+  const buildings = [[-2.55, 0.95, -3.0], [-2.2, 1.3, -3.6], [-1.85, 1.1, -3.1], [-1.5, 1.45, -3.8], [-1.25, 1.0, -3.2]].map(([x, h, z]) => {
+    const b = box(0.32, h, 0.32, mat(0xdcd2c0), x, h / 2, z);
+    const beaconM = new THREE.MeshBasicMaterial({ color: NAVY, transparent: true, opacity: 0 });
+    const beacon = new THREE.Mesh(new THREE.RingGeometry(0.06, 0.09, 32), beaconM); beacon.rotation.x = -Math.PI / 2; beacon.position.set(x, h + 0.01, z); scene.add(beacon);
+    return { b, top: V(x, h + 0.03, z), beacon, beaconM };
   });
-  const slots = SLOTS.map((x) => {
-    const g = new THREE.Group(); g.position.set(x, 0, SLOT_Z); scene.add(g);
-    const tMat = new THREE.MeshStandardMaterial({ color: 0xdfe6f2, metalness: 0.1, roughness: 0.5, emissive: new THREE.Color(MSP), emissiveIntensity: 0.05 });
-    const tile = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.035, 0.26), tMat); tile.position.y = 0.018; g.add(tile);
-    const eMat = new THREE.LineBasicMaterial({ color: 0x000000 });
-    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.4, 0.035, 0.26)), eMat); edge.position.y = 0.018; g.add(edge);
-    const hMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const head = new THREE.Mesh(new THREE.OctahedronGeometry(0.05, 0), hMat); head.position.y = 0.2; g.add(head);
-    return { g, eMat, hMat, head, pos: V(x, 0.12, SLOT_Z), busy: 0 };
+
+  // ---------- the board ----------
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(BOARD.w, BOARD.h), new THREE.MeshBasicMaterial({ map: texBoard(THREE) }));
+  board.position.set(BOARD.x, BOARD.y, WALL_Z + 0.035); scene.add(board);
+  const colX = (c) => BOARD.x - BOARD.w / 2 + (c + 0.5) * BOARD.w / 3;
+  const slotOnBoard = (c, k) => V(colX(c) + ((k % 2) - 0.5) * 0.46, BOARD.y + 0.2 - Math.floor(k / 2) * 0.27, WALL_Z + 0.05);
+
+  // ---------- cubicles, people, screens ----------
+  const partM = mat(0xc9d2e0), deskM = mat(0xf6f1e8), monM = mat(0x1a2236, { roughness: 0.4 }), chairM = mat(0x2f3b52);
+  const shirtM = mat(NAVY, { roughness: 0.6 }), headM = mat(0xd9dee6, { roughness: 0.6 });
+  const scrTexN = texScreen(THREE, '#9cc0ff', '#13203a'), scrTexS = texScreen(THREE, '#ffb48a', '#2a1408');
+  const desks = DESKS.map((x, i) => {
+    const g = new THREE.Group(); g.position.set(x, 0, ROW_Z); scene.add(g);
+    box(0.03, 0.5, 0.62, partM, -0.44, 0.25, -0.05, g); if (i === DESKS.length - 1) box(0.03, 0.5, 0.62, partM, 0.44, 0.25, -0.05, g);
+    box(0.88, 0.5, 0.03, partM, 0, 0.25, -0.36, g);
+    box(0.74, 0.03, 0.34, deskM, 0, 0.36, -0.17, g);
+    box(0.3, 0.19, 0.02, monM, 0, 0.5, -0.27, g);
+    const scrM = new THREE.MeshBasicMaterial({ map: i === SPEC ? scrTexS : scrTexN, color: 0x000000 });
+    const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.27, 0.16), scrM); scr.position.set(0, 0.5, -0.258); g.add(scr);
+    box(0.2, 0.03, 0.2, chairM, 0, 0.22, 0.12, g); box(0.2, 0.22, 0.03, chairM, 0, 0.34, 0.22, g);
+    // the person: abstract figure, back to camera, wearing the MSP's navy
+    const person = new THREE.Group(); person.position.set(0, 0.24, 0.1); g.add(person);
+    const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.065, 0.14, 6, 12), shirtM); torso.position.y = 0.16; person.add(torso);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.055, 16, 12), headM); head.position.y = 0.33; person.add(head);
+    const glowM = new THREE.MeshBasicMaterial({ color: ORANGE, transparent: true, opacity: 0, depthWrite: false });
+    const glow = new THREE.Mesh(new THREE.RingGeometry(0.22, 0.25, 48), glowM); glow.rotation.x = -Math.PI / 2; glow.position.set(0, 0.006, 0.05); g.add(glow);
+    return { g, scrM, person, glow, glowM, deskTop: V(x, 0.39, ROW_Z - 0.12) };
   });
 
-  // ---------- the glass surface, seen from below ----------
-  const gridTex = canvasTex(THREE, 512, 512, (g, w, h) => {
-    g.clearRect(0, 0, w, h); g.strokeStyle = 'rgba(160,190,255,0.55)'; g.lineWidth = 2;
-    for (let i = 0; i <= 8; i++) { const p = i * w / 8; g.beginPath(); g.moveTo(p, 0); g.lineTo(p, h); g.stroke(); g.beginPath(); g.moveTo(0, p); g.lineTo(w, p); g.stroke(); }
-  }, { srgb: false, repeat: [6, 6] });
-  const glassMat = new THREE.MeshBasicMaterial({ map: gridTex, color: 0x000000, transparent: true, depthWrite: false, side: THREE.BackSide });
-  const glass = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), glassMat); glass.rotation.x = -Math.PI / 2; glass.position.y = -0.004; scene.add(glass);
-
-  // ---------- below: the specialist layer ----------
-  const below = new THREE.Group(); scene.add(below);
-  const deckMat = new THREE.MeshStandardMaterial({ color: 0xfbf4ec, metalness: 0.4, roughness: 0.3, emissive: new THREE.Color(ORANGE), emissiveIntensity: 0.0 });
-  const deck = new THREE.Mesh(new THREE.BoxGeometry(1.45, 0.04, 1.0), deckMat); deck.position.set(1.47, BENCH_Y - 0.02, 0.26); below.add(deck);
-  const dEdgeMat = new THREE.LineBasicMaterial({ color: 0x000000 });
-  const dEdge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.45, 0.04, 1.0)), dEdgeMat); dEdge.position.copy(deck.position); below.add(dEdge);
-  const lowGrid = new THREE.GridHelper(6, 24, 0x000000, 0x000000); lowGrid.position.y = -1.9;
-  lowGrid.material.transparent = true; lowGrid.material.depthWrite = false; below.add(lowGrid);
-  // threads of light linking the layer up to the underside of the floor
-  const th = [], tr = rand(4);
-  for (let i = 0; i < 46; i++) { const x = 0.6 + tr() * 1.9, z = -0.35 + tr() * 1.2; th.push(x, BENCH_Y, z, x, -0.01, z); }
-  const thGeo = new THREE.BufferGeometry(); thGeo.setAttribute('position', new THREE.Float32BufferAttribute(th, 3));
-  const thMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, depthWrite: false });
-  below.add(new THREE.LineSegments(thGeo, thMat));
-
-  // ---------- tickets ----------
-  const ticketGeo = new THREE.BoxGeometry(0.15, 0.012, 0.09);
-  const mkTicket = () => { const mat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0 }); const m = new THREE.Mesh(ticketGeo, mat); scene.add(m); return { m, mat }; };
-  // routine tickets: always flowing from clients to the team
-  const ROUTINE = 14, routine = [];
-  for (let i = 0; i < ROUTINE; i++) routine.push({ ...mkTicket(), c: (r() * CLIENTS.length) | 0, s: (r() * SLOTS.length) | 0, phase: r() * 3.2, period: 3.2 });
-  // specialist tickets: queue into the backlog, drop through the floor, get worked, rise, get delivered
-  const spec = Array.from({ length: N_SPEC }, (_, k) => ({ ...mkTicket(), k, c: [1, 4, 2, 5, 0, 3][k], s: k % SLOTS.length, arrive: 0.7 + k * 0.62 }));
-  const cOr = new THREE.Color(ORANGE), cIce = new THREE.Color(ICE), cMsp = new THREE.Color(MSP), cTmp = new THREE.Color();
-  const stackPos = (k) => V(STACK[0], 0.03 + k * 0.022, STACK[1]);
-  const benchPos = (k) => V(BENCH[k][0], BENCH_Y + 0.02, BENCH[k][1]);
+  // ---------- cards ----------
+  const cardGeo = new THREE.PlaneGeometry(0.4, 0.25);
+  const card = (tex) => { const m = new THREE.Mesh(cardGeo, new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false })); scene.add(m); return m; };
+  // routine: board -> a generalist's desk, all loop long
+  const routine = ROUTINE_TITLES.map((t, i) => ({ m: card(texCard(THREE, t, 'ROUTINE', '#eef3fb', '#13203a', '#24467f')), desk: i % SPEC, phase: i * 0.62, period: 4.96 }));
+  // specialist: queue on the board -> specialist desk -> worked -> navy -> Done -> out to a client
+  const spec = SPEC_TITLES.map((t, k) => ({
+    k, m: card(texCard(THREE, t, 'CISCO / PALO ALTO', '#fff1e6', '#3a1606', '#d24305')),
+    texDone: texCard(THREE, t, 'DONE  ·  YOUR MSP', '#eef3fb', '#13203a', '#24467f'),
+    appear: 0.5 + k * 0.7, fly: 6.2 + k * 0.45, worked: 11.2 + k * 0.6, done: 13.0 + k * 0.45, out: 17.0 + k * 0.5, bld: k % buildings.length
+  }));
+  spec.forEach((s) => { s.texOpen = s.m.material.map; });
+  const deskStack = (k) => desks[SPEC].deskTop.clone().add(V(-0.2 + (k % 3) * 0.2, 0.004 + Math.floor(k / 3) * 0.004, 0.02));
   const arc = (a, b, u, h) => V(a.x + (b.x - a.x) * u, a.y + (b.y - a.y) * u + Math.sin(u * Math.PI) * h, a.z + (b.z - a.z) * u);
-
-
-  const size = new THREE.Vector2(), tmp = V(0, 0, 0);
-  const work = (k) => 7.0 + k * 0.5;             // each specialist ticket is worked on the bench
-  const rise = (k) => 11.3 + k * 0.55;
-  const deliver = (k) => 17.0 + k * 0.45;
-  const drop = (k) => 5.8 + k * 0.32;
+  const qBoard = new THREE.Quaternion(), qDesk = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0)), qTmp = new THREE.Quaternion();
+  const winPt = V(-1.95, 1.3, WALL_Z - 0.05);
+  const tmp = V(0, 0, 0);
 
   return {
     duration: L,
-    floor: { tile: 0.7, base: 0xe6dcc9, reflect: 0.3 },
+    floor: { tile: 0.7, base: 0xe6dcc9, reflect: 0.25 },
     vignette: 0,
-    chapters: [{ start: 0, label: 'Scope' }, { start: 5.5, label: 'Engineer' }, { start: 11, label: 'Validate' }, { start: 16.5, label: 'Hand over' }],
+    bloom: 0.06,
+    exposure: 0.85,
+    chapters: [{ start: 0, label: 'Backlog' }, { start: 5.5, label: 'Specialist' }, { start: 11, label: 'Validate' }, { start: 16.5, label: 'Hand over' }],
     labels: [
-      { text: 'Your team', at: (t, v) => v.set(-0.3, 0.42, SLOT_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(4.6, 5.2, t)) },
-      { text: 'Cisco & Palo Alto backlog', tone: 'accent', at: (t, v) => v.set(STACK[0], 0.32, STACK[1]), alpha: (t) => smooth(2.6, 3.2, t) * (1 - smooth(5.0, 5.5, t)) },
-      { text: 'Specialist engineering · beneath the surface', tone: 'accent', at: (t, v) => v.set(1.45, BENCH_Y + 0.28, 0.25), alpha: (t) => smooth(6.6, 7.2, t) * (1 - smooth(10.4, 10.9, t)) },
-      { text: 'Checked · now in your colours', tone: 'ok', at: (t, v) => v.set(0.3, 0.05, SLOT_Z), alpha: (t) => smooth(12.8, 13.4, t) * (1 - smooth(16.0, 16.5, t)) },
-      { text: 'Delivered in your name', tone: 'ok', at: (t, v) => v.set(0.0, 0.45, -1.4), alpha: (t) => smooth(18.2, 18.8, t) * (1 - smooth(21.2, 21.7, t)) }
+      { text: 'Your generalist team', at: (t, v) => v.set(-0.95, 0.95, ROW_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(4.8, 5.3, t)) },
+      { text: 'Cisco & Palo Alto backlog', tone: 'accent', at: (t, v) => v.set(colX(1), BOARD.y + BOARD.h / 2 + 0.1, WALL_Z + 0.05), alpha: (t) => smooth(2.4, 3.0, t) * (1 - smooth(5.0, 5.5, t)) },
+      { text: 'Specialist · in your colours', tone: 'accent', at: (t, v) => v.set(DESKS[SPEC], 0.95, ROW_Z), alpha: (t) => smooth(6.2, 6.8, t) * (1 - smooth(10.5, 11.0, t)) },
+      { text: 'Backlog cleared', tone: 'ok', at: (t, v) => v.set(colX(1), BOARD.y + BOARD.h / 2 + 0.1, WALL_Z + 0.05), alpha: (t) => smooth(15.4, 15.9, t) * (1 - smooth(16.3, 16.6, t)) },
+      { text: 'Delivered in your name', tone: 'ok', at: (t, v) => v.set(-1.95, WIN.y1 + 0.1, WALL_Z), alpha: (t) => smooth(18.0, 18.6, t) * (1 - smooth(21.2, 21.7, t)) }
     ],
     fade: (t) => shotFade(SHOTS, t),
     update(t) {
-      const belowOn = t > 5.45 && t < 16.55;   // camera is beneath the floor for shots 2 and 3
-      scene.background.setHex(belowOn ? 0xe7cdb3 : 0xf3ead9); scene.fog.color.setHex(belowOn ? 0xe3c6aa : 0xefe5d2); scene.fog.density = belowOn ? 0.03 : 0.03;
-      below.visible = belowOn; glass.visible = belowOn;
-      glassMat.color.set(0x24467f); glassMat.opacity = 0.28;
-      const layer = smooth(5.6, 6.6, t) * (1 - smooth(15.8, 16.5, t));
-      dEdgeMat.color.copy(cOr).multiplyScalar(0.6 + 0.4 * layer);
-      deckMat.emissiveIntensity = 0.05 + 0.1 * layer;
-      lowGrid.material.color.copy(cOr); lowGrid.material.opacity = 0.35 * layer;
-      thMat.color.copy(cOr); thMat.opacity = 0.3 + 0.4 * layer;
-      under.intensity = 1.2 * layer;
-
-      // clients and team
-      clients.forEach((c, i) => {
-        c.rMat.color.copy(cMsp); c.cMat.color.copy(cIce);
-        c.core.rotation.y = t * (0.5 + i * 0.1);
+      // people work; screens scroll
+      scrTexN.offset.y = (t * 0.35) % 1; scrTexS.offset.y = (t * 0.5) % 1;
+      const join = smooth(5.7, 6.6, t);
+      desks.forEach((d, i) => {
+        const spec_ = i === SPEC;
+        const on = spec_ ? join : 1;
+        d.person.visible = on > 0.01;
+        d.person.scale.setScalar(spec_ ? 0.6 + 0.4 * on : 1);
+        d.person.position.y = 0.24 + Math.sin(t * 3 + i * 1.7) * 0.004;
+        d.person.children[1].rotation.y = Math.sin(t * 0.7 + i) * 0.3;
+        d.scrM.color.setScalar(spec_ ? 0.15 + 0.85 * on : 1);
+        d.glowM.opacity = spec_ ? 0.85 * join * (1 - smooth(16.6, 17.6, t) * 0.7) : 0;
       });
-      slots.forEach((s, j) => { s.eMat.color.copy(cMsp); s.hMat.color.copy(cIce); s.head.rotation.y = t * 0.8 + j; });
+      specLamp.intensity = 1.4 * join * (1 - smooth(16.6, 17.6, t) * 0.6);
 
-      // routine flow: client -> team, all loop long (the MSP's day job)
-      routine.forEach((rt) => {
-        const u = (((t + rt.phase) % rt.period) + rt.period) % rt.period / 1.6;
-        const on = u < 1;
-        const p = arc(clients[rt.c].pos, slots[rt.s].pos, clamp01(u), 0.35);
-        rt.m.position.copy(p); rt.m.rotation.y = 0.3;
-        rt.mat.color.copy(cIce);
-        rt.mat.opacity = on ? Math.min(smooth(0, 0.1, u), 1 - smooth(0.85, 1, u)) * 0.9 : 0;
-        rt.m.visible = rt.mat.opacity > 0.01;
+      // routine cards: board -> generalist desk
+      routine.forEach((rc) => {
+        const u = (((t + rc.phase) % rc.period) + rc.period) % rc.period / 1.6;
+        const m = rc.m;
+        if (u < 1) {
+          const from = slotOnBoard(0, 2), to = desks[rc.desk].deskTop;
+          m.position.copy(arc(from, to, smooth(0, 1, u), 0.35));
+          m.quaternion.copy(qBoard).slerp(qDesk, smooth(0.6, 1, u));
+          m.material.opacity = Math.min(smooth(0, 0.12, u), 1 - smooth(0.85, 1, u));
+        } else m.material.opacity = 0;
+        m.visible = m.material.opacity > 0.01;
       });
 
-      // specialist tickets: queue -> backlog -> drop -> worked -> rise (recolour at surface) -> deliver
-      let ripple = new Array(CLIENTS.length).fill(0);
+      // specialist cards
       spec.forEach((s) => {
-        const k = s.k, p = s.m.position;
-        const a0 = s.arrive, d0 = drop(k), w0 = work(k), r0 = rise(k), h0 = deliver(k);
-        let col = cOr, op = 1, bright = 0.75;
-        if (t < a0) { op = 0; }
-        else if (t < a0 + 1.4) { p.copy(arc(clients[s.c].pos, stackPos(k), smooth(a0, a0 + 1.4, t), 0.45)); }
-        else if (t < d0) { p.copy(stackPos(k)); bright = 0.7 + 0.08 * Math.sin(t * 6 + k); }
-        else if (t < d0 + 1.2) { const u = smooth(d0, d0 + 1.2, t); p.copy(stackPos(k)).lerp(benchPos(k), u); p.x += Math.sin(u * Math.PI) * 0.1; }
-        else if (t < r0) { p.copy(benchPos(k)); const done = smooth(w0, w0 + 0.3, t); bright = 0.75 + 0.5 * done * (1 - smooth(w0 + 0.3, w0 + 1.2, t)); }
-        else if (t < r0 + 1.3) {
-          const u = smooth(r0, r0 + 1.3, t); p.copy(arc(benchPos(k), slots[s.s].pos, u, 0.15));
-          const crossed = smooth(-0.05, 0.05, p.y); col = cTmp.copy(cOr).lerp(cMsp, crossed); bright = 1.0 + 0.8 * Math.exp(-Math.pow(p.y * 14, 2));
-        }
-        else if (t < h0) { p.copy(slots[s.s].pos).add(tmp.set(0, 0.02 + k * 0.008, 0)); col = cMsp; }
-        else if (t < h0 + 1.3) { const u = smooth(h0, h0 + 1.3, t); p.copy(arc(slots[s.s].pos, clients[s.c].pos, u, 0.4)); col = cMsp; op = 1 - smooth(0.9, 1, u); if (u > 0.85) ripple[s.c] = Math.max(ripple[s.c], (u - 0.85) / 0.15); }
-        else op = 0;
-        if (t > h0 + 1.3 && t < h0 + 2.5) ripple[s.c] = Math.max(ripple[s.c], 1 - (t - h0 - 1.3) / 1.2);
-        s.m.rotation.y = 0.3;
-        s.mat.color.copy(col).multiplyScalar(bright);
-        s.mat.opacity = op; s.m.visible = op > 0.01;
+        const m = s.m, k = s.k;
+        let op = 1;
+        const onBoard = slotOnBoard(1, k), onDesk = deskStack(k), inDone = slotOnBoard(2, k);
+        m.material.map = s.texOpen;
+        if (t < s.appear) op = 0;
+        else if (t < s.fly) {
+          m.position.copy(onBoard); m.quaternion.copy(qBoard);
+          op = smooth(s.appear, s.appear + 0.3, t);
+          m.position.x += Math.sin(t * 7 + k) * 0.003 * smooth(2.5, 5.0, t);   // the backlog ages and jitters
+        } else if (t < s.fly + 1.1) {
+          const u = smooth(s.fly, s.fly + 1.1, t);
+          m.position.copy(arc(onBoard, onDesk, u, 0.4)); m.quaternion.copy(qBoard).slerp(qDesk, smooth(0.55, 1, u));
+        } else if (t < s.done) {
+          m.position.copy(onDesk); m.quaternion.copy(qDesk);
+          if (t > s.worked) m.material.map = s.texDone; else m.material.map = s.texOpen;
+          m.position.y += t > s.worked && t < s.worked + 0.35 ? Math.sin((t - s.worked) / 0.35 * Math.PI) * 0.06 : 0;
+        } else if (t < s.done + 1.0) {
+          const u = smooth(s.done, s.done + 1.0, t);
+          m.material.map = s.texDone;
+          m.position.copy(arc(onDesk, inDone, u, 0.4)); m.quaternion.copy(qDesk).slerp(qBoard, smooth(0, 0.5, u));
+        } else if (t < s.out) { m.position.copy(inDone); m.quaternion.copy(qBoard); m.material.map = s.texDone; }
+        else if (t < s.out + 1.6) {
+          const u = smooth(s.out, s.out + 1.6, t), b = buildings[s.bld];
+          m.material.map = s.texDone;
+          const p = u < 0.5 ? arc(inDone, winPt, u / 0.5, 0.25) : arc(winPt, b.top, (u - 0.5) / 0.5, 0.3);
+          m.position.copy(p); m.quaternion.copy(qBoard);
+          op = 1 - smooth(0.9, 1, u);
+        } else op = 0;
+        m.material.opacity = op; m.visible = op > 0.01;
       });
-      clients.forEach((c, i) => { const u = ripple[i]; c.ripple.scale.setScalar(1 + (1 - u) * 1.8); c.pMat.color.copy(cIce); c.pMat.opacity = u * 0.9; });
-
-      
+      // client buildings light up as work arrives
+      buildings.forEach((b, i) => {
+        let v = 0;
+        spec.forEach((s) => { if (s.bld === i) { const a = t - (s.out + 1.45); if (a > 0 && a < 1.2) v = Math.max(v, 1 - a / 1.2); } });
+        b.beacon.scale.setScalar(1 + (1 - v) * 2.2); b.beaconM.opacity = v * 0.9;
+      });
     },
     camera(t, out) {
       shotCamera(SHOTS, [
-        // scope: above, the team and the growing backlog
-        [[0.6, 2.0, 3.7], [0.25, 1.9, 3.4], [0.3, 0.15, -0.35], [0.35, 0.15, -0.3], 32, 0.0],
-        // engineer: beneath the glass, over the specialist layer
-        [[2.8, -0.95, 2.3], [2.35, -0.98, 1.95], [1.4, -1.38, 0.22], [1.4, -1.38, 0.24], 32, 0.06],
-        // validate: still below, looking up as finished tickets rise through the surface
-        [[1.6, -2.1, 2.9], [1.0, -1.85, 2.6], [0.6, -0.3, 0.25], [0.45, -0.15, 0.3], 32, 0.06],
-        // hand over: back above, wide, as the team delivers to clients
-        [[0.0, 2.3, 4.2], [0.0, 2.55, 4.7], [0.0, 0.15, -0.5], [0.0, 0.15, -0.5], 32, 0.0]
+        // backlog: the whole office, board above the cubicles
+        [[0.4, 2.0, 4.9], [0.15, 1.95, 4.6], [0.3, 1.2, -1.2], [0.3, 1.2, -1.2], 34, -0.06],
+        // specialist: the end cubicle and the backlog column
+        [[2.6, 1.75, 3.1], [2.25, 1.7, 2.85], [1.0, 1.15, -1.2], [0.95, 1.15, -1.25], 34, -0.04],
+        // validate: the board up close as cards move to Done
+        [[1.6, 1.6, 2.4], [1.2, 1.65, 2.2], [0.9, 1.15, -1.6], [0.8, 1.2, -1.6], 32, 0.06],
+        // hand over: toward the window as work goes out to clients
+        [[-0.4, 1.8, 3.6], [-0.3, 1.95, 4.1], [-1.4, 1.05, -1.8], [-1.3, 1.05, -1.8], 34, 0.05]
       ], t, out);
     }
   };

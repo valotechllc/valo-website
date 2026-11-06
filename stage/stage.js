@@ -227,6 +227,8 @@ export function createStage(container, factories, opts = {}) {
     floor.update(scene, camera);
     grade.uniforms.uTime.value = t;
     grade.uniforms.uVig.value = film.vignette ?? 1; // light scenes switch off the dark vignette
+    bloom.strength = film.bloom ?? 0.42;            // and can turn the glow down
+    renderer.toneMappingExposure = film.exposure ?? 1.0;
     const fade = film.fade ? film.fade(t) : 1;
     grade.uniforms.uFade.value = fade;
     composer.render();
