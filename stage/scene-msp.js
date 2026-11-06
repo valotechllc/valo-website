@@ -51,7 +51,7 @@ function texScreen(THREE, line, bg) {
 export function mspScene(ctx) {
   const { THREE, scene } = ctx;
   scene.fog.density = 0.02;
-  scene.background.setHex(BEIGE); scene.fog.color.setHex(0xefe5d2); // per-scene tint: beige office
+  scene.background.setHex(0xd9c6ae); scene.fog.color.setHex(0xd4bfa5); // per-scene tint: warm clay office
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
   const r = rand(14);
 
@@ -63,8 +63,8 @@ export function mspScene(ctx) {
   const box = (w, h, d, m, x, y, z, parent = scene) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); b.position.set(x, y, z); parent.add(b); return b; };
 
   // ---------- room: carpet, back wall with a window, client buildings outside ----------
-  box(5.6, 0.004, 2.6, mat(0xe2d7c3), 0, 0.002, -0.35);
-  const wallM = mat(0xece2d0);
+  box(5.6, 0.004, 2.6, mat(0x8a5a3b, { roughness: 0.55 }), 0, 0.002, -0.35);
+  const wallM = mat(0xf4ede2);
   const WALL_H = 2.0;
   const WIN = { x0: -2.75, x1: -1.15, y0: 0.75, y1: 1.85 };
   box(0.25, WALL_H, 0.06, wallM, -2.875, WALL_H / 2, WALL_Z);
@@ -78,7 +78,7 @@ export function mspScene(ctx) {
   glass.position.set((WIN.x0 + WIN.x1) / 2, (WIN.y0 + WIN.y1) / 2, WALL_Z); scene.add(glass);
   // the MSP's clients, seen through the window
   const buildings = [[-2.55, 0.95, -3.0], [-2.2, 1.3, -3.6], [-1.85, 1.1, -3.1], [-1.5, 1.45, -3.8], [-1.25, 1.0, -3.2]].map(([x, h, z]) => {
-    const b = box(0.32, h, 0.32, mat(0xdcd2c0), x, h / 2, z);
+    const b = box(0.32, h, 0.32, mat(0x9fb3cf), x, h / 2, z);
     const beaconM = new THREE.MeshBasicMaterial({ color: NAVY, transparent: true, opacity: 0 });
     const beacon = new THREE.Mesh(new THREE.RingGeometry(0.06, 0.09, 32), beaconM); beacon.rotation.x = -Math.PI / 2; beacon.position.set(x, h + 0.01, z); scene.add(beacon);
     return { b, top: V(x, h + 0.03, z), beacon, beaconM };
@@ -91,8 +91,8 @@ export function mspScene(ctx) {
   const slotOnBoard = (c, k) => V(colX(c) + ((k % 2) - 0.5) * 0.46, BOARD.y + 0.2 - Math.floor(k / 2) * 0.27, WALL_Z + 0.05);
 
   // ---------- cubicles, people, screens ----------
-  const partM = mat(0xc9d2e0), deskM = mat(0xf6f1e8), monM = mat(0x1a2236, { roughness: 0.4 }), chairM = mat(0x2f3b52);
-  const shirtM = mat(NAVY, { roughness: 0.6 }), headM = mat(0xd9dee6, { roughness: 0.6 });
+  const partM = mat(0x2c3e63, { roughness: 0.9 }), deskM = mat(0xd9b98c, { roughness: 0.5 }), monM = mat(0x1a2236, { roughness: 0.4 }), chairM = mat(0x2f3b52);
+  const shirtM = mat(0x1d3a6e, { roughness: 0.6 }), headM = mat(0xf2ece4, { roughness: 0.6 });
   const scrTexN = texScreen(THREE, '#9cc0ff', '#13203a'), scrTexS = texScreen(THREE, '#ffb48a', '#2a1408');
   const desks = DESKS.map((x, i) => {
     const g = new THREE.Group(); g.position.set(x, 0, ROW_Z); scene.add(g);
@@ -132,7 +132,7 @@ export function mspScene(ctx) {
 
   return {
     duration: L,
-    floor: { tile: 0.7, base: 0xe6dcc9, reflect: 0.25 },
+    floor: { tile: 0.7, base: 0x6e4a33, reflect: 0.25 },
     vignette: 0,
     bloom: 0.06,
     exposure: 0.85,

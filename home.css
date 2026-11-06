@@ -62,10 +62,10 @@
 .h-hero-inner{padding-bottom:clamp(128px,18vh,200px);text-align:center;pointer-events:none}
 /* Light hero (beige MSP scene): navy type over a cream shade */
 .h-hero .h-st,.h-hero .h-hero-sub,.h-hero .h-hero-shade,.h-hero .h-kicker,.h-hero .h-btn,.h-hero .h-chapter-caption,.h-hero .h-tabs button,.h-hero .h-stepnav button{transition:color .4s ease,background .4s ease,border-color .4s ease,opacity .4s ease}
-.h-hero.is-light{background:#f3ead9}
+.h-hero.is-light{background:#d9c6ae}
 .h-hero.is-light .h-hero-shade{background:
-  radial-gradient(46% 30% at 50% 64%,rgba(243,234,217,.75),rgba(243,234,217,0) 100%),
-  linear-gradient(180deg,rgba(243,234,217,.35) 0%,rgba(243,234,217,0) 14%,rgba(243,234,217,0) 40%,rgba(243,234,217,.7) 60%,rgba(243,234,217,.92) 80%,rgba(243,234,217,.98) 100%)}
+  radial-gradient(46% 30% at 50% 64%,rgba(244,237,226,.8),rgba(244,237,226,0) 100%),
+  linear-gradient(180deg,rgba(244,237,226,.3) 0%,rgba(244,237,226,0) 14%,rgba(244,237,226,0) 40%,rgba(244,237,226,.75) 60%,rgba(244,237,226,.94) 80%,rgba(244,237,226,.98) 100%)}
 .h-hero.is-light .h-st{color:var(--navy-900);text-shadow:0 2px 30px rgba(243,234,217,.7)}
 .h-hero.is-light .h-hero-sub{color:rgba(11,21,38,.82)}
 .h-hero.is-light .h-kicker{color:#b8470f;background:rgba(243,234,217,.88)}
