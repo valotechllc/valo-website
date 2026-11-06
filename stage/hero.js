@@ -37,7 +37,7 @@ const SERVICES = [
     sub: 'Specialist engineering behind your brand. The client stays yours.',
     cta: ['Discuss an MSP engagement', '/services/#msp'],
     light: true, // beige scene: hero text switches to navy
-    steps: ['Your generalists handle the routine. Cisco and Palo Alto work piles up.', 'A specialist joins your team, in your colours, inside your process and tools.', 'Each change is checked against what should pass and what should not.', 'The work goes to your clients in your name. The client stays yours.']
+    steps: ['Your generalists handle the routine. Cisco and Palo Alto work piles up.', 'VALO Engineering takes the specialist backlog, inside your process and tools.', 'Each change is checked against what should pass and what should not.', 'The work goes to your clients in your name. The client stays yours.']
   }
 ];
 

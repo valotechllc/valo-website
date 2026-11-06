@@ -10,7 +10,7 @@ import { canvasTex, rand, shotCamera, shotFade } from './lib.js';
 const L = 22;
 const SHOTS = [0, 5.5, 11, 16.5, L];
 const NAVY = 0x24467f, ORANGE = 0xd24305, BEIGE = 0xf3ead9;
-const DESKS = [-1.9, -0.95, 0.0, 0.95, 1.9];   // the last cubicle starts empty
+const DESKS = [-2.15, -1.25, -0.35, 0.55, 2.1];   // four MSP cubicles; VALO's cubicle stands apart on the right, empty at first
 const SPEC = 4;
 const ROW_Z = -0.25;
 const WALL_Z = -1.6;
@@ -22,20 +22,20 @@ function texCard(THREE, title, tag, bg, fg, accent) {
   return canvasTex(THREE, 320, 200, (g, w, h) => {
     g.fillStyle = bg; g.fillRect(0, 0, w, h);
     g.fillStyle = accent; g.fillRect(0, 0, w, 14);
-    g.font = '600 36px Inter, sans-serif'; g.fillStyle = fg; g.fillText(title, 18, 92);
+    g.font = '700 40px Inter, sans-serif'; g.fillStyle = fg; g.fillText(title, 18, 96);
     g.font = '500 24px "JetBrains Mono", monospace'; g.fillStyle = accent; g.fillText(tag, 18, 160);
   });
 }
 function texBoard(THREE) {
   return canvasTex(THREE, 1024, 460, (g, w, h) => {
-    g.fillStyle = '#fbf8f2'; g.fillRect(0, 0, w, h);
-    g.strokeStyle = 'rgba(36,70,127,0.35)'; g.lineWidth = 3; g.strokeRect(2, 2, w - 4, h - 4);
-    const cols = [['ROUTINE', '#24467f'], ['SPECIALIST BACKLOG', '#d24305'], ['DONE', '#24467f']];
+    g.fillStyle = '#14213a'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = '#3b5688'; g.lineWidth = 6; g.strokeRect(3, 3, w - 6, h - 6);
+    const cols = [['ROUTINE', '#e8eef8'], ['SPECIALIST BACKLOG', '#ff8a4c'], ['DONE', '#9fd0a8']];
     cols.forEach(([t, c], i) => {
       const x = i * w / 3;
-      if (i) { g.fillStyle = 'rgba(36,70,127,0.18)'; g.fillRect(x - 1, 20, 2, h - 40); }
-      g.font = '600 26px "JetBrains Mono", monospace'; g.fillStyle = c; g.fillText(t, x + 22, 52);
-      g.fillStyle = c; g.globalAlpha = 0.5; g.fillRect(x + 22, 66, w / 3 - 44, 3); g.globalAlpha = 1;
+      if (i) { g.fillStyle = 'rgba(232,238,248,0.22)'; g.fillRect(x - 1, 24, 2, h - 48); }
+      g.font = '700 26px "JetBrains Mono", monospace'; g.fillStyle = c; g.fillText(t, x + 24, 58);
+      g.fillStyle = c; g.globalAlpha = 0.7; g.fillRect(x + 24, 76, w / 3 - 48, 4); g.globalAlpha = 1;
     });
   });
 }
@@ -85,19 +85,26 @@ export function mspScene(ctx) {
   });
 
   // ---------- the board ----------
-  const board = new THREE.Mesh(new THREE.PlaneGeometry(BOARD.w, BOARD.h), new THREE.MeshBasicMaterial({ map: texBoard(THREE) }));
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(BOARD.w, BOARD.h), new THREE.MeshBasicMaterial({ map: texBoard(THREE), toneMapped: false }));
   board.position.set(BOARD.x, BOARD.y, WALL_Z + 0.035); scene.add(board);
   const colX = (c) => BOARD.x - BOARD.w / 2 + (c + 0.5) * BOARD.w / 3;
   const slotOnBoard = (c, k) => V(colX(c) + ((k % 2) - 0.5) * 0.46, BOARD.y + 0.2 - Math.floor(k / 2) * 0.27, WALL_Z + 0.05);
 
   // ---------- cubicles, people, screens ----------
+  const valoPartM = mat(0x6b2a0c, { roughness: 0.9 });
   const partM = mat(0x2c3e63, { roughness: 0.9 }), deskM = mat(0xd9b98c, { roughness: 0.5 }), monM = mat(0x1a2236, { roughness: 0.4 }), chairM = mat(0x2f3b52);
   const shirtM = mat(0x1d3a6e, { roughness: 0.6 }), headM = mat(0xf2ece4, { roughness: 0.6 });
   const scrTexN = texScreen(THREE, '#9cc0ff', '#13203a'), scrTexS = texScreen(THREE, '#ffb48a', '#2a1408');
   const desks = DESKS.map((x, i) => {
     const g = new THREE.Group(); g.position.set(x, 0, ROW_Z); scene.add(g);
-    box(0.03, 0.5, 0.62, partM, -0.44, 0.25, -0.05, g); if (i === DESKS.length - 1) box(0.03, 0.5, 0.62, partM, 0.44, 0.25, -0.05, g);
-    box(0.88, 0.5, 0.03, partM, 0, 0.25, -0.36, g);
+    const pM = i === SPEC ? valoPartM : partM;
+    box(0.03, 0.5, 0.62, pM, -0.44, 0.25, -0.05, g); if (i >= SPEC - 1) box(0.03, 0.5, 0.62, pM, 0.44, 0.25, -0.05, g);
+    box(0.88, 0.5, 0.03, pM, 0, 0.25, -0.36, g);
+    if (i === SPEC) {
+      box(1.1, 0.006, 0.95, mat(0x3a1a0a, { roughness: 0.9 }), 0, 0.006, -0.02, g);
+      const sign = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.12), new THREE.MeshBasicMaterial({ map: canvasTex(THREE, 512, 100, (c, w, h) => { c.fillStyle = '#d24305'; c.fillRect(0, 0, w, h); c.font = '700 46px "JetBrains Mono", monospace'; c.fillStyle = '#fff'; c.textBaseline = 'middle'; c.fillText('VALO ENGINEERING', 26, h / 2 + 2); }), toneMapped: false }));
+      sign.position.set(0, 0.58, -0.375); g.add(sign);
+    }
     box(0.74, 0.03, 0.34, deskM, 0, 0.36, -0.17, g);
     box(0.3, 0.19, 0.02, monM, 0, 0.5, -0.27, g);
     const scrM = new THREE.MeshBasicMaterial({ map: i === SPEC ? scrTexS : scrTexN, color: 0x000000 });
@@ -114,7 +121,7 @@ export function mspScene(ctx) {
 
   // ---------- cards ----------
   const cardGeo = new THREE.PlaneGeometry(0.4, 0.25);
-  const card = (tex) => { const m = new THREE.Mesh(cardGeo, new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false })); scene.add(m); return m; };
+  const card = (tex) => { const m = new THREE.Mesh(cardGeo, new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false, toneMapped: false })); scene.add(m); return m; };
   // routine: board -> a generalist's desk, all loop long
   const routine = ROUTINE_TITLES.map((t, i) => ({ m: card(texCard(THREE, t, 'ROUTINE', '#eef3fb', '#13203a', '#24467f')), desk: i % SPEC, phase: i * 0.62, period: 4.96 }));
   // specialist: queue on the board -> specialist desk -> worked -> navy -> Done -> out to a client
@@ -134,13 +141,13 @@ export function mspScene(ctx) {
     duration: L,
     floor: { tile: 0.7, base: 0x6e4a33, reflect: 0.25 },
     vignette: 0,
-    bloom: 0.06,
-    exposure: 0.85,
+    bloom: 0.03,
+    exposure: 0.72,
     chapters: [{ start: 0, label: 'Backlog' }, { start: 5.5, label: 'Specialist' }, { start: 11, label: 'Validate' }, { start: 16.5, label: 'Hand over' }],
     labels: [
-      { text: 'Your generalist team', at: (t, v) => v.set(-0.95, 0.95, ROW_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(4.8, 5.3, t)) },
+      { text: 'Your generalist team', at: (t, v) => v.set(-0.8, 0.92, ROW_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(4.8, 5.3, t)) },
       { text: 'Cisco & Palo Alto backlog', tone: 'accent', at: (t, v) => v.set(colX(1), BOARD.y + BOARD.h / 2 + 0.1, WALL_Z + 0.05), alpha: (t) => smooth(2.4, 3.0, t) * (1 - smooth(5.0, 5.5, t)) },
-      { text: 'Specialist · in your colours', tone: 'accent', at: (t, v) => v.set(DESKS[SPEC], 0.95, ROW_Z), alpha: (t) => smooth(6.2, 6.8, t) * (1 - smooth(10.5, 11.0, t)) },
+      { text: 'VALO Engineering', tone: 'accent', at: (t, v) => v.set(DESKS[SPEC], 0.92, ROW_Z), alpha: (t) => smooth(0.6, 1.2, t) * (1 - smooth(21.2, 21.7, t)) },
       { text: 'Backlog cleared', tone: 'ok', at: (t, v) => v.set(colX(1), BOARD.y + BOARD.h / 2 + 0.1, WALL_Z + 0.05), alpha: (t) => smooth(15.4, 15.9, t) * (1 - smooth(16.3, 16.6, t)) },
       { text: 'Delivered in your name', tone: 'ok', at: (t, v) => v.set(-1.95, WIN.y1 + 0.1, WALL_Z), alpha: (t) => smooth(18.0, 18.6, t) * (1 - smooth(21.2, 21.7, t)) }
     ],
@@ -218,7 +225,7 @@ export function mspScene(ctx) {
         // backlog: the whole office, board above the cubicles
         [[0.4, 2.0, 4.9], [0.15, 1.95, 4.6], [0.3, 1.2, -1.2], [0.3, 1.2, -1.2], 34, -0.06],
         // specialist: the end cubicle and the backlog column
-        [[2.6, 1.75, 3.1], [2.25, 1.7, 2.85], [1.0, 1.15, -1.2], [0.95, 1.15, -1.25], 34, -0.04],
+        [[3.7, 1.75, 2.6], [3.4, 1.7, 2.4], [1.75, 0.45, -0.45], [1.7, 0.45, -0.48], 34, 0.12],
         // validate: the board up close as cards move to Done
         [[1.6, 1.6, 2.4], [1.2, 1.65, 2.2], [0.9, 1.15, -1.6], [0.8, 1.2, -1.6], 32, 0.06],
         // hand over: toward the window as work goes out to clients
