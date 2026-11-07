@@ -36,7 +36,7 @@ const SERVICES = [
     title: 'MSP white-label',
     sub: 'Specialist engineering behind your brand. The client stays yours.',
     cta: ['Discuss an MSP engagement', '/services/#msp'],
-    steps: ['Routine tickets go to your generalists. Cisco and Palo Alto work piles up.', 'VALO Engineering pulls the specialist backlog, inside your process and tools.', 'Each change is checked and comes back in your colours.', 'The work goes to your clients in your name. The client stays yours.']
+    steps: ['Agree the scope, responsibilities, change window and rollback with your team.', 'Reveal the specialist engineering behind your delivery, inside your process.', 'Check permitted and blocked paths and document the evidence.', 'The delivery portfolio closes under your identity. The client stays yours.']
   }
 ];
 
