@@ -36,10 +36,12 @@
 <link rel="preload" as="image" href="/media/migration-poster-portrait.webp?v=20261104" media="(max-width: 760px)" fetchpriority="high" />
 <link rel="stylesheet" href="/styles.css?v=nav2" />
 <link rel="stylesheet" href="/home.css?v=nav3" />
+<link rel="stylesheet" href="/msp-studio.css?v=20261107" />
 <script src="/site.js?v=nav1" defer></script>
 <script src="/home.js?v=nav1" defer></script>
 <script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
 <script type="module" src="/stage/hero.js"></script>
+<script type="module" src="/stage/msp-feature.js?v=20261107"></script>
 </head>
 <body class="home">
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -206,16 +208,41 @@
     </div>
   </section>
 
-  <!-- 5. MSP partnership feature.
-       Background still rendered from stage/scene-msp.js (v5, ticket rail, night) at t = 14.5 s, shift -0.1. -->
-  <section class="h-msp" id="msp" aria-labelledby="h-msp-title" data-media-status="poster-preview">
-    <div class="h-msp-media" aria-hidden="true"><img src="/media/msp-feature.webp?v=20261106e" alt="" width="1920" height="1080" loading="lazy" /></div>
-    <div class="h-msp-shade" aria-hidden="true"></div>
-    <div class="container h-msp-inner">
-      <p class="h-label">For MSPs</p>
-      <h2 id="h-msp-title" class="h-display">Specialist engineering, <em>under your brand.</em></h2>
-      <p class="h-lead">Your clients see your MSP. Behind it, VALO handles the Cisco and Palo Alto work your team doesn&rsquo;t have the hours or depth for.</p>
-      <a class="h-btn h-btn-solid" href="/services/#msp">Discuss an MSP engagement</a>
+  <!-- 5. MSP only: an authored portfolio film and its own responsive delivery studio. -->
+  <section class="h-msp msp-studio" id="msp" aria-labelledby="h-msp-title">
+    <div class="container msp-studio-head">
+      <p class="h-label">04 / White-label MSP engineering</p>
+      <p class="msp-edition">Your client relationship. Preserved.</p>
+    </div>
+    <div class="container msp-studio-grid">
+      <div class="msp-studio-copy">
+        <h2 id="h-msp-title">Your brand.<br><em>Our engineering.</em></h2>
+        <p class="msp-intro">The expertise behind your next delivery.</p>
+        <p class="msp-description">Bring specialist Cisco and Palo Alto engineering into your client projects. VALO works inside your process, validates the change, and hands the work back in your name.</p>
+        <ul class="msp-specialties" aria-label="MSP engineering support">
+          <li>Firewall migrations</li><li>Policy cleanup</li><li>Troubleshooting</li>
+        </ul>
+        <a class="h-btn h-btn-solid" href="/services/#msp">Build with VALO <span aria-hidden="true">↗</span></a>
+        <p class="msp-principal">Principal-led. Scoped with your team.</p>
+      </div>
+      <figure class="msp-cinema" aria-label="Illustrative white-label delivery: the MSP portfolio opens to reveal scoped engineering, validation, and handover under the MSP brand.">
+        <div class="msp-screen">
+          <video class="msp-film" muted loop playsinline preload="metadata" poster="/media/msp-feature.webp?v=20261107" aria-hidden="true" data-msp-film data-desktop="/media/msp-portfolio.mp4?v=20261107" data-mobile="/media/msp-portfolio-mobile.mp4?v=20261107"></video>
+          <div class="msp-screen-top"><span>Inside the delivery</span><button class="msp-play" type="button" aria-pressed="false" hidden>Pause film <span aria-hidden="true">Ⅱ</span></button></div>
+          <div class="msp-screen-bottom"><span class="msp-phase-name">01 / Scope</span><span class="msp-film-mark">Illustrative sequence</span></div>
+        </div>
+        <figcaption class="msp-caption">A specialist layer behind your delivery. The client-facing identity stays yours.</figcaption>
+      </figure>
+    </div>
+    <div class="container msp-delivery">
+      <div class="msp-delivery-label"><span>The delivery sequence</span><span class="msp-clock" aria-hidden="true">01 — 04</span></div>
+      <div class="msp-chapters" role="group" aria-label="Explore the MSP delivery sequence">
+        <button type="button" data-msp-step="0" aria-current="step"><span class="msp-step-number">01</span><span><b>Scope together</b><small>Responsibilities. Window. Rollback.</small></span></button>
+        <button type="button" data-msp-step="1"><span class="msp-step-number">02</span><span><b>Engineer precisely</b><small>Specialist work in your process.</small></span></button>
+        <button type="button" data-msp-step="2"><span class="msp-step-number">03</span><span><b>Validate the change</b><small>Tested paths. Documented evidence.</small></span></button>
+        <button type="button" data-msp-step="3"><span class="msp-step-number">04</span><span><b>Hand over in your name</b><small>Your brand. Your client relationship.</small></span></button>
+      </div>
+      <p class="msp-footnote">Your tools. Your process. Your name on the work.</p>
     </div>
   </section>
 
