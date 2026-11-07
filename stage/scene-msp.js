@@ -1,123 +1,76 @@
-/* MSP / THE ENGINEERING BEHIND YOUR NAME.
-   A precision-made delivery portfolio opens to reveal scoped specialist work,
-   validation, and handover; its client-facing cover always carries the MSP identity.
-   Four authored camera shots, deterministic at every t. All documents are illustrative.
-   Kept self-contained so the other service films and shared renderer stay untouched. */
-export const MSP_DURATION = 24;
-const CUTS = [0, 6, 12, 18, MSP_DURATION];
-const limit = x => Math.max(0, Math.min(1, x));
-const smooth = (a,b,x) => {const u=limit((x-a)/(b-a));return u*u*(3-2*u)};
-const blend=(a,b,u)=>a+(b-a)*u;
-
-export function mspScene({THREE,scene}) {
-  const C={navy:0x183557,ink:0x080f1c,copper:0xe98d54,ice:0xa4c4dd,mint:0x98cdb3,paper:0xd5e2ea};
-  scene.background.setHex(0x050b16);scene.fog.color.setHex(0x081120);scene.fog.density=.045;
-  scene.add(new THREE.HemisphereLight(0x8caecf,0x070a12,.8));
-  const key=new THREE.DirectionalLight(0xc8ddf5,2.6);key.position.set(-3,5,5);scene.add(key);
-  const rim=new THREE.PointLight(C.copper,4.2,9,2);rim.position.set(2.5,2,-1.5);scene.add(rim);
-  const fill=new THREE.PointLight(0x537dab,2.5,9,2);fill.position.set(-3,1,1);scene.add(fill);
-  const V=(x,y,z)=>new THREE.Vector3(x,y,z);
-  const metal=(color,roughness=.34,metalness=.55)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
-  const navy=metal(C.navy,.29,.48),edge=metal(0x425168,.25,.8),black=metal(C.ink,.48,.35),copper=metal(0x955c3d,.32,.65);
-  const glow=color=>new THREE.MeshBasicMaterial({color,toneMapped:false});
-  const blueGlow=glow(0x94c6ea),warmGlow=glow(C.copper),greenGlow=glow(C.mint);
-  function box(w,h,d,mat,x,y,z,parent=scene){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);parent.add(m);return m}
-  function round(w,h,d,mat,parent){const r=.045,s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);const geo=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:true,bevelThickness:.006,bevelSize:.006,bevelSegments:2,curveSegments:5});geo.translate(0,0,-d/2);const m=new THREE.Mesh(geo,mat);parent.add(m);return m}
-  function texture(w,h,draw){const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;draw(canvas.getContext('2d'),w,h);const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;return tex}
-  function face(parent,w,h,tex,z){const mat=new THREE.MeshBasicMaterial({map:tex,toneMapped:false});const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat);m.position.z=z;parent.add(m);return m}
-  const mono='"JetBrains Mono", monospace',sans='Inter, sans-serif';
-  function header(g,w,number,title,accent='#d99a6e') {g.fillStyle='#a7bdce';g.font=`500 18px ${mono}`;g.fillText(number+' / ENGINEERING RECORD',38,42);g.fillStyle=accent;g.fillRect(38,66,54,3);g.fillStyle='#e4edf3';g.font=`500 40px ${sans}`;g.fillText(title,38,126)}
-  function rule(g,x,y,w,alpha=.25){g.fillStyle=`rgba(160,189,210,${alpha})`;g.fillRect(x,y,w,1)}
-  const brandTex=texture(1024,640,(g,w,h)=>{
-    const bg=g.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1c3c5d');bg.addColorStop(1,'#0a1b30');g.fillStyle=bg;g.fillRect(0,0,w,h);
-    g.strokeStyle='rgba(148,181,211,.08)';g.lineWidth=1;for(let x=-h;x<w;x+=26){g.beginPath();g.moveTo(x,0);g.lineTo(x+h,h);g.stroke()}
-    g.fillStyle='#e9a16e';for(let i=0;i<4;i++)g.fillRect(58+i*10,53+(3-i)*8,5,35-(3-i)*8);
-    g.fillStyle='#c2d2de';g.font=`500 19px ${mono}`;g.fillText('CLIENT DELIVERY',130,82);
-    g.fillStyle='#f4f7f8';g.font=`500 108px ${sans}`;g.fillText('YOUR MSP',54,310);
-    g.fillStyle='#adc2d2';g.font=`400 26px ${sans}`;g.fillText('Your name. Your client relationship.',58,368);
-    rule(g,58,491,908,.28);g.fillStyle='#d2e0e9';g.font=`500 18px ${mono}`;g.fillText('SCOPED  /  ENGINEERED  /  VALIDATED',58,536);
-    g.fillStyle='#69849d';g.font=`400 15px ${mono}`;g.fillText('ILLUSTRATIVE WHITE-LABEL DELIVERY',58,589);
-  });
-  const scopeTex=texture(900,640,(g,w,h)=>{
-    g.fillStyle='#122439';g.fillRect(0,0,w,h);header(g,w,'01','Agreed before the change');
-    const items=[['SCOPE','Firewall policy & dependencies'],['RESPONSIBILITY','Specialist work, inside your process'],['CHANGE WINDOW','Agreed with your team'],['ROLLBACK','Planned before implementation']];
-    items.forEach(([a,b],i)=>{const y=200+i*88;g.fillStyle='#7c98ae';g.font=`500 15px ${mono}`;g.fillText(a,38,y);g.fillStyle='#d8e4ec';g.font=`400 25px ${sans}`;g.fillText(b,38,y+35);rule(g,38,y+56,824,.15)});
-    g.fillStyle='#7192a9';g.font=`400 14px ${mono}`;g.fillText('SYNTHETIC EXAMPLE / NOT CLIENT DATA',38,604)
-  });
-  const engineerTex=texture(900,640,(g,w,h)=>{
-    g.fillStyle='#101d2c';g.fillRect(0,0,w,h);header(g,w,'02','Specialist engineering','#efac7e');
-    g.fillStyle='#d4976f';g.font=`500 19px ${mono}`;g.fillText('CISCO + PALO ALTO',38,180);
-    const lines=['policy-map: reviewed','configuration: staged','change-window: agreed','rollback: prepared'];
-    lines.forEach((s,i)=>{g.fillStyle=i===1?'#e7b58d':'#95adc0';g.font=`400 27px ${mono}`;g.fillText(s,56,265+i*55);g.fillStyle='#d88c56';g.fillRect(38,245+i*55,3,26)});
-    rule(g,38,520,824,.2);g.fillStyle='#d4e0e9';g.font=`500 22px ${sans}`;g.fillText('VALO ENGINEERING',38,570);g.fillStyle='#7c96aa';g.font=`400 15px ${mono}`;g.fillText('WORKING INSIDE YOUR PROCESS',38,605)
-  });
-  function validationTex(complete){return texture(900,640,(g,w,h)=>{
-    g.fillStyle='#122738';g.fillRect(0,0,w,h);header(g,w,'03','Evidence before handover','#97c6ad');
-    ['Permitted paths tested','Blocked paths checked','Configuration documented','Handover prepared'].forEach((s,i)=>{const y=230+i*75;g.strokeStyle=complete?'#94cbb0':'#5c7a8b';g.lineWidth=3;g.strokeRect(40,y-23,24,24);if(complete){g.beginPath();g.moveTo(45,y-11);g.lineTo(51,y-5);g.lineTo(61,y-18);g.stroke()}g.fillStyle=complete?'#d8ede5':'#9eb3c3';g.font=`400 29px ${sans}`;g.fillText(s,90,y);rule(g,38,y+28,824,.14)});
-    g.fillStyle=complete?'#94cbb0':'#7290a5';g.font=`500 18px ${mono}`;g.fillText(complete?'VALIDATED / READY FOR YOUR HANDOVER':'VALIDATION / IN PROGRESS',38,595)
-  })}
-  const validateOpen=validationTex(false),validateDone=validationTex(true);
-  const clientTex=texture(512,340,(g,w,h)=>{g.fillStyle='#12283d';g.fillRect(0,0,w,h);g.fillStyle='#86a4bb';g.font=`400 18px ${mono}`;g.fillText('CLIENT ENVIRONMENT',28,42);g.fillStyle='#dfebf2';g.font=`500 53px ${sans}`;g.fillText('YOUR MSP',28,153);g.fillStyle='#91bfa9';g.font=`500 18px ${mono}`;g.fillText('DELIVERED IN YOUR NAME',28,270);rule(g,28,209,456,.3)});
-
-  const assembly=new THREE.Group();assembly.position.y=.94;assembly.rotation.x=-.12;scene.add(assembly);
-  const parts=[];
-  function layer(name,w,h,mat,tex){const g=new THREE.Group();g.name=name;assembly.add(g);round(w,h,.065,mat,g);if(tex)face(g,w-.07,h-.07,tex,.04);for(const sx of [-1,1])box(.012,h-.10,.014,sx<0?warmGlow:blueGlow,sx*(w/2-.025),0,.039,g);parts.push(g);return g}
-  const back=layer('VALO specialist layer',2.34,1.49,copper,null);
-  box(2.18,.008,.014,warmGlow,0,.65,.045,back);
-  const scope=layer('Scope and responsibility',2.18,1.40,black,scopeTex);
-  const engineer=layer('Configuration and rollback',2.18,1.40,black,engineerTex);
-  const validation=layer('Validation and handover',2.18,1.40,black,validateOpen);
-  const cover=layer('Client-facing MSP identity',2.38,1.50,navy,brandTex);
-  // Fine fasteners and exposed page edges make this a physical portfolio.
-  for(const x of [-1.10,1.10])for(const y of [-.63,.63]){const screw=new THREE.Mesh(new THREE.CylinderGeometry(.013,.013,.008,16),edge);screw.rotation.x=Math.PI/2;screw.position.set(x,y,.045);cover.add(screw)}
-  for(let i=0;i<8;i++)box(2.17,.006,.006,edge,0,-.69,.08+i*.019,scope);
-  const seal=new THREE.Group();validation.add(seal);seal.position.set(.76,-.48,.065);
-  const sealMat=glow(C.mint);const torus=new THREE.Mesh(new THREE.TorusGeometry(.13,.006,8,64),sealMat);seal.add(torus);
-  function stroke(a,b,r,mat,parent){const dir=V(...b).sub(V(...a));const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,dir.length(),8),mat);m.position.copy(V(...a).add(V(...b)).multiplyScalar(.5));m.quaternion.setFromUnitVectors(V(0,1,0),dir.normalize());parent.add(m);return m}
-  stroke([-.07,0,0],[-.015,-.045,0],.009,sealMat,seal);stroke([-.015,-.045,0],[.08,.055,0],.009,sealMat,seal);
-  const scan=new THREE.Group();engineer.add(scan);box(2.1,.008,.012,warmGlow,0,0,.055,scan);
-  const scanGlass=new THREE.Mesh(new THREE.PlaneGeometry(2.1,.10),new THREE.MeshBasicMaterial({color:C.copper,transparent:true,opacity:.08,depthWrite:false,blending:THREE.AdditiveBlending}));scanGlass.position.z=.052;scan.add(scanGlass);
-
-  const stand=new THREE.Group();scene.add(stand);
-  box(3.0,.10,1.72,black,0,.055,0,stand);box(2.74,.025,1.52,edge,0,.12,0,stand);
-  for(const x of [-1.42,1.42])box(.014,.008,1.55,warmGlow,x,.112,0,stand);
-  const columns=[];
-  for(let i=0;i<3;i++){const g=new THREE.Group();g.position.set(2.85,.65,-1.0+i*.72);g.rotation.y=-.28;scene.add(g);round(.84,.58,.055,black,g);face(g,.78,.52,clientTex,.034);box(.73,.008,.01,greenGlow,0,-.25,.04,g);columns.push(g)}
-  const track=new THREE.CatmullRomCurve3([V(1.2,.75,.3),V(2,.8,.1),V(2.6,.7,-.25),V(2.85,.65,-.28)]);
-  const trackMat=new THREE.MeshBasicMaterial({color:C.ice,transparent:true,opacity:.22});scene.add(new THREE.Mesh(new THREE.TubeGeometry(track,48,.005,6,false),trackMat));
-  const pulses=Array.from({length:5},()=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.018,10,8),greenGlow);scene.add(m);return m});
-  const sparks=Array.from({length:28},(_,i)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.004,5,4),new THREE.MeshBasicMaterial({color:i%4?0x61829d:C.copper,transparent:true,opacity:.25}));m.position.set(Math.sin(i*2.4)*4,.25+(i%9)*.31,-2.5+Math.cos(i*3.7)*1.3);scene.add(m);return m});
-
-  return {
-    duration:MSP_DURATION,floor:{tile:.65,base:0x050a12,reflect:1.05},bloom:.3,exposure:1.08,
-    chapters:[{start:0,label:'Scope'},{start:6,label:'Engineer'},{start:12,label:'Validate'},{start:18,label:'Hand over'}],
-    labels:[
-      {text:'Your identity. Your relationship.',at:(t,v)=>v.set(0,1.96,.45),alpha:t=>smooth(.5,1,t)*(1-smooth(5.3,6,t))},
-      {text:'VALO / behind your delivery',tone:'accent',at:(t,v)=>v.set(.65,1.9,.15),alpha:t=>smooth(6.4,7,t)*(1-smooth(11.3,12,t))},
-      {text:'Validated before handover',tone:'ok',at:(t,v)=>v.set(.6,1.9,.28),alpha:t=>smooth(13.8,14.3,t)*(1-smooth(17.3,18,t))},
-      {text:'Delivered under your brand',tone:'ok',at:(t,v)=>v.set(1.7,1.75,-.1),alpha:t=>smooth(19,19.5,t)*(1-smooth(23.2,23.8,t))}
-    ],
-    fade(t){let f=1;for(const b of CUTS){const depth=b===0||b===24?1:.6;f*=1-depth*(1-smooth(0,.24,Math.abs(t-b)))}return f},
-    update(t){
-      const open=smooth(4.6,7.3,t)*(1-smooth(17.8,20.5,t)),delivery=smooth(20.2,23.1,t);
-      assembly.position.set(delivery*.86,.94+Math.sin(t*.38)*.012,0);assembly.rotation.y=-.13+Math.sin(t*.13)*.045;
-      const states=[[-.10,-.04,-.35],[-2.18,.06,.02],[.08,.15,.18],[2.32,.02,.14],[-1.18,.10,.78]];
-      parts.forEach((g,i)=>{g.position.set(states[i][0]*open,states[i][1]*open,blend(-.33+i*.115,states[i][2],open));g.rotation.y=i===4?-.36*open:(i-2)*-.09*open;g.rotation.z=i===4?-.015*open:0});
-      cover.position.x=blend(0,-3.45,open);cover.position.z=blend(.23,-.55,open);cover.rotation.y=-.48*open;
-      cover.scale.setScalar(1);const checked=t>=14.1;const fm=validation.children.find(x=>x.material?.map);if(fm&&fm.material.map!==(checked?validateDone:validateOpen)){fm.material.map=checked?validateDone:validateOpen;fm.material.needsUpdate=true}
-      seal.visible=checked;seal.scale.setScalar(.7+.3*smooth(14.1,14.7,t));
-      scan.visible=t>6.1&&t<12;scan.position.y=blend(.58,-.58,((t-6.1)%2.8)/2.8);
-      columns.forEach((g,i)=>{const reveal=smooth(18.4+i*.3,20+i*.3,t);g.scale.setScalar(.8+.2*reveal);g.position.y=.65+Math.sin(t*.45+i)*.015});
-      trackMat.opacity=.04+.34*smooth(19,20.4,t);pulses.forEach((m,i)=>{m.visible=t>19.4;m.position.copy(track.getPoint((t*.31+i/5)%1))});
-      sparks.forEach((m,i)=>{m.position.y=.25+(i%9)*.31+Math.sin(t*.25+i)*.025});
-    },
-    camera(t,out){
-      const shots=[
-        [[-1.1,2.05,4.15],[-.55,1.93,4.0],[-.10,.91,0],[.0,.94,0],33],
-        [[2.4,3.0,8.0],[1.6,2.8,7.7],[-.35,1.0,.05],[-.15,1.0,.05],33],
-        [[3.8,1.95,4.2],[3.4,1.85,3.9],[2.15,1.0,.18],[2.2,.98,.18],34],
-        [[2.3,2.15,5.5],[2.65,2.3,5.9],[.95,.85,-.2],[1.15,.82,-.25],34]
-      ];let i=0;while(i<3&&t>=CUTS[i+1])i++;const u=.5-.5*Math.cos(limit((t-CUTS[i])/6)*Math.PI),s=shots[i];out.pos.set(...s[0].map((n,k)=>blend(n,s[1][k],u)));out.target.set(...s[2].map((n,k)=>blend(n,s[3][k],u)));out.fov=s[4];out.shift=0;
-    }
-  };
+/* MSP film II: the specialist layer. A dark, machined delivery folio opens in depth,
+   reveals an engineered interconnect and validation layer, then closes under the MSP name.
+   Original illustrative geometry, no client data or product claims. Only MSP owns this file. */
+export const MSP_DURATION=24;
+const CUTS=[0,6,12,18,24],clamp=x=>Math.min(1,Math.max(0,x));
+const smooth=(a,b,x)=>{const u=clamp((x-a)/(b-a));return u*u*(3-2*u)},lerp=(a,b,u)=>a+(b-a)*u;
+export function mspScene({THREE,scene}){
+ const C={ink:0x070d16,navy:0x11253b,metal:0x718392,copper:0xe18c54,ice:0xa8cce6,mint:0x8dbca8};
+ scene.background.setHex(0x030812);scene.fog.color.setHex(0x050c19);scene.fog.density=.055;
+ const V=(...a)=>new THREE.Vector3(...a);
+ scene.add(new THREE.HemisphereLight(0x799cbd,0x03050a,.6));
+ const key=new THREE.DirectionalLight(0xc1d8eb,2.3);key.position.set(-3,5,4);scene.add(key);
+ const amber=new THREE.PointLight(C.copper,3.2,8,2);amber.position.set(3,2,-1);scene.add(amber);
+ const blue=new THREE.PointLight(0x639bcf,3.4,8,2);blue.position.set(-3,2,-2);scene.add(blue);
+ const mat=(color,roughness=.3,metalness=.72)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
+ const shell=mat(C.navy,.27,.82),dark=mat(C.ink,.36,.64),titanium=mat(0x6e7b84,.22,.92),copper=mat(0xa46642,.31,.9);
+ const light=(color,intensity=1)=>new THREE.MeshBasicMaterial({color:new THREE.Color(color).multiplyScalar(intensity),toneMapped:false});
+ const warm=light(C.copper,1.7),cool=light(C.ice,1.25),mint=light(C.mint,1.3);
+ const box=(w,h,d,m,x,y,z,parent=scene)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);parent.add(o);return o};
+ function slab(w,h,d,m,parent){const r=.055,s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);const g=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:true,bevelThickness:.012,bevelSize:.014,bevelSegments:4,curveSegments:8});g.translate(0,0,-d/2);const o=new THREE.Mesh(g,m);parent.add(o);return o}
+ function tex(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t}
+ function print(parent,w,h,map,z){const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map,transparent:true,depthWrite:false,toneMapped:false}));m.position.z=z;parent.add(m);return m}
+ const brand=tex(1200,720,(g,w,h)=>{g.clearRect(0,0,w,h);g.fillStyle='#c2d0db';g.font='500 58px Inter, sans-serif';g.fillText('YOUR MSP',86,528);g.fillStyle='#647d94';g.font='400 18px "JetBrains Mono", monospace';g.fillText('WHITE-LABEL ENGINEERING',88,572);g.fillStyle='#b48a6b';for(let i=0;i<4;i++)g.fillRect(87+i*9,97-i*5,3,21+i*5);});
+ const circuit=tex(1200,720,(g,w,h)=>{g.clearRect(0,0,w,h);g.strokeStyle='rgba(116,155,186,.35)';g.lineWidth=2;for(let i=0;i<22;i++){const x=65+i*49,y=90+(i%7)*72;g.beginPath();g.moveTo(x,40);g.lineTo(x,y);g.lineTo(600+(i-11)*13,y);g.lineTo(600+(i-11)*13,340);g.stroke();g.beginPath();g.arc(x,y,5,0,Math.PI*2);g.stroke()}g.strokeStyle='#976947';g.lineWidth=3;for(let i=0;i<12;i++){g.beginPath();g.moveTo(60,530+i*7);g.lineTo(340+i*7,530+i*7);g.lineTo(420+i*7,450);g.lineTo(720,450);g.stroke()}});
+ const etch=tex(1200,720,(g,w,h)=>{g.clearRect(0,0,w,h);g.strokeStyle='rgba(144,174,197,.25)';g.lineWidth=1;for(let y=70;y<650;y+=25){g.beginPath();g.moveTo(70,y);g.lineTo(1130,y);g.stroke()}for(let x=70;x<1140;x+=25){g.beginPath();g.moveTo(x,70);g.lineTo(x,650);g.stroke()}g.strokeStyle='rgba(184,207,224,.6)';g.lineWidth=3;g.strokeRect(260,205,680,300);for(let i=0;i<3;i++){g.strokeRect(330+i*220,280,100,100);g.beginPath();g.moveTo(430+i*220,330);g.lineTo(550+i*220,330);g.stroke()}});
+ const assembly=new THREE.Group();assembly.position.set(.35,1.25,0);assembly.rotation.set(-.22,-.2,-.04);scene.add(assembly);
+ const back=new THREE.Group(),scope=new THREE.Group(),engineer=new THREE.Group(),validation=new THREE.Group(),cover=new THREE.Group();const layers=[back,scope,engineer,validation,cover];layers.forEach(g=>assembly.add(g));
+ slab(2.76,1.66,.10,dark,back);slab(2.66,1.55,.055,titanium,scope);slab(2.62,1.53,.065,dark,engineer);slab(2.66,1.55,.045,dark,validation);slab(2.82,1.72,.105,shell,cover);
+ print(cover,2.72,1.64,brand,.066);print(scope,2.50,1.43,etch,.04);print(engineer,2.49,1.43,circuit,.045);
+ // The cover has a recessed binding, fine reveals, flush fasteners and restrained edge light.
+ box(.028,1.40,.011,copper,-1.32,0,.066,cover);box(.004,1.35,.012,warm,-1.302,0,.069,cover);
+ for(let i=0;i<9;i++)box(.020,.035,.015,titanium,1.31,-.43+i*.105,.066,cover);
+ for(const x of [-1.31,1.31])for(const y of [-.73,.73]){const m=new THREE.Mesh(new THREE.CylinderGeometry(.009,.009,.006,20),titanium);m.rotation.x=Math.PI/2;m.position.set(x,y,.066);cover.add(m)}
+ box(2.42,.004,.012,cool,0,.708,.044,scope);
+ box(2.42,.004,.012,warm,0,-.70,.046,engineer);
+ // A machined interconnect carries the specialist work; it is an illustrative assembly, not a product.
+ const core=new THREE.Group();engineer.add(core);slab(.60,.43,.07,copper,core);core.position.z=.07;
+ const coreTop=slab(.46,.30,.026,dark,core);coreTop.position.z=.052;
+ for(let i=0;i<12;i++){const x=-.25+i*.045;box(.012,.08,.035,titanium,x,.265,.07,engineer);box(.012,.08,.035,titanium,x,-.265,.07,engineer)}
+ const workTraces=[];
+ for(let i=0;i<12;i++){const y=(i-5.5)*.070;const g=new THREE.Group();engineer.add(g);g.position.set(0,y,.09);box(.85,.004,.006,copper,-.78,0,0,g);box(.85,.004,.006,copper,.78,0,0,g);const p=box(.045,.009,.01,warm,-1.18,0,.006,g);workTraces.push({g,p,seed:i*.071})}
+ // Four validation fiducials illuminate in a measured sequence; no document-sized text inside the shot.
+ const checks=[];
+ for(let i=0;i<4;i++){const g=new THREE.Group();g.position.set(-.84+i*.56,0,.045);validation.add(g);const ring=new THREE.Mesh(new THREE.TorusGeometry(.105,.003,10,64),light(0x5f778c,.6));g.add(ring);const okM=new THREE.MeshBasicMaterial({color:C.mint,toneMapped:false,transparent:true,opacity:0});const a=box(.065,.010,.009,okM,-.028,-.008,.009,g);a.rotation.z=-.65;const b=box(.11,.010,.009,okM,.032,.013,.009,g);b.rotation.z=.78;checks.push(okM);box(.18,.003,.006,copper,0,-.29,.005,g)}
+ const scan=box(2.47,.007,.012,mint,0,.6,.062,validation);
+ const rails=[];for(const x of [-1.15,1.15])for(const y of [-.59,.59]){const m=new THREE.Mesh(new THREE.CylinderGeometry(.010,.010,.58,12),copper);m.rotation.x=Math.PI/2;m.position.set(x,y,-.05);assembly.add(m);rails.push(m)}
+ const clients=[];
+ for(let i=0;i<3;i++){const g=new THREE.Group();g.position.set(3.2,.95,-1.1+i*.46);g.rotation.set(-.12,-.45,0);scene.add(g);slab(.71,.46,.055,shell,g);print(g,.66,.40,brand,.04);box(.58,.003,.007,cool,0,-.2,.038,g);clients.push(g)}
+ const path=new THREE.CatmullRomCurve3([V(1.4,1.12,.1),V(2.1,1.15,0),V(2.8,1.0,-.3),V(3.2,.95,-.64)]);
+ const pathMat=new THREE.MeshBasicMaterial({color:C.ice,transparent:true,opacity:0});scene.add(new THREE.Mesh(new THREE.TubeGeometry(path,64,.003,6,false),pathMat));
+ const pulses=Array.from({length:4},()=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.012,12,8),mint);scene.add(m);return m});
+ return {duration:24,floor:{tile:1.6,base:0x02050b,reflect:.64},bloom:.38,exposure:.98,
+ chapters:[{start:0,label:'Scope'},{start:6,label:'Engineer'},{start:12,label:'Validate'},{start:18,label:'Hand over'}],
+ labels:[{text:'Specialist engineering / inside your delivery',tone:'accent',at:(t,v)=>v.set(.35,2.28,.05),alpha:t=>smooth(6.2,7,t)*(1-smooth(11.3,12,t))},{text:'Validated before handover',tone:'ok',at:(t,v)=>v.set(.6,2.28,.4),alpha:t=>smooth(14.1,14.7,t)*(1-smooth(17.3,18,t))}],
+ fade(t){let f=1;for(const b of CUTS)f*=1-(b===0||b===24?1:.7)*(1-smooth(0,.20,Math.abs(t-b)));return f},
+ update(t){
+  const open=smooth(3.8,7.6,t)*(1-smooth(17.8,20.6,t));
+  assembly.position.set(.35+smooth(20,23.3,t)*.3,1.25+Math.sin(t*.22)*.01,0);assembly.rotation.y=-.20+Math.sin(t*.12)*.07;
+  const depths=[-.32,-.17,0,.17,.32];layers.forEach((g,i)=>{g.position.set((i-2)*.065*open,(i-2)*.025*open,depths[i]*(1+open*2.15));g.rotation.y=(i-2)*.028*open});
+  const hinge=open*1.52;cover.position.x=-1.32+1.32*Math.cos(hinge);cover.position.z=.32+1.32*Math.sin(hinge);cover.position.y=.14*open;cover.rotation.y=-hinge;cover.rotation.x=-.12*open;
+  // The first layer rises to reveal the recessed specialist core; validation advances toward camera.
+  validation.position.x+=.08*open;validation.position.y+=1.34*open;validation.rotation.x=-.18*open;
+  rails.forEach(m=>{m.scale.y=1+open;m.visible=t<12||t>18});
+  workTraces.forEach(({p,seed})=>{const u=(t*.30+seed)%1;p.position.x=-1.17+u*2.34;p.visible=t>6&&t<12});
+  checks.forEach((m,i)=>m.opacity=smooth(12.6+i*.7,13.2+i*.7,t));scan.position.y=.62-((t-12)*.28%1.25);scan.visible=t>=12&&t<16.7;
+  pathMat.opacity=.14*smooth(19.8,21,t);pulses.forEach((m,i)=>{m.visible=t>20.2;m.position.copy(path.getPoint((t*.25+i*.25)%1))});
+  clients.forEach((g,i)=>g.position.y=.95+Math.sin(t*.3+i)*.005);
+ },camera(t,out){
+  const shots=[
+   [[-2.8,2.4,5.15],[-1.9,2.16,4.95],[-.35,1.25,0],[-.28,1.25,0],32],
+   [[3.7,3.2,6.5],[3.3,2.95,6.1],[-.12,1.85,.1],[-.05,1.86,.1],36],
+   [[1.55,3.0,5.0],[1.15,2.9,4.65],[.36,2.46,.40],[.32,2.48,.40],34],
+   [[2.25,2.4,5.3],[2.6,2.65,5.9],[.8,1.10,-.08],[1.0,1.12,-.15],34]
+  ];let i=0;while(i<3&&t>=CUTS[i+1])i++;const u=.5-.5*Math.cos(clamp((t-CUTS[i])/6)*Math.PI),s=shots[i];out.pos.set(...s[0].map((v,k)=>lerp(v,s[1][k],u)));out.target.set(...s[2].map((v,k)=>lerp(v,s[3][k],u)));out.fov=s[4];out.shift=0;
+ }};
 }
