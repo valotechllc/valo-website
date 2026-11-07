@@ -9,7 +9,7 @@
 // so reduced-motion visitors and browsers without WebGL2 never download it.
 const loadScenes = () => Promise.all([
   import('./stage.js'),
-  import('./scene-migration.js'), import('./scene-segmentation.js'), import('./scene-assessment.js'), import('./scene-msp.js')
+  import('./scene-migration.js'), import('./scene-segmentation.js'), import('./scene-assessment.js'), import('./scene-msp.js?v=msp2')
 ]).then(([core, a, b, c, d]) => ({ createStage: core.createStage, scenes: [a.migrationScene, b.segmentationScene, c.assessmentScene, d.mspScene] }));
 const webglAvailable = () => { try { const c = document.createElement('canvas'); return !!(window.WebGL2RenderingContext && c.getContext('webgl2')); } catch (e) { return false; } };
 
