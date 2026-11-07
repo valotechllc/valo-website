@@ -3,7 +3,7 @@
 .msp-studio .msp-cinema{position:absolute;inset:0;margin:0;z-index:-2;pointer-events:none}
 .msp-studio .msp-screen{position:absolute;inset:0;overflow:hidden}
 .msp-studio .msp-film{width:100%;height:100%;display:block;object-fit:cover;object-position:center 34%}
-.msp-studio::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#03070ee8 0%,#03070e87 27%,transparent 65%),linear-gradient(0deg,#03070e 0%,#03070ed9 12%,transparent 65%,#03070e4d 100%)}
+.msp-studio::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#03070e 0%,#03070e 38%,#03070ee6 48%,#03070e55 66%,transparent 86%),linear-gradient(0deg,#03070e 0%,#03070ed9 12%,transparent 65%,#03070e4d 100%)}
 .msp-studio .msp-studio-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:36px;position:relative}
 .msp-studio .h-label{margin:0;color:#b8c8d5;font:10px/1.6 var(--mono);letter-spacing:.13em}
 .msp-studio .msp-play{border:1px solid #94aaba40;background:#06101c55;backdrop-filter:blur(10px);color:#b8c8d5;font:10px var(--mono);text-transform:uppercase;letter-spacing:.08em;min-width:126px;min-height:44px;padding:12px 16px;cursor:pointer}
@@ -34,7 +34,7 @@
 .msp-studio .msp-chapters button:hover b{color:#e5ae87}
 .msp-studio button:focus-visible,.msp-studio a:focus-visible{outline:2px solid #e6a475;outline-offset:5px}
 @media(min-width:1600px){.h-msp.msp-studio{min-height:1000px}.msp-studio .msp-studio-body{min-height:920px}.msp-studio .msp-studio-copy{padding-bottom:82px}}
-@media(min-width:761px) and (max-width:1100px){.msp-studio .msp-studio-copy{max-width:460px}.msp-studio h2{font-size:58px}.msp-studio .msp-chapters{gap:20px}.msp-studio .msp-chapters button{gap:12px}.msp-studio::after{background:linear-gradient(90deg,#03070eb8,transparent 85%),linear-gradient(0deg,#03070e 0%,#03070ed9 20%,transparent 80%)}}
+@media(min-width:761px) and (max-width:1100px){.msp-studio .msp-studio-copy{max-width:460px}.msp-studio h2{font-size:58px}.msp-studio .msp-chapters{gap:20px}.msp-studio .msp-chapters button{gap:12px}.msp-studio::after{background:linear-gradient(90deg,#03070e 0%,#03070e 38%,#03070ee6 48%,#03070e55 66%,transparent 86%),linear-gradient(0deg,#03070e 0%,#03070ed9 20%,transparent 80%)}}
 @media(max-width:760px){
  .h-msp.msp-studio{min-height:0;scroll-margin-top:66px}
  .msp-studio .msp-cinema{bottom:auto;height:570px}
