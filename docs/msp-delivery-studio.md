@@ -1,31 +1,31 @@
-# MSP cinematic revision — November 7, 2026
+# MSP kinetic film — November 7, 2026
 
-Only the MSP scene and homepage MSP feature are redesigned. The migration, segmentation and assessment scene files, their media, the shared stage engine, shared styles and shared homepage behavior remain byte-identical. `node docs/check-msp-scope.mjs 48fc758` enforces that boundary. The two hero entry/import cache queries only refresh the MSP dependency.
+This revision addresses the slow pacing and amateur appearance of the previous 24-second film. The edit is rebuilt as twelve seconds of continuous work, rather than accelerating the previous film. There are four three-second shots: scope, engineer, validate, hand over. Modules arrive in the first second, routed work moves through them, a validation sweep completes, and the identity layer closes over the work before handover to client deliveries.
 
-The original procedural delivery folio opens to reveal a recessed specialist engineering core and a separate validation layer. It closes under the MSP identity and connects to client folios. The visual is illustrative: it contains no customer data, vendor hardware model, SOC representation or SLA claim.
+The original illustrative service cartridges show migration, policy review and remediation. An open identity frame reveals the engineering behind the MSP brand. There are no oversized blank cover panels, fake dashboards, vendor hardware models, customer information or new service claims.
 
-The revision replaces the previous text-heavy document panels and raised platform with machined edges, copper interconnects, engraved marks, a restrained validation sequence, moving signal pulses and four deliberate camera moves. The homepage feature is a full-bleed stage with an editorial overlay and chapter strip. Portrait framing places the film above the copy on phones.
+The migration, segmentation and assessment scenes and assets, shared stage engine, shared styles and shared homepage behavior remain byte-identical. Run `node docs/check-msp-scope.mjs 48fc758` or use `5df62e4` as the baseline. Only the MSP hero caption and dependency cache query change inside the shared hero entry.
 
-- `stage/scene-msp.js`: original 24-second, four-shot Three.js scene for the existing hero.
-- `media/msp-portfolio.mp4`: 1920 × 1080, 24 fps, silent H.264/yuv420p, 24 seconds.
-- `media/msp-portfolio-mobile.mp4`: separately framed 800 × 1100 film, same scene and duration.
-- `media/msp-feature.webp`, `media/msp-portfolio-mobile.webp`: film posters at 2.2 seconds.
-- `msp-studio.css` and `stage/msp-feature.js`: layout, playback and chapter controls scoped to `#msp`.
+## Production
 
-The feature uses rendered moving geometry so it remains animated without WebGL. It honors reduced motion, pauses outside the film viewport and in background tabs, and remembers a separate MSP pause preference. Chapter buttons seek to the corresponding shot. Heading, service copy and CTA remain accessible HTML.
+- `stage/scene-msp.js`: the original 12-second Three.js geometry and deterministic choreography.
+- `docs/export-msp-scene.mjs`: exports the actual geometry, textures, transforms and camera poses at 24 fps.
+- `docs/render-msp-blender.py`: Blender Cycles studio renderer, real area lights, physical materials, contact shadows, satin floor reflections, depth of field and AgX color management. Adaptive sampling uses 12 samples maximum. A render border omits the desktop copy-safe region and masked floor edge.
+- `docs/denoise-msp-frame.py`: persistent Intel Open Image Denoise process, kept separate from Blender's runtime libraries.
+- `docs/frame-msp-mobile.py`: a portrait edit with a crop chosen per shot and padding in the site background color; it retains all the original moving geometry.
+- Desktop film: 1280 × 720, 24 fps, 12 seconds, silent H.264/yuv420p.
+- Portrait film: 640 × 880, 24 fps, same edit and duration.
 
-## Rebuild the MSP films
-
-Node requires `@napi-rs/canvas`; Python requires `moderngl`, `numpy`, `Pillow`; FFmpeg and an EGL context are needed. The runtime canvas package can be located through `CODEX_PRIMARY_RUNTIME_NODE_MODULES`.
+Blender 4.3+, FFmpeg, Node with `@napi-rs/canvas`, and Python with `oidn`, `numpy` and `Pillow` are required. If the denoiser dependencies are outside the default Python installation, set `MSP_OIDN_DIR` to their directory. `MSP_DENOISE_PYTHON` optionally selects the external Python executable.
 
 ```sh
 node docs/export-msp-scene.mjs /absolute/path/msp-frames.json film
-python docs/render-msp-film.py /absolute/path/msp-frames.json media --film
-python docs/render-msp-film.py /absolute/path/msp-frames.json media --film --mobile
-ffmpeg -ss 2.2 -i media/msp-portfolio.mp4 -frames:v 1 -c:v libwebp -quality 88 media/msp-feature.webp
-ffmpeg -ss 2.2 -i media/msp-portfolio-mobile.mp4 -frames:v 1 -c:v libwebp -quality 88 media/msp-portfolio-mobile.webp
+blender -b -t 8 --python-exit-code 1 -P docs/render-msp-blender.py -- /absolute/path/msp-frames.json /absolute/output --resume
+python docs/frame-msp-mobile.py /absolute/output/msp-portfolio.mp4 media/msp-portfolio-mobile.mp4
 ```
 
-The offline renderer uses the scene's geometry, textures, animated world transforms and camera poses. It adds Cook–Torrance metal/roughness shading, studio reflections, shadow mapping, four-sample antialiasing, a blurred reflective floor, bloom and a film grade. It applies an MSP-specific desktop lens offset and portrait camera framing; its lighting approximation differs from the shared Three.js environment. This is original rendered motion rather than stock footage or animated stills.
+Copy the desktop film from the output directory into `media/`. Extract the two WebP posters at 1.7 seconds with FFmpeg. The renderer's `--stills --draft` flags use four review frames; `--test` restricts output to the first frame. Each production PNG is retained so an interrupted render can resume. The old EGL renderer remains available for lower-cost motion proofs; it is not used for the final studio films.
 
-Validation: protected-file/markup guard; finite transforms and cameras for all 576 frames; syntax checks; H.264/yuv420p/duration checks; browser playback, pause/resume and chapter seeking; responsive checks at 320, 375, 390, 430 and 768 px. Actual phone hardware and the native WebGL hero path cannot be exercised in this cloud browser; the independent video feature is exercised without WebGL.
+The browser controller derives chapter seeking from the actual video duration. Motion pauses offscreen, in background tabs and for reduced-motion users; a local MSP pause preference is retained. The feature uses a compact desktop stage and a portrait layout through 900 px, chapter selection that returns the film into view on narrow screens, with readable copy below the film on phones and tablets.
+
+Validation covers protected files/markup, all 288 transforms/cameras, syntax, media duration/codec/frame rate, pause/resume, chapter selection, and responsive layouts at 320, 375, 390, 430 and 768 px. The cloud browser has no WebGL2; the independent video feature is testable here, while native hero rendering and physical phone hardware remain outside this browser verification.

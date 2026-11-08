@@ -9,7 +9,7 @@
 // so reduced-motion visitors and browsers without WebGL2 never download it.
 const loadScenes = () => Promise.all([
   import('./stage.js'),
-  import('./scene-migration.js'), import('./scene-segmentation.js'), import('./scene-assessment.js'), import('./scene-msp.js?v=msp2')
+  import('./scene-migration.js'), import('./scene-segmentation.js'), import('./scene-assessment.js'), import('./scene-msp.js?v=msp3')
 ]).then(([core, a, b, c, d]) => ({ createStage: core.createStage, scenes: [a.migrationScene, b.segmentationScene, c.assessmentScene, d.mspScene] }));
 const webglAvailable = () => { try { const c = document.createElement('canvas'); return !!(window.WebGL2RenderingContext && c.getContext('webgl2')); } catch (e) { return false; } };
 
@@ -36,7 +36,7 @@ const SERVICES = [
     title: 'MSP white-label',
     sub: 'Specialist engineering behind your brand. The client stays yours.',
     cta: ['Discuss an MSP engagement', '/services/#msp'],
-    steps: ['Agree the scope, responsibilities, change window and rollback with your team.', 'Reveal the specialist engineering behind your delivery, inside your process.', 'Check permitted and blocked paths and document the evidence.', 'The delivery portfolio closes under your identity. The client stays yours.']
+    steps: ['Agree the scope, responsibilities, change window and rollback with your team.', 'Reveal the specialist engineering behind your delivery, inside your process.', 'Check permitted and blocked paths and document the evidence.', 'Validated engineering is handed over under your identity. The client stays yours.']
   }
 ];
 
