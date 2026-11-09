@@ -27,7 +27,7 @@ const SERVICES = [
     steps: ['Workforce, applications and guest devices share one flat network.', 'Group systems into zones with clear boundaries.', 'Permit only the paths the business needs, through policy.', 'Test what is allowed and what is blocked, then document it.']
   },
   {
-    title: 'Network assessment',
+    title: 'Network Security Assessment',
     sub: 'Risk-ranked findings and a roadmap. $2,500 flat for a qualifying single site.',
     cta: ['See how assessments work', '/services/network-security.html'],
     steps: ['Review the environment’s configuration and architecture.', 'Record each finding with the evidence behind it.', 'Rank findings by risk: fix now, next 90 days, planned.', 'Deliver a remediation roadmap you can act on.']
