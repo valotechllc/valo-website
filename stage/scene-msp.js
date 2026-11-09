@@ -3,19 +3,19 @@
 export const MSP_DURATION=12;
 const clamp=x=>Math.max(0,Math.min(1,x)),smooth=(a,b,t)=>{const u=clamp((t-a)/(b-a));return u*u*(3-2*u)},ease=(a,b,t)=>1-(1-clamp((t-a)/(b-a)))**3;
 export function mspScene({THREE,scene}){
- const C={ink:0x101c2a,navy:0x253c51,metal:0x8896a1,copper:0xb57c55,ice:0xbed6e7,mint:0xa7d4bc};
+ const C={ink:0x101c2a,navy:0x253c51,metal:0x8896a1,copper:0xf26b1f,ice:0xbed6e7,mint:0xa7d4bc};
  scene.background.setHex(0x03070e);scene.fog.color.setHex(0x03070e);scene.fog.density=.04;
  scene.add(new THREE.HemisphereLight(0xa1b3c8,0x03060d,.9));
  for(const [col,power,pos] of [[0xd7e5ee,2.3,[-3,5,4]],[0xb7d8f3,2.2,[-2,2,-2]],[0xe2a67f,2.5,[3,2,-1]]]){const l=new THREE.PointLight(col,power,0,2);l.position.set(...pos);scene.add(l)}
  const metal=(color,roughness=.3,metalness=.65)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
  const ink=metal(C.ink,.45,.15),navy=metal(C.navy,.34,.55),silver=metal(C.metal,.28,.75),copper=metal(C.copper,.3,.8);
  const light=(col,p=1)=>new THREE.MeshBasicMaterial({color:new THREE.Color(col).multiplyScalar(p),toneMapped:false});
- const warm=light(0xd99769,1.3),ice=light(C.ice,.7),muted=light(0x678097,.55),mint=light(C.mint,1.3);
+ const warm=light(0xff7a33,1.5),ice=light(C.ice,.7),muted=light(0x678097,.55),mint=light(C.mint,1.3);
  const box=(w,h,d,m,x=0,y=0,z=0,parent=scene)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);parent.add(o);return o};
  function slab(w,h,d,m,parent,r=.035){const s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);const g=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:true,bevelThickness:.009,bevelSize:.009,bevelSegments:3,curveSegments:8});g.translate(0,0,-d/2);const o=new THREE.Mesh(g,m);parent.add(o);return o}
  function tex(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;return tx}
  function print(parent,w,h,tx,x,y,z){const o=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tx,transparent:true,depthWrite:false,toneMapped:false}));o.position.set(x,y,z);parent.add(o);return o}
- const brand=tex(1200,280,(g,w,h)=>{g.clearRect(0,0,w,h);g.fillStyle='#dce6ee';g.font='500 62px Inter, sans-serif';g.fillText('YOUR MSP',45,110);g.fillStyle='#8ca0b0';g.font='400 22px "JetBrains Mono", monospace';g.fillText('SPECIALIST DELIVERY · YOUR IDENTITY',48,175);g.fillStyle='#c18d69';for(let i=0;i<4;i++)g.fillRect(1010+i*18,100-i*15,5,36+i*15)});
+ const brand=tex(1200,280,(g,w,h)=>{g.clearRect(0,0,w,h);g.fillStyle='#ffffff';g.font='bold 104px Inter, sans-serif';g.fillText('YOUR MSP',45,128);g.fillStyle='#f26b1f';g.fillRect(48,152,240,8);g.fillStyle='#d3dee7';g.font='bold 26px "JetBrains Mono", monospace';g.fillText('SPECIALIST DELIVERY · YOUR IDENTITY',48,214);g.fillStyle='#ff7a33';for(let i=0;i<4;i++)g.fillRect(1010+i*22,118-i*18,8,44+i*18)});
  const plan=tex(1200,760,(g,w,h)=>{g.clearRect(0,0,w,h);g.strokeStyle='rgba(150,180,201,.18)';g.lineWidth=1;for(let x=30;x<1200;x+=40){g.beginPath();g.moveTo(x,25);g.lineTo(x,735);g.stroke()}for(let y=25;y<760;y+=40){g.beginPath();g.moveTo(30,y);g.lineTo(1170,y);g.stroke()}g.strokeStyle='rgba(176,199,217,.5)';g.lineWidth=2;g.strokeRect(110,80,980,570);for(let i=0;i<3;i++){g.strokeRect(160+i*310,140,250,420)}g.setLineDash([7,10]);g.beginPath();g.moveTo(90,700);g.lineTo(1100,700);g.stroke()});
  const assembly=new THREE.Group();assembly.position.set(.45,.62,0);assembly.rotation.set(-.72,-.17,-.03);scene.add(assembly);
  const base=new THREE.Group(),work=new THREE.Group(),identity=new THREE.Group();assembly.add(base,work,identity);
@@ -32,7 +32,7 @@ export function mspScene({THREE,scene}){
  for(let i=0;i<3;i++){
   const g=new THREE.Group();work.add(g);slab(.68,1.12,.045,navy,g);const face=slab(.62,1.06,.018,ink,g);face.position.z=.035;
   box(.56,.005,.01,silver,0,.45,.051,g);box(.56,.005,.01,muted,0,-.38,.051,g);
-  const tx=tex(600,160,(ctx,w,h)=>{ctx.clearRect(0,0,w,h);ctx.fillStyle='#aabfce';ctx.font='500 30px "JetBrains Mono", monospace';ctx.fillText(['MIGRATION','POLICY','REMEDIATION'][i],24,68);ctx.fillStyle='#6c859b';ctx.font='400 20px "JetBrains Mono", monospace';ctx.fillText(['MAP / STAGE / CUT OVER','REVIEW / CLEAN / VERIFY','DIAGNOSE / FIX / TEST'][i],24,112)});print(g,.58,.155,tx,0,-.46,.054);
+  const tx=tex(600,160,(ctx,w,h)=>{ctx.clearRect(0,0,w,h);ctx.fillStyle='#eef3f7';ctx.font='bold 34px "JetBrains Mono", monospace';ctx.fillText(['MIGRATION','POLICY','REMEDIATION'][i],24,66);ctx.fillStyle='#ff8a4c';ctx.font='bold 22px "JetBrains Mono", monospace';ctx.fillText(['PALO ALTO · CISCO','PALO ALTO · ISE','CISCO · PALO ALTO'][i],24,112)});print(g,.58,.155,tx,0,-.46,.054);
   const statusMat=light(0x4e6677,.45);const status=box(.06,.012,.014,statusMat,.23,.49,.055,g);indicators.push(statusMat);
   for(const x of [-.24,.24])for(const y of [-.30,.33]){const ring=new THREE.Mesh(new THREE.TorusGeometry(.021,.003,6,20),silver);ring.position.set(x,y,.054);g.add(ring)}
   const paths=[];

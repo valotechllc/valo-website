@@ -7,10 +7,10 @@ from pathlib import Path
 from mathutils import Matrix, Vector
 args=sys.argv[sys.argv.index('--')+1:];src,out=Path(args[0]),Path(args[1]);out.mkdir(parents=True,exist_ok=True)
 mobile='--mobile' in args;draft='--draft' in args;stills='--stills' in args
-W,H=((640,880) if mobile else (960,540)) if draft else ((800,1100) if mobile else (1280,720))
+W,H=((640,880) if mobile else (960,540)) if draft else ((800,1100) if mobile else ((1920,1080) if '--hd' in args else (1280,720)))
 d=json.loads(src.read_text());d['frames']=d['frames'][:1] if '--test' in args else d['frames'];bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=12;s.cycles.use_denoising=False;s.cycles.use_adaptive_sampling=True;s.cycles.adaptive_threshold=.08;s.cycles.adaptive_min_samples=2;s.cycles.diffuse_bounces=1;s.cycles.glossy_bounces=2;s.render.use_persistent_data=True;s.cycles.max_bounces=5;s.cycles.transparent_max_bounces=6
-s.render.threads_mode='FIXED';s.render.threads=8;s.render.resolution_x=W;s.render.resolution_y=H;s.render.resolution_percentage=100;s.render.film_transparent=False;s.render.use_border=not mobile;s.render.use_crop_to_border=False;s.render.border_min_x=.28;s.render.border_max_x=1;s.render.border_min_y=.06;s.render.border_max_y=1
+s.render.threads_mode='FIXED';s.render.threads=int(os.environ.get('MSP_THREADS','8'));s.render.resolution_x=W;s.render.resolution_y=H;s.render.resolution_percentage=100;s.render.film_transparent=False;s.render.use_border=not mobile;s.render.use_crop_to_border=False;s.render.border_min_x=.28;s.render.border_max_x=1;s.render.border_min_y=.06;s.render.border_max_y=1
 s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGB';s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.view_settings.exposure=.25
 s.world.use_nodes=True;bg=s.world.node_tree.nodes.get('Background');bg.inputs['Color'].default_value=(.065,.085,.12,1);bg.inputs['Strength'].default_value=.24
 C=Matrix(((1,0,0,0),(0,0,-1,0),(0,1,0,0),(0,0,0,1)))
