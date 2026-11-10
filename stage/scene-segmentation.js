@@ -66,6 +66,7 @@ export function segmentationScene(ctx) {
     const ids = nodes.map((n, i) => i).filter((i) => nodes[i].zone === zi);
     for (let k = 0; k < ids.length; k++) { const a = ids[k], b = ids[(k + 3) % ids.length]; const key = a < b ? a + ':' + b : b + ':' + a; if (!seen.has(key)) { seen.add(key); links.push({ a, b, cross: false, cut: 99, seed: r() }); } }
   });
+  const CROSS = links.filter((l) => l.cross).length;
   const lPos = new Float32Array(links.length * 6), lCol = new Float32Array(links.length * 6);
   const lGeo = new THREE.BufferGeometry();
   lGeo.setAttribute('position', new THREE.BufferAttribute(lPos, 3));
@@ -87,6 +88,15 @@ export function segmentationScene(ctx) {
     fragmentShader: 'varying vec3 vC; void main(){ float r = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, r); gl_FragColor = vec4(vC * a * a, 1.0); }'
   });
   scene.add(new THREE.Points(sGeo, sMat));
+
+  // cut bursts: a spark pops at the midpoint of each cross-zone link as it is cut
+  const cutLinks = links.filter((l) => l.cross);
+  const bPos = new Float32Array(cutLinks.length * 3), bCol = new Float32Array(cutLinks.length * 3), bSeed = new Float32Array(cutLinks.length).fill(1.6);
+  const bGeo = new THREE.BufferGeometry();
+  bGeo.setAttribute('position', new THREE.BufferAttribute(bPos, 3));
+  bGeo.setAttribute('aColor', new THREE.BufferAttribute(bCol, 3));
+  bGeo.setAttribute('aSeed', new THREE.BufferAttribute(bSeed, 1));
+  scene.add(new THREE.Points(bGeo, sMat));
 
   // ---------- zone walls of light ----------
   const walls = ZONES.map((z) => {
@@ -140,10 +150,11 @@ export function segmentationScene(ctx) {
     floor: { tile: 0.6, base: 0x04121a, reflect: 0.85 },
     chapters: [{ start: 0, label: 'Flat network' }, { start: 5.5, label: 'Zones' }, { start: 11, label: 'Approved paths' }, { start: 16.5, label: 'Test' }],
     labels: [
-      { text: 'Flat network · everything reaches everything', tone: 'stop', at: (t, v) => v.set(0.4, 0.62, -1.3), alpha: (t) => smooth(1.2, 1.8, t) * (1 - smooth(5.0, 5.6, t)) },
+      { text: 'Flat network · everything reaches everything', tone: 'stop', at: (t, v) => v.set(0.9, 0.3, -0.2), alpha: (t) => smooth(1.2, 1.8, t) * (1 - smooth(5.0, 5.6, t)) },
+      { text: `${CROSS} cross-zone links cut`, tone: 'stop', at: (t, v) => v.set(0, 0.75, 0.05), alpha: (t) => smooth(CUT1 - 0.2, CUT1 + 0.3, t) * (1 - smooth(10.75, 11.0, t)) },
       { text: 'Workforce', at: zoneLabel(0), alpha: (t) => smooth(8.6, 9.4, t) * (1 - smooth(21.2, 21.7, t)) },
       { text: 'Applications', at: zoneLabel(1), alpha: (t) => smooth(8.8, 9.6, t) * (1 - smooth(21.2, 21.7, t)) },
-      { text: 'Guest & IoT', at: zoneLabel(2), alpha: (t) => smooth(9.0, 9.8, t) * (1 - smooth(21.2, 21.7, t)) },
+      { text: 'Guest & IoT', at: (t, v) => v.set(ZONES[2].c[0], 0.02, ZONES[2].c[1] + ZD / 2 + 0.05), alpha: (t) => smooth(9.0, 9.8, t) * (1 - smooth(21.2, 21.7, t)) },
       { text: 'Policy gateway', tone: 'accent', at: (t, v) => v.set(GATE[0], GATE[1] + 0.34, GATE[2]), alpha: (t) => smooth(11.2, 11.9, t) * (1 - smooth(16.3, 16.8, t)) },
       { text: 'Allowed · as expected', tone: 'ok', at: (t, v) => v.set(0.75, 0.68, 0.25), alpha: (t) => smooth(17.6, 18.1, t) * (1 - smooth(21.0, 21.5, t)) },
       { text: 'Blocked · as expected', tone: 'stop', at: (t, v) => v.set(0.15, 0.62, -0.4), alpha: (t) => smooth(18.4, 18.9, t) * (1 - smooth(21.0, 21.5, t)) }
@@ -192,6 +203,13 @@ export function segmentationScene(ctx) {
         sCol[o] = (0.7 + 0.5 * hot) * a; sCol[o + 1] = (0.8 - 0.35 * hot) * a; sCol[o + 2] = (1.2 - 0.9 * hot) * a;
       });
       sGeo.attributes.position.needsUpdate = true; sGeo.attributes.aColor.needsUpdate = true;
+      cutLinks.forEach((l, k) => {
+        const A = nodes[l.a].p, B = nodes[l.b].p, o = k * 3, d = t - l.cut;
+        const a = d < 0 ? 0 : Math.exp(-d * 6) * 2.2;
+        bPos[o] = (A.x + B.x) / 2; bPos[o + 1] = (A.y + B.y) / 2 + d * 0.05; bPos[o + 2] = (A.z + B.z) / 2;
+        bCol[o] = 1.0 * a; bCol[o + 1] = 0.42 * a; bCol[o + 2] = 0.12 * a;
+      });
+      bGeo.attributes.position.needsUpdate = true; bGeo.attributes.aColor.needsUpdate = true;
 
       // walls of light rise around each zone
       walls.forEach((w, i) => {
@@ -217,6 +235,9 @@ export function segmentationScene(ctx) {
       const no = smooth(17.9, 18.3, t) * (1 - smooth(21.0, 21.6, t));
       probeNo.m.uniforms.uTime.value = t - 17.9; probeNo.m.uniforms.uActive.value = no; probeNo.mesh.visible = no > 0.01;
       probeNo.m.uniforms.uFlash.value = smooth(18.5, 18.7, t) * (0.6 + 0.4 * Math.sin(t * 7)) * no;
+      const hit = smooth(18.45, 18.6, t) * Math.exp(-Math.max(0, t - 18.6) * 1.6) * no;
+      ringMat.color.set(ORANGE).multiplyScalar(0.1 + 1.8 * gw + 3.0 * hit);
+      gate.scale.multiplyScalar(1 + 0.18 * hit); gateLight.intensity = 1.6 * gw + 3.0 * hit;
 
       renderer.getDrawingBufferSize(size);
       sMat.uniforms.uScale.value = size.y * 0.02;
@@ -229,7 +250,7 @@ export function segmentationScene(ctx) {
         // zones: high and wide as devices regroup and walls rise
         [[0.0, 3.5, 5.2], [0.0, 3.3, 4.8], [0.0, 0.15, -0.45], [0.0, 0.15, -0.45], 32, 0.06],
         // approved paths: low from the side, through the gateway
-        [[2.3, 1.35, 2.5], [1.7, 1.45, 2.7], [0.0, 0.25, -0.15], [0.0, 0.25, -0.15], 32, 0.0],
+        [[2.4, 2.1, 3.5], [1.6, 2.15, 3.8], [0.0, 0.05, -0.3], [0.0, 0.05, -0.3], 34, 0.0],
         // test: pull back to the whole design
         [[-2.1, 1.7, 2.6], [-0.7, 2.3, 3.7], [0.0, 0.2, -0.3], [0.0, 0.2, -0.3], 32, 0.0]
       ], t, out);
