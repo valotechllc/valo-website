@@ -121,11 +121,11 @@ export function migrationScene(ctx) {
   ghost.position.set(0, TOP - ROW_H * (RULES.length - 1) / 2, 0.006); oldP.g.add(ghost);
 
   // review blade sweeping down the old rulebase, then across the new one at validation
-  const mkBlade = (pg) => { const b = new THREE.Mesh(new THREE.PlaneGeometry(0.16, PW + 0.1), new THREE.MeshBasicMaterial({ map: texGlowBlade(THREE), color: 0x000000, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false })); b.rotation.z = Math.PI / 2; b.position.z = 0.03; pg.g.add(b); return b; };
+  const mkBlade = (pg) => { const b = new THREE.Mesh(new THREE.PlaneGeometry(0.09, PW + 0.02), new THREE.MeshBasicMaterial({ map: texGlowBlade(THREE), color: 0x000000, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false })); b.rotation.z = Math.PI / 2; b.position.z = 0.03; pg.g.add(b); return b; };
   const blade = mkBlade(oldP), vblade = mkBlade(newP);
 
   // removed rules break into fragments that fall to the floor (shader-driven, deterministic)
-  const fragN = 70, fp = [], fv = [], fs = [], fc = [], fr = rand(31);
+  const fragN = 170, fp = [], fv = [], fs = [], fc = [], fr = rand(31);
   DROP.forEach((i) => {
     for (let n = 0; n < fragN; n++) {
       const q = W(oldP, (fr() - 0.5) * ROW_W, rowY(i) + (fr() - 0.5) * ROW_H * 0.6, 0.02); fp.push(q.x, q.y, q.z);
@@ -161,8 +161,8 @@ export function migrationScene(ctx) {
     const toNew = W(newP, -0.3 + k * 0.15, -PH / 2 + 0.12, 0.02);
     const mo = pulseMaterial(THREE, BLUE, k * 0.21, 3.2); mo.uniforms.uSpeed.value = 1.1;
     const mn = pulseMaterial(THREE, ORANGE, k * 0.17 + 0.1, 3.2); mn.uniforms.uSpeed.value = 1.1;
-    oldS.push(tube([src, new THREE.Vector3((sx + toOld.x) / 2, 0.06, (src.z + toOld.z) / 2 + 0.2), new THREE.Vector3(toOld.x, toOld.y * 0.6, toOld.z + 0.25), toOld], mo).material);
-    newS.push(tube([src, new THREE.Vector3((sx + toNew.x) / 2, 0.06, (src.z + toNew.z) / 2 + 0.2), new THREE.Vector3(toNew.x, toNew.y * 0.6, toNew.z + 0.25), toNew], mn).material);
+    oldS.push(tube([src, new THREE.Vector3((sx + toOld.x) / 2, 0.75, (src.z + toOld.z) / 2 + 0.2), new THREE.Vector3(toOld.x, toOld.y * 0.6 + 0.3, toOld.z + 0.25), toOld], mo).material);
+    newS.push(tube([src, new THREE.Vector3((sx + toNew.x) / 2, 0.75, (src.z + toNew.z) / 2 + 0.2), new THREE.Vector3(toNew.x, toNew.y * 0.6 + 0.3, toNew.z + 0.25), toNew], mn).material);
   }
   // validation probes: two allowed (ice), one that must be denied (stops at the panel and flashes)
   const probe = (x0, lx, ly, color, seed) => {
@@ -205,8 +205,11 @@ export function migrationScene(ctx) {
     labels: [
       { text: '0 hits · remove', tone: 'accent', at: rowLabel(firstDrop, 0.86), alpha: (t) => smooth(flagAt(firstDrop) + 0.2, flagAt(firstDrop) + 0.6, t) * (1 - smooth(5.4, 5.9, t)) },
       { text: 'Shadowed · remove', tone: 'accent', at: rowLabel(shadowed, 0.86), alpha: (t) => smooth(flagAt(shadowed) + 0.2, flagAt(shadowed) + 0.6, t) * (1 - smooth(5.4, 5.9, t)) },
+      { text: '10 of 14 rules carried · 4 removed', tone: 'accent', at: (t, v) => v.set(0, 0.95, -0.1), alpha: (t) => smooth(9.9, 10.4, t) * (1 - smooth(10.75, 11.0, t)) },
       { text: 'Rollback ready', tone: 'ok', at: (t, v) => v.copy(topOld), alpha: (t) => smooth(8.6, 9.2, t) * (1 - smooth(16.2, 16.8, t)) },
-      { text: 'Change window open', tone: 'accent', at: (t, v) => v.set(0, 0.95, -0.35), alpha: (t) => smooth(11.2, 11.7, t) * (1 - smooth(15.9, 16.4, t)) },
+      { text: 'Change window open', tone: 'accent', at: (t, v) => v.set(0, 0.42, -0.45), alpha: (t) => smooth(11.2, 11.5, t) * (1 - smooth(11.85, 11.95, t)) },
+      ...[1, 2, 3, 4, 5].map((n) => ({ text: n < 5 ? `${n} of 5 paths on new platform` : 'All 5 paths live · old path idle', tone: n < 5 ? 'accent' : 'ok', at: (t, v) => v.set(0, 0.42, -0.45),
+        alpha: (t) => smooth(11.6 + (n - 1) * 0.75 + 0.35, 11.6 + (n - 1) * 0.75 + 0.55, t) * (n < 5 ? 1 - smooth(11.6 + n * 0.75 + 0.3, 11.6 + n * 0.75 + 0.35, t) : 1 - smooth(16.0, 16.4, t)) })),
       { text: 'Allowed · as expected', tone: 'ok', at: (t, v) => v.copy(P2.end).add(tmp.set(0, 0.12, 0)), alpha: (t) => smooth(18.0, 18.4, t) * (1 - smooth(20.6, 21.0, t)) },
       { text: 'Denied · as expected', tone: 'stop', at: (t, v) => v.copy(PD.end).add(tmp.set(0, 0.12, 0)), alpha: (t) => smooth(18.5, 18.9, t) * (1 - smooth(20.6, 21.0, t)) },
       { text: 'Retired after validation', at: (t, v) => v.copy(topOld), alpha: (t) => smooth(19.4, 19.9, t) * (1 - smooth(21.2, 21.6, t)) }
@@ -216,9 +219,9 @@ export function migrationScene(ctx) {
       // review sweep down the current rulebase
       const su = (t - SCAN0) / (SCAN1 - SCAN0), vu = (t - 16.9) / 1.6;
       blade.position.y = TOP + 0.04 - clamp01(su) * (ROW_H * RULES.length + 0.08);
-      blade.material.color.set(ORANGE).multiplyScalar(su > 0 && su < 1 ? 1.3 * Math.sin(su * Math.PI) ** 0.4 : 0);
+      blade.material.color.set(ORANGE).multiplyScalar(su > 0 && su < 1 ? 0.75 * Math.sin(su * Math.PI) ** 0.4 : 0);
       vblade.position.y = TOP + 0.04 - clamp01(vu) * (ROW_H * KEEP.length + 0.08);
-      vblade.material.color.set(ICE).multiplyScalar(vu > 0 && vu < 1 ? 1.2 * Math.sin(vu * Math.PI) ** 0.4 : 0);
+      vblade.material.color.set(ICE).multiplyScalar(vu > 0 && vu < 1 ? 0.6 * Math.sin(vu * Math.PI) ** 0.4 : 0);
 
       // rows: flag -> carry across (kept) or break apart (removed)
       rows.forEach((r) => {
@@ -276,17 +279,17 @@ export function migrationScene(ctx) {
       deny.uniforms.uFlash.value = smooth(18.4, 18.6, t) * (0.6 + 0.4 * Math.sin(t * 7)) * (1 - smooth(20.8, 21.4, t));
 
       renderer.getDrawingBufferSize(size);
-      fragMat.uniforms.uScale.value = size.y * 0.018;
+      fragMat.uniforms.uScale.value = size.y * 0.026;
       dMat.uniforms.uTime.value = t; dMat.uniforms.uScale.value = size.y * 0.012;
     },
     camera(t, out) {
       shotCamera(SHOTS, [
         // scope: over the shoulder of the current rulebase as the review runs down it
-        [[-2.3, 2.05, 2.45], [-1.7, 1.95, 2.35], [-1.0, 0.3, -0.25], [-0.9, 0.28, -0.3], 30, 0.04],
+        [[-2.3, 2.05, 2.45], [-1.7, 1.95, 2.35], [-1.0, 0.36, -0.25], [-0.9, 0.34, -0.3], 30, 0.04],
         // stage: wide, rules arc across to the new platform
-        [[0.0, 1.75, 4.1], [0.0, 1.65, 3.75], [0.0, 0.4, -0.1], [0.0, 0.4, -0.1], 32, 0.0],
+        [[0.0, 1.6, 3.6], [0.0, 1.5, 3.3], [0.0, 0.62, -0.1], [0.0, 0.6, -0.1], 34, 0.0],
         // cut over: low, behind the users, watching paths switch
-        [[2.2, 1.55, 3.1], [1.7, 1.45, 3.0], [-0.15, 0.12, 0.7], [0.0, 0.12, 0.6], 32, 0.02],
+        [[0.6, 2.2, 4.0], [-0.2, 2.05, 3.7], [0.0, 0.5, 0.25], [0.0, 0.5, 0.2], 36, 0.0],
         // validate: on the new platform, then pull back as the old one retires
         [[2.0, 1.45, 2.0], [0.6, 1.7, 3.9], [1.0, 0.32, -0.15], [0.1, 0.38, -0.1], 30, 0.0]
       ], t, out);

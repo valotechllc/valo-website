@@ -237,9 +237,11 @@ export function createStage(container, factories, opts = {}) {
       film.labels.forEach((l, i) => {
         const el = labelEls[i];
         l.at(t, v3); v3.project(camera);
-        const x = (v3.x + 1) / 2 * width, y = (1 - v3.y) / 2 * height;
+        const px = (v3.x + 1) / 2 * width, y = (1 - v3.y) / 2 * height;
+        // keep the whole label on screen (long labels on phones)
+        const hw = (el.offsetWidth || 120) / 2 + 8, x = width > 2 * hw ? Math.min(Math.max(px, hw), width - hw) : px;
         // keep labels clear of the navigation bar and the headline block
-        const safe = smooth(88, 120, y) * (1 - smooth(height * 0.46, height * 0.52, y)) * smooth(-20, 40, x) * (1 - smooth(width - 40, width + 20, x));
+        const safe = smooth(88, 120, y) * (1 - smooth(height * 0.46, height * 0.52, y)) * smooth(-20, 40, px) * (1 - smooth(width - 40, width + 20, px));
         let a = (v3.z < 1 ? clamp01(l.alpha(t)) : 0) * fade * safe;
         // skip a label that would overlap one already shown (narrow screens)
         if (a > 0.05) {
