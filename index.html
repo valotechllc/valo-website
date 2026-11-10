@@ -36,12 +36,12 @@
 <link rel="preload" as="image" href="/media/migration-poster-portrait.webp?v=20261104" media="(max-width: 760px)" fetchpriority="high" />
 <link rel="stylesheet" href="/styles.css?v=nav2" />
 <link rel="stylesheet" href="/home.css?v=s2" />
-<link rel="stylesheet" href="/msp-studio.css?v=msp4" />
+<link rel="stylesheet" href="/msp-section.css?v=mx1" />
 <script src="/site.js?v=nav1" defer></script>
 <script src="/home.js?v=nav1" defer></script>
 <script type="importmap">{"imports":{"three":"/vendor/three/three.module.min.js","three/addons/":"/vendor/three/addons/"}}</script>
 <script type="module" src="/stage/hero.js?v=s2"></script>
-<script type="module" src="/stage/msp-feature.js?v=msp3"></script>
+<script src="/msp-section.js?v=mx1" defer></script>
 </head>
 <body class="home">
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -208,32 +208,117 @@
     </div>
   </section>
 
-  <!-- 5. MSP only: a full-bleed cinematic delivery story. -->
-  <section class="h-msp msp-studio" id="msp" aria-labelledby="h-msp-title">
-    <figure class="msp-cinema" aria-label="Illustrative white-label delivery: specialist service modules assemble behind the MSP identity, validate, and connect to client deliveries.">
-      <div class="msp-screen">
-        <video class="msp-film" muted loop playsinline preload="metadata" poster="/media/msp-feature.webp?v=msp3" aria-hidden="true" data-msp-film data-desktop="/media/msp-portfolio.mp4?v=msp3" data-mobile="/media/msp-portfolio-mobile.mp4?v=msp3"></video>
-      </div>
-    </figure>
-    <div class="container msp-studio-head">
-      <p class="h-label">White-label MSP engineering</p>
-      <button class="msp-play" type="button" aria-pressed="false" hidden>Pause film</button>
-    </div>
-    <div class="container msp-studio-body">
-      <div class="msp-studio-copy">
-        <p class="msp-eyebrow"><span></span> Behind your brand</p>
-        <h2 id="h-msp-title">Your brand.<br><em>Our engineering.</em></h2>
-        <p class="msp-description">Cisco and Palo Alto engineering for migrations, policy optimization, and network remediation. Scoped with your team. Delivered under your name.</p>
-        <a class="msp-cta" href="/services/#msp">Build with VALO <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M4 16 16 4M4 4h12v12"/></svg></a>
-      </div>
-      <div class="msp-delivery">
-        <div class="msp-delivery-label"><span class="msp-phase-name">01 / Scope</span><span>One team. Your name.</span></div>
-        <div class="msp-chapters" role="group" aria-label="Explore the MSP delivery sequence">
-          <button type="button" data-msp-step="0" aria-current="step"><span class="msp-step-number">01</span><span><b>Scope</b><small>Agree the work.</small></span></button>
-          <button type="button" data-msp-step="1"><span class="msp-step-number">02</span><span><b>Engineer</b><small>Add specialist depth.</small></span></button>
-          <button type="button" data-msp-step="2"><span class="msp-step-number">03</span><span><b>Validate</b><small>Prove the change.</small></span></button>
-          <button type="button" data-msp-step="3"><span class="msp-step-number">04</span><span><b>Hand over</b><small>Keep your identity.</small></span></button>
+  <!-- 5. MSP white-label: scroll-driven card flip. Front = the MSP's customer-facing ticket, back = VALO's engineering.
+       Styles: /msp-section.css. Behaviour: /msp-section.js. Without JS it renders as a normal section. -->
+  <section class="mx" id="msp" data-step="0" aria-labelledby="h-msp-title">
+    <div class="mx-scroll">
+      <div class="mx-stage">
+        <div class="container mx-grid">
+          <div class="mx-copy">
+            <p class="h-label">White-label MSP engineering</p>
+            <h2 id="h-msp-title" class="mx-title">Your brand on the front.<br><em>Our engineering behind it.</em></h2>
+            <ol class="mx-chapters" aria-label="How a white-label project runs">
+              <li class="mx-ch is-on" data-ch="0">
+                <button type="button" aria-current="step"><span class="mx-n">01</span><b>Scope</b></button>
+                <div class="mx-ch-body"><p>Your customer brings the request to you. VALO agrees the scope, change window and rollback with your team before any work starts.</p></div>
+                <span class="mx-bar" aria-hidden="true"></span>
+              </li>
+              <li class="mx-ch" data-ch="1">
+                <button type="button" aria-current="false"><span class="mx-n">02</span><b>Engineer</b></button>
+                <div class="mx-ch-body"><p>VALO engineers the change on the customer&rsquo;s Palo Alto or Cisco equipment, inside your change process.</p></div>
+                <span class="mx-bar" aria-hidden="true"></span>
+              </li>
+              <li class="mx-ch" data-ch="2">
+                <button type="button" aria-current="false"><span class="mx-n">03</span><b>Validate</b></button>
+                <div class="mx-ch-body"><p>Every change is tested: what should pass, what should be blocked, and how to back out.</p></div>
+                <span class="mx-bar" aria-hidden="true"></span>
+              </li>
+              <li class="mx-ch" data-ch="3">
+                <button type="button" aria-current="false"><span class="mx-n">04</span><b>Hand over</b></button>
+                <div class="mx-ch-body"><p>Configs, change records and as-built notes go to your team. Your customer sees your MSP from start to finish.</p></div>
+                <span class="mx-bar" aria-hidden="true"></span>
+              </li>
+            </ol>
+          </div>
+
+          <figure class="mx-device" aria-label="Illustration: a service ticket branded with your MSP's name. Its reverse side shows VALO configuring and testing the firewall change, then the ticket returns to your team completed with handover documents.">
+            <div class="mx-card" aria-hidden="true">
+              <!-- Front: what your customer sees -->
+              <div class="mx-face mx-front">
+                <div class="mx-fhead">
+                  <span class="mx-brand"><span class="mx-mark">YM</span>Your MSP</span>
+                  <span class="mx-desk">Service desk</span>
+                </div>
+                <p class="mx-kind">Change request</p>
+                <p class="mx-subject">Branch firewall replacement</p>
+                <dl class="mx-fields">
+                  <div><dt>Customer</dt><dd>Your customer</dd></div>
+                  <div><dt>Assigned</dt><dd>Your MSP engineering</dd></div>
+                  <div><dt>Status</dt><dd class="mx-status"><span data-s="0">Scoping</span><span data-s="1">In progress</span><span data-s="2">Validating</span><span data-s="3">Completed</span></dd></div>
+                </dl>
+                <ol class="mx-track"><li>Scope</li><li>Engineer</li><li>Validate</li><li>Hand over</li></ol>
+                <div class="mx-files">
+                  <span class="mx-pending">Handover documents pending</span>
+                  <span class="mx-file">as-built.pdf</span><span class="mx-file">running-config.xml</span><span class="mx-file">change-record.pdf</span>
+                </div>
+                <p class="mx-ffoot">Customer-facing &middot; Delivered by Your MSP</p>
+              </div>
+
+              <!-- Back: what happens behind it -->
+              <div class="mx-face mx-back">
+                <div class="mx-bhead"><span><b>VALO</b> engineering</span><span>Behind your brand</span></div>
+                <div class="mx-term">
+                  <p style="--i:0"><span class="mx-pr">admin@fw-branch-01&gt;</span> configure</p>
+                  <p style="--i:1"><span class="mx-pr">admin@fw-branch-01#</span> set zone guest network layer3 ethernet1/3</p>
+                  <p style="--i:2"><span class="mx-pr">admin@fw-branch-01#</span> set rulebase security rules staff-web from trust to untrust application [ ssl web-browsing ] action allow</p>
+                  <p style="--i:3"><span class="mx-pr">admin@fw-branch-01#</span> set rulebase security rules guest-deny from guest to trust action deny</p>
+                  <p style="--i:4"><span class="mx-pr">admin@fw-branch-01#</span> commit</p>
+                  <p style="--i:5" class="mx-ok">Configuration committed successfully</p>
+                </div>
+                <ul class="mx-tests">
+                  <li style="--i:0"><span>trust &rarr; untrust &middot; ssl</span><span>staff-web</span><b>Allow</b></li>
+                  <li style="--i:1"><span>guest &rarr; trust &middot; any</span><span>guest-deny</span><b>Deny</b></li>
+                  <li style="--i:2"><span>Rollback configuration</span><span>saved</span><b>Ready</b></li>
+                </ul>
+              </div>
+            </div>
+            <figcaption>Illustrative &middot; your customer sees the front. VALO works on the back.</figcaption>
+          </figure>
         </div>
+      </div>
+    </div>
+
+    <div class="mx-detail">
+      <div class="container">
+        <div class="mx-detail-head">
+          <p class="mx-lead">When a customer needs Palo Alto or Cisco firewall and network security work your bench can&rsquo;t cover, bring VALO in for that project. Your customer deals with your MSP from request to handover.</p>
+          <div class="mx-actions">
+            <a class="h-btn h-btn-solid" href="/contact.html?service=msp">Discuss an MSP engagement</a>
+            <a class="h-link" href="/services/#msp">How engagements are scoped</a>
+          </div>
+        </div>
+        <div class="mx-cols">
+          <div>
+            <p class="h-meta">What you can hand off</p>
+            <ul class="mx-list">
+              <li><b>Firewall migrations</b><span>Palo Alto and Cisco cutovers, with rollback ready before the window opens.</span></li>
+              <li><b>Policy review &amp; cleanup</b><span>Rulebase, NAT and access review with a prioritized cleanup plan.</span></li>
+              <li><b>Segmentation &amp; switching</b><span>Cisco switching, routing and segmentation for customer networks.</span></li>
+              <li><b>Network Security Assessment</b><span>An engineer-led review of a customer site with risk-ranked findings.</span></li>
+              <li><b>Escalations</b><span>VPN, routing and firewall issues your team wants a second engineer on.</span></li>
+            </ul>
+          </div>
+          <div>
+            <p class="h-meta">How white-label works</p>
+            <ul class="mx-list">
+              <li><b>Under your name</b><span>VALO works as part of your team on your customer&rsquo;s project.</span></li>
+              <li><b>Your customer stays yours</b><span>VALO doesn&rsquo;t market to or contract directly with customers you bring in.</span></li>
+              <li><b>Scoped before work starts</b><span>Every project has a defined scope, deliverables and handover.</span></li>
+              <li><b>No retainer required</b><span>Engage VALO for one project. No ongoing managed-service commitment.</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="mx-note">Scoping calls are free and take 30 minutes. You speak with the engineer who does the work.</p>
       </div>
     </div>
   </section>
