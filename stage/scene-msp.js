@@ -40,21 +40,23 @@ const MONO = '"JetBrains Mono", monospace';
 
 /* ---------- textures ---------- */
 function texWallFront(THREE) {
+  // a dark graphite brand panel with light type, so it sits in the scene instead of glaring
   return canvasTex(THREE, 2048, 1068, (g, w, h) => {
-    const grd = g.createLinearGradient(0, 0, 0, h); grd.addColorStop(0, '#eef1f5'); grd.addColorStop(1, '#d3d9e2');
+    const grd = g.createLinearGradient(0, 0, 0, h); grd.addColorStop(0, '#2c333e'); grd.addColorStop(1, '#1d222a');
     g.fillStyle = grd; g.fillRect(0, 0, w, h);
-    g.strokeStyle = 'rgba(30,45,70,0.06)'; g.lineWidth = 2;
+    g.strokeStyle = 'rgba(200,215,235,0.05)'; g.lineWidth = 2;
     for (let x = 64; x < w; x += 64) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); }
     for (let y = 64; y < h; y += 64) { g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); }
-    g.fillStyle = '#13213b'; g.fillRect(150, 330, 230, 230);
+    g.fillStyle = '#3b4556'; g.fillRect(150, 330, 230, 230);
+    g.strokeStyle = 'rgba(255,255,255,0.22)'; g.lineWidth = 3; g.strokeRect(151.5, 331.5, 227, 227);
     g.fillStyle = '#f26b1f'; g.fillRect(150, 560, 230, 14);
     g.fillStyle = '#ffffff'; g.font = '700 112px Inter, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('YM', 265, 450);
     g.textAlign = 'left'; g.textBaseline = 'alphabetic';
-    g.fillStyle = '#0d1729'; g.font = '700 220px Inter, sans-serif'; g.fillText('Your MSP', 440, 520);
-    g.fillStyle = '#4c586b'; g.font = '500 58px Inter, sans-serif'; g.fillText('Managed network services', 446, 610);
-    g.fillStyle = '#7a8597'; g.font = `500 34px ${MONO}`; g.fillText('SERVICE DESK  ·  CHANGE MANAGEMENT  ·  SUPPORT', 150, 860);
-    g.fillStyle = 'rgba(19,33,59,0.18)'; g.fillRect(150, 890, w - 300, 3);
-    g.fillStyle = '#9aa3b2'; g.font = `500 28px ${MONO}`; g.fillText('ILLUSTRATIVE BRAND', 150, 960);
+    g.fillStyle = '#eef2f7'; g.font = '700 220px Inter, sans-serif'; g.fillText('Your MSP', 440, 520);
+    g.fillStyle = '#b3bdcb'; g.font = '500 58px Inter, sans-serif'; g.fillText('Managed service provider', 446, 610);
+    g.fillStyle = '#93a0b3'; g.font = `500 34px ${MONO}`; g.fillText('SERVICE DESK  ·  CHANGE MANAGEMENT  ·  SUPPORT', 150, 860);
+    g.fillStyle = 'rgba(255,255,255,0.14)'; g.fillRect(150, 890, w - 300, 3);
+    g.fillStyle = '#76829a'; g.font = `500 28px ${MONO}`; g.fillText('ILLUSTRATIVE BRAND', 150, 960);
   });
 }
 function texWallBack(THREE) {
@@ -71,10 +73,10 @@ function texWallBack(THREE) {
 function texStatus(THREE, state) {
   const c = { scope: ['#f26b1f', 'REQ-1042  ·  Scoping'], work: ['#f26b1f', 'REQ-1042  ·  In progress'], done: ['#1f9d68', 'REQ-1042  ·  Completed'] }[state];
   return canvasTex(THREE, 720, 120, (g, w, h) => {
-    g.fillStyle = '#ffffff'; g.fillRect(0, 0, w, h);
-    g.strokeStyle = 'rgba(19,33,59,0.25)'; g.lineWidth = 3; g.strokeRect(1.5, 1.5, w - 3, h - 3);
+    g.fillStyle = '#353d4a'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(255,255,255,0.25)'; g.lineWidth = 3; g.strokeRect(1.5, 1.5, w - 3, h - 3);
     g.fillStyle = c[0]; g.beginPath(); g.arc(52, h / 2, 14, 0, Math.PI * 2); g.fill();
-    g.fillStyle = '#13213b'; g.font = '600 40px Inter, sans-serif'; g.textBaseline = 'middle'; g.fillText(c[1], 86, h / 2 + 2);
+    g.fillStyle = '#eef2f7'; g.font = '600 40px Inter, sans-serif'; g.textBaseline = 'middle'; g.fillText(c[1], 86, h / 2 + 2);
   });
 }
 function texTicket(THREE) {
@@ -193,7 +195,7 @@ export function mspScene(ctx) {
   const wall = new THREE.Group(); wall.position.set(0, WY, 0); scene.add(wall);
   const frameMat = new THREE.MeshStandardMaterial({ color: 0x9aa3b0, metalness: 0.9, roughness: 0.32, roughnessMap: brushed });
   const fTex = texWallFront(THREE);
-  const frontMat = new THREE.MeshStandardMaterial({ map: fTex, emissiveMap: fTex, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.14, color: 0x9ea6b2, roughness: 0.42, metalness: 0.05 });
+  const frontMat = new THREE.MeshStandardMaterial({ map: fTex, emissiveMap: fTex, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.16, color: 0x9aa2ae, roughness: 0.75, metalness: 0.05, envMapIntensity: 0.35 });
   const front = new THREE.Mesh(new THREE.PlaneGeometry(WW, WH), frontMat); front.position.set(0, WH / 2, 0.021); wall.add(front);
   const bTex = texWallBack(THREE);
   const backMat = new THREE.MeshStandardMaterial({ map: bTex, emissiveMap: bTex, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.35, roughness: 0.3, metalness: 0.3 });
@@ -205,7 +207,7 @@ export function mspScene(ctx) {
   const stripF = new THREE.Mesh(new THREE.BoxGeometry(WW, 0.008, 0.01), stripMatF); stripF.position.set(0, -0.03, 0.045); wall.add(stripF);
   const stripB = new THREE.Mesh(new THREE.BoxGeometry(WW, 0.008, 0.01), stripMatB); stripB.position.set(0, -0.03, -0.045); wall.add(stripB);
   const statusTex = { scope: texStatus(THREE, 'scope'), work: texStatus(THREE, 'work'), done: texStatus(THREE, 'done') };
-  const chipMat = new THREE.MeshStandardMaterial({ map: statusTex.scope, emissiveMap: statusTex.scope, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.16, color: 0xb4bcc7, roughness: 0.4 });
+  const chipMat = new THREE.MeshStandardMaterial({ map: statusTex.scope, emissiveMap: statusTex.scope, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.16, color: 0x9aa2ae, roughness: 0.75, envMapIntensity: 0.35 });
   const chip = new THREE.Mesh(new THREE.PlaneGeometry(0.6, 0.1), chipMat); chip.position.set(0.66, WH - 0.17, 0.026); wall.add(chip);
 
   /* ---------- the customer's site ---------- */
@@ -298,7 +300,7 @@ export function mspScene(ctx) {
 
   /* ---------- the request ticket and the handover pack ---------- */
   const tkTex = texTicket(THREE);
-  const tkMat = new THREE.MeshStandardMaterial({ map: tkTex, emissiveMap: tkTex, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.2, color: 0xc4cad3, roughness: 0.45, transparent: true, opacity: 0, side: THREE.DoubleSide });
+  const tkMat = new THREE.MeshStandardMaterial({ map: tkTex, emissiveMap: tkTex, emissive: new THREE.Color(0xffffff), emissiveIntensity: 0.1, color: 0xa3aab5, roughness: 0.45, transparent: true, opacity: 0, side: THREE.DoubleSide });
   const ticket = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.285), tkMat); ticket.castShadow = true; scene.add(ticket);
   const docs = DOCS.map((d, i) => {
     const tx = texDoc(THREE, d);
