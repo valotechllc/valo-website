@@ -9,7 +9,7 @@
 // so reduced-motion visitors and browsers without WebGL2 never download it.
 const loadScenes = () => Promise.all([
   import('./stage.js'),
-  import('./scene-migration.js?v=s2'), import('./scene-segmentation.js?v=s2'), import('./scene-assessment.js'), import('./scene-msp.js?v=msp4')
+  import('./scene-migration.js?v=s2'), import('./scene-segmentation.js?v=s2'), import('./scene-assessment.js'), import('./scene-msp.js?v=mx1')
 ]).then(([core, a, b, c, d]) => ({ createStage: core.createStage, scenes: [a.migrationScene, b.segmentationScene, c.assessmentScene, d.mspScene] }));
 const webglAvailable = () => { try { const c = document.createElement('canvas'); return !!(window.WebGL2RenderingContext && c.getContext('webgl2')); } catch (e) { return false; } };
 
@@ -34,9 +34,9 @@ const SERVICES = [
   },
   {
     title: 'MSP white-label',
-    sub: 'Specialist engineering behind your brand. The client stays yours.',
-    cta: ['Discuss an MSP engagement', '/services/#msp'],
-    steps: ['Agree the scope, responsibilities, change window and rollback with your team.', 'Reveal the specialist engineering behind your delivery, inside your process.', 'Check permitted and blocked paths and document the evidence.', 'Validated engineering is handed over under your identity. The client stays yours.']
+    sub: 'Your brand on the front. Our engineering behind it.',
+    cta: ['Discuss an MSP engagement', '/contact.html?service=msp'],
+    steps: ['Your customer brings the request to you. VALO agrees scope, change window and rollback with your team.', 'VALO engineers the change on the customer’s Palo Alto or Cisco equipment, inside your process.', 'Every change is tested: what should pass, what should be blocked, and how to back out.', 'Configs, change records and as-built notes go to your team. Your customer sees your MSP throughout.']
   }
 ];
 
