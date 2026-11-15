@@ -173,6 +173,11 @@ function trailMaterial(THREE, color) {
   });
 }
 
+/* Per shot: [pull-back factor, extra lens shift] so the action clears the hero headline. */
+const FRAME = [[1.45, 0.18], [1.6, 0.22], [1.6, 0.3], [1.3, 0.3]];
+// Phones stack the text full width under the scene and already dolly back, so they need much less.
+const FRAME_PORTRAIT = [[1.0, 0.0], [1.05, 0.0], [1.05, 0.0], [1.0, 0.0]];
+
 export function mspScene(ctx) {
   const { THREE, scene, renderer } = ctx;
   // graphite, not navy: the scene's own tint keeps the panels and equipment clear of the background
@@ -439,6 +444,11 @@ export function mspScene(ctx) {
         // hand over: the pack crosses the wall; pull back to the MSP's side
         [[2.4, 2.0, 3.9], [0.1, 1.25, 3.6], [0.1, 1.3, -0.3], [0.45, 0.62, 0.45], 34, 0.0]
       ], t, out);
+      // The headline sits over the lower half of the hero: pull back and lift the action into the band above it.
+      const i = Math.min(3, Math.floor(t / (L / 4)));
+      const f = (out.aspect ?? 16 / 9) < 1 ? FRAME_PORTRAIT[i] : FRAME[i];
+      out.pos.sub(out.target).multiplyScalar(f[0]).add(out.target);
+      out.shift += f[1];
     }
   };
 }

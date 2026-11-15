@@ -201,8 +201,9 @@ export function createStage(container, factories, opts = {}) {
     const { film, scene, floor } = active;
     t = ((t % film.duration) + film.duration) % film.duration;
     film.update(t);
-    film.camera(t, shot);
     const aspect = width / height;
+    shot.aspect = aspect;
+    film.camera(t, shot);
     camera.aspect = aspect;
     // Portrait screens: widen the vertical field of view within reason, then dolly back to keep the composition.
     const hfov = 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(shot.fov) / 2) * (16 / 9));
@@ -234,6 +235,9 @@ export function createStage(container, factories, opts = {}) {
     composer.render();
     if (labelEls.length) {
       const placed = [];
+      // Labels stay above the top of the hero text (eyebrow and headline), wherever it sits at this screen size.
+      let textTop = height * 0.46;
+      if (opts.textTop) { const r = opts.textTop.getBoundingClientRect(), c = container.getBoundingClientRect(); if (r.height) textTop = r.top - c.top; }
       film.labels.forEach((l, i) => {
         const el = labelEls[i];
         l.at(t, v3); v3.project(camera);
@@ -241,7 +245,7 @@ export function createStage(container, factories, opts = {}) {
         // keep the whole label on screen (long labels on phones)
         const hw = (el.offsetWidth || 120) / 2 + 8, x = width > 2 * hw ? Math.min(Math.max(px, hw), width - hw) : px;
         // keep labels clear of the navigation bar and the headline block
-        const safe = smooth(88, 120, y) * (1 - smooth(height * 0.46, height * 0.52, y)) * smooth(-20, 40, px) * (1 - smooth(width - 40, width + 20, px));
+        const safe = smooth(88, 120, y) * (1 - smooth(textTop - 26, textTop - 6, y)) * smooth(-20, 40, px) * (1 - smooth(width - 40, width + 20, px));
         let a = (v3.z < 1 ? clamp01(l.alpha(t)) : 0) * fade * safe;
         // skip a label that would overlap one already shown (narrow screens)
         if (a > 0.05) {
