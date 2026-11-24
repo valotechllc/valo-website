@@ -1,10 +1,10 @@
 /* Film B, network segmentation, as a real-time scene (v2: untangling the hairball).
    Story (22 s loop): a flat network where every device can reach every system ->
    devices regroup into zones, walls of light rise and cross-zone links are cut ->
-   only approved paths run through the policy gateway -> tests: allowed passes, blocked stops.
+   only approved paths run through the firewall -> tests: allowed passes, blocked stops.
    No vendor hardware is modelled. All values are functions of scene time t. */
 import { smooth, clamp01 } from './stage.js';
-import { rand, pulseMaterial, pointsMaterial, shotCamera, shotFade } from './lib.js';
+import { rand, pulseMaterial, pointsMaterial, shotCamera, shotFade, slab, canvasTex } from './lib.js';
 
 const L = 22;
 const SHOTS = [0, 5.5, 11, 16.5, L];
@@ -111,13 +111,37 @@ export function segmentationScene(ctx) {
     return { g, box, mat, eMat, fMat, col: new THREE.Color(z.col) };
   });
 
-  // ---------- policy gateway ----------
+  // ---------- firewall: a next-gen appliance every approved path runs through ----------
   const gate = new THREE.Group(); gate.position.set(GATE[0], GATE[1], GATE[2]); scene.add(gate);
+  const FW = { w: 0.72, h: 0.14, d: 0.44 };
+  const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1b232e, metalness: 0.72, roughness: 0.34 });
+  const body = new THREE.Mesh(slab(THREE, FW.w, FW.h, FW.d, 0.008), bodyMat); body.position.y = -FW.h / 2; gate.add(body);
+  // front panel: vent slots, eight network ports, management ports, model plate
+  const panelTex = canvasTex(THREE, 1024, 200, (g, w, h) => {
+    g.fillStyle = '#0c1118'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#05080c'; for (let i = 0; i < 9; i++) g.fillRect(34 + i * 18, 46, 8, 108);           // vents
+    g.strokeStyle = '#3a4756'; g.lineWidth = 3;
+    for (let i = 0; i < 8; i++) { const x = 260 + i * 62; g.fillStyle = '#04070a'; g.fillRect(x, 70, 46, 40); g.strokeRect(x, 70, 46, 40); g.fillStyle = '#1a222c'; g.fillRect(x + 12, 62, 22, 8); }
+    for (let i = 0; i < 2; i++) { const x = 790 + i * 60; g.fillStyle = '#04070a'; g.fillRect(x, 74, 40, 30); g.strokeRect(x, 74, 40, 30); }
+    g.fillStyle = '#8796a6'; g.font = '600 26px "JetBrains Mono", monospace'; g.fillText('NGFW', 262, 160); g.fillText('MGMT', 790, 150);
+  });
+  const panelMat = new THREE.MeshBasicMaterial({ map: panelTex, color: 0x000000 });
+  const panel = new THREE.Mesh(new THREE.PlaneGeometry(FW.w - 0.02, FW.h - 0.016), panelMat); panel.position.set(0, 0, FW.d / 2 + 0.0015); gate.add(panel);
+  // port activity LEDs (ice) above each port, flicker with inspected traffic
+  const leds = [];
+  for (let i = 0; i < 8; i++) {
+    const m = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const led = new THREE.Mesh(new THREE.PlaneGeometry(0.012, 0.007), m);
+    led.position.set(-(FW.w - 0.02) / 2 + (FW.w - 0.02) * ((260 + i * 62 + 23) / 1024), (FW.h - 0.016) * (0.5 - 58 / 200), FW.d / 2 + 0.002); gate.add(led); leds.push(m);
+  }
+  // VALO-orange status strip along the top front edge, and glowing chassis edges
   const ringMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.009, 10, 64), ringMat); gate.add(ring);
-  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(0.23, 0.004, 8, 64), ringMat); gate.add(ring2);
-  const coreMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false });
-  const core = new THREE.Mesh(new THREE.CircleGeometry(0.16, 48), coreMat); gate.add(core);
+  const strip = new THREE.Mesh(new THREE.BoxGeometry(FW.w - 0.03, 0.006, 0.004), ringMat); strip.position.set(0, FW.h / 2 - 0.012, FW.d / 2 + 0.003); gate.add(strip);
+  const edgeMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.9 });
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(FW.w, FW.h, FW.d)), edgeMat); gate.add(edges);
+  // inspection plane: a thin light sheet through the chassis that brightens as traffic passes, and flares on a block
+  const coreMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
+  const core = new THREE.Mesh(new THREE.PlaneGeometry(FW.d * 0.92, FW.h * 0.9), coreMat); core.rotation.y = Math.PI / 2; gate.add(core);
 
   // approved paths and test probes (tubes with travelling pulses)
   const tube = (pts, mat, rad = 0.008) => { const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 110, rad, 6, false), mat); scene.add(m); return m; };
@@ -131,8 +155,8 @@ export function segmentationScene(ctx) {
     mkPath([guestC, V(0.0, 0.32, -0.6), G, V(0.0, 0.6, 0.0), V(0.0, 1.3, -1.6), V(0.0, 1.6, -3.4)], ICE, 0.2, 4.4)
   ];
   const probeOk = mkPath([V(-1.45, 0.2, 0.35), V(-0.7, 0.5, 0.25), G, V(0.7, 0.5, 0.25), V(1.45, 0.2, 0.35)], ICE, 0.1, 3.2);
-  const probeNo = mkPath([V(0.25, 0.18, -1.2), V(0.4, 0.42, -0.6), V(0.08, 0.26, -0.05), G], ORANGE, 0.3, 1.8);
-  probeNo.m.uniforms.uStop.value = 0.94;
+  const probeNo = mkPath([V(0.25, 0.18, -1.2), V(0.38, 0.42, -0.7), V(0.06, 0.25, -0.32), V(GATE[0], GATE[1], GATE[2] - 0.23)], ORANGE, 0.3, 1.8);
+  probeNo.m.uniforms.uStop.value = 0.99; // stops dead at the firewall's back face
 
   // distant points for depth
   const dp = [], dc = [], ds = [], dr = rand(77);
@@ -150,14 +174,14 @@ export function segmentationScene(ctx) {
     floor: { tile: 0.6, base: 0x04121a, reflect: 0.85 },
     chapters: [{ start: 0, label: 'Flat network' }, { start: 5.5, label: 'Zones' }, { start: 11, label: 'Approved paths' }, { start: 16.5, label: 'Test' }],
     labels: [
+      { text: 'Firewall', tone: 'accent', at: (t, v) => v.set(GATE[0], GATE[1] + 0.12, GATE[2] + 0.22), alpha: (t) => smooth(11.2, 11.9, t) * (1 - smooth(16.3, 16.8, t)) },
       { text: 'Flat network · everything reaches everything', tone: 'stop', at: (t, v) => v.set(0.9, 0.3, -0.2), alpha: (t) => smooth(1.2, 1.8, t) * (1 - smooth(5.0, 5.6, t)) },
       { text: `${CROSS} cross-zone links cut`, tone: 'stop', at: (t, v) => v.set(0, 0.75, 0.05), alpha: (t) => smooth(CUT1 - 0.2, CUT1 + 0.3, t) * (1 - smooth(10.75, 11.0, t)) },
       { text: 'Workforce', at: zoneLabel(0), alpha: (t) => smooth(8.6, 9.4, t) * (1 - smooth(21.2, 21.7, t)) },
       { text: 'Applications', at: zoneLabel(1), alpha: (t) => smooth(8.8, 9.6, t) * (1 - smooth(21.2, 21.7, t)) },
-      { text: 'Guest & IoT', at: (t, v) => v.set(ZONES[2].c[0], 0.02, ZONES[2].c[1] + ZD / 2 + 0.05), alpha: (t) => smooth(9.0, 9.8, t) * (1 - smooth(21.2, 21.7, t)) },
-      { text: 'Policy gateway', tone: 'accent', at: (t, v) => v.set(GATE[0], GATE[1] + 0.34, GATE[2]), alpha: (t) => smooth(11.2, 11.9, t) * (1 - smooth(16.3, 16.8, t)) },
-      { text: 'Allowed · as expected', tone: 'ok', at: (t, v) => v.set(0.75, 0.68, 0.25), alpha: (t) => smooth(17.6, 18.1, t) * (1 - smooth(21.0, 21.5, t)) },
-      { text: 'Blocked · as expected', tone: 'stop', at: (t, v) => v.set(0.15, 0.62, -0.4), alpha: (t) => smooth(18.4, 18.9, t) * (1 - smooth(21.0, 21.5, t)) }
+      { text: 'Guest & IoT', at: (t, v) => t < 11 ? v.set(ZONES[2].c[0], 0.02, ZONES[2].c[1] + ZD / 2 + 0.05) : v.set(ZONES[2].c[0] + ZD * 0.25, 0.5, ZONES[2].c[1] - ZD / 2), alpha: (t) => smooth(9.0, 9.8, t) * (1 - smooth(21.2, 21.7, t)) },
+      { text: 'Allowed · as expected', tone: 'ok', at: (t, v) => v.set(0.85, 0.42, 0.3), alpha: (t) => smooth(17.6, 18.1, t) * (1 - smooth(21.0, 21.5, t)) },
+      { text: 'Blocked · as expected', tone: 'stop', at: (t, v) => v.set(-0.05, 0.4, -0.55), alpha: (t) => smooth(18.4, 18.9, t) * (1 - smooth(21.0, 21.5, t)) }
     ],
     fade: (t) => shotFade(SHOTS, t),
     update(t) {
@@ -223,9 +247,11 @@ export function segmentationScene(ctx) {
 
       // policy gateway wakes; approved paths run through it
       const gw = smooth(10.6, 11.6, t);
-      gate.scale.setScalar(0.4 + 0.6 * gw); gate.rotation.y = Math.sin(t * 0.4) * 0.25;
+      gate.scale.setScalar(0.4 + 0.6 * gw); gate.rotation.y = -0.18 + Math.sin(t * 0.35) * 0.06; gate.position.y = GATE[1] + (1 - gw) * -0.15;
       ringMat.color.set(ORANGE).multiplyScalar(0.1 + 1.8 * gw);
-      coreMat.color.set(ORANGE).multiplyScalar(0.12 * gw);
+      coreMat.color.set(ORANGE).multiplyScalar(0.0);
+      panelMat.color.setScalar(0.25 + 0.75 * gw);
+      leds.forEach((m, i) => { const on = gw * (0.35 + 0.65 * (Math.sin(t * (9 + i * 1.7) + i * 2.1) > 0.2 ? 1 : 0)); m.color.set(i < 6 ? ICE : 0x6ee7a8).multiplyScalar(1.6 * on); });
       gateLight.intensity = 1.6 * gw;
       approved.forEach((p, k) => { const a = smooth(11.4 + k * 0.6, 12.2 + k * 0.6, t) * (1 - smooth(21.0, 21.6, t)); p.m.uniforms.uTime.value = t; p.m.uniforms.uActive.value = a * (k === 2 ? 0.7 : 1); p.mesh.visible = a > 0.01; });
 
@@ -236,8 +262,10 @@ export function segmentationScene(ctx) {
       probeNo.m.uniforms.uTime.value = t - 17.9; probeNo.m.uniforms.uActive.value = no; probeNo.mesh.visible = no > 0.01;
       probeNo.m.uniforms.uFlash.value = smooth(18.5, 18.7, t) * (0.6 + 0.4 * Math.sin(t * 7)) * no;
       const hit = smooth(18.45, 18.6, t) * Math.exp(-Math.max(0, t - 18.6) * 1.6) * no;
-      ringMat.color.set(ORANGE).multiplyScalar(0.1 + 1.8 * gw + 3.0 * hit);
-      gate.scale.multiplyScalar(1 + 0.18 * hit); gateLight.intensity = 1.6 * gw + 3.0 * hit;
+      ringMat.color.set(ORANGE).multiplyScalar(0.1 + 2.2 * gw + 3.0 * hit);
+      edgeMat.color.set(ORANGE).multiplyScalar(0.35 * gw + 2.4 * hit);
+      coreMat.color.set(ORANGE).multiplyScalar(0.9 * hit);
+      gate.position.x = GATE[0] + Math.sin(t * 60) * 0.004 * hit; gateLight.intensity = 1.6 * gw + 3.0 * hit;
 
       renderer.getDrawingBufferSize(size);
       sMat.uniforms.uScale.value = size.y * 0.02;
@@ -252,7 +280,7 @@ export function segmentationScene(ctx) {
         // approved paths: low from the side, through the gateway
         [[2.4, 2.1, 3.5], [1.6, 2.15, 3.8], [0.0, 0.05, -0.3], [0.0, 0.05, -0.3], 34, 0.0],
         // test: pull back to the whole design
-        [[-2.1, 1.7, 2.6], [-0.7, 2.3, 3.7], [0.0, 0.2, -0.3], [0.0, 0.2, -0.3], 32, 0.0]
+        [[-2.4, 2.0, 3.2], [-0.9, 2.4, 4.1], [0.0, -0.02, -0.45], [0.0, -0.02, -0.45], 32, 0.0]
       ], t, out);
     }
   };
