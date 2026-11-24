@@ -174,14 +174,14 @@ export function segmentationScene(ctx) {
     floor: { tile: 0.6, base: 0x04121a, reflect: 0.85 },
     chapters: [{ start: 0, label: 'Flat network' }, { start: 5.5, label: 'Zones' }, { start: 11, label: 'Approved paths' }, { start: 16.5, label: 'Test' }],
     labels: [
+      { text: 'Firewall', tone: 'accent', at: (t, v) => v.set(GATE[0], GATE[1] + 0.12, GATE[2] + 0.22), alpha: (t) => smooth(11.2, 11.9, t) * (1 - smooth(16.3, 16.8, t)) },
       { text: 'Flat network · everything reaches everything', tone: 'stop', at: (t, v) => v.set(0.9, 0.3, -0.2), alpha: (t) => smooth(1.2, 1.8, t) * (1 - smooth(5.0, 5.6, t)) },
       { text: `${CROSS} cross-zone links cut`, tone: 'stop', at: (t, v) => v.set(0, 0.75, 0.05), alpha: (t) => smooth(CUT1 - 0.2, CUT1 + 0.3, t) * (1 - smooth(10.75, 11.0, t)) },
       { text: 'Workforce', at: zoneLabel(0), alpha: (t) => smooth(8.6, 9.4, t) * (1 - smooth(21.2, 21.7, t)) },
       { text: 'Applications', at: zoneLabel(1), alpha: (t) => smooth(8.8, 9.6, t) * (1 - smooth(21.2, 21.7, t)) },
-      { text: 'Guest & IoT', at: (t, v) => v.set(ZONES[2].c[0], 0.02, ZONES[2].c[1] + ZD / 2 + 0.05), alpha: (t) => smooth(9.0, 9.8, t) * (1 - smooth(21.2, 21.7, t)) },
-      { text: 'Firewall · policy enforced', tone: 'accent', at: (t, v) => v.set(GATE[0], GATE[1] + 0.2, GATE[2]), alpha: (t) => smooth(11.2, 11.9, t) * (1 - smooth(16.3, 16.8, t)) },
-      { text: 'Allowed · as expected', tone: 'ok', at: (t, v) => v.set(0.75, 0.68, 0.25), alpha: (t) => smooth(17.6, 18.1, t) * (1 - smooth(21.0, 21.5, t)) },
-      { text: 'Blocked · as expected', tone: 'stop', at: (t, v) => v.set(0.15, 0.62, -0.4), alpha: (t) => smooth(18.4, 18.9, t) * (1 - smooth(21.0, 21.5, t)) }
+      { text: 'Guest & IoT', at: (t, v) => t < 11 ? v.set(ZONES[2].c[0], 0.02, ZONES[2].c[1] + ZD / 2 + 0.05) : v.set(ZONES[2].c[0] + ZD * 0.25, 0.5, ZONES[2].c[1] - ZD / 2), alpha: (t) => smooth(9.0, 9.8, t) * (1 - smooth(21.2, 21.7, t)) },
+      { text: 'Allowed · as expected', tone: 'ok', at: (t, v) => v.set(0.85, 0.42, 0.3), alpha: (t) => smooth(17.6, 18.1, t) * (1 - smooth(21.0, 21.5, t)) },
+      { text: 'Blocked · as expected', tone: 'stop', at: (t, v) => v.set(-0.05, 0.4, -0.55), alpha: (t) => smooth(18.4, 18.9, t) * (1 - smooth(21.0, 21.5, t)) }
     ],
     fade: (t) => shotFade(SHOTS, t),
     update(t) {
@@ -280,7 +280,7 @@ export function segmentationScene(ctx) {
         // approved paths: low from the side, through the gateway
         [[2.4, 2.1, 3.5], [1.6, 2.15, 3.8], [0.0, 0.05, -0.3], [0.0, 0.05, -0.3], 34, 0.0],
         // test: pull back to the whole design
-        [[-2.1, 1.7, 2.6], [-0.7, 2.3, 3.7], [0.0, 0.2, -0.3], [0.0, 0.2, -0.3], 32, 0.0]
+        [[-2.4, 2.0, 3.2], [-0.9, 2.4, 4.1], [0.0, -0.02, -0.45], [0.0, -0.02, -0.45], 32, 0.0]
       ], t, out);
     }
   };
