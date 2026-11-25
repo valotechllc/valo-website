@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Firewall Is the Front Door. Is It Still Supported? | VALO Security Brief</title>
+<meta name="description" content="VALO Security Brief Issue 005: why unsupported and exposed edge devices are the easiest way in, what CISA BOD 26-02 asks for, and five checks for MSPs, SMBs and public-sector networks." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Your Firewall Is the Front Door. Is It Still Supported?" />
+<meta property="og:description" content="Unsupported and exposed edge devices are the easiest way in. Five checks to run before the next exploited flaw." />
+<meta property="og:url" content="https://www.valotechnologiesllc.com/insights/security-brief-005.html" />
+<meta property="og:image" content="https://www.valotechnologiesllc.com/og-image.png" />
+<link rel="icon" type="image/svg+xml" href="/valo-favicon.svg?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css?v=nav2" />
+<style>
+.article-wrap{max-width:840px}
+.article-meta{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.article-wrap .prose p{font-size:17px;line-height:1.85}
+.article-callout{background:var(--bg-card);border:1px solid var(--line-strong);border-left:4px solid var(--accent);padding:24px 26px;margin:32px 0}
+.question{background:var(--bg-card);border:1px solid var(--line);padding:24px;margin:16px 0}
+.question h3{font-family:var(--display);font-size:23px;letter-spacing: -0.01em; font-weight: 700; text-transform: none;color:var(--ink);margin:0 0 10px}
+.question p{color:var(--ink-dim);margin:0;line-height:1.75}
+ol.steps-list{padding-left:22px;color:var(--ink-dim)}ol.steps-list li{margin:0 0 14px;line-height:1.8;font-size:17px}ol.steps-list strong{color:var(--ink)}
+ul.brief-list{padding-left:22px;color:var(--ink-dim)}ul.brief-list li{margin:0 0 10px;line-height:1.8;font-size:17px}
+.brief-signup{max-width:920px;background:var(--bg-card);border:1px solid var(--line-strong);padding:30px;margin:48px 0 0}
+.brief-note{font-size:12px;color:var(--ink-mute);line-height:1.6;margin-top:10px}
+@media(max-width:600px){.brief-subscribe-embed{height:860px!important}}
+@media(max-width:380px){.brief-subscribe-embed{height:980px!important}}
+</style>
+<script src="/site.js?v=nav1" defer></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<canvas id="grid-bg" aria-hidden="true"></canvas>
+<nav class="topnav" id="topnav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="VALO Technologies home"><img src="/valo-logo-dark.svg" alt="VALO Technologies" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="/services/">Services</a></li><li><a href="/industries/">Industries</a></li><li><a href="/about/">About</a></li><li><a href="/insights/" class="active">Insights</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/contact.html" class="nav-cta">Schedule a conversation</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="page-hero"><div class="container article-wrap">
+    <div class="breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/insights/">VALO Security Brief</a><span aria-hidden="true"> / </span>Issue 005</div>
+    <div class="article-meta">Issue 005 · November 25, 2026 · Network &amp; Security Engineering</div>
+    <h1>Your firewall is the front door. Is it still supported?</h1>
+    <p class="page-hero-sub">Firewalls, VPN gateways and other internet-facing devices are the first thing an attacker touches. When one is past end of support, or exposes more than it should, it becomes the easiest way in.</p>
+  </div></div>
+
+  <section><div class="container article-wrap">
+    <div class="prose reveal">
+      <p>Issue 004 looked at the encryption those devices use. This issue looks at the devices themselves: what sits at the edge of your network, whether the vendor still fixes it, and what it exposes to the internet.</p>
+      <p>Edge devices are an attractive target for a simple reason. They are reachable from anywhere, they often run with privileged access to the network behind them, and they rarely run endpoint security tools. An attacker who gets in at the edge can often move inward from there.</p>
+
+      <h2>What happened in the last few weeks</h2>
+      <p><strong>October 28: Cisco ASA and FTD.</strong> Cisco disclosed CVE-2026-76418 in the Remote Access SSL VPN service of Secure Firewall ASA and Secure Firewall Threat Defense (FTD). An unauthenticated attacker can force the device to reload, taking the VPN down. Cisco reports it is being exploited, rates it 8.6 (CVSS 3.1), and says there is no workaround, only fixed releases and a temporary mitigation.</p>
+      <p><strong>November 20: Cisco Expressway.</strong> CISA added CVE-2026-76466 to its Known Exploited Vulnerabilities (KEV) catalog. It affects clustered Expressway deployments and lets an unauthenticated attacker run commands as root. Reported attacks started at internet-facing Expressway Edge devices and moved to internal systems from there. The fix is release X15.5.20 or later.</p>
+      <p>Neither of these is a reason to single out one vendor. Exploited edge-device flaws turn up across the industry. The pattern is the point: the edge is where attackers start.</p>
+    </div>
+
+    <div class="article-callout reveal">
+      <div class="eyebrow">What CISA has asked for</div>
+      <p style="margin:8px 0 12px;color:var(--ink-dim);line-height:1.8;">On February 5, 2026, CISA issued Binding Operational Directive 26-02, <em>Mitigating Risk from End-of-Support Edge Devices</em>. It is binding only on federal civilian agencies, with these deadlines:</p>
+      <ul class="brief-list" style="margin:0 0 12px;">
+        <li><strong>Immediately:</strong> update supported devices that run end-of-support software.</li>
+        <li><strong>May 5, 2026:</strong> inventory end-of-support edge devices.</li>
+        <li><strong>February 5, 2027:</strong> begin removing devices that are already past end of support.</li>
+        <li><strong>August 5, 2027:</strong> finish removing them.</li>
+        <li><strong>February 5, 2028:</strong> run continuous discovery and lifecycle management.</li>
+      </ul>
+      <p style="margin:0;color:var(--ink-dim);line-height:1.8;">In a joint fact sheet, CISA, the FBI and the UK's National Cyber Security Centre "strongly urge all organizations" to review the directive and apply the same mitigations. For businesses, MSPs and state and local government it is guidance, not a mandate, and it is a sensible bar to measure against.</p>
+    </div>
+
+    <div class="prose reveal"><h2>Five checks for this quarter</h2></div>
+
+    <div class="question reveal"><h3>1. List every edge device</h3><p>Include anything that faces the internet or routes traffic between networks:</p><ul class="brief-list" style="margin:10px 0;"><li>firewalls and VPN gateways</li><li>routers and internet-facing switches</li><li>wireless controllers and access points</li><li>load balancers</li><li>voice and video gateways, such as Expressway</li></ul><p>For each one, record the model, software version, owner and location. A spreadsheet is enough to start.</p></div>
+    <div class="question reveal"><h3>2. Add the end-of-support date</h3><p>Look up each model and software train on the vendor's end-of-life notices. Flag anything already past end of support, and anything that reaches it in the next 12 months. Those devices will not get fixes for the next exploited flaw.</p></div>
+    <div class="question reveal"><h3>3. Patch what is still supported</h3><p>Use CISA's KEV catalog to decide what goes first: a flaw that is being exploited outranks a higher score that is not. Check whether your ASA, FTD or Expressway releases are on the fixed lists in Cisco's advisories.</p></div>
+    <div class="question reveal"><h3>4. Shrink what the internet can reach</h3><p>Management interfaces should not be reachable from the internet. VPN portals should be on only where they are used. Cluster and peer ports should accept traffic only from known peers. Cisco's Expressway fix guidance, for example, limits TCP ports 4371&ndash;4372 to cluster nodes when you can't update right away.</p></div>
+    <div class="question reveal"><h3>5. Keep evidence</h3><p>Keep the inventory with owners, end-of-support dates, patch dates and replacement plans. Auditors, cyber insurers and public-sector customers increasingly ask how edge devices are managed. It also gives leadership a dated list to budget against.</p></div>
+
+    <div class="prose reveal">
+      <h2>Who does what</h2>
+      <p><strong>Leadership</strong> decides:</p>
+      <ul class="brief-list">
+        <li>how much end-of-support risk the organization will accept, and for how long</li>
+        <li>when replacement budgets land</li>
+        <li>who signs off on any exception</li>
+      </ul>
+      <p><strong>The MSP or IT team</strong> handles the hands-on work:</p>
+      <ul class="brief-list">
+        <li>builds and maintains the inventory</li>
+        <li>watches vendor advisories and the KEV catalog</li>
+        <li>patches, hardens and schedules replacements</li>
+      </ul>
+      <p><strong>Vendors and resellers</strong> provide end-of-life dates, supported upgrade paths and replacement options, in writing.</p>
+
+      <h2>Replacing an edge device without an outage</h2>
+      <ol class="steps-list">
+        <li><strong>Export</strong> the running configuration and store it off the device.</li>
+        <li><strong>Translate</strong> it to the new platform and review every rule, NAT and VPN entry, instead of copying blindly.</li>
+        <li><strong>Test</strong> with a written list built by the people who use the network: remote VPN, payroll, phones, door controllers.</li>
+        <li><strong>Cut over</strong> in a maintenance window, with a rollback deadline agreed in advance and out-of-band access ready.</li>
+        <li><strong>Keep</strong> the old device racked and untouched until the new one has carried a full business day.</li>
+        <li><strong>Record</strong> what changed, when, and who approved it.</li>
+      </ol>
+
+      <h2>Before the holiday weekend</h2>
+      <p>Fewer people are watching over Thanksgiving. Before you log off, confirm three things: internet-facing devices are on fixed releases for the advisories above, someone is on call who can reach them out of band, and that person knows who to call at the vendor or MSP.</p>
+      <p>A useful first step costs nothing. <strong>Ask your MSP or IT team: which of our internet-facing devices are past end of support, or will be in the next 12 months?</strong></p>
+    </div>
+
+    <div class="prose reveal">
+      <p style="font-size:14px;">Sources: <a href="https://www.cisa.gov/news-events/directives/bod-26-02-mitigating-risk-end-support-edge-devices" target="_blank" rel="noopener noreferrer">CISA BOD 26-02</a>; <a href="https://www.ic3.gov/CSA/2026/260205.pdf" target="_blank" rel="noopener noreferrer">CISA, FBI and NCSC: Reducing the Attack Surface for End-of-Support Edge Devices</a>; <a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-asaftd-tunnel-dos-s6mgkb75" target="_blank" rel="noopener noreferrer">Cisco advisory: ASA and FTD SSL VPN (CVE-2026-76418)</a>; <a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-vcs-static-cred-hr7EWZ8t" target="_blank" rel="noopener noreferrer">Cisco advisory: Expressway (CVE-2026-76466)</a>; <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer">CISA Known Exploited Vulnerabilities catalog</a>. Fixed releases and guidance can change, so check the current advisories for your environment.</p>
+      <p><strong>VALO Security Brief</strong> is published every other Wednesday by VALO Technologies. It shares practical network security engineering, risk, and compliance guidance for MSPs and the organizations they support.</p>
+    </div>
+  </div></section>
+
+  <section><div class="container article-wrap">
+    <div class="brief-signup reveal" id="subscribe">
+      <div class="eyebrow">Subscribe</div>
+      <h2 class="section-title" style="margin-top:8px;">Get the next issue by email.</h2>
+      <p class="section-sub">One focused briefing every other Wednesday. Practical security, governance, and engineering guidance tied to decisions organizations actually have to make.</p>
+      <iframe class="brief-subscribe-embed" title="VALO Security Brief Signup" width="540" height="720" src="https://b94747d8.sibforms.com/v2/serve/MUIFAI9LozrsTOW6c362rTflBbDoqel_CpceIbogMThpB-8sVmjhP-IZNstz8JcvM_hg9sE7t7wGauwe_N7MRoZOTHjd8_QAVnKuepoBvKIgOHF781RYDOe0HHKUdLcvGNUonSeR6UOmpJG1TanbTUUtTcecFRMXrf0kZOQwkmfC0LIHpZBv1lvBfJTQFMRCkSSAfiM4yt2MaKGnTw==" frameborder="0" scrolling="no" loading="lazy" style="display:block;width:100%;max-width:540px;height:720px;overflow:hidden;margin:0 auto;border:0;"></iframe>
+      <div class="brief-note">By subscribing, you agree to receive the VALO Security Brief by email. You can unsubscribe at any time by replying to a newsletter or emailing <a href="mailto:newsletter@valotechnologiesllc.com">newsletter@valotechnologiesllc.com</a>. See our <a href="/privacy.html">Privacy Policy</a>.</div>
+    </div>
+  </div></section>
+
+  <section class="cta-section"><div class="container"><h2>Not sure what sits at the edge of your network?</h2><p>VALO's Network &amp; Security Assessment is a vendor-neutral, engineer-led review of your firewalls, VPN and edge devices, with risk-ranked findings and a remediation roadmap. $2,500 flat for qualifying single-site environments.</p><a href="/services/network-security.html#assessment" class="btn btn-lg">See how assessments work</a></div></section>
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-name">VALO<span>.</span></div>
+      <div class="footer-brand-tag">Technologies LLC</div>
+      <p>Specialized network security engineering and cybersecurity consulting for MSPs, SMBs, and SLED organizations.</p>
+      <p>Dallas, TX<br><a href="mailto:info@valotechnologiesllc.com">info@valotechnologiesllc.com</a></p>
+      <a href="https://www.linkedin.com/in/loseinikamara" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="VALO Technologies LinkedIn">LinkedIn</a>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="/services/#msp">MSP White-Label Engineering</a></li>
+        <li><a href="/contact.html?service=firewall-migration">Firewall Migration &amp; Implementation</a></li>
+        <li><a href="/contact.html?service=firewall-assessment">Firewall Assessment &amp; Optimization</a></li>
+        <li><a href="/services/network-security.html">Network Security Engineering</a></li>
+        <li><a href="/services/network-security.html#assessment">Network &amp; Security Assessment</a></li>
+        <li><a href="/services/">All Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Who We Serve</h5>
+      <ul>
+        <li><a href="/industries/#msp">Managed Service Providers</a></li>
+        <li><a href="/industries/#smb">Small &amp; Midsize Businesses</a></li>
+        <li><a href="/industries/#sled">State, Local &amp; Education (SLED)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>About &amp; Resources</h5>
+      <ul>
+        <li><a href="/about/">About VALO</a></li>
+        <li><a href="/about/leadership.html">Leadership</a></li>
+        <li><a href="/about/credentials.html">Credentials &amp; Methodology</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/insights/">VALO Security Brief</a></li>
+        <li><a href="/resources/">Sample Deliverables</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom"><div>&copy; 2026 VALO Technologies LLC. All rights reserved.</div><div class="footer-bottom-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+</div></footer>
+<script>(function(){const canvas=document.getElementById('grid-bg');if(canvas){const ctx=canvas.getContext('2d');let W,H;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;draw();}function draw(){ctx.clearRect(0,0,W,H);const step=48;ctx.strokeStyle='rgba(59,130,246,0.15)';ctx.lineWidth=1;for(let x=0;x<=W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<=H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}resize();window.addEventListener('resize',resize);}const nav=document.getElementById('topnav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});const hb=document.getElementById('hamburger'),nl=document.getElementById('navLinks');if(hb&&nl){hb.addEventListener('click',function(){const o=nl.classList.toggle('open');hb.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!nav.contains(e.target)){nl.classList.remove('open');hb.setAttribute('aria-expanded','false');}});}const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('in');});}})();</script>
+</body>
+</html>
